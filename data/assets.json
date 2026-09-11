@@ -1,8 +1,8 @@
 {
  "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。",
  "engine_limit": 300,
- "assigned": 197,
- "buffer": 103,
+ "assigned": 193,
+ "buffer": 107,
  "assets": [
   {
    "id": "BG01",
@@ -1415,16 +1415,6 @@
    "placeholder": true
   },
   {
-   "id": "cg15",
-   "cat": "cg",
-   "file": "assets/cg/cg_15_kuraishi-ryoma-mie_houkoku.png",
-   "label": "倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。",
-   "desc": "倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。",
-   "meta": "scene",
-   "source": "image1/white_144.png",
-   "placeholder": true
-  },
-  {
    "id": "cg16",
    "cat": "cg",
    "file": "assets/cg/cg_16_meshino-futami_jimushitsu.png",
@@ -1445,16 +1435,6 @@
    "placeholder": true
   },
   {
-   "id": "cg18",
-   "cat": "cg",
-   "file": "assets/cg/cg_18_mie-minamitou3_kyoudai.png",
-   "label": "三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。",
-   "desc": "三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。",
-   "meta": "scene",
-   "source": "image3/white_147.png",
-   "placeholder": true
-  },
-  {
    "id": "cg19",
    "cat": "cg",
    "file": "assets/cg/cg_19_naitou_zutto_miteimasu.png",
@@ -1472,16 +1452,6 @@
    "desc": "全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。",
    "meta": "scene",
    "source": "image1/white_149.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg21",
-   "cat": "cg",
-   "file": "assets/cg/cg_21_ryoma_yohaku_ni_kaku.png",
-   "label": "両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。",
-   "desc": "両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。",
-   "meta": "scene",
-   "source": "image3/white_150.png",
    "placeholder": true
   },
   {
@@ -1572,16 +1542,6 @@
    "desc": "寺地（単独・朗読）／BG13。スマホのライトが顔を照らす。",
    "meta": "scene",
    "source": "image3/white_161.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg33",
-   "cat": "cg",
-   "file": "assets/cg/cg_33_all-katsuya_hitorizutsu.png",
-   "label": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
-   "desc": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
-   "meta": "scene",
-   "source": "image3/white_162.png",
    "placeholder": true
   },
   {
@@ -2115,6 +2075,38 @@
    "label": "三重／勝也。ミディアムショット、「先生、聞いていいですか」。",
    "source": "image3/white_154.png",
    "note": "脚本から外した予備CG（2026-09-11 演出調整）"
+  },
+  {
+   "file": "assets/_buffer/cg_15_kuraishi-ryoma-mie_houkoku.png",
+   "id": "cg15",
+   "cat": "cg",
+   "label": "倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。",
+   "source": "image1/white_144.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
+  },
+  {
+   "file": "assets/_buffer/cg_18_mie-minamitou3_kyoudai.png",
+   "id": "cg18",
+   "cat": "cg",
+   "label": "三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。",
+   "source": "image3/white_147.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
+  },
+  {
+   "file": "assets/_buffer/cg_21_ryoma_yohaku_ni_kaku.png",
+   "id": "cg21",
+   "cat": "cg",
+   "label": "両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。",
+   "source": "image3/white_150.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
+  },
+  {
+   "file": "assets/_buffer/cg_33_all-katsuya_hitorizutsu.png",
+   "id": "cg33",
+   "cat": "cg",
+   "label": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
+   "source": "image3/white_162.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
   }
  ]
 }

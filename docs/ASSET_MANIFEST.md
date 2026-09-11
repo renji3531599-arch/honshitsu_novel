@@ -16,7 +16,7 @@
 |---|---|---|
 | 背景(BG) | 24 | 24 |
 | 立ち絵差分 | 113 | 105（第5章の表情リスト合計。企画書の計数是差 -8） |
-| 名場面CG | 38 | 34（4枚は演出調整で予備退避） |
+| 名場面CG | 38 | 30（8枚は演出整理で予備退避） |
 | ED専用CG | 14 | 14 |
 | UI／アイテム | 20 | 20 |
 | 未割当バッファ | 約90 | 99（`assets/_buffer/`） |
@@ -173,13 +173,13 @@
 | 141 | `image1/white_141.png` | `assets/cg/cg_12_ryoma_butsudan_ushiro.png` | 両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。 |
 | 142 | `image1/white_142.png` | `assets/cg/cg_13_ryoma-mie_narabu_zaseki.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 |
 | 143 | `image2/white_143.png` | `assets/cg/cg_14_kuraishi_shinbun_haikyou.png` | 倉石（単独）／BG10。埃まみれの学校新聞を読んで言葉を失う。 |
-| 144 | `image1/white_144.png` | `assets/cg/cg_15_kuraishi-ryoma-mie_houkoku.png` | 倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。 |
+| 144 | `image1/white_144.png` | `assets/_buffer/cg_15_kuraishi-ryoma-mie_houkoku.png` | 倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。 |
 | 145 | `image2/white_145.png` | `assets/cg/cg_16_meshino-futami_jimushitsu.png` | 召野／二見／BG07。窓越しの光、少し距離のある立ち位置。 |
 | 146 | `image3/white_146.png` | `assets/cg/cg_17_mie-mitsumine_sakura_tsubomi.png` | 三重／三峰／BG16。国境をまたぐ桜並木（まだ蕾）。 |
-| 147 | `image3/white_147.png` | `assets/cg/cg_18_mie-minamitou3_kyoudai.png` | 三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。 |
+| 147 | `image3/white_147.png` | `assets/_buffer/cg_18_mie-minamitou3_kyoudai.png` | 三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。 |
 | 148 | `image1/white_148.png` | `assets/cg/cg_19_naitou_zutto_miteimasu.png` | 内藤（単独）／BG18。伏し目から顔を上げる一瞬。 |
 | 149 | `image1/white_149.png` | `assets/cg/cg_20_all_yoru_no_chizu.png` | 全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。 |
-| 150 | `image3/white_150.png` | `assets/cg/cg_21_ryoma_yohaku_ni_kaku.png` | 両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。 |
+| 150 | `image3/white_150.png` | `assets/_buffer/cg_21_ryoma_yohaku_ni_kaku.png` | 両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。 |
 | 151 | `image1/white_151.png` | `assets/cg/cg_22_omoide_no_chizu_kansei.png` | 「思い出の地形図」完成図。画面いっぱいの作品アート。 |
 | 152 | `image2/white_152.png` | `assets/cg/cg_23_katsuya_yuugata_madobe.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 |
 | 153 | `image2/white_153.png` | `assets/_buffer/cg_24_katsuya_zecchuu.png` | 勝也（単独）／BG13相当。地図を渡され絶句する正面カット。 |
@@ -191,7 +191,7 @@
 | 159 | `image2/white_159.png` | `assets/cg/cg_30_katsuya_gojikan_no_houkoku.png` | 勝也（単独）／BG13。「窓の外を見るたび、報告していた」。 |
 | 160 | `image2/white_160.png` | `assets/cg/cg_31_all-katsuya_sasuragasu.png` | 全員集合／勝也／BG13。生徒たちを見渡す広い構図。 |
 | 161 | `image3/white_161.png` | `assets/cg/cg_32_terachi_saigo_no_roudoku.png` | 寺地（単独・朗読）／BG13。スマホのライトが顔を照らす。 |
-| 162 | `image3/white_162.png` | `assets/cg/cg_33_all-katsuya_hitorizutsu.png` | 全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。 |
+| 162 | `image3/white_162.png` | `assets/_buffer/cg_33_all-katsuya_hitorizutsu.png` | 全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。 |
 | 163 | `image2/white_163.png` | `assets/cg/cg_34_katsuya_hareyaka.png` | 勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。 |
 | 164 | `image2/white_164.png` | `assets/cg/cg_35_all_sotsugyou_sakurafubu.png` | 全員集合／BG17。卒業式、桜吹雪。 |
 | 165 | `image2/white_165.png` | `assets/cg/cg_36_katsuya_suunengo_kyoushitsu.png` | 勝也（単独）／BG24。数年後、新一年に同じ地図を見せる。 |

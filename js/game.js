@@ -80,7 +80,7 @@ export class Game {
     return {
       scene: this.state.scene, idx: this.state.idx,
       state: JSON.parse(JSON.stringify(this.state)),
-      history: this.history.slice(-60),
+      history: this.history.slice(-30),
       label: this.sceneLabel(),
       bg: this.dom.stage.dataset.bgid || '',
       playtime: Math.round(this.playtime),
@@ -91,7 +91,7 @@ export class Game {
     this.state = Object.assign(this.freshState(), snap.state || {});
     this.state.scene = snap.scene;
     this.state.idx = snap.idx || 0;
-    this.history = (snap.history || []).slice();
+    this.history = (snap.history || []).slice(-120);
     this.stopFlow();
     this.shell.renderItems();
     this.shell.renderLog();
@@ -242,10 +242,9 @@ export class Game {
           if (slug) this.stage.applyChr(slug);
         } else this.stage.applyChr(null);
         this.history.push({ sp: ins.sp, tag: ins.tag, txt: ins.txt, scene: this.state.scene });
-        // バックログの保持は上限付き（重さ・メモリ対策。表示は最新100行のみ）
-        if (this.history.length > 300) this.history.splice(0, this.history.length - 300);
+        if (this.history.length > 120) this.history.splice(0, this.history.length - 120);
         this.countLine(ins);
-        this.shell.renderLog();
+        if (this.shell._logOpen) this.shell.renderLog();
         this.typing = true;
         this._mode = 'text';
         this.typer.speed = this.skip ? 99 : this.store.config.textSpeed;
@@ -259,7 +258,7 @@ export class Game {
         this._lastTextLen = ins.txt.length;
         // 長文は 1300ms 相当の余韻を、それ以外は文字数比例の autoDelay を使う
         await this.waitForClick(ins.txt.length > 52 ? Math.min(2600, 900 + ins.txt.length * 18) : undefined);
-        if (this.store.config.autosave && this.state.idx % 3 === 0) this.store.saveAuto(this.snapshot());
+        if (this.store.config.autosave && this.state.idx % 12 === 0) this.store.saveAuto(this.snapshot());
         return;
       }
       /* --------------------------------------------------------- 表示系 -- */
@@ -510,7 +509,8 @@ export class Game {
     });
     m.playtime = Math.round(this.playtime) + (m.playtime || 0);
     if (id === 'true' || id === 'bonus') m.cleared = true;
-    this.store.saveMeta();
+    // エンド到達は確定事項なので、デバウンスを待たず即時保存する
+    this.store.saveMetaNow();
     this.audio.bgm(null, 2.6);
     this._mode = 'end';
     this.shell.showEnding(id, ins.title, j);

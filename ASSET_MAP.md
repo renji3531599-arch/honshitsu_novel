@@ -161,13 +161,13 @@
 | cg12 | white_141.png | `cg_12_ryoma_butsudan_ushiro.png` | 両馬(単独)　祖父の遺影の前で正座する後ろ姿 |
 | cg13 | white_142.png | `cg_13_ryoma-mie_butsudan_narabu.png` | 両馬／三重　仏壇の前で並んで座る |
 | cg14 | white_143.png | `cg_14_kuraishi_shoko_shinbun.png` | 倉石(単独)　古い学校新聞を読み言葉を失う |
-| cg15 | white_144.png | `cg_15_kuraishi-ryoma-mie_houkoku.png` | 倉石／両馬／三重　調査の報告を受ける一同 |
+| cg15 | white_144.png | `cg_15_kuraishi-ryoma-mie_houkoku.png` | 倉石／両馬／三重　調査の報告を受ける一同 | ｜ 2026-09-11 演出整理で脚本から外し `assets/_buffer/` へ退避
 | cg16 | white_145.png | `cg_16_meshino-futami_shokuinshitsu.png` | 召野／二見　職員室、窓越しの光 |
 | cg17 | white_146.png | `cg_17_mie-mitsumine_sakura_namiki.png` | 三重／三峰　蕾の桜並木、国境をまたぐ二人 |
-| cg18 | white_147.png | `cg_18_mie-minamitou_kyoshitsu.png` | 三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図 |
+| cg18 | white_147.png | `cg_18_mie-minamitou_kyoshitsu.png` | 三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図 | ｜ 2026-09-11 演出整理で脚本から外し `assets/_buffer/` へ退避
 | cg19 | white_148.png | `cg_19_naitou_kao_age.png` | 内藤(単独)　「本質配信、ずっと見てます」と顔を上げる |
 | cg20 | white_149.png | `cg_20_zenin_chizu_tukuru.png` | 全員集合　机を寄せ合い地図を作る俯瞰構図 |
-| cg21 | white_150.png | `cg_21_ryoma_temoto_kakikomu.png` | 両馬(手元アップ)　地図の隅に何かを書き足す |
+| cg21 | white_150.png | `cg_21_ryoma_temoto_kakikomu.png` | 両馬(手元アップ)　地図の隅に何かを書き足す | ｜ 2026-09-11 演出整理で脚本から外し `assets/_buffer/` へ退避
 | cg22 | white_151.png | `cg_22_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図　画面いっぱいの作品アートワーク |
 | cg23 | white_152.png | `cg_23_katsuya_ushirosugata_yuugata.png` | 勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る |
 | cg24 | white_153.png | `cg_24_katsuya_chizu_watasu_zekkyu.png` | 勝也(正面)　地図を渡され絶句する瞬間 ｜ 2026-09-11 演出調整で脚本から外し `assets/_buffer/` へ退避
@@ -179,7 +179,7 @@
 | cg30 | white_159.png | `cg_30_katsuya_genzai_kyoshitsu.png` | 勝也(単独)　「窓の外を見るたび、報告していた」と語る |
 | cg31 | white_160.png | `cg_31_zenin-katsuya_hiroi_kouzu.png` | 全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図 |
 | cg32 | white_161.png | `cg_32_terachi_dokudoku_roudoku.png` | 寺地(単独・朗読)　スマホのライトに照らされて |
-| cg33 | white_162.png | `cg_33_zenin-katsuya_namida_koraeru.png` | 全員／勝也　一人ずつの一言、勝也が涙をこらえる |
+| cg33 | white_162.png | `cg_33_zenin-katsuya_namida_koraeru.png` | 全員／勝也　一人ずつの一言、勝也が涙をこらえる | ｜ 2026-09-11 演出整理で脚本から外し `assets/_buffer/` へ退避
 | cg34 | white_163.png | `cg_34_katsuya_hareyaka_emie.png` | 勝也(単独)　晴れやかな笑み(表情⑩解禁カット) |
 | cg35 | white_164.png | `cg_35_zenin_sotsugyoushiki_sakurafubuki.png` | 全員集合　卒業式・桜吹雪 |
 | cg36 | white_165.png | `cg_36_katsuya_suunengo_kyoshitsu.png` | 勝也(単独)　数年後の教室、新しい1年生に同じ地図を |
@@ -336,7 +336,7 @@
 
 ---
 
-- 合計: 300スロット (背景24 / 立ち絵105 / 名場面CG 34（4枚は予備退避） / ED用CG 14 / UI 20 / 予備 103)
+- 合計: 300スロット (背景24 / 立ち絵105 / 名場面CG 30（8枚は予備退避） / ED用CG 14 / UI 20 / 予備 107)
 - 企画書§8.2では立ち絵113本と計上されているが、第5章の表情リストを実列挙すると105本のため、
   差分8本は予備スロット(追加表情用バッファ)として確保している(§8.6「約90枚分のバッファ」の一部)。
 - 元 `image1/`, `image2/`, `image3/` フォルダはリネーム後に撤去。

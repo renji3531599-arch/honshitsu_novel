@@ -131,6 +131,7 @@ function hills(rand, base, amp, color, op) {
 }
 
 const _backdropCache = new Map();
+const _figureCache = new Map();
 /* --------------------------------------------------------- 場面別 SVG ----- */
 export function backdropSVG(asset) {
   const cacheKey = asset ? (asset.id + '|' + (asset.meta||'')) : 'null';
@@ -366,17 +367,10 @@ const FIG = {
   'wakaki-katsuya': { h: 592, sh: 100, hair: 'short', tie: '#9c2f40', prop: 'bag', gender: 'm' },
 };
 
-/* 立ち絵SVGの生成結果キャッシュ。
-   かつては発話行ごとに innerHTML へ書き直していた（≒毎行 SVG 再パース＋
-   blurフィルタ再ラスタライズ → もたつき・一瞬消える原因）。
-   生成物は slug|expr で一意なので初回だけ組み立てて使い回す。 */
-const _figureCache = new Map();
-
 export function figureSVG(slug, expr = '01', mood = 'normal') {
-  // mood（talk 時の揺れ）は CSS クラス側で表現するため、生成物は slug|expr のみでキャッシュする
-  const key = slug + '|' + expr;
-  const hit = _figureCache.get(key);
-  if (hit) return hit;
+  // 表情差分は expr で決まる。talking による揺れはCSSで担うため、キャッシュキーは expr までに限定して再生成を防ぐ
+  const cacheKey = slug + '|' + expr;
+  if (_figureCache.has(cacheKey)) return _figureCache.get(cacheKey);
   const f = FIG[slug] || FIG.mie;
   const rand = rng(hash(slug + '|' + expr));
   const H = 700, cx = 210;
@@ -443,11 +437,10 @@ export function figureSVG(slug, expr = '01', mood = 'normal') {
   if (darken) g += `<rect width="420" height="${H}" fill="#000" fill-opacity="${darken}"/>`;
   if (exprN >= 8) g += `<circle cx="${cx}" cy="${R(neck + 120)}" r="300" fill="url(#halo)"/>
     <radialGradient id="halo"><stop offset="0" stop-color="#ffe9bd" stop-opacity=".35"/><stop offset="1" stop-color="#ffe9bd" stop-opacity="0"/></radialGradient>`;
-  // 全身にかける feGaussianBlur は撤廃（毎行の再パース時にフィルタの
-  // ラスタライズコストが支配的だった。線画はシャープなままでも紙面の質感は
-  // mix-blend-mode:multiply 側で担保される）
+  // 全身にかける feGaussianBlur は撤廃（フィルタのラスタライズコストが支配的だった。
+  // 線画はシャープなままでも紙面の質感は mix-blend-mode:multiply 側で担保される）
   const svg = `<svg viewBox="0 0 420 700" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
-  _figureCache.set(key, svg);
+  _figureCache.set(cacheKey, svg);
   return svg;
 }
 
@@ -467,10 +460,14 @@ export class Particles {
     this.parts = [];
     if (!mode) { this.clear(); return; }
     if (!this.ctx) return;
-    // 画面が大きい/高DPR端末では粒子数を少し絞って軽量化（見た目は密度調整で維持）
+    // 画面が大きい/高DPR端末では粒子数を絞って軽量化。低負荷端末では50%カット、それ以外でも85%に
     const isLow = (()=>{ try{ return (navigator.hardwareConcurrency && navigator.hardwareConcurrency<=4) || (window.devicePixelRatio||1) > 1.8; }catch(_){ return false; } })();
+    const isVeryLow = (()=>{ try{ return (navigator.hardwareConcurrency && navigator.hardwareConcurrency<=2) || (window.devicePixelRatio||1) > 2.2; }catch(_){ return false; } })();
     const base = mode === 'sakura' ? 52 : mode === 'ash' ? 28 : mode === 'yoru' ? 36 : 48;
-    const n = isLow ? Math.round(base * 0.7) : base;
+    let n = base;
+    if (isVeryLow) n = Math.round(base * 0.45);
+    else if (isLow) n = Math.round(base * 0.62);
+    // さらにユーザ設定で粒子を無効化できるよう、configを見る（game側で管理）
     for (let i = 0; i < n; i++) this.parts.push(this.spawn(true));
     if (!this.raf) this.tick();
   }
@@ -510,8 +507,10 @@ export class Particles {
     if (!ctx) return;
     const step = (now) => {
       if (!this.mode) { this.raf = 0; return; }
-      // 30fps まで間引いて軽量化（見た目は 60fps と差がほぼ分からない）
-      if (now && this._lastDraw && now - this._lastDraw < 32) { this.raf = requestAnimationFrame(step); return; }
+      // 30fps（通常）〜 20fps（低負荷）まで間引いて軽量化
+      const isVeryLowTick = (()=>{ try{ return navigator.hardwareConcurrency && navigator.hardwareConcurrency<=4; }catch(_){ return false; } })();
+      const interval = isVeryLowTick ? 48 : 32;
+      if (now && this._lastDraw && now - this._lastDraw < interval) { this.raf = requestAnimationFrame(step); return; }
       this._lastDraw = now || performance.now();
       const w = cv.width, h = cv.height;
       if (w === 0 || h === 0) { this.raf = requestAnimationFrame(step); return; }
@@ -628,7 +627,6 @@ export class Stage {
     const my = ++this._bgToken;
     const img = this.el.bgImg;
     const back = this.el.bgBack;
-    const layer = img.parentElement;   // .lay-bg
     if (!id) {
       this._bgOutgoing?.remove();
       this._bgOutgoing = null;
@@ -649,6 +647,10 @@ export class Stage {
       try { await next.decode(); }
       catch (e) { return; } // 読み込み失敗時は現在の背景を維持
       if (my !== this._bgToken) return;
+    } else {
+      // プレースホルダSVGはキャッシュ済みだが、メインスレッドをブロックしないよう一瞬譲る（滑らかな切替のため）
+      if (this.bgId) await new Promise(r => requestAnimationFrame(()=> requestAnimationFrame(r)));
+      if (my !== this._bgToken) return;
     }
     this._bgOutgoing?.remove();
     const outgoing = document.createElement('div');
@@ -661,12 +663,15 @@ export class Stage {
     }
     const hasPrevious = !!this.bgId;
     const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const stage = this.el.stage;
     if (hasPrevious && !reduced) {
       img.after(outgoing);
       this._bgOutgoing = outgoing;
+      stage.classList.add('bg-switching');
     }
     // 新背景はいったん透明で差し替え、次のフレームからフェードイン。
     // 旧背景（.bg-outgoing）のフェードアウトと同時に走るので、真のクロスフェードになる。
+    const layer = img.parentElement;   // .lay-bg
     if (layer && !reduced) layer.classList.add('bg-enter');
     if (placeholder) {
       back.innerHTML = backdropSVG(a || { id, meta: '' });
@@ -679,14 +684,17 @@ export class Stage {
     if (layer && !reduced) {
       requestAnimationFrame(() => requestAnimationFrame(() => layer.classList.remove('bg-enter')));
     }
-    // 新背景の上で旧背景だけをフェードアウト。途中に暗転を挟まない。
+    // 新背景の上で旧背景をフェードアウト。途中に暗転を挟まず、長めのイージングで“すっと溶ける”切替に
     if (outgoing.isConnected) {
       void outgoing.offsetWidth;
-      outgoing.classList.add('leaving');
+      requestAnimationFrame(() => outgoing.classList.add('leaving'));
       setTimeout(() => {
         outgoing.remove();
         if (this._bgOutgoing === outgoing) this._bgOutgoing = null;
-      }, 1150);
+        stage.classList.remove('bg-switching');
+      }, 1450);
+    } else {
+      stage.classList.remove('bg-switching');
     }
     const kind = ((a && a.meta) || '').split('/')[0];
     this.el.stage.dataset.bgkind = kind;
@@ -809,6 +817,8 @@ export class Stage {
       el.style.height = `calc(var(--u)*640)`;
       const a = this.assets.chrFor(slug, rec.expr);
       const sil = el.querySelector('.sil'), img = el.querySelector('img'), tag = el.querySelector('.nametag');
+      // 表情が変わったときだけ中身を差し替える。話者が変わっただけならCSSの talk/dim
+      // で処理し、SVGは触らない（再パースによるチラつき防止）。実画像も同じ。
       if (a && !this.isPlaceholder(a)) {
         if (rec.svgKey !== '') { sil.innerHTML = ''; rec.svgKey = ''; }
         if (rec.srcKey !== a.file) { img.src = a.file; rec.srcKey = a.file; }
@@ -820,8 +830,9 @@ export class Stage {
         if (rec.srcKey !== '') { img.removeAttribute('src'); rec.srcKey = ''; }
       }
       const label = a ? a.label.replace(/^\S+\s/, '') : rec.expr;
-      tag.textContent = `${slug} · ${rec.expr} · ${label}`;
-      // restart entrance if newly added
+      // nametag は開発用（showSpriteTag OFFならCSSで非表示）。内容が変わったときだけ更新
+      const tagText = `${slug} · ${rec.expr} · ${label}`;
+      if (tag.textContent !== tagText) tag.textContent = tagText;
       if (isNew) { void el.offsetWidth; }
       el.classList.remove('out');
       el.classList.add('in');
