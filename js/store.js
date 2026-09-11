@@ -51,6 +51,7 @@ export const DEFAULT_META = () => ({
 
 export class Store {
   constructor() {
+    this._saveMetaTimer = 0;
     const rawConf = JSON.parse(get(K_CONF) || '{}');
     this.config = Object.assign({}, DEFAULT_CONFIG, rawConf);
     // 軽量マイグレーション: 不明キーの除去と型補正
@@ -75,8 +76,16 @@ export class Store {
     if (!Array.isArray(this.meta.readScenes)) this.meta.readScenes = [];
   }
   saveConfig() { set(K_CONF, JSON.stringify(this.config)); }
-  saveMeta() { set(K_META, JSON.stringify(this.meta)); try { del(K_META_OLD); } catch(_){} }
-  resetMeta() { this.meta = DEFAULT_META(); del(K_META); }
+  saveMeta() {
+    // 連続する saveMeta を 400ms 以内に束ねる（プレイ中の毎行書き込みによるジッターを防ぐ）
+    clearTimeout(this._saveMetaTimer);
+    this._saveMetaTimer = setTimeout(() => {
+      try { set(K_META, JSON.stringify(this.meta)); del(K_META_OLD); } catch(_){}
+    }, 400);
+  }
+  saveMetaNow() { clearTimeout(this._saveMetaTimer); try { set(K_META, JSON.stringify(this.meta)); del(K_META_OLD); } catch(_){} }
+  flushMeta() { this.saveMetaNow(); }
+  resetMeta() { clearTimeout(this._saveMetaTimer); this.meta = DEFAULT_META(); del(K_META); }
 
   save(slot, data) {
     data.savedAt = Date.now();
@@ -109,12 +118,21 @@ export class Store {
   }
   hasSave() { return this.list().some(s => !s.empty) || !!this.load('auto'); }
   saveAuto(data) {
+    // オートセーブも 900ms デバウンス（毎行保存による localStorage 連打を防ぐ）
+    clearTimeout(this._autoTimer);
+    this._autoPending = Object.assign({ savedAt: Date.now(), _v: 2 }, data);
+    this._autoTimer = setTimeout(() => {
+      const payload = JSON.stringify(this._autoPending);
+      try { set(P_SAVE + 'auto', payload); }
+      catch (e) {
+        try { del(P_SAVE + 'auto'); set(P_SAVE + 'auto', payload); } catch (_) {}
+      }
+    }, 900);
+  }
+  saveAutoNow(data) {
+    clearTimeout(this._autoTimer);
     const payload = JSON.stringify(Object.assign({ savedAt: Date.now(), _v: 2 }, data));
-    try { set(P_SAVE + 'auto', payload); }
-    catch (e) {
-      // オートセーブは失敗してもゲームを止めない — 古いautoを消して再試行
-      try { del(P_SAVE + 'auto'); set(P_SAVE + 'auto', payload); } catch (_) {}
-    }
+    try { set(P_SAVE + 'auto', payload); } catch(e){ try{ del(P_SAVE+'auto'); set(P_SAVE+'auto', payload);}catch(_){} }
   }
   loadAuto() { try { return JSON.parse(get(P_SAVE + 'auto') || 'null'); } catch (e) { return null; } }
   quick(slot, data) { set(P_SAVE + 'q' + slot, JSON.stringify(Object.assign({ savedAt: Date.now() }, data))); }
