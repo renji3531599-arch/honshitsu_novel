@@ -1,0 +1,322 @@
+; ═══════════════════════════════════════════════════════════════════════
+;  エンディング ―― 共通卒業式（END-0）＋ 個別エピローグ（END-1〜14）
+;  企画書 第11章
+; ═══════════════════════════════════════════════════════════════════════
+
+#chapter end | 地面は、忘れない。 | ENDINGS
+
+#scene end0 | 卒業式（共通）
+@chapter end
+@bg bg_sotsugyoushiki_kaijou
+@bgm bgm17 fade=2.8
+@se se15
+ナ：翌日、卒業式。
+ナ：桜はまだ五分咲きだったが、それで十分だった。
+ナ：北棟と南棟、二つのネクタイが同じ並木道を通る。
+ナ：理数科三年B組の四十人が、最後にもう一度、あの教室に集まった。
+@cg cg35 kb
+@part sakura
+@chr ryoma=02,mie=09
+両馬：三年間、ありがとうございました。
+三重：お前が言うと締まらねえんだよ。
+両馬：締まらなくていい。それも✝本質✝だ。
+三重：……まあ。
+ナ：「まあ」がまだ死なないでいることに、誰もが少しだけ安心した。
+@item sotsugyou
+@cg off
+@chr clear
+ナ：ここから先は、この一ヶ月で、あなたが何を選んで来たかによる。
+ナ：誰も置き去りにしない、というのが、このクラス最後の議題だった。
+@jump end0_pick
+
+#scene end0_pick | 分岐
+@part off
+@bgm off
+@fx fadeblack
+ナ：――ここで、式は終わる。はずだった。
+@if endings_count>=13 -> end_bonus
+ナ：見慣れた床が、見慣れた光で、もう一度、この教室を照らしている。
+@if tease>=3 && flag_ryoma>=4 && heart>=12 && heart<=17 -> end_comedy
+@if heart>=24 && flagcount>=6 -> end_true
+@if heart>=18 && bestflag==mie -> end_good_mie
+@if heart>=18 && bestflag==satou -> end_good_satou
+@if heart>=18 && bestflag==rei -> end_good_rei
+@if heart>=18 && bestflag==terachi -> end_good_terachi
+@if heart>=18 && bestflag==ryoma -> end_good_ryoma
+@if heart>=18 && bestflag==izaki -> end_good_izaki
+@if heart>=18 && bestflag==meshino -> end_good_meshino
+@if heart>=18 && bestflag==kuraishi -> end_good_kuraishi
+@if heart>=18 && bestflag==minamitou -> end_good_minamitou
+@if heart>=12 -> end_normal
+@jump end_bittersweet
+
+; ───────────────────────────────────────────── ① TRUE END ──
+#scene end_true | TRUE END「地面は、忘れない。」
+@bg bg_kyoshitsu_suunengo
+@bgm bgm18 fade=3.2
+@cg cg_end_true kb
+ナ：数年後。
+ナ：北棟三年B組――今はもう違う顔ぶれの教室で、勝也は同じ地形図を広げている。
+@chr katsuya=02
+勝也：同じ地図だ。前の代から、そのまた前の代からも、ずっと同じ。同じに見えるか?
+ナ：教室の隅、新任教師として控えていた誰か――かつての教え子の一人が、その光景を見て、静かに笑う。
+ナ：勝也は、放課後の職員室で、久しぶりに古い匿名掲示板を開いた。
+ナ：「ヘイカツスレ」。三年前、生徒たちが書き続けていたあのスレッドだ。
+@chat bbs_489
+@cg off
+ナ：読み進めるうちに、見覚えのない、けれど確かに何年も前から書き込みを続けている「489」という名前に行き当たる。
+@memo 「地形の話を通じて、時間と人間の話をしてる。」 hand
+@tip b489
+ナ：誰が書いたのかは、わからない。
+ナ：わからないままでいい。地面は、忘れない。
+ナ：忘れない誰かが、きっとどこかにいる。それだけで、十分だった。
+@chr katsuya=07
+勝也：……お前らも、元気でやってるか。
+@cg cg36
+@fx fadeblack
+@bgm bgm24 fade=1.4
+ナ：――ここまでの、全員分の記録。
+@end true | TRUE END「地面は、忘れない。」
+
+; ───────────────────────────────────────── ② GOOD END ― 三重 ──
+#scene end_good_mie | GOOD END 三重「否定の向こう側」
+@bg bg_kyoshitsu_haru_sotsugyougo
+@bgm bgm19 fade=2.4
+@cg cg_end_mie kb
+ナ：三重県臣は、教育学部に進学した。
+ナ：「人に何かを伝える仕事」に興味を持ったのは、あの日、寺地が読み上げた言葉が、自分でも驚くほど胸に残ったからだった。
+@chr mie=09
+三重：……人に教えるとか、柄じゃないけど。
+三重：柄じゃないことを、柄じゃないままやってみるのも、悪くないなと思って。
+ナ：実習の教案には、最後まで消し忘れた✝が一行だけ入っていた。
+ナ：三峰とは、今も連絡を取り合っている。「は？」のハモりは、今も健在だ。
+@if runs>=2 -> end_good_mie_2
+@jump end_good_mie_end
+
+#scene end_good_mie_2 | （おまけ）ハモり
+@cg cg37
+@chr mitsumine=06,mie=02
+三峰：あんた、先生になったんだっけ。
+三重：なってない。まだ。
+三峰：は?
+三重：は?
+@cg off
+@jump end_good_mie_end
+
+#scene end_good_mie_end | GOOD END 三重・了
+@fx fadeblack
+@end good_mie | GOOD END 三重「否定の向こう側」
+
+; ───────────────────────────────────────── ③ GOOD END ― 砂糖 ──
+#scene end_good_satou | GOOD END 砂糖「見ている、それだけで」
+@bg bg_kyoshitsu_haru_sotsugyougo
+@bgm bgm19 fade=2.4
+@cg cg_end_satou kb
+ナ：砂糖東洋は、地質・地理情報系の学科に進んだ。
+ナ：フィールド調査先で、堂々と空を見上げている。
+@chr satou=06
+砂糖：見てる。今度は、見てないふりしない。
+ナ：スマートフォンの充電は、今でもよく切れる。
+ナ：だが、切れても平気になった。
+@cg off
+ナ：代わりに、切れたら空を見るようになった。それだけの差が、三年分よりずっと大きかった。
+@fx fadeblack
+@end good_satou | GOOD END 砂糖「見ている、それだけで」
+
+; ───────────────────────────────────────── ④ GOOD END ― 零 ──
+#scene end_good_rei | GOOD END 零「面白いを仕事にする」
+@bg bg_toshoshitsu
+@bgm bgm19 fade=2.4
+@cg cg_end_rei kb
+ナ：数理零は、データサイエンス系の研究室に進んだ。
+ナ：「面白い」は今も彼の最高の褒め言葉だが、それとは別に、「大事」という言葉も、彼の語彙に加わった。
+@chr rei=02
+零：面白いことと、大事なこと。両方あるって、最近わかった。
+ナ：研究室のホワイトボードの隅に、三年前の地図の複写が貼ってある。
+ナ：誰が貼ったかは、聞かないことになっている。
+@fx fadeblack
+@end good_rei | GOOD END 零「面白いを仕事にする」
+
+; ───────────────────────────────────────── ⑤ GOOD END ― 寺地 ──
+#scene end_good_terachi | GOOD END 寺地「配信は続く」
+@bg bg_hokutou_kyoshitsu_yoru
+@bgm bgm09 fade=2.4
+@cg cg_end_terachi kb
+ナ：本質配信は、今も細々と続いている。
+ナ：登録者数は増えたり減ったりしているが、寺地はもう気にしていない。
+@chr terachi=04
+寺地：意味がわからないまま、届け続ける。それでいいって、先生が教えてくれたから。
+ナ：机の引き出しには、また新しい紙束が増えていた。
+@chat live_end
+@fx fadeblack
+@end good_terachi | GOOD END 寺地「配信は続く」
+
+; ───────────────────────────────────────── ⑥ GOOD END ― 両馬 ──
+#scene end_good_ryoma | GOOD END 両馬「✝本質✝、その後」
+@bg bg_ryoma_ie_butsudan
+@bgm bgm10 fade=2.4
+@cg cg38 kb
+ナ：両馬二郎は、祖父の墓の前で、変わらず笑っていた。
+@chr ryoma=06
+両馬：爺ちゃん、聞こえてる?　俺、後輩に引き継いだよ。✝本質✝、まだ終わってない。
+ナ：倉石暁が、その隣で神妙な顔で手を合わせていた。
+@cg cg_end_ryoma kb
+ナ：墓前で笑って報告できる孫は、たぶん、そう多くない。
+@cg off
+@chr kuraishi=02,ryoma=06
+倉石：先輩。年鑑の第四章、系譜の項を書き換えました。
+両馬：ん?　何を。
+倉石：創始者の下に「待たせてくれた人」を追記しました。
+両馬：……先生のこと?
+倉石：はい。✝はつけませんでした。つけなくていい行だったので。
+@fx fadeblack
+@end good_ryoma | GOOD END 両馬「✝本質✝、その後」
+
+; ───────────────────────────────────── ⑦ GOOD END ― 伊崎＋伊豆見 ──
+#scene end_good_izaki | GOOD END 伊崎＋伊豆見「それぞれの歩幅」
+@bg bg_sakura_namiki
+@bgm bgm19 fade=2.4
+@cg cg_end_izaki_izumi kb
+ナ：伊崎と伊豆見は、別々の大学に進んだ。
+ナ：それでも、月に一度は連絡を取り合っている。
+@chr izumi=06,izaki=06
+伊豆見：隣にいなくても、離れたわけじゃないんだよな。
+伊崎：だな。
+ナ：春休みに一度だけ、同じ駅で待ち合わせて、どちらからともなく同じ方角に歩き出した。
+ナ：距離は、たぶん、二人が勝手に決めていいものだった。
+@cg off
+@fx fadeblack
+@end good_izaki | GOOD END 伊崎＋伊豆見「隣にいた二人、それぞれの歩幅」
+
+; ───────────────────────────────────────── ⑧ GOOD END ― 召野 ──
+#scene end_good_meshino | GOOD END 召野「言葉を届ける」
+@bg bg_minamitou_kyoshitsu
+@bgm bgm19 fade=2.4
+@cg cg_end_meshino kb
+ナ：召野カイトは、国際系の学部で英語教育を学び始めた。
+ナ：「伝えたいことを、ちゃんと言葉にする」というテーマを、二見先生への片思いから見つけた男だった。
+@chr meshino=06
+召野：先生の窓の外の話、聞いてよかったです。
+召野：言えなかった"ありがとう"、俺は言えるうちに言いたいので。
+ナ：卒業式の日、二見玲子は英語の時間割の外に立って、何も言わずに手を振った。
+@fx fadeblack
+@end good_meshino | GOOD END 召野「言葉を届ける」
+
+; ───────────────────────────────────────── ⑨ GOOD END ― 倉石 ──
+#scene end_good_kuraishi | GOOD END 倉石「年鑑、完結せず」
+@bg bg_kaidan_odoriba
+@bgm bgm19 fade=2.4
+@cg cg_end_kuraishi kb
+ナ：倉石暁は、✝本質✝年鑑を完結させなかった。
+ナ：完結させたら✝本質✝ではなくなる――それが、彼の三年間の結論だった。
+ナ：年鑑は、後輩に託された。
+@chr kuraishi=05
+倉石：先輩方の代の記録は、ここまでです。
+倉石：あとは、これを読む誰かが、続きを書いてください。
+ナ：表紙の✝は、もうひとつも増えていなかった。
+ナ：それが、彼の三年間だった。
+@fx fadeblack
+@end good_kuraishi | GOOD END 倉石「年鑑、完結せず」
+
+; ───────────────────────────────────────── ⑩ GOOD END ― 南棟 ──
+#scene end_good_minamitou | GOOD END 南棟「境界のない春」
+@bg bg_sakura_namiki
+@bgm bgm19 fade=2.4
+@cg cg_end_minamitou kb
+ナ：櫻優と内藤蘭は、まだ理論通りには進んでいない。
+ナ：それでも、二人でいる時間は、確実に増えていた。
+@chr sakura=06,naitou=06
+櫻：恋愛発生の法則、また一つ、書き換えないといけないかもしれません。
+内藤：書き換えなくていいですよ、そんなの。
+ナ：三峰瑠衣は、今では理数科の教室に出入りする"公認"のような存在になっていた。
+@cg off
+@chr mitsumine=03
+三峰：あたしはもう、国境の向こうとか思ってないし。
+@fx fadeblack
+@end good_minamitou | GOOD END 南棟「境界のない春」
+
+; ───────────────────────────────────────── ⑪ NORMAL END ──
+#scene end_normal | NORMAL END「見えないけど、ある」
+@bg bg_hokutou_kyoshitsu_yuugata
+@bgm bgm20 fade=2.6
+@cg cg_end_normal kb
+ナ：勝也は、あの日、全てを語ったわけではなかった。
+ナ：「ありがとう。……でも、この話は、また今度な」――そう言って、彼は静かに教室を出ていった。
+@chr katsuya=02
+勝也：地図は、まだ途中だ。全部見せたら、面白くないだろう。
+ナ：それでも、十分だった。
+ナ：わからないことが全部わかる必要はない。見えないけど、ある。
+ナ：それだけで、この三年間は報われた。
+@cg off
+@fx fadeblack
+@end normal | NORMAL END「見えないけど、ある」
+
+; ───────────────────────────────────── ⑫ BITTERSWEET END ──
+#scene end_bittersweet | BITTERSWEET END「こぼれた地図」
+@part ash
+@bg bg_hokutou_kyoshitsu_yuugata
+@bgm bgm21 fade=2.4
+ナ：準備は、間に合わなかった。
+ナ：地図は未完成のまま、慌ただしく丸められて勝也に渡された。
+ナ：段取りは崩れ、伝えたかった言葉の半分も、伝えられなかった。
+@cg cg_end_bittersweet
+@chr mie=04,ryoma=08
+三重：……ぐだぐだになったな。
+両馬：ぐだぐだでも、渡せただけマシだろ。
+ナ：勝也は、こぼれ落ちた地図の切れ端を一枚だけ拾い上げ、笑った。
+@chr katsuya=02
+勝也：……十分だ。完璧な地図より、こぼれた地図の方が、らしくていい。
+ナ：うまくはいかなかった。それでも、小さな灯りは、確かに残った。
+@cg off
+@fx fadeblack
+@end bittersweet | BITTERSWEET END「こぼれた地図」
+
+; ───────────────────────────────────── ⑬ COMEDY SECRET END ──
+#scene end_comedy | COMEDY SECRET END「原✝本質✝、完全体」
+@bg bg_hokutou_kyoshitsu_hiru
+@bgm bgm22 fade=1.6
+ナ：大真面目にふざけ続けた者には、たいてい、最後にふざけた結末が来る。
+@cg cg_end_comedy kb
+ナ：倉石の「グレートチェーン理論」が、なぜか完成してしまった。
+ナ：前-原✝本質✝、原✝本質✝、✝本質✝、亜✝本質✝、非✝本質✝――五段階モデルを、勝也まで巻き込んで検証する羽目になる。
+@tip greatchain
+@chr katsuya=06,kuraishi=01,mie=02
+勝也：……つまり、俺が窓の外を見てるのは、前-原✝本質✝の顕現だと言いたいのか。
+倉石：その通りです!
+三重：先生まで巻き込むな!
+勝也：……本質、かもな。
+三重：先生まで言うな!!
+@cnt ryoma_honshitsu
+@chat bbs_comedy
+ナ：この一件は、後年まで掲示板に記録として残り、誰も真に受けず、誰も忘れない。
+@cg off
+@fx flash
+@se se03
+@end comedy | COMEDY SECRET END「原✝本質✝、完全体」
+
+; ───────────────────────────────────── ⑭ BONUS EXTRA ──
+#scene end_bonus | BONUS EXTRA「また、この教室で」
+@bg bg_suiko_hotori
+@bgm bgm23 fade=2.6
+@se se09
+ナ：数年後の夏。翠湖のほとりに、理数科三年B組だった面々が、久しぶりに顔を揃えた。
+ナ：北棟組も、南棟組も。三峰も、櫻も、内藤も。
+@cg cg_end_bonus kb
+@bgm bgm24 fade=1.4
+@chr katsuya=02,ryoma=02
+勝也：呼ばれたから来たが……お前ら、まだ✝本質✝とか言ってるのか。
+両馬：言ってますよ。一生言います。
+@chr mie=09
+三重：一生は長すぎるだろ。
+両馬：長くない。✝本質✝に終わりはないんだよ。
+三重：は？
+@cnt mie_ha
+ナ：何年経っても、変わらないものがある。
+ナ：変わらないことが、こんなにも嬉しいと思える日が来るとは、誰も思っていなかった。
+@chr katsuya=10
+勝也：……そうか。まだ、続いてるのか。
+ナ：地面は、忘れない。忘れない誰かが、いつまでもそこにいる。
+@cg off
+@fx fadeblack
+@se se10
+@end bonus | BONUS EXTRA「また、この教室で」

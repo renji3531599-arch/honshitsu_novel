@@ -1,0 +1,10 @@
+; シナリオ本の読み込み順（先頭から連結して1本の脚本として扱う）
+00_prologue.txt
+10_chapter1.txt
+20_route_satou_rei.txt
+30_route_terachi_ryoma.txt
+40_route_minamitou_meshino.txt
+50_converge.txt
+60_climax.txt
+70_endings.txt
+90_chats.txt

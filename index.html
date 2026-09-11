@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>まだ地図の途中で 〜✝本質✝特別編〜</title>
+<meta name="description" content="桐葉高校理数科三年B組・卒業前ノベルゲーム『まだ地図の途中で』〜✝本質✝特別編〜">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;900&display=swap">
+<link rel="stylesheet" href="css/vn.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2315120f'/%3E%3Cpath d='M16 5v22M6 16h20' stroke='%23d8c9a8' stroke-width='2.2'/%3E%3C/svg%3E">
+</head>
+<body>
+<div id="frame">
+
+  <!-- ======================= GAME STAGE ======================= -->
+  <div id="viewport">
+    <div id="stage">
+      <div class="layer lay-bg" id="layBg">
+        <div class="art-back" id="bgBack"></div>
+        <img class="art-img" id="bgImg" alt="" decoding="async">
+        <div class="grade" id="bgGrade"></div>
+        <div class="lightshaft" id="bgLight"></div>
+      </div>
+
+      <div class="layer lay-chr" id="layChr"></div>
+
+      <div class="layer lay-cg" id="layCg">
+        <div class="cg-holder" id="cgHolder">
+          <div class="art-back" id="cgBack"></div>
+          <img class="art-img" id="cgImg" alt="" decoding="async">
+        </div>
+      </div>
+
+      <div class="layer lay-fx">
+        <canvas id="fxParticles"></canvas>
+        <div class="fx-veil" id="fxVeil"></div>
+        <div class="fx-flash" id="fxFlash"></div>
+        <div class="fx-bars top" id="barTop"></div>
+        <div class="fx-bars bottom" id="barBottom"></div>
+        <div class="fx-grain" id="fxGrain"></div>
+        <div class="fx-vignette"></div>
+        <div class="fx-scan"></div>
+      </div>
+
+      <!-- 場面用キャプション（ handwritten memo 等） -->
+      <div class="caption" id="caption"></div>
+
+      <!-- 章タイトルカード -->
+      <div class="card-overlay" id="cardOverlay">
+        <div class="card-inner">
+          <div class="card-no" id="cardNo"></div>
+          <div class="card-rule"></div>
+          <div class="card-title" id="cardTitle"></div>
+          <div class="card-sub" id="cardSub"></div>
+        </div>
+      </div>
+
+      <!-- HUB（ルート選択） -->
+      <div class="hub" id="hub">
+        <div class="hub-head">
+          <div class="hub-kicker">HUB ― MISOKAI NO JUNBI</div>
+          <div class="hub-title">見送りの準備、始めます</div>
+          <div class="hub-note">話せる相手から、順番に。読了すると等高線が繋がります。</div>
+        </div>
+        <div class="hub-list" id="hubList"></div>
+        <div class="hub-foot" id="hubFoot"></div>
+      </div>
+
+      <!-- 常時HUD -->
+      <div class="hud-mark" id="hudLeft"></div>
+      <div class="hud-mark right" id="hudRight"></div>
+      <div class="toast-stack" id="toasts"></div>
+
+      <!-- 所持品 -->
+      <div class="items hidden" id="items"></div>
+
+      <!-- 端末（LINE / 掲示板 / 配信）オーバーレイ -->
+      <div class="screen-wrap" id="screenWrap">
+        <div class="screen-frame" id="screenFrame">
+          <div class="screen-titlebar"><span id="screenTitle"></span><span class="screen-kind" id="screenKind"></span></div>
+          <div class="screen-body" id="screenBody"></div>
+          <div class="screen-close">クリック / Enter で閉じる</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================= TEXT BOX ======================= -->
+    <div id="textwrap" class="hidden">
+      <div id="namebox"><span id="nameText"></span></div>
+      <div id="textbox">
+        <div id="text"></div>
+        <div class="pagecorner"><span id="pageMark">▼</span></div>
+      </div>
+      <div id="toolbar">
+        <button class="tbtn" data-menu="auto" id="btnAuto">AUTO</button>
+        <button class="tbtn" data-menu="skip" id="btnSkip">SKIP</button>
+        <button class="tbtn" data-menu="log">LOG</button>
+        <button class="tbtn" data-menu="save">SAVE</button>
+        <button class="tbtn" data-menu="load">LOAD</button>
+        <button class="tbtn" data-menu="config">CONFIG</button>
+        <button class="tbtn" data-menu="quick">MENU</button>
+      </div>
+    </div>
+
+    <!-- ======================= CHOICES ======================= -->
+    <div id="choices" class="hidden"><div id="choicePrompt"></div><div id="choiceList"></div></div>
+
+    <!-- クイックメニュー -->
+    <div id="quickmenu" class="hidden">
+      <div class="qm-list" id="qmList"></div>
+    </div>
+
+    <!-- ======================= OVERLAYS ======================= -->
+    <div id="overlay" class="hidden">
+      <div class="ov-panel" id="ovPanel">
+        <header class="ov-head">
+          <div class="ov-kicker" id="ovKicker">SYSTEM</div>
+          <div class="ov-title" id="ovTitle">CONFIG</div>
+          <button class="ov-close" id="ovClose">✕ CLOSE <span class="k">Esc</span></button>
+        </header>
+        <div class="ov-body" id="ovBody"></div>
+        <footer class="ov-foot" id="ovFoot"></footer>
+      </div>
+    </div>
+
+    <!-- ======================= TITLE ======================= -->
+    <div id="title">
+      <div class="title-bg" id="titleBg"></div>
+      <div class="title-grain"></div>
+      <div class="title-inner">
+        <div class="title-meta">
+          <span>桐葉高校理数科三部作 ― 非公式オリジナル番外編</span>
+          <span>KIRYUA HIGH SCHOOL · NORTH BUILDING · CLASS 3B</span>
+        </div>
+        <div class="title-logo">
+          <div class="logo-orn">✝</div>
+          <h1>まだ地図の途中で</h1>
+          <div class="logo-sub">〜✝本質✝特別編〜</div>
+          <div class="logo-tag">卒業まで、あと一ヶ月。<br class="pc">地図筒から、一枚の古い写真がこぼれ落ちた。</div>
+        </div>
+        <nav class="title-menu" id="titleMenu"></nav>
+        <div class="title-foot">
+          <div id="titleProgress"></div>
+          <div class="copy">© 桐葉高校理数科三年B組、および南棟の面々 ／ And to the one who was looking out of the window.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <noscript><p style="padding:2rem;color:#e8e0cc">このノベルゲームは JavaScript を使用します。JavaScript を有効にしてください。</p></noscript>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
