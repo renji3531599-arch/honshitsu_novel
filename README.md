@@ -67,14 +67,30 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 `assets/` の 300 枚は**すべて白紙プレースホルダー**で、**名前だけ本編に合わせてある**。
 エンジン側の作法：
 
-* 合成は `mix-blend-mode: multiply` ＝ **白いところが透明**。だから白紙でも画面が壊れない
-  （背景・立ち絵は `js/visual.js` がその場手続き生成した SVG を下地に描く）。
-* 差し替えは同名上書きだけ。`data/assets.json` の該当行の `"placeholder": true` を **`false`** にすると
-  補完SVGが消えて、実画像がそのまま出る。
-* 起動は**画像先読み方式**：`false` の行はローダー（`TOUCH TO START` の前）で全枚プリロードされ、
-  本編中の背景/CG切替はクロスフェードする。例外として `assets/bg/title_key.jpg`
+* 白紙プレースホルダのあいだは `js/visual.js` がその場手続き生成したSVG（等高線背景／シルエット立ち絵）を
+  描き、**実画像に差し替えた行だけSVG側を空にして** `<img>` へ渡す（二重描きなし）。
+  どの経路で描いているかは `#stage[data-art="real"|"placeholder"]` で判る。
+* 合成（multiply＝**白いところが透明**）は既定 **OFF**。`#stage[data-blend="multiply"]` を付けたときだけ
+  立ち絵に掛かる。背景・CGは常に `normal`（全面レイヤに multiply を掛けると、実写素材が
+  親の黒 `#0c0a08` と掛け算されて**ほぼ黒く潰れて見えた**ため。2026-09-11 に修正）。
+  白背景JPEGをそのまま置きたいときは CONFIG の「画像合成」を multiply にすれば救済される。
+* 差し替えは同名上書き＋台帳の `"placeholder": false` だけ。それで補完SVGが消えて実画像が出る。
+  透明PNGが正解だが、白背景素材でも合成モードで追従する。
+* 起動は**優先プリロード方式**：`false` の行でも「これから読む数シーンぶん（既定5シーン分）」だけを
+  `TOUCH TO START` 前に読み、残りはタイトル表示後に手が空いたときへ回す（`AssetDB.warmRest`）。
+  200枚を差し替えても起動時間は一定。例外として `assets/bg/title_key.jpg`
   （タイトルキービジュアル、夕方の教室）は最初から実画像で収録済み。
+* 本編中の背景切替は**2枚スラブのクロスディゾルブ**（既定1.15秒、CONFIGで 1.85秒／即時）。
+  CG差し替えは「完全に下げてから上げる」ので、半透明のまま絵が入れ替わって見えない。
+* 作ったのに本編で出していないCGは `"reserve": true` を付けるとギャラリーと回収枚数から外れる
+  （2026-09-11 に11枚を降板。経緯と基準は `docs/PERF_2026-09-11.md` §CG）。
 * 素材IDは脚本内で `bg_hokutou_kyoshitsu_asa`（=ファイル名stem）でも `BG01` でも書ける。
+* **1素材ずつの解説**（どのシーンで何回出るか／未使用差分／Ken Burns 有無／降板理由）は自动生成：
+  `assets/README.md`（総）／ `assets/bg|cg|chr|ui/README.md` ／ **`docs/CG_GUIDE.md`（CG全52枚を物語順に）**。
+  台帳か脚本を直したら `node tools/gen_asset_md.mjs` で再生成。
+* 差し替え後は **`sw.js` の `CACHE`（現在 `honshitsu-v2`）を必ず上げる**。CacheFirst で画像を返すため、
+  上げると旧キャッシュ（白紙PNG）を配信し続けて「差し替わってないように見える」ことがある。
+  ※ 脚本 `data/script/*.txt` は NetworkFirst に変えた（直したのに反映されない問題の防止）。
 * 使わなかった予備 99 枚は `assets/_buffer/` に退避済み（一覧は `docs/ASSET_MANIFEST.md`）。
 * リネーム作業自体は `python3 tools/rename_assets.py` で再実行可能（台帳とmanifestも同時に更新）。
 
@@ -103,6 +119,21 @@ docs/ASSET_MANIFEST.md        … 201枠の一覧（用途・元ファイル・�
 ```
 
 ---
+
+## 4-b. 重さ・滑らかさ（2026-09-11 の実測で入れた手当て）
+
+`tools/perf_probe.mjs`（jsdomで162ライン分を実プレイしてJS・保存量だけを測る）で特定した発熱源と、
+その対策の一覧は **`docs/PERF_2026-09-11.md`**。要約すると：
+
+| 効いた順 | 内容 |
+|---|---|
+| 1 | 背景SVGの全面 `feTurbulence` ＋ SVG内 `infinite` アニメ → **128pxタイルの `<pattern>`** とCSS側アニメへ置換 |
+| 2 | 立ち絵1人に最大4本の `infinite`（うち1本はblur再ラスタ） → **呼吸はtranslateのみ・talkは単発・リム3.2秒** |
+| 3 | `#textbox` の `backdrop-filter: blur(6px)` → 既定OFF（CONFIGで戻せる） |
+| 4 | 1ライン平均 **1.7KBの localStorage 同期書き込み** → 自動セーブ9秒＋340msデバウンスで **平均0.08KB/ライン** |
+| 5 | 話者切りのたびに立ち絵SVGを `innerHTML` へ書き戻す（＝一瞬消える） → **表情が変わるときだけ書換**、話者はclassとz-indexだけ |
+
+CONFIGに4つつまみ增设：背景の切り替え／立ち絵の動き／画像合成／テキスト窓をぼかす。
 
 ## 5. 検証
 

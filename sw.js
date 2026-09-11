@@ -1,5 +1,7 @@
-/* sw.js — 最小オフライン対応。初回はネットワーク優先、2回目からCacheFirst */
-const CACHE = 'honshitsu-v1';
+/* sw.js — 最小オフライン対応。初回はネットワーク優先、2回目からCacheFirst
+   ※ 実素材・脚本を差し替えたら CACHE のバージョンを上げる（上げるまで旧キャッシュを返す）。
+      honshitsu-v2: 2026-09-11 の軽量化＋CG整理を、前回の CacheFirst に閉じ込めないため。 */
+const CACHE = 'honshitsu-v2';
 const CORE = [
   './',
   './index.html',
@@ -28,8 +30,9 @@ self.addEventListener('activate', e=>{
 });
 self.addEventListener('fetch', e=>{
   const url = new URL(e.request.url);
-  // data/script/*.txt と assets は CacheFirst、他は NetworkFirst
-  const isAsset = url.pathname.includes('/assets/') || url.pathname.includes('/data/script/');
+  // 画像（/assets/）だけ CacheFirst。data/script/*.txt はテキストなので NetworkFirst にした
+  //  ―― 脚本を直したのに古いキャッシュを返して「CGが減っていない」状態になったため（2026-09-11）。
+  const isAsset = url.pathname.includes('/assets/');
   if(isAsset){
     e.respondWith(caches.match(e.request).then(r=> r || fetch(e.request).then(res=>{
       const copy = res.clone();

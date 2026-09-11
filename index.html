@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https: blob:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; media-src 'self' blob:; worker-src 'self' blob:">
 <meta name="theme-color" content="#0a0908">
 <meta property="og:title" content="まだ地図の途中で 〜✝本質✝特別編〜">
-<meta property="og:description" content="桐葉高校理数科三年B組・卒業前ノベルゲーム『まだ地図の途中で』〜✝本質✝特別編〜 ― 地図筒からこぼれた一枚の古い写真が、最後の一ヶ月を静かに揺らす。14の結末、38枚のCG、HUB自由順ルート。">
+<meta property="og:description" content="桐葉高校理数科三年B組・卒業前ノベルゲーム『まだ地図の途中で』〜✝本質✝特別編〜 ― 地図筒からこぼれた一枚の古い写真が、最後の一ヶ月を静かに揺らす。14の結末、27枚のCG、HUB自由順ルート。">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/bg/title_key.jpg">
 <meta property="og:image:width" content="1600">
@@ -28,9 +28,17 @@
   <!-- ======================= GAME STAGE ======================= -->
   <div id="viewport">
     <div id="stage">
+      <!-- 背景は2枚のスラブを交互に使ってクロスディゾルブする（二重準備）。
+           旧レイヤを触らないので、SVG 内部のアニメが再生されて飛ぶことがない。 -->
       <div class="layer lay-bg" id="layBg">
-        <div class="art-back" id="bgBack"></div>
-        <img class="art-img" id="bgImg" alt="" decoding="async" fetchpriority="high">
+        <div class="bg-slab on" id="bgA">
+          <div class="art-back" id="bgBack"></div>
+          <img class="art-img" id="bgImg" alt="" decoding="async" fetchpriority="high">
+        </div>
+        <div class="bg-slab" id="bgB" aria-hidden="true">
+          <div class="art-back"></div>
+          <img class="art-img" alt="" decoding="async">
+        </div>
         <div class="grade" id="bgGrade"></div>
         <div class="lightshaft" id="bgLight"></div>
       </div>

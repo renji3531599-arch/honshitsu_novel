@@ -1,153 +1,684 @@
 #!/usr/bin/env node
+/* ============================================================================
+   gen_asset_md.mjs — 画像素材 README 生成器
+   ----------------------------------------------------------------------------
+   `data/assets.json`（台帳）と `data/script/*.txt`（本編DSL）と実ファイルの
+   ヘッダを突き合わせて、「1素材ずつ・改行つきで・どこでどう出るか」を書く。
+   出力:
+     assets/README.md          … 総合（早見・共通仕様・差し替え手順）
+     assets/bg/README.md       … 背景 25
+     assets/cg/README.md       … CG 52
+     assets/chr/README.md      … 立ち絵 105（キャラごとにまとめる）
+     assets/ui/README.md       … UI 20
+     assets/_buffer/README.md  … 予備枠 99
+     docs/CG_GUIDE.md          … CG 全52枚を「物語順」にまとめたガイド
+   手編集せず、台帳を直して `node tools/gen_asset_md.mjs` で再生成。
+   ========================================================================== */
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
-const root = path.resolve('assets');
-const dataPath = 'data/assets.json';
-const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-const byFile = new Map();
-for (const a of data.assets) {
-  byFile.set(a.file, a);
-  // also stem
-  const stem = a.file.replace(/^.*\//,'');
-  byFile.set(stem, a);
-}
-byFile.set('assets/bg/title_key.jpg', { id:'title_key', cat:'bg', file:'assets/bg/title_key.jpg', label:'タイトルキービジュアル', desc:'タイトル背景（桜並木・教室・手書き地図の合成）', meta:'title/key', source:'-（実写合成）', placeholder:false });
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const rd = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
+const exists = (p) => fs.existsSync(path.join(ROOT, p));
+const TODAY = new Date().toISOString().slice(0, 10);
 
-function getImageInfo(p) {
+/* ----------------------------------------------------------- 台帳・メタ ---- */
+const ledger = JSON.parse(rd('data/assets.json'));
+const meta = JSON.parse(rd('data/meta.json'));
+const ASSETS = ledger.assets.slice();
+// タイトルキービジュアル：台帳に既にある場合は足さない（二重計上防止）
+if (!ASSETS.some(a => a.id === 'title_key')) ASSETS.push({
+  id: 'title_key', cat: 'bg', file: 'assets/bg/title_key.jpg',
+  label: 'タイトルキービジュアル（夕方の教室）',
+  desc: 'タイトル画面の背景。`TOUCH TO START` の後ろに静かに揺れる。',
+  meta: 'title/key', source: '-（実写合成）', placeholder: false,
+});
+
+const byId = new Map(ASSETS.map(a => [a.id, a]));
+const byStem = new Map(ASSETS.map(a => [path.basename(a.file).replace(/\.\w+$/, ''), a]));
+/** 脚本の `@bg bg_xxx` / `@bg BG01` どちらでも引けるようにする */
+const lookup = (key) => byId.get(key) || byStem.get(key) || null;
+
+/* ------------------------------------------------------------ 実寸・容量 ---- */
+function imgInfo(rel) {
+  const p = path.join(ROOT, rel);
+  if (!exists(rel)) return { dim: '—（未配置）', bytes: '—' };
+  const st = fs.statSync(p);
+  let dim = '?×?';
   try {
-    const out = execSync(`identify -format "%w %h %b" "${p}" 2>/dev/null`, {encoding:'utf-8'}).trim();
-    // out like "400 300 810B" or "1376 768 242752B"
-    const [w,h,b] = out.split(/\s+/);
-    return {w: Number(w), h: Number(h), bytes: b};
-  } catch(e){
-    return {w:'-', h:'-', bytes:'-'};
-  }
+    const b = fs.readFileSync(p);
+    if (b.slice(1, 4).toString('latin1') === 'PNG') dim = `${b.readUInt32BE(16)}×${b.readUInt32BE(20)}`;
+    else if (b[0] === 0xff && b[1] === 0xd8) {           // JPEG: SOF マーカーを歩く
+      let o = 2;
+      while (o + 9 < b.length) {
+        if (b[o] !== 0xff) { o++; continue; }
+        const m = b[o + 1];
+        if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) {
+          dim = `${b.readUInt16BE(o + 7)}×${b.readUInt16BE(o + 5)}`; break;
+        }
+        o += 2 + b.readUInt16BE(o + 2);
+      }
+    }
+  } catch (_) { /* 読めないなら ?×? のまま */ }
+  return { dim, bytes: st.size < 1024 ? `${st.size}B` : `${(st.size / 1024).toFixed(0)}KB` };
 }
 
-function formatBytes(b){
-  if(b==='-') return '-';
-  // b like 810B or 242752B or 1.2KB
-  return b;
+/* ------------------------------------------------------- 脚本のパース ---- */
+const scriptFiles = rd('data/script/index.txt').split('\n').map(s => s.trim())
+  .filter(s => s && !s.startsWith(';') && !s.startsWith('#'));
+
+/** assetKey -> 使用箇所の一覧 */
+const usage = { bg: new Map(), cg: new Map() };
+/** 'slug|expr' -> 使用箇所 */
+const chrUsage = new Map();
+const note = (map, key, rec) => { if (!key) return; if (!map.has(key)) map.set(key, []); map.get(key).push(rec); };
+
+for (const f of scriptFiles) {
+  const rel = `data/script/${f}`;
+  if (!exists(rel)) continue;
+  const lines = rd(rel).split('\n');
+  let chapter = null, scene = null, curBg = null, curChr = [], openCg = null;
+  const where = (i) => ({ file: rel, line: i + 1, chapter, scene });
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const s = raw.trim();
+    let m;
+    if ((m = s.match(/^#chapter\s+(\S+)\s*\|\s*([^|]+?)(?:\|.*)?$/))) { chapter = { id: m[1], title: m[2].trim() }; continue; }
+    if ((m = s.match(/^#scene\s+(\S+)\s*\|\s*(.+)$/))) { scene = { id: m[1], title: m[2].trim() }; continue; }
+    if ((m = s.match(/^@bg\s+(\S+)/))) {
+      const a = lookup(m[1]);
+      curBg = a || null;
+      note(usage.bg, a && a.id, { ...where(i), at: `@bg ${m[1]}` });
+      continue;
+    }
+    if (/^@bg\s+off/.test(s)) { curBg = null; continue; }
+    if ((m = s.match(/^@chr\s+(.+)$/))) {
+      if (/clear/.test(m[1])) { curChr = []; }
+      else {
+        curChr = [];
+        for (const part of m[1].split(',')) {
+          const p = part.trim().split('=');
+          if (p.length < 2) continue;
+          const expr = p[1].padStart(2, '0');
+          curChr.push(`${p[0]}=${expr}`);
+          note(chrUsage, `${p[0]}|${expr}`, { ...where(i), at: s });
+        }
+      }
+      continue;
+    }
+    if ((m = s.match(/^@cg\s+(\S+)(.*)$/))) {
+      if (m[1] === 'off') {
+        if (openCg) { openCg.to = i; closeCg(); }
+        continue;
+      }
+      const a = lookup(m[1]);
+      if (openCg) { openCg.to = i; closeCg(); }          // 直接差し替え（dip）
+      openCg = { asset: a, kb: /kb/.test(m[2]), ...where(i), at: s, before: prevSpeech(lines, i), inside: [], fx: [] };
+      note(usage.cg, a && a.id, openCg);
+      continue;
+    }
+    if (openCg) {
+      if (/^[^@;]{1,4}：/.test(s)) { if (openCg.inside.length < 3) openCg.inside.push(s); }
+      else if (/^@?(fx|se|memo|item|tip|save|cnt|chat)\b/.test(s)) { if (openCg.fx.length < 4) openCg.fx.push(s); }
+      else if (/^@jump|^@end|^#scene/.test(s)) { openCg.to = i; closeCg(); }
+    }
+  }
+  if (openCg) { openCg.to = lines.length - 1; closeCg(); }
+  function closeCg() {
+    const c = openCg; openCg = null;
+    c.chrList = curChr.slice(0, 4);
+    c.bgId = curBg ? curBg.id : null;
+  }
+}
+function prevSpeech(lines, i) {
+  for (let k = i - 1; k >= 0 && k > i - 8; k--) {
+    const t = lines[k].trim();
+    if (/^[^@;]{1,4}：/.test(t)) return t;
+  }
+  return '';
 }
 
-function recSpec(cat, file){
-  if(cat==='bg') return '1600×900 (16:9) / JPEG・PNG / cover / 背景は`backdropSVG`でSVG補完';
-  if(cat==='cg') return '1600×900 (16:9) / PNG/JPEG / cover / CGは全面表示＋KenBurns可';
-  if(cat==='chr') return '420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置';
-  if(cat==='ui') {
-    if(file.includes('title_logo')) return '1200×480 推奨（透過PNG、中央配置）';
-    if(file.includes('frame')) return '可変（枠装飾は9-patch想定） 推奨 1280×720 背景';
-    if(file.includes('icon')) return '256×256〜512×512 正方形 透過PNG';
-    if(file.includes('bg_')) return '1600×900 背景用';
-    return 'UI部品 — 推奨サイズはラベル参照';
+/* --------------------------------------------------------- コード参照 ---- */
+const CODE_FILES = ['js/visual.js', 'js/game.js', 'js/shell.js', 'js/main.js', 'js/store.js',
+  'js/state.js', 'js/audio.js', 'js/text.js', 'js/parser.js', 'index.html', 'css/vn.css',
+  'data/meta.json', 'data/terms.json'];
+const codeCache = CODE_FILES.filter(exists).map(f => ({ f, src: rd(f) }));
+/** id かファイル名stem が JS/CSS/HTML/台帳 から参照されている箇所（先頭3件） */
+function codeRefs(a) {
+  const stem = path.basename(a.file).replace(/\.\w+$/, '');
+  const out = [];
+  for (const { f, src } of codeCache) {
+    const lines = src.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].includes(stem) || (a.id.length > 3 && lines[i].includes(`'${a.id}'`)) || lines[i].includes(`"${a.id}"`)) {
+        out.push(`${f}:${i + 1}`);
+        if (out.length >= 3) return out;
+      }
+    }
   }
-  if(cat==='_buffer') return '400×300 プレースホルダ（白紙）— LFS移行時は差し替え';
-  return '-';
+  return out;
 }
 
-function genForDir(dirRel, cat, title, lead){
-  const dir = path.join(root, dirRel);
-  const files = fs.readdirSync(dir).filter(f=> /\.(png|jpg|jpeg|webp)$/i.test(f)).sort();
-  const rows = [];
-  for (const f of files){
-    const full = path.join(dir, f);
-    const rel = `assets/${dirRel}/${f}`;
-    const info = getImageInfo(full);
-    const meta = byFile.get(rel) || byFile.get(f) || null;
-    const label = meta?.label || '-';
-    const desc = meta?.desc || '-';
-    const placeholder = meta ? (meta.placeholder ? '◯ 白紙プレースホルダ' : '● 実画像') : '—';
-    const source = meta?.source || '-';
-    const rec = recSpec(cat==='bg' && f==='title_key.jpg' ? 'bg' : cat, f);
-    rows.push({f, rel, info, label, desc, placeholder, source, rec});
-  }
-  let md = `# ${title}\n\n${lead}\n\n`;
-  md += `> 生成日: ${new Date().toISOString().slice(0,10)}  /  総数: ${rows.length} ファイル  /  実体は \`data/assets.json\` が正本（台帳）\n\n`;
-  if(cat==='bg'){
-    md += `## 推奨仕様（BG）\n\n- **サイズ**: 1600×900px（16:9） — \`Stage.bg\` は \`object-fit: cover\` で表示、SVGフォールバック（\`backdropSVG\`）は 1600×900 viewBox\n- **形式**: PNG / JPEG（写真はJPEG、描き込みはPNG推奨）\n- **色**: 時間帯別に \`${'{kyoshitsu/rouka/suiko/...}'}/${'{asa/hiru/yuugata/yoru}'}\` で自動で暖色/寒色フィルタが掛かる（\`visual.js MOODS\`）\n- **配置**: \`#stage\` 背面レイヤ \`lay-bg\`（\`art-back\` がSVG、\`art-img\` が実画像。実画像は \`placeholder:false\` で切替）\n\n`;
-  } else if(cat==='cg'){
-    md += `## 推奨仕様（CG）\n\n- **サイズ**: 1600×900px（16:9） — 全画面差し込み、Ken Burns（\`cgHolder.kb\`）で 26〜32秒かけて 1.02→1.12 にズーム\n- **形式**: PNG / JPEG（透過はPNG）\n- **命名**: \`cg_##_slug_...png\` / \`cg_end_*.png\`（ENDカードは \`#1a1611\` 背景で等高線＋円形グラデ）\n- **配置**: \`lay-cg\`（\`stage-mode=\"cg\"\` で立ち絵を自動で隠す）\n\n`;
-  } else if(cat==='chr'){
-    md += `## 推奨仕様（立ち絵）\n\n- **viewBox**: 420×700（表示は \`--u*420\` 幅 × \`--u*640\` 高、\`object-position: bottom center\`）\n- **推奨実寸**: 840×1280px 以上（2×解像度、透過PNG）。顔〜胸上＋全身が 700px に収まる。トリミングは下基準\n- **形式**: PNG（透過必須）\n- **配置**: \`lay-chr\`。1体=50%中央 / 2体=31%69% / 3体=19%50%81%（\`Stage.applyChr\`）。入退場は \`data-enter=\"left/right/center\"\` で 3種、呼吸（\`chrBreathe\` 4.6s）＋talkバウンス（\`.talk\` 0.34s）＋dimで奥行き\n- **SVGフォールバック**: \`figureSVG(slug, expr)\` が髪型・小道具・表情濃度（\`expr\` 01-10）を procedurally に描く\n\n`;
-  } else if(cat==='ui'){
-    md += `## 推奨仕様（UI）\n\n- **種別**: タイトルロゴ / フレーム（LINE/BBS/配信） / アイコン（年鑑/新聞/地図筒…） / 背景装飾（SAVE/HUB/END）\n- **サイズ目安**: ロゴ 1200×480 / フレーム 1280×720 / アイコン 256×256〜512×512（透過PNG）\n- **配置**: タイトル(\`#title\` / \`#titleBg\`)、端末(\`screen-wrap\` の \`data-kind=\"line/bbs/live\"\`)、オーバーレイ(\`#overlay\`)\n\n`;
-  } else if(cat==='_buffer'){
-    md += `## 用途（_buffer）\n\n- **用途**: 今後差し替える画像の予約枠（99スロット）。現在は 400×300 白紙プレースホルダ。\n- **実データ**: \`assets/_buffer/white_202.png〜white_300.png\`（各 810B）。\n- **台帳**: \`data/assets.json\` の \`bufferFiles\` 配列（将来 LFS へ移行時はここに実ファイルを登録し、\`placeholder:false\` にして参照を切り替え）\n\n`;
-  }
+/* ------------------------------------------------------------- 書式 helper -- */
+const MOOD_LABEL = {
+  asa: '朝（明るい寒色・光差し ON）', hiru: '昼（ニュートラル・光 ON）',
+  yuugata: '夕方（オレンジ・光 WARM）', yoru: '夜（青み・光 OFF・ヴェール半枚）',
+  akari: '灯り（室内灯・光 ON）', sepia: 'セピア（回想）', gensou: '幻想（褪色・暖）',
+  sotsu: '卒業式（白熱・光 ON）',
+};
+const RECOMMEND = {
+  bg: '1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面',
+  cg: '1600×900（16:9）／PNG か JPEG／全面差し込み（透過は使わない）',
+  chr: '840×1280 以上／透過PNG／下揃え（`object-position: bottom center`）',
+  ui: 'ロゴ 1200×480・枠 1280×720・アイコン 256〜512 正方形／透過PNG',
+  _buffer: 'まだ空き枠（400×300 白紙）',
+};
+const whereStr = (u) => {
+  const sc = u.scene ? `シーン \`${u.scene.id}\`「${u.scene.title}」` : 'シーン外';
+  const ch = u.chapter ? `${u.chapter.title} / ` : '';
+  return `${ch}${sc} ― \`${u.file.replace('data/script/', '')}:${u.line}\``;
+};
+const FB_TEXT = {
+  bg: 'エンジンが等高線SVGで補完描画中（`backdropSVG`）',
+  cg: 'CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）',
+  chr: 'エンジンがシルエットで補完描画中（`figureSVG`）',
+  ui: 'CSS装飾だけで代替中',
+};
+const status = (a) => a.reserve
+  ? '予備（`reserve: true`＝ギャラリー・回収枚数に数えない）'
+  : (a.placeholder ? `白紙プレースホルダ ― ${FB_TEXT[a.cat] || ''}` : '● 実画像が乗っている');
+const dimStr = (i) => `現 ${i.dim}・${i.bytes}`;
+const dirOf = (a) => a.file.split('/')[1];
 
-  md += `## ファイル一覧\n\n`;
-  md += `| # | ファイル | 実寸（現在） | 容量 | 推奨サイズ | ラベル | 説明 | 状態 | 出典（仮置き元） |\n`;
-  md += `|---:|---|---|---|すすめ|---|---|---|---|\n`;
-  rows.forEach((r,i)=>{
-    const dims = r.info.w!=='-' ? `${r.info.w}×${r.info.h}` : '-';
-    const safeLabel = r.label.replace(/\|/g,'\\|');
-    const safeDesc = r.desc.replace(/\|/g,'\\|').replace(/\n/g,' ');
-    const safeRec = r.rec.replace(/\|/g,'\\|');
-    md += `| ${i+1} | \`${r.f}\` | ${dims} | ${r.info.bytes} | ${safeRec} | ${safeLabel} | ${safeDesc} | ${r.placeholder} | \`${r.source}\` |\n`;
-  });
-  if(cat==='chr'){
-    md += `\n### 立ち絵 表情バリエーション（抜粋）\n\n- \`01 通常/穏やか\` → \`02 微笑/笑顔\` → \`03 悩み/困り\` → \`04 驚き/怒り\` → \`05 悲しみ/切なさ\` → \`06 決意/真剣\` → \`07 照れ/喜び\` → \`08 泣き/涙\` → \`09 以降 個別（晴れやか・全力等）\`\n- 表現は \`expr\` 番号で濃度（\`darken\`）と \`#halo\` の有無が変わる（\`figureSVG\` 内 \`exprN>=8\` で後光が付く）\n- 実装では \`game.js\` が \`chr:{set:{slug:expr}}\` で \`store.meta.chr[slug]\` に回収を記録\n`;
+/* ============================== 各素材の解説ブロック ====================== */
+function blockCg(a, opts = {}) {
+  const hd = opts.hd || '###';
+  const info = imgInfo(a.file);
+  const L = [];
+  L.push(`${hd} \`${a.id}\` ― ${a.label}`);
+  L.push('');
+  L.push(`- **ファイル**: \`${a.file}\`（${dimStr(info)}）`);
+  L.push(`- **差し替え推奨**: ${RECOMMEND.cg}`);
+  L.push(`- **状態**: ${status(a)}`);
+  const us = usage.cg.get(a.id) || [];
+  if (!us.length) {
+    L.push(`- **出番**: 本編のどこからも呼ばれていない（\`@cg ${a.id}\` 指定なし）`);
+  } else {
+    us.forEach((u, n) => {
+      const span = u.to ? `${u.line}→${u.to + 1}行（約${u.to + 1 - u.line}ライン表示）` : `${u.line}行で表示`;
+      L.push(us.length > 1 ? `- **出番 ${n + 1}/${us.length}**: ${whereStr(u)}` : `- **出番**: ${whereStr(u)}`);
+      L.push(`  - 指定: \`${u.at}\` ／ ${span}${u.kb ? ' ／ Ken Burns ON（26秒で 1.02→1.12）' : '／ Ken Burns なし（静止）'}`);
+      if (u.bgId) {
+        const b = byId.get(u.bgId);
+        L.push(`  - そのときの背景: \`${u.bgId}\`${b ? ' ' + b.label : ''}`);
+      }
+      if (u.chrList && u.chrList.length) L.push(`  - 立ち絵（CGの裏に回る）: ${u.chrList.map(c => '`' + c + '`').join(' / ')}`);
+      if (u.before) L.push(`  - 直前の台詞: ${u.before}`);
+      if (u.inside.length) L.push(`  - 表示中に進む台詞: ${u.inside.map(t => shorten(t, 34)).join(' → ')}`);
+      if (u.fx.length) L.push(`  - 同時に走る演出: ${u.fx.map(t => '`' + t + '`').join(' ')}`);
+    });
   }
-  if(cat==='bg' || cat==='cg'){
-    md += `\n### 補足\n\n- 現状プレースホルダは **400×300 白紙（810B）**。差し替え時は同じファイル名で上書きし、\`data/assets.json\` の該当 \`placeholder\` を \`false\` にするだけでエンジンが実画像に切替（\`Stage.isPlaceholder\`）\n- プリロードは \`AssetDB.realList()\`（\`placeholder:false\` のみ）を 6並列で \`decode()\` し、失敗しても SVG でフォールバック\n`;
+  // ENDカードCGは条件を添える
+  const end = Object.entries(meta.endings || {}).find(([, v]) => v.cg === a.id);
+  if (end) {
+    L.push(`- **対応エンド**: ${end[1].tier}「${end[1].label}」（\`@end ${end[0]}\`）`);
+    L.push(`  - 到達条件: ${end[1].cond}`);
   }
-  md += `\n---\n*このMDは自動生成（\`tools/gen_asset_md.mjs\`）。手編集より台帳 \`data/assets.json\` を正本にしてください。*\n`;
+  if (RESERVE_REASON[a.id]) L.push(`- **降板の理由**: ${RESERVE_REASON[a.id]}`);
+  const refs = codeRefs(a).filter(r => !r.endsWith('css/vn.css'));
+  if (refs.length) L.push(`- **エンジン側の参照**: ${refs.map(r => '`' + r + '`').join(' / ')}`);
+  L.push('');
+  return L.join('\n');
+}
+function blockBg(a) {
+  const info = imgInfo(a.file);
+  const L = [];
+  const kind = (a.meta || '').split('/')[0], moodKey = (a.meta || '').split('/')[1];
+  L.push(`### \`${a.id}\` ― ${a.label}`);
+  L.push('');
+  L.push(`- **ファイル**: \`${a.file}\`（${dimStr(info)}）`);
+  L.push(`- **差し替え推奨**: ${RECOMMEND.bg}`);
+  L.push(`- **状態**: ${status(a)}`);
+  if (moodKey) L.push(`- **時間帯トーン**: \`${a.meta}\` → ${MOOD_LABEL[moodKey] || moodKey}（\`js/visual.js MOODS\`` + '）' + '、`@bg` 指定で自動追従');
+  if (!a.placeholder) L.push(`- **補完SVG**: 出ない（実画像が乗っているので \`#stage[data-art="real"]\` になり、SVG側は空になる）`);
+  else if (kind) L.push(`- **下地の種類**: \`backdropSVG\` の \`${kind}\` パターンで補完描画（等高線・窓・照明の配置が変わる）`);
+  const us = usage.bg.get(a.id) || [];
+  if (!us.length) {
+    L.push(`- **出番**: 脚本から \`@bg\` 指定なし（タイトル背景など、エンジン側だけを使う）`);
+  } else {
+    L.push(`- **使用回数**: 本編 ${us.length} 箇所`);
+    us.slice(0, 5).forEach(u => L.push(`  - ${whereStr(u)}`));
+    if (us.length > 5) L.push(`  - …ほか ${us.length - 5} 箇所`);
+    const cgs = ASSETS.filter(x => x.cat === 'cg' && (usage.cg.get(x.id) || []).some(u => u.bgId === a.id));
+    if (cgs.length) L.push(`- **この背景まわりのCG**: ${cgs.map(x => '`' + x.id + '`').join(' / ')}`);
+  }
+  const refs = codeRefs(a);
+  if (refs.length) L.push(`- **エンジン側の参照**: ${refs.map(r => '`' + r + '`').join(' / ')}`);
+  L.push('');
+  return L.join('\n');
+}
+function blockChr(a) {
+  const info = imgInfo(a.file);
+  const slug = a.meta || path.basename(a.file).split('_')[1];
+  const expr = (path.basename(a.file).match(/_(\d\d)_/) || [])[1] || '01';
+  const us = chrUsage.get(`${slug}|${expr}`) || [];
+  const L = [];
+  const tail = a.placeholder ? '' : `　※ ${status(a)}`;
+  L.push(`- **${padExpr(expr)} ${exprLabel(a.label)}** ― \`@chr ${slug}=${expr}\` ／ \`${path.basename(a.file)}\`${tail}`);
+  L.push(us.length
+    ? `  本編 **${us.length} 回**。初出 \`${path.basename(us[0].file, '.txt')}:${us[0].line}\`${us[0].scene ? '（' + us[0].scene.title + '）' : ''}${us.length > 1 ? ' → ほか ' + (us.length - 1) + ' 回' : ''}`
+    : `  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る`);
+  return L.join('\n');
+}
+function blockUi(a) {
+  const info = imgInfo(a.file);
+  const L = [];
+  L.push(`### \`${a.id}\` ― ${a.label}`);
+  L.push('');
+  L.push(`- **ファイル**: \`${a.file}\`（${dimStr(info)}）`);
+  L.push(`- **差し替え推奨**: ${RECOMMEND.ui}`);
+  L.push(`- **状態**: ${status(a)}`);
+  const item = Object.entries(meta.items || {}).find(([, v]) => v.icon === a.id || v.icon === path.basename(a.file).replace(/\.\w+$/, ''));
+  if (item) L.push(`- **対応アイテム**: \`${item[0]}\`「${item[1].label}」― 所持品欄に出る（${item[1].desc}）`);
+  const refs = codeRefs(a);
+  L.push(`- **使われる場所**: ${refs.length ? refs.map(r => '`' + r + '`').join(' / ') : 'JS/CSS/台帳のいずれにも直参照なし ― エンジンが class だけで代替描画している（置くと初めて効く）'}`);
+  L.push('');
+  return L.join('\n');
+}
+const padExpr = (e) => '①②③④⑤⑥⑦⑧⑨⑩'[Number(e) - 1] || e;
+const exprLabel = (label) => {
+  const i = String(label).indexOf(' ');
+  return i > 0 ? label.slice(i + 1) : label;
+};
+const shorten = (t, n) => t.length > n ? t.slice(0, n) + '…' : t;
+
+/* 予備枠に落とした理由（docs/PERF_2026-09-11.md §4 と対） */
+const RESERVE_REASON = {
+  cg04: '2026-09-11 の整理で降板。勝也の硬い表情は直前の `@chr katsuya=06` が担うので1枚絵は過剰だった',
+  cg08: '同左。零のPCの光＝氛围カット。同じルートの決定瞬間（cg09）に1枚を残す方針',
+  cg11: '同左。「暴露じゃなくて、ありがとうの会」の頷き合いは3人の立ち絵で足りた',
+  cg15: '同左。報告の続きの台詞受け渡しで、見せる新情報がない',
+  cg21: '同左。両馬が「見せない」と言った落書きなので、逆に cg22 の完成図を被せたほうが効く',
+  cg24: '同左。絶句は `@chr katsuya=04` で足りる',
+  cg25: '同左。「先生、聞いていいですか」はミディアムショットでなく立ち絵で',
+  cg32: '同左。朗読の立ち上がり（ピークの cg33 は残した）',
+  cg36: '同左。`cg_end_true` と同一構図の二重表示になっていた',
+  cg37: '同左。おまけ3行のハモり（ギャグに1枚絵は過剰）',
+  cg38: '同左。`cg_end_ryoma` に統合（ENDは1シーン1枚）',
+};
+
+/** 物語順のCG解説：章が変わるところに ## 見出しを立てる */
+function cgStorySections(list) {
+  const out = []; let cur = null, n = 0;
+  for (const a of list) {
+    const u = (usage.cg.get(a.id) || [])[0];
+    const chId = u && u.chapter ? u.chapter.id : '(章指定なし)';
+    if (chId !== cur) {
+      cur = chId; n++;
+      out.push(`\n### ${n}. ${u && u.chapter ? u.chapter.title : chId}\n\n` +
+        `_${u && u.chapter ? u.chapter.title : ''}（\`#chapter ${chId}\`）― この章で ${list.filter(x => { const v = (usage.cg.get(x.id) || [])[0]; return v && v.chapter && v.chapter.id === chId; }).length} 枚使用_\n`);
+    }
+    out.push(blockCg(a, { hd: '####' }));
+  }
+  return out.join('\n');
+}
+
+/* =============================================================== 出力 ---- */
+const head = (title, lead, total) => `# ${title}
+
+${Array.isArray(lead) ? lead.join('\n') : lead}
+
+> 生成: \`node tools/gen_asset_md.mjs\`（${TODAY}）／総数 ${total} ファイル／正本は台帳 \`data/assets.json\`
+> ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
+
+`;
+
+function quickTable(list, cols) {
+  const rows = list.map(a => '| ' + cols(a).join(' | ') + ' |');
+  return rows.join('\n');
+}
+const collectCount = (cat) => (usage[cat] ? usage[cat] : null);
+
+/* ---- assets/cg/README.md ＋ docs/CG_GUIDE.md ---- */
+function cgDoc(opts = {}) {
+  const order = opts.byStory
+    ? ASSETS.filter(a => a.cat === 'cg').slice().sort((x, y) => {
+        const ux = (usage.cg.get(x.id) || [])[0], uy = (usage.cg.get(y.id) || [])[0];
+        const rank = (u) => u ? (scriptFiles.indexOf(path.basename(u.file)) * 100000 + u.line) : 9e9;
+        return rank(ux) - rank(uy);
+      })
+    : ASSETS.filter(a => a.cat === 'cg').sort((a, b) => a.id.localeCompare(b.id, 'en'));
+  const used = order.filter(a => !a.reserve), spare = order.filter(a => a.reserve);
+  const leadCg = opts.byStory
+    ? ['本編で**今どこに使っていて**、どの差し替え手順で、なぜ予備に落とした枚があるのか ―― 52枚を**物語の順**に並べた1本。',
+       '画像の実体は現在すべて白紙プレースホルダ（400×300）なので、**連絡表として使う**のが正しい読み方。',
+       '構図・寸法・出番（行番号まで）がここにある。']
+    : ['`assets/cg/` の差し込みCG 38スロット＋ENDカード 14スロット。**出番・演出・差し替え仕様を1枚ずつ**。'];
+  let md = head(opts.byStory ? 'CG 総まくりガイド ― 今ある52枚を1枚ずつ' : 'CG — 名場面CG・ENDカード（52枚）', leadCg, order.length);
+  md += `## 先にまとめ
+
+- **本編で使っている枚数**: ${used.filter(a => (usage.cg.get(a.id) || []).length).length} 枚（ \`@cg\` 指定 ${[...usage.cg.values()].reduce((n, v) => n + v.length, 0)} 箇所 ）
+- **予備枠に落としてある枚数**: ${spare.length} 枚（ \`reserve: true\` ／素材は残す・ギャラリーと回収分母からは外す）
+- **実画像が乗っている枚数**: ${order.filter(a => !a.placeholder).length} 枚（まだ白紙）
+- **回収表示の分母**: \`AssetDB.collectible('cg')\` = ${order.filter(a => !a.reserve).length} 枚 → タイトルと保存画面の \`x/N\` はここを見る
+
+## CG を置く基準（2026-09-11 改定）
+
+1. **場面転換**（まだ見せていない場所・新しい人物関係の初出）か、**決定の瞬間**（取り消せない一言・合意）にだけ置く。
+2. 小物アップ／机アップ／並んで喋っているだけの報告は**立ち絵＋\`@bg\`＋\`@chr\`**（＋ \`@memo\` \`@caption\`）で足りる。置かない。
+3. 同じCGを10ライン以内に再掲しない（ dip の連発は「切れた」ことすら伝わらない）。
+4. ENDカード用 \`cg_end_*\` と同一構図の差し替えは作らない。1シーン1枚。
+5. 喜劇のツッコミ（「は？」）にはCGを立てない。立つと笑いが半減する。
+6. 外した素材は消さず \`reserve: true\`。**ギャラリーに出すと未回収に見える**から数えない。
+
+詳細な経緯と数値: \`docs/PERF_2026-09-11.md\`。
+
+## 早見表（${opts.byStory ? '物語順' : 'ID順'}）
+
+| ID | ひとこと | 出番 | 状態 |
+|---|---|---|---|
+${quickTable(used, (a) => {
+    const us = usage.cg.get(a.id) || [];
+    const tag = us[0] ? (us[0].chapter ? `\`${us[0].chapter.id}\`` : path.basename(us[0].file, '.txt')) : '—';
+    return ['`' + a.id + '`', a.label.length > 30 ? a.label.slice(0, 30) + '…' : a.label,
+      us.length ? `${us.length}箇所 @${us[0].line}${us.length > 1 ? '…' : ''}（${tag}）` : `—（${tag}）`,
+      us.length ? '本編' : '未使用'];
+  })}
+
+---
+
+## 1枚ずつの解説（本編使用 ${used.length} 枚）
+${opts.byStory ? '\n（章ごとに区切って、本編で流れる順に並べてある）\n' : ''}
+${opts.byStory ? cgStorySections(used) : used.map(a => blockCg(a)).join('\n')}
+---
+
+## 予備枠（${spare.length} 枚 ― 素材はあるが出していない）
+
+これらは \`data/assets.json\` に \`"reserve": true\` を付けてある。
+**実画像としては残してある**ので、脚本に \`@cg id\` を1行足せばそのまま復帰できる
+（その場合 \`reserve\` を外す＝ギャラリーと回収分母に復活する）。
+
+${spare.length ? spare.map(a => blockCg(a)).join('\n') : '（なし）'}
+
+## 全 ${order.length} 枚のファイル名一覧（配置・リネーム用）
+
+台帳の \`file\` と**同名**で置けばそのまま効く（拡張子を変えたいときは台帳も直す）。
+
+| ID | ファイル | 寸法（現） | 状態 |
+|---|---|---|---|
+${quickTable(order, (a) => {
+    const i = imgInfo(a.file);
+    const us = usage.cg.get(a.id) || [];
+    return ['`' + a.id + '`', '`' + a.file + '`', i.dim,
+      a.reserve ? '予備' : (us.length ? '本編 ' + us.length + '箇所' : '未使用') + (a.placeholder ? '・白紙' : '・実画像')];
+  })}
+
+## 差し替え手順（CG共通）
+
+1. \`assets/cg/\` に**同名で上書き**（推奨 1600×900／16:9、PNG or JPEG）
+2. \`data/assets.json\` のその行の \`"placeholder": true\` → \`false\` にする
+3. \`sw.js\` の \`CACHE\`（現在 \`honshitsu-v2\`）を上げる ← **忘れると白紙PNGを返し続ける**
+4. 差し替えた瞬間、エンジン側は \`backdropSVG\`／合成の重い方を自動で切る（\`#stage[data-art="real"]\`）
+   ― \`object-fit: cover\` で全画面。Ken Burns は \`@cg id kb\` の付与側で決まる
+
+### 演出のしかた（脚本DSL）
+
+| 書き方 | 結果 |
+|---|---|
+| \`@cg cg07\` | 0.42秒で一度下げてから 0.75秒でフェードイン（\`.lay-cg.dip\`）。同一idの再指定は何もしない |
+| \`@cg cg07 kb\` | 同上＋ Ken Burns 26秒（1.02→1.12） |
+| \`@cg off\` | 0.75秒で下げて立ち絵を返す（\`stage-mode=cg\` を外す） |
+| 背景切り替え | \`@bg\` は 2枚スラブのクロスディゾルブ（既定1.15秒・CONFIGで変更可） |
+`;
   return md;
 }
 
-const dirs = [
-  { rel:'bg', cat:'bg', title:'BG — 背景画像 一覧', lead:'`assets/bg/` にある背景素材の台帳。北棟教室・廊下・保管庫・図書室・翠湖・屋上ほか、時間帯（asa/hiru/yuugata/yoru）で雰囲気が変わります。' },
-  { rel:'cg', cat:'cg', title:'CG — イベントCG 一覧', lead:'`assets/cg/` の差し込みCG・ENDカード。物語の要所（地図筒が開く瞬間、桜、旧校舎、卒業式…）と 14種のENDイラスト。' },
-  { rel:'chr', cat:'chr', title:'CHR — 立ち絵 一覧', lead:'`assets/chr/` のキャラクタ立ち絵（全105差分）。\`chr_<slug>_<expr>_<label>.png\` 形式。現在は 400×300 白紙プレースホルダのものが多いが、差し替えで透過PNGに置換。' },
-  { rel:'ui', cat:'ui', title:'UI — UI素材 一覧', lead:'`assets/ui/` のタイトルロゴ・フレーム・アイコン類（20点）。LINE/BBS/配信画面などの端末フレームや、所持品アイコン。' },
-  { rel:'_buffer', cat:'_buffer', title:'_BUFFER — 予約枠（プレースホルダ）', lead:'`assets/_buffer/` の予約枠 99枚（white_202〜300）。今後追加する背景/CG/立ち絵の置き場。現在は白紙。' },
-];
+/* ---- assets/bg/README.md ---- */
+function bgDoc() {
+  const list = ASSETS.filter(a => a.cat === 'bg').sort((a, b) => (a.id === 'title_key' ? 1 : b.id === 'title_key' ? -1 : a.id.localeCompare(b.id, 'en')));
+  let md = head('BG — 背景（25枚）',
+    ['`assets/bg/` の背景スロット。**1枚ずつ「どのシーンで何回」「どの時間帯トーンか」**まで書く。',
+     '現在はすべて白紙プレースホルダで、画面に出ているのは `js/visual.js` の `backdropSVG()` が生成する等高線下地。'],
+    list.length);
+  md += `## 先にまとめ
 
-for(const d of dirs){
-  const md = genForDir(d.rel, d.cat, d.title, d.lead);
-  const outPath = path.join(root, d.rel, 'README.md');
-  fs.writeFileSync(outPath, md, 'utf-8');
-  console.log(`→ ${outPath} (${md.split('\n').length}行)`);
-}
-// overview
-const overview = `# Assets — 画像素材 台帳（概要）
+- 使用 ${list.filter(a => (usage.bg.get(a.id) || []).length).length} 枚 ／ 未使用 ${list.filter(a => !(usage.bg.get(a.id) || []).length).length} 枚（ \`title_key.jpg\` などエンジン専有のものを含む）
+- \`@bg\` 指定は**ファイル名stem**（ \`bg_hokutou_kyoshitsu_asa\` ）でも**台帳ID**（ \`BG01\` ）でも書ける
+- 切り替えは 2枚スラブのクロスディゾルブ（既定1.15秒）。実画像は**隠れた側で \`decode()\` してから**受渡すので暗転しない
 
-> 全画像は \`data/assets.json\` が正本。ここ \`assets/\` 配下の各フォルダにも \`README.md\` を置き、**実寸 / 推奨サイズ / 何の画像か**を一覧化しています。
+## 早見表
 
-| フォルダ | 点数 | 実寸（現在） | 推奨 | 用途 | 台帳 |
-|---|---:|---|---|---|---|
-| \`bg/\` | 25 | 400×300 白紙が大半（title_key.jpg のみ 1376×768 実画像） | 1600×900 16:9 | 背景（教室/廊下/保管庫/湖/屋上…） | \`bg/README.md\` |
-| \`cg/\` | 52 | 400×300 白紙 | 1600×900 16:9 | イベントCG 38枚＋ENDカード 14枚 | \`cg/README.md\` |
-| \`chr/\` | 105 | 400×300 白紙 | 420×700 viewBox（実寸推奨 840×1280 透過PNG） | 立ち絵差分（16キャラ×表情） | \`chr/README.md\` |
-| \`ui/\` | 20 | 400×300 白紙（一部実画像なし） | ロゴ 1200×480 / アイコン 256×256〜 | タイトル/フレーム/アイコン | \`ui/README.md\` |
-| \`_buffer/\` | 99 | 400×300 白紙 810B | 予約枠 | 今後追加用の空きスロット | \`_buffer/README.md\` |
+| ID | ひとこと | 使用 | トーン |
+|---|---|---|---|
+${quickTable(list, (a) => {
+    const us = usage.bg.get(a.id) || [];
+    return ['`' + a.id + '`', a.label.length > 26 ? a.label.slice(0, 26) + '…' : a.label,
+      us.length ? `${us.length}箇所` : '—', (a.meta || '').split('/')[1] || '—'];
+  })}
 
-## 差し替え手順
+---
 
-1. **実画像を用意** — 推奨サイズで書き出し（背景/CGは 1600×900、立ち絵は透過PNG 840×1280）
-2. **同名で上書き** — \`assets/bg/bg_hokutou_kyoshitsu_asa.png\` など既存の白紙ファイルを置換
-3. **台帳を更新** — \`data/assets.json\` の該当 \`placeholder\` を \`false\` に（\`engine_limit/assigned\` は自動集計）
-4. **プリロード確認** — \`npm run dev\` などで \`AssetDB.realList()\` が拾い、起動時 6並列で先読み。失敗しても SVGフォールバックで起動
+## 1枚ずつの解説
 
-## 立ち絵の凝った動き（2026-09 強化）
+${list.map(a => blockBg(a)).join('\n')}
+## 差し替え手順（BG共通）
 
-- **入場 3種**: \`data-enter=\"left/right/center\"\` で左/右/中央からスライド＋ブラー＋スケール。\`--chr-delay\` で 88ms ずつスタッガ（2人/3人時）
-- **呼吸**: \`chrBreathe\` 4.6s 無限（-2.8px 上下＋0.7%スケール＋0.1deg回転）
-- **会話バウンス**: \`.talk\` は \`chrTalkBounce\` 0.34s alternate 無限（-5px弾む）＋ rim（足元の影）が \`rimPulse\` で脈動、\`nametag\` が持ち上がる
-- **非会話 dim**: \`dim\` は 60%明度・52%彩度・0.45pxブラー＋0.985縮小
-- **奥行き**: 3人時は中央 1.016、左右 0.988 のベーススケール。話者は \`z-index:9\` で手前
+1. \`assets/bg/\` に同名上書き（1600×900／16:9）
+2. 台帳の \`placeholder\` を \`false\` に → SVG補完が外れて実画像になる
+3. \`sw.js\` の \`CACHE\` を上げる
+4. 白背景素材のまま使いたいときだけ CONFIG「画像合成」= multiply（**既定は normal**。multiply は \`#stage[data-blend="multiply"]\` を付けたときだけ立ち絵に掛かる）
 
-詳細は \`css/vn.css\` 末尾「立ち絵 — 凝った動き」セクション、\`js/visual.js Stage.applyChr\` を参照。
+### \`@bg\` の書き方
 
-## 生成
-
-\`\`\`
-node tools/gen_asset_md.mjs
-\`\`\`
-
-*各 README はこのスクリプトの自動生成。手で直さず、台帳を直して再生成してください。*
+| 書き方 | 結果 |
+|---|---|
+| \`@bg bg_hokutou_kyoshitsu_yuugata\` | stem 指定（推奨）。 \`time=yuugata\` を併記すると \`mood()\` も同時に切り替わる |
+| \`@bg BG03\` | 台帳ID指定でも解決される |
+| \`@bg bg_x time=akari\` | 背景の差し替えと照明トーンを同時に（ \`MOODS\` を参照） |
+| \`@bg off\` | 背景を剥ぐ（両スラブを空にする） |
 `;
-fs.writeFileSync('assets/README.md', overview, 'utf-8');
-console.log('→ assets/README.md');
+  return md;
+}
+
+/* ---- assets/chr/README.md ---- */
+function chrDoc() {
+  const list = ASSETS.filter(a => a.cat === 'chr').sort((a, b) => a.file.localeCompare(b.file));
+  const byChar = new Map();
+  for (const a of list) {
+    const slug = a.meta || path.basename(a.file).split('_')[1];
+    if (!byChar.has(slug)) byChar.set(slug, []);
+    byChar.get(slug).push(a);
+  }
+  const usedSlots = [...chrUsage.keys()];
+  let md = head('CHR — 立ち絵（105差分／16キャラ）',
+    ['`assets/chr/` の立ち絵差分。キャラごとに**どの表情が本編で何回出るか**を1枚ずつ書く。',
+     '現在は白紙プレースホルダで、画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。'],
+    list.length);
+  md += `## 先にまとめ
+
+- キャラ ${byChar.size} 体／差分 ${list.length} 枚／**本編で実際に呼ばれている差分 ${usedSlots.length} 枚**
+- 未使用差分は「差し替え優先度：低」。枚数だけは確保してあるので、脚本に \`@chr slug=NN\` を足せば出る
+- \`@chr\` は 1〜3人まで同時（中央／左右の3スロット）。\`@chr clear\` で全員下げる
+- 喋っている人の表示順は自動（\`z-index:9\`）。**話者切替で素材は差し替えない**（class と重なり順だけ＝ちらつきなし）
+
+## 早見表（キャラ別）
+
+| スラッグ | 名前 | 差分 | 本編の呼ばれ数 | 台詞色 |
+|---|---|---|---|---|
+${[...byChar.entries()].map(([slug, arr]) => {
+    const sp = Object.values(meta.speakers || {}).find(v => v.sprite === slug);
+    const n = arr.reduce((k, a) => {
+      const e = path.basename(a.file).match(/_(\d\d)_/);
+      return k + ((chrUsage.get(`${slug}|${e ? e[1] : '01'}`) || []).length);
+    }, 0);
+    return '| `' + slug + '` | ' + (sp ? `${sp.name}（${sp.kana}）` : '（台詞名なし／回想・サブ）') +
+      ' | ' + arr.length + ' | ' + n + ' | ' + (sp ? '`' + sp.color + '`' : '—') + ' |';
+  }).join('\n')}
+
+---
+
+## キャラごとの解説（差分を1枚ずつ）
+
+${[...byChar.entries()].map(([slug, arr]) => {
+    const sp = Object.values(meta.speakers || {}).find(v => v.sprite === slug);
+    const route = (meta.routes || []).find(r => r.who && sp && r.who === sp.name);
+    const L = [`### \`${slug}\` ${sp ? '― ' + sp.name + '（' + sp.kana + '）' : '― 台帳上のスラッグのみ（回想・サブキャラ）'}`, ''];
+    const maxExpr = String(Math.max(...arr.map(a => Number((path.basename(a.file).match(/_(\d\d)_/) || [])[1] || 1)))).padStart(2, '0');
+    L.push(`- **書き方**: \`@chr ${slug}=01\`〜\`@chr ${slug}=${maxExpr}\`（差分 ${arr.length} 枚・\`@chr ${slug} all\` は非対応、\`@chr clear\` で全員下げる）`);
+    if (sp) L.push(`- **名前ボックス**: ${sp.name}／色 \`${sp.color}\``);
+    L.push(`- **差し替え推奨（このキャラ共通）**: ${RECOMMEND.chr} ／ 現在 白紙 ${arr.filter(x => x.placeholder).length} 枚・実画像 ${arr.filter(x => !x.placeholder).length} 枚（各 ${dimStr(imgInfo(arr[0].file))}）`);
+    if (route) L.push(`- **その人が主役のルート**: ${route.no}「${route.title}」${route.sub ? ' ― ' + route.sub : ''}（開始シーン \`${route.scene}\`）`);
+    L.push('');
+    L.push(arr.map(a => blockChr(a)).join('\n'));
+    L.push('');
+    return L.join('\n');
+  }).join('\n')}
+## 差し替え手順（立ち絵共通）
+
+1. \`assets/chr/\` に**同名・透過PNG**で上書き（840×1280 推奨／下揃え）
+2. 台帳の \`placeholder\` を \`false\` に → シルエット補完（\`figureSVG\`）が消えて実画像になる
+3. \`sw.js\` の \`CACHE\` を上げる
+4. 白背景のまま置きたいときだけ CONFIG「画像合成」= multiply（ \`#stage[data-blend="multiply"] .chr img\` にだけ掛かる）
+
+### 演出（JS/CSS 側で自動）
+
+| 効く場所 | 挙動 |
+|---|---|
+| \`data-enter="left/right/center"\` | 入場スライド＋ブラー（88ms ずつスタッガ） |
+| \`chrBreathe\` 8.4s | **\`translate\` だけ**動かす（ぼかしの再計算を毎フレームやめた）。CONFIG「立ち絵の動き」で lite/off/full |
+| \`.talk\` | \`chrTalkSettle\` .5s 単発（旧来は .34s 無限＝再ラスタ源だった） |
+| \`.dim\` | 非話者を明度60%・彩度52%・0.985 |
+| 3人時 | 中央 1.016／左右 0.988 で奥行き |
+`;
+  return md;
+}
+
+/* ---- assets/ui/README.md ---- */
+function uiDoc() {
+  const list = ASSETS.filter(a => a.cat === 'ui').sort((a, b) => a.id.localeCompare(b.id, 'en'));
+  let md = head('UI — ロゴ・枠・アイコン（20枚）',
+    ['`assets/ui/` のタイトルロゴ／端末フレーム／所持品アイコン。**1点ずつ、どこから参照されているか**まで書く。'],
+    list.length);
+  md += `## 早見表
+
+| ID | ひとこと | 種別 |
+|---|---|---|
+${quickTable(list, (a) => ['`' + a.id + '`', a.label.length > 30 ? a.label.slice(0, 30) + '…' : a.label,
+    /logo/.test(a.file) ? 'ロゴ' : /frame/.test(a.file) ? '枠' : /bg_/.test(a.file) ? '面' : 'アイコン'])}
+
+---
+
+## 1点ずつの解説
+
+${list.map(a => blockUi(a)).join('\n')}## 差し替え手順（UI共通）
+
+1. \`assets/ui/\` に同名上書き（透過PNG。**アイコンは 256〜512 正方形**）
+2. 台帳の \`placeholder\` を \`false\` に（ \`false\` にした瞬間、エンジンの代替描画が消える）
+3. \`sw.js\` の \`CACHE\` を上げる
+`;
+  return md;
+}
+
+/* ---- assets/README.md ---- */
+function topDoc() {
+  const cats = [
+    ['bg', '背景', '1600×900／cover', '等高線SVG（`backdropSVG`）'],
+    ['cg', '名場面CG・ENDカード', '1600×900／cover', '―（白紙なら下地のみ）'],
+    ['chr', '立ち絵差分', '840×1280／透過PNG', 'シルエット（`figureSVG`）'],
+    ['ui', 'ロゴ・枠・アイコン', '用途ごとに上記', 'CSSだけで代替'],
+  ];
+  let md = `# Assets — 画像素材总台帳
+
+このフォルダの**すべてが白紙プレースホルダ**（ \`assets/bg/title_key.jpg\` だけが実画像）で、
+画面に実際に描いているのは \`js/visual.js\` の手続き生成SVGです。
+**「何を・どこに・どう置けば効くか」を1素材ずつ書いたREADMEが、下の4枚**。
+
+- \`bg/README.md\` ― 背景 25 枚（出番・時間帯トーン・@bg の書き方）
+- \`cg/README.md\` ― CG 52 枚（出番・Ken Burns・予備枠の理由）
+- \`chr/README.md\` ― 立ち絵 105 差分（キャラ別・表情別の本編出現回数）
+- \`ui/README.md\` ― UI 20 点（アイテム対応・参照箇所）
+- \`_buffer/README.md\` ― 未割当の空き枠 99 枚
+- \`../docs/CG_GUIDE.md\` ― **CG 52枚を物語順にまとめた1本**（これだけ読めばCGは足りる）
+
+## 内訳
+
+| フォルダ | 点数 | 現在の状態 | 実画像にするときの推奨 | エンジン側の補完 |
+|---|---:|---|---|---|
+${cats.map(([d, n, rec, fb]) => {
+    const rows = ASSETS.filter(a => (a.file.split('/')[1]) === d);
+    const real = rows.filter(a => !a.placeholder).length;
+    return `| \`${d}/\` | ${rows.length} | 白紙 ${rows.length - real}・実画像 ${real} | ${rec} | ${fb} |`;
+  }).join('\n')}
+| \`_buffer/\` | ${ledger.bufferFiles.length} | 未割当スロット | 400×300 白紙 | ― |
+
+## 差し替えの作法（4ステップ）
+
+1. **同名で上書き**（フォルダと拡張子を変えるときは台帳の \`file\` も直す）
+2. \`data/assets.json\` の \`"placeholder": true\` → \`false\`
+   ― これだけで補完SVGが消えて実画像に切り替わる（ \`#stage[data-art="real"]\` ）
+3. \`sw.js\` の \`CACHE\`（現在 \`honshitsu-v2\`）を上げる ← **忘れると白紙が返る**
+4. \`node tools/vncheck.mjs\` と \`node tools/smoke.mjs\` で崩れを確認
+
+## 合成（blend）についての注意 ― 2026-09-11 に変更
+
+- 以前は全面レイヤに \`mix-blend-mode: multiply\`（＝白＝透明）が掛かっていたが、
+  \`contain: paint\` のせいで**実写素材がほぼ真っ黒**に描画される不具合があった（白紙時代は気づかなかった）。
+- いまは **既定 \`normal\`**。立ち絵だけ CONFIG「画像合成」= multiply で選べる
+  （ \`#stage[data-blend="multiply"] .chr img\` ／背景は \`#fff\` 下地に切り替わる）。
+- 立ち絵は**透過PNGが正解**。multiply は白背景JPEGをそのまま置きたいときの逃げ道。
+- 実素材を大量に置くなら **WebP** を推奨（1600×900 PNG を素で置くと概算 165MB、WebPなら 30MB 前後）。
+  起動プリロードは「読む5シーンぶんだけ」を先に待つ優先方式なので、枚数が増えても起動は一定。
+
+## 重さの記録
+
+実測して直した一覧（背景SVGの全面 \`feTurbulence\`、立ち絵の無限アニメ、テキスト窓の \`backdrop-filter\`、
+1ライン平均1.7KBあった同期セーブ等）は \`../docs/PERF_2026-09-11.md\`。
+`;
+  return md;
+}
+
+/* ---- assets/_buffer/README.md ---- */
+function bufferDoc() {
+  const files = (ledger.bufferFiles || []).map(f => path.basename(f)).sort();
+  let md = head('_buffer — 未割当スロット（' + files.length + '枚）',
+    ['`assets/_buffer/` は**まだ誰も使っていない空き枠**。白紙 400×300（各 810B）が並んでいる。',
+     '新しい場面・新しい表情差分を作りたいときの取り出し先で、**本編はどこからも参照していない**。'],
+    files.length);
+  md += `## 使い方の流れ
+
+1. 使いたい用途を決める（ \`bg_shinpaiza_yuugata.png\` など）**ファイル名は \`data/assets.json\` の行に合わせる**
+2. \`assets/_buffer/white_NNN.png\` を該当フォルダへリネームして移動（ \`assets/bg/\` など ）
+3. 台帳のその行の \`file\` を新パスに書き換え、実画像を乗せたら \`placeholder: false\`
+4. \`node tools/rename_assets.py\`（リネーム一括）または台帳直編集 → \`node tools/vncheck.mjs\` で参照整合
+5. \`sw.js\` の \`CACHE\` を上げる
+
+> \`docs/AUDIT_2026-09-11.md\` の P-2 に「リポジトリを 1.5MB 太らせている」とある。
+> 実素材導入とあわせて \`git lfs\` 化 or 除外候補。削除はまだしていない（履歴のため残置）。
+
+## 中身（${files.length}枚・すべて同じ白紙）
+
+| 範囲 | ファイル | 状態 |
+|---|---|---|
+| \`white_202\` 〜 \`white_300\` | ${files.length} 枚 | 未割当（400×300・810B・白）。差分を1枚ずつ説明しても中身は同じなので一覧に留める |
+
+個別の「使い方」は台帳側に書いてある。どれか1枠を使うときは、**空き番号の先頭から詰める**と
+\`assigned\`（現在 ${ledger.assigned}）と \`engine_limit\`（${ledger.engine_limit}）の账簿が Clean に保てる。
+`;
+  return md;
+}
+
+/* ------------------------------------------------------------------ 書込 -- */
+const out = {
+  'assets/README.md': topDoc(),
+  'assets/bg/README.md': bgDoc(),
+  'assets/cg/README.md': cgDoc(),
+  'assets/chr/README.md': chrDoc(),
+  'assets/ui/README.md': uiDoc(),
+  'assets/_buffer/README.md': bufferDoc(),
+  'docs/CG_GUIDE.md': cgDoc({ byStory: true }),
+};
+for (const [p, txt] of Object.entries(out)) {
+  fs.writeFileSync(path.join(ROOT, p), txt.replace(/\n{3,}/g, '\n\n'));
+  console.log(`${p.padEnd(26)} ${String(txt.split('\n').length).padStart(5)} 行`);
+}

@@ -18,3 +18,6 @@ Thumbs.db
 .cache/
 .parcel-cache/
 dist/
+
+# 計測アウトプット（tools/perf_probe.mjs）
+.perf-probe.json

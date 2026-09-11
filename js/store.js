@@ -19,7 +19,10 @@ export const DEFAULT_CONFIG = {
   textSpeed: 1.1,       // 0.25〜4
   autoDelay: 1500,      // 文读完待機 ms
   advanceClick: true,   // 画面クリックで送る
-  blend: 'multiply',    // スプライト合成モード（白背景素材前提）
+  blend: 'normal',      // スプライト合成（透過PNGなら normal、白抜き四角素材なら multiply）
+  bgFade: 'soft',       // 背景切替のクロスディゾルブ: soft(1.15s)/slow(1.85s)/off
+  chrMotion: 'lite',    // 立ち絵の常時アニメ: full/lite/off（重い環境では lite/off）
+  boxBlur: false,       // テキスト窓の backdrop-filter（効くが重い。既定 OFF）
   cgMode: 'window',     // window / full
   showSpriteTag: false, // 立ち絵スロット名の表示（開発用）
   bgmVol: .45,
@@ -73,12 +76,45 @@ export class Store {
     if (!this.meta.routes || typeof this.meta.routes !== 'object') this.meta.routes = {};
     if (!Array.isArray(this.meta.music)) this.meta.music = [];
     if (!Array.isArray(this.meta.readScenes)) this.meta.readScenes = [];
+    this._metaDirty = false; this._metaTimer = 0;
+    // タブを閉じる・隠れる前に、ため込んだメタを確実に書く
+    try {
+      const w = globalThis;
+      if (w && w.addEventListener) {
+        w.addEventListener('pagehide', () => this.flushMeta());
+        w.addEventListener('beforeunload', () => this.flushMeta());
+        w.addEventListener('visibilitychange', () => { if (w.document && w.document.hidden) this.flushMeta(); });
+      }
+    } catch (_) { }
   }
   saveConfig() { set(K_CONF, JSON.stringify(this.config)); }
-  saveMeta() { set(K_META, JSON.stringify(this.meta)); try { del(K_META_OLD); } catch(_){} }
+  /* 横断メタは「1ラインごと」に更新される（既読・年鑑カウンタ・表情回収など）。
+     毎回 JSON.stringify + localStorage 同期書き込みをやっていては操作ごとに詰まるので、
+     汚れたら小窓にまとめて 1 回だけ書く。重要な局面（手動保存・終了・タブ隠蔵）で flush する。 */
+  saveMeta() {
+    this._metaDirty = true;
+    if (this._metaTimer) return;
+    const later = globalThis.setTimeout || ((f) => f());
+    this._metaTimer = later(() => { this._metaTimer = 0; this.flushMeta(); }, 340);
+  }
+  flushMeta() {
+    if (!this._metaDirty && !this._metaTimer) return;
+    if (this._metaTimer) { try { clearTimeout(this._metaTimer); } catch (_) { } this._metaTimer = 0; }
+    this._metaDirty = false;
+    this.pruneMeta();
+    set(K_META, JSON.stringify(this.meta));
+    try { del(K_META_OLD); } catch (_) { }
+  }
+  /** 保存量を頭打ちにする（既読・表情・来訪は古いのから落とす） */
+  pruneMeta() {
+    const m = this.meta;
+    if (Array.isArray(m.readScenes) && m.readScenes.length > 260) m.readScenes.splice(0, m.readScenes.length - 260);
+    if (m.chr) Object.keys(m.chr).forEach(k => { const a = m.chr[k]; if (Array.isArray(a) && a.length > 16) m.chr[k] = a.slice(-16); });
+  }
   resetMeta() { this.meta = DEFAULT_META(); del(K_META); }
 
   save(slot, data) {
+    this.flushMeta();
     data.savedAt = Date.now();
     data._v = 2;
     try {

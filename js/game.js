@@ -7,6 +7,10 @@ import { Typer } from './text.js';
 import { metaUnlock } from './store.js';
 import { freshState as makeFresh, makeGetter, setVar as applySet, parseEffect, judge as judgeOf, resolveEnding } from './state.js';
 
+const HIST_MEM = 240;              // バックログ（メモリ側）の上限
+const HIST_KEEP = 40;              // セーブデータに載せる履歴の上限
+const AUTOSAVE_MIN_MS = 9000;      // 同期書き込みの間引き
+
 const VISUAL_ONLY = new Set(['bg', 'cg', 'chr', 'bgm', 'se', 'fx', 'tone', 'veil', 'light', 'bars', 'lay', 'chapter', 'part']);
 
 export class Game {
@@ -80,7 +84,7 @@ export class Game {
     return {
       scene: this.state.scene, idx: this.state.idx,
       state: JSON.parse(JSON.stringify(this.state)),
-      history: this.history.slice(-60),
+      history: this.history.slice(-HIST_KEEP),   // 保存用ログは直近だけ（軽量に）
       label: this.sceneLabel(),
       bg: this.dom.stage.dataset.bgid || '',
       playtime: Math.round(this.playtime),
@@ -236,7 +240,7 @@ export class Game {
           const slug = sp.sprite;
           if (slug) this.stage.applyChr(slug);
         } else this.stage.applyChr(null);
-        this.history.push({ sp: ins.sp, tag: ins.tag, txt: ins.txt, scene: this.state.scene });
+        this.pushHistory({ sp: ins.sp, tag: ins.tag, txt: ins.txt, scene: this.state.scene });
         this.countLine(ins);
         this.shell.renderLog();
         this.typing = true;
@@ -252,15 +256,16 @@ export class Game {
         this._lastTextLen = ins.txt.length;
         // 長文は 1300ms 相当の余韻を、それ以外は文字数比例の autoDelay を使う
         await this.waitForClick(ins.txt.length > 52 ? Math.min(2600, 900 + ins.txt.length * 18) : undefined);
-        if (this.store.config.autosave && this.state.idx % 3 === 0) this.store.saveAuto(this.snapshot());
+        this.autosaveTick();   // 3ライン毎の同期書き込み → 時間間引き＋一括化
         return;
       }
       /* --------------------------------------------------------- 表示系 -- */
       case 'bg': {
         const a = this.data.assets.byId[ins.id];
-        this.stage.bg(ins.id);
         const time = a && a.meta ? (a.meta.split('/')[1] || guessTime(ins.id)) : guessTime(ins.id || '');
-        this.stage.mood(time);
+        // 時間帯（grade / lightshaft）も背景クロスディゾルブと同時に走らせる。
+        // 先に色だけ切り替わると「色だけがカッと変わる」＝カットのように見えていた。
+        this.stage.bg(ins.id, { time });
         this.dom.stage.dataset.bgid = ins.id || '';
         this.dom.stage.dataset.time = time;
         return;
@@ -378,7 +383,11 @@ export class Game {
         }
         return;
       case 'savepoint':
-        if (!silent && this.store.config.autosave) this.store.saveAuto(this.snapshot());   // 静かに保存（トーストなし）
+        if (!silent && this.store.config.autosave) {
+          clearTimeout(this._autosaveTimer);
+          this._lastAutoAt = Date.now();     // 直後の間引きセーブと重ねない
+          try { this.store.saveAuto(this.snapshot()); } catch (e) { /* 容量不足は HANDOFF 側で表示 */ }
+        }
         return;
       case 'wait': {
         if (!silent && ins.ms && ins.ms > 800) {
@@ -402,6 +411,25 @@ export class Game {
     }
   }
 
+  /* --------------------------------------------------- ログ／オートセーブ ----
+     バックログは「読み返せれば十分」。全履歴をメモリにも localStorage にも垂れ流すと、
+     1ライン送るたびに数KBの同期書き込みが走って操作が重くなる。
+     → メモリ上限・保存上限・保存間隔をここで抑える。                          */
+  pushHistory(rec) {
+    const h = this.history;
+    h.push(rec);
+    if (h.length > HIST_MEM) h.splice(0, h.length - HIST_MEM);
+  }
+  autosaveTick() {
+    if (!this.store.config.autosave) return;
+    const now = Date.now();
+    if (this._lastAutoAt && now - this._lastAutoAt < AUTOSAVE_MIN_MS) return;
+    this._lastAutoAt = now;
+    clearTimeout(this._autosaveTimer);
+    this._autosaveTimer = setTimeout(() => {          // クリック連打・オート中は1回に束ねる
+      try { this.store.saveAuto(this.snapshot()); } catch (e) { if (e && e.message === 'QUOTA_EXCEEDED') this.shell.toast('保存容量がいっぱいです — 古いスロットを1つ削除してください'); }
+    }, 340);
+  }
   /** 倉石年鑑用の自動カウント（原作準拠：数えてる） */
   countLine(ins) {
     const k = ins.sp, t = ins.txt || '';

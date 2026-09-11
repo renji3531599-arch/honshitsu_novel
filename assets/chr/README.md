@@ -1,132 +1,382 @@
-# CHR — 立ち絵 一覧
+# CHR — 立ち絵（105差分／16キャラ）
 
-`assets/chr/` のキャラクタ立ち絵（全105差分）。`chr_<slug>_<expr>_<label>.png` 形式。現在は 400×300 白紙プレースホルダのものが多いが、差し替えで透過PNGに置換。
+`assets/chr/` の立ち絵差分。キャラごとに**どの表情が本編で何回出るか**を1枚ずつ書く。
+現在は白紙プレースホルダで、画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。
 
-> 生成日: 2026-09-11  /  総数: 105 ファイル  /  実体は `data/assets.json` が正本（台帳）
+> 生成: `node tools/gen_asset_md.mjs`（2026-09-11）／総数 105 ファイル／正本は台帳 `data/assets.json`
+> ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
 
-## 推奨仕様（立ち絵）
+## 先にまとめ
 
-- **viewBox**: 420×700（表示は `--u*420` 幅 × `--u*640` 高、`object-position: bottom center`）
-- **推奨実寸**: 840×1280px 以上（2×解像度、透過PNG）。顔〜胸上＋全身が 700px に収まる。トリミングは下基準
-- **形式**: PNG（透過必須）
-- **配置**: `lay-chr`。1体=50%中央 / 2体=31%69% / 3体=19%50%81%（`Stage.applyChr`）。入退場は `data-enter="left/right/center"` で 3種、呼吸（`chrBreathe` 4.6s）＋talkバウンス（`.talk` 0.34s）＋dimで奥行き
-- **SVGフォールバック**: `figureSVG(slug, expr)` が髪型・小道具・表情濃度（`expr` 01-10）を procedurally に描く
+- キャラ 16 体／差分 105 枚／**本編で実際に呼ばれている差分 78 枚**
+- 未使用差分は「差し替え優先度：低」。枚数だけは確保してあるので、脚本に `@chr slug=NN` を足せば出る
+- `@chr` は 1〜3人まで同時（中央／左右の3スロット）。`@chr clear` で全員下げる
+- 喋っている人の表示順は自動（`z-index:9`）。**話者切替で素材は差し替えない**（class と重なり順だけ＝ちらつきなし）
 
-## ファイル一覧
+## 早見表（キャラ別）
 
-| # | ファイル | 実寸（現在） | 容量 | 推奨サイズ | ラベル | 説明 | 状態 | 出典（仮置き元） |
-|---:|---|---|---|すすめ|---|---|---|---|
-| 1 | `chr_futami_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 二見玲子 通常 | 立ち絵差分 二見玲子／通常 | ◯ 白紙プレースホルダ | `image1/white_103.png` |
-| 2 | `chr_futami_02_hohoemi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 二見玲子 微笑 | 立ち絵差分 二見玲子／微笑 | ◯ 白紙プレースホルダ | `image3/white_104.png` |
-| 3 | `chr_futami_03_shinpai.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 二見玲子 心配顔 | 立ち絵差分 二見玲子／心配顔 | ◯ 白紙プレースホルダ | `image1/white_105.png` |
-| 4 | `chr_futami_04_itazura.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 二見玲子 いたずらっぽい笑み | 立ち絵差分 二見玲子／いたずらっぽい笑み | ◯ 白紙プレースホルダ | `image1/white_106.png` |
-| 5 | `chr_futami_05_yokogao.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 二見玲子 しんみりした横顔 | 立ち絵差分 二見玲子／しんみりした横顔 | ◯ 白紙プレースホルダ | `image3/white_107.png` |
-| 6 | `chr_inaba_01_shashin_no_waraui.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 稲葉悌二（回想専用） 古写真の中の柔らかい笑み | 立ち絵差分 稲葉悌二（回想専用）／古写真の中の柔らかい笑み | ◯ 白紙プレースホルダ | `image1/white_126.png` |
-| 7 | `chr_inaba_02_yama_sasu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 稲葉悌二（回想専用） 山を指差す横顔 | 立ち絵差分 稲葉悌二（回想専用）／山を指差す横顔 | ◯ 白紙プレースホルダ | `image1/white_127.png` |
-| 8 | `chr_izaki_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊崎 通常 | 立ち絵差分 伊崎／通常 | ◯ 白紙プレースホルダ | `image3/white_078.png` |
-| 9 | `chr_izaki_02_egao.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊崎 笑顔 | 立ち絵差分 伊崎／笑顔 | ◯ 白紙プレースホルダ | `image2/white_079.png` |
-| 10 | `chr_izaki_03_komari.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊崎 困り顔 | 立ち絵差分 伊崎／困り顔 | ◯ 白紙プレースホルダ | `image1/white_080.png` |
-| 11 | `chr_izaki_04_shikiri.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊崎 真剣（仕切る顔） | 立ち絵差分 伊崎／真剣（仕切る顔） | ◯ 白紙プレースホルダ | `image1/white_081.png` |
-| 12 | `chr_izaki_05_odoroki.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊崎 驚き | 立ち絵差分 伊崎／驚き | ◯ 白紙プレースホルダ | `image2/white_082.png` |
-| 13 | `chr_izaki_06_shimiemi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊崎 しみじみとした微笑み | 立ち絵差分 伊崎／しみじみとした微笑み | ◯ 白紙プレースホルダ | `image1/white_083.png` |
-| 14 | `chr_izumi_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊豆見 通常 | 立ち絵差分 伊豆見／通常 | ◯ 白紙プレースホルダ | `image2/white_084.png` |
-| 15 | `chr_izumi_02_egao.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊豆見 笑顔 | 立ち絵差分 伊豆見／笑顔 | ◯ 白紙プレースホルダ | `image2/white_085.png` |
-| 16 | `chr_izumi_03_kinchou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊豆見 緊張 | 立ち絵差分 伊豆見／緊張 | ◯ 白紙プレースホルダ | `image2/white_086.png` |
-| 17 | `chr_izumi_04_ketsui.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊豆見 決意 | 立ち絵差分 伊豆見／決意 | ◯ 白紙プレースホルダ | `image1/white_087.png` |
-| 18 | `chr_izumi_05_tere.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊豆見 照れ | 立ち絵差分 伊豆見／照れ | ◯ 白紙プレースホルダ | `image1/white_088.png` |
-| 19 | `chr_izumi_06_hokorashige.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 伊豆見 誇らしげ | 立ち絵差分 伊豆見／誇らしげ | ◯ 白紙プレースホルダ | `image3/white_089.png` |
-| 20 | `chr_katsuya_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 通常（穏やか） | 立ち絵差分 塀勝也／通常（穏やか） | ◯ 白紙プレースホルダ | `image3/white_025.png` |
-| 21 | `chr_katsuya_02_hohoemi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 微笑 | 立ち絵差分 塀勝也／微笑 | ◯ 白紙プレースホルダ | `image1/white_026.png` |
-| 22 | `chr_katsuya_03_tooi_me.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 遠い目 | 立ち絵差分 塀勝也／遠い目 | ◯ 白紙プレースホルダ | `image3/white_027.png` |
-| 23 | `chr_katsuya_04_odoroki.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 驚き | 立ち絵差分 塀勝也／驚き | ◯ 白紙プレースホルダ | `image1/white_028.png` |
-| 24 | `chr_katsuya_05_me_fuseru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 目を伏せる | 立ち絵差分 塀勝也／目を伏せる | ◯ 白紙プレースホルダ | `image1/white_029.png` |
-| 25 | `chr_katsuya_06_kataki_muten.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 硬い無表情 | 立ち絵差分 塀勝也／硬い無表情 | ◯ 白紙プレースホルダ | `image2/white_030.png` |
-| 26 | `chr_katsuya_07_kaisou_me_soseru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 回想・目を細める | 立ち絵差分 塀勝也／回想・目を細める | ◯ 白紙プレースホルダ | `image1/white_031.png` |
-| 27 | `chr_katsuya_08_namida_koraeru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 涙をこらえる | 立ち絵差分 塀勝也／涙をこらえる | ◯ 白紙プレースホルダ | `image1/white_032.png` |
-| 28 | `chr_katsuya_09_naku.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 泣く | 立ち絵差分 塀勝也／泣く | ◯ 白紙プレースホルダ | `image3/white_033.png` |
-| 29 | `chr_katsuya_10_hareyaka_emmi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 塀勝也 晴れやかな笑み | 立ち絵差分 塀勝也／晴れやかな笑み | ◯ 白紙プレースホルダ | `image1/white_034.png` |
-| 30 | `chr_kuraishi_01_kekkyou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 倉石暁 通常（熱狂） | 立ち絵差分 倉石暁／通常（熱狂） | ◯ 白紙プレースホルダ | `image2/white_096.png` |
-| 31 | `chr_kuraishi_02_kanshou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 倉石暁 感激 | 立ち絵差分 倉石暁／感激 | ◯ 白紙プレースホルダ | `image3/white_097.png` |
-| 32 | `chr_kuraishi_03_chousa_shinken.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 倉石暁 真剣（調査中） | 立ち絵差分 倉石暁／真剣（調査中） | ◯ 白紙プレースホルダ | `image2/white_098.png` |
-| 33 | `chr_kuraishi_04_shonbori.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 倉石暁 しょんぼり | 立ち絵差分 倉石暁／しょんぼり | ◯ 白紙プレースホルダ | `image3/white_099.png` |
-| 34 | `chr_kuraishi_05_hokorashige.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 倉石暁 誇らしげ | 立ち絵差分 倉石暁／誇らしげ | ◯ 白紙プレースホルダ | `image1/white_100.png` |
-| 35 | `chr_kuraishi_06_kotoba_usinau.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 倉石暁 言葉を失う顔 | 立ち絵差分 倉石暁／言葉を失う顔 | ◯ 白紙プレースホルダ | `image3/white_101.png` |
-| 36 | `chr_kuraishi_07_namidagumu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 倉石暁 涙ぐむ | 立ち絵差分 倉石暁／涙ぐむ | ◯ 白紙プレースホルダ | `image1/white_102.png` |
-| 37 | `chr_meshino_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 召野カイト 通常 | 立ち絵差分 召野カイト／通常 | ◯ 白紙プレースホルダ | `image3/white_090.png` |
-| 38 | `chr_meshino_02_kimegao.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 召野カイト 決め顔 | 立ち絵差分 召野カイト／決め顔 | ◯ 白紙プレースホルダ | `image2/white_091.png` |
-| 39 | `chr_meshino_03_tere.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 召野カイト 照れ | 立ち絵差分 召野カイト／照れ | ◯ 白紙プレースホルダ | `image2/white_092.png` |
-| 40 | `chr_meshino_04_shinken.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 召野カイト 真剣 | 立ち絵差分 召野カイト／真剣 | ◯ 白紙プレースホルダ | `image1/white_093.png` |
-| 41 | `chr_meshino_05_eigo_doya.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 召野カイト 英語ドヤ顔 | 立ち絵差分 召野カイト／英語ドヤ顔 | ◯ 白紙プレースホルダ | `image3/white_094.png` |
-| 42 | `chr_meshino_06_shinmiri.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 召野カイト しんみり | 立ち絵差分 召野カイト／しんみり | ◯ 白紙プレースホルダ | `image3/white_095.png` |
-| 43 | `chr_mie_01_reishou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 通常（冷笑・半目） | 立ち絵差分 三重県臣／通常（冷笑・半目） | ◯ 白紙プレースホルダ | `image1/white_044.png` |
-| 44 | `chr_mie_02_ha.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 「は？」 | 立ち絵差分 三重県臣／「は？」 | ◯ 白紙プレースホルダ | `image3/white_045.png` |
-| 45 | `chr_mie_03_douyou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 動揺 | 立ち絵差分 三重県臣／動揺 | ◯ 白紙プレースホルダ | `image1/white_046.png` |
-| 46 | `chr_mie_04_chimatsu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 気まずい沈黙 | 立ち絵差分 三重県臣／気まずい沈黙 | ◯ 白紙プレースホルダ | `image1/white_047.png` |
-| 47 | `chr_mie_05_tere.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 照れ | 立ち絵差分 三重県臣／照れ | ◯ 白紙プレースホルダ | `image2/white_048.png` |
-| 48 | `chr_mie_06_iraduki_shinken.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 苛立ち混じりの真剣 | 立ち絵差分 三重県臣／苛立ち混じりの真剣 | ◯ 白紙プレースホルダ | `image1/white_049.png` |
-| 49 | `chr_mie_07_honki_shinken.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 本気の真剣 | 立ち絵差分 三重県臣／本気の真剣 | ◯ 白紙プレースホルダ | `image3/white_050.png` |
-| 50 | `chr_mie_08_namida_kamu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 涙をこらえて唇を噛む | 立ち絵差分 三重県臣／涙をこらえて唇を噛む | ◯ 白紙プレースホルダ | `image3/white_051.png` |
-| 51 | `chr_mie_09_sunao_hohoemi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 初めての素直な微笑み | 立ち絵差分 三重県臣／初めての素直な微笑み | ◯ 白紙プレースホルダ | `image1/white_052.png` |
-| 52 | `chr_mie_10_nakigao.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三重県臣 泣き顔 | 立ち絵差分 三重県臣／泣き顔 | ◯ 白紙プレースホルダ | `image1/white_053.png` |
-| 53 | `chr_mitsumine_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三峰瑠衣 通常 | 立ち絵差分 三峰瑠衣／通常 | ◯ 白紙プレースホルダ | `image3/white_114.png` |
-| 54 | `chr_mitsumine_02_tsukkomi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三峰瑠衣 ツッコミ顔 | 立ち絵差分 三峰瑠衣／ツッコミ顔 | ◯ 白紙プレースホルダ | `image1/white_115.png` |
-| 55 | `chr_mitsumine_03_egao.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三峰瑠衣 笑顔 | 立ち絵差分 三峰瑠衣／笑顔 | ◯ 白紙プレースホルダ | `image3/white_116.png` |
-| 56 | `chr_mitsumine_04_akire.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三峰瑠衣 呆れ | 立ち絵差分 三峰瑠衣／呆れ | ◯ 白紙プレースホルダ | `image2/white_117.png` |
-| 57 | `chr_mitsumine_05_yasashii.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三峰瑠衣 優しい顔 | 立ち絵差分 三峰瑠衣／優しい顔 | ◯ 白紙プレースホルダ | `image1/white_118.png` |
-| 58 | `chr_mitsumine_06_ha.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 三峰瑠衣 「は？」（ハモリ専用） | 立ち絵差分 三峰瑠衣／「は？」（ハモリ専用） | ◯ 白紙プレースホルダ | `image2/white_119.png` |
-| 59 | `chr_naitou_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 内藤蘭 通常 | 立ち絵差分 内藤蘭／通常 | ◯ 白紙プレースホルダ | `image2/white_120.png` |
-| 60 | `chr_naitou_02_hohoemi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 内藤蘭 微笑 | 立ち絵差分 内藤蘭／微笑 | ◯ 白紙プレースホルダ | `image2/white_121.png` |
-| 61 | `chr_naitou_03_dokusho.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 内藤蘭 読書中（伏し目） | 立ち絵差分 内藤蘭／読書中（伏し目） | ◯ 白紙プレースホルダ | `image3/white_122.png` |
-| 62 | `chr_naitou_04_odoroki.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 内藤蘭 驚き | 立ち絵差分 内藤蘭／驚き | ◯ 白紙プレースホルダ | `image2/white_123.png` |
-| 63 | `chr_naitou_05_yasashii_me.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 内藤蘭 優しい目 | 立ち絵差分 内藤蘭／優しい目 | ◯ 白紙プレースホルダ | `image3/white_124.png` |
-| 64 | `chr_naitou_06_sukoshi_warau.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 内藤蘭 少し笑う | 立ち絵差分 内藤蘭／少し笑う | ◯ 白紙プレースホルダ | `image2/white_125.png` |
-| 65 | `chr_rei_01_suzushii.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 通常（涼しい顔） | 立ち絵差分 数理零／通常（涼しい顔） | ◯ 白紙プレースホルダ | `image3/white_070.png` |
-| 66 | `chr_rei_02_hohoemi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 微笑 | 立ち絵差分 数理零／微笑 | ◯ 白紙プレースホルダ | `image3/white_071.png` |
-| 67 | `chr_rei_03_kangaechuu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 考え中（顎に手） | 立ち絵差分 数理零／考え中（顎に手） | ◯ 白紙プレースホルダ | `image1/white_072.png` |
-| 68 | `chr_rei_04_odoroki.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 驚き | 立ち絵差分 数理零／驚き | ◯ 白紙プレースホルダ | `image1/white_073.png` |
-| 69 | `chr_rei_05_data_shinken.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 真剣（データと向き合う） | 立ち絵差分 数理零／真剣（データと向き合う） | ◯ 白紙プレースホルダ | `image3/white_074.png` |
-| 70 | `chr_rei_06_yasashii_me.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 優しい目 | 立ち絵差分 数理零／優しい目 | ◯ 白紙プレースホルダ | `image1/white_075.png` |
-| 71 | `chr_rei_07_kotoba_erabu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 言葉を選ぶ顔 | 立ち絵差分 数理零／言葉を選ぶ顔 | ◯ 白紙プレースホルダ | `image1/white_076.png` |
-| 72 | `chr_rei_08_me_rumaseru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 数理零 目を潤ませる | 立ち絵差分 数理零／目を潤ませる | ◯ 白紙プレースホルダ | `image2/white_077.png` |
-| 73 | `chr_ryoma_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 通常 | 立ち絵差分 両馬二郎／通常 | ◯ 白紙プレースホルダ | `image3/white_035.png` |
-| 74 | `chr_ryoma_02_niyari.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 ニヤリ | 立ち絵差分 両馬二郎／ニヤリ | ◯ 白紙プレースホルダ | `image1/white_036.png` |
-| 75 | `chr_ryoma_03_zenryoku.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 全力 | 立ち絵差分 両馬二郎／全力 | ◯ 白紙プレースホルダ | `image3/white_037.png` |
-| 76 | `chr_ryoma_04_kinimo_majime.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 急に真顔 | 立ち絵差分 両馬二郎／急に真顔 | ◯ 白紙プレースホルダ | `image1/white_038.png` |
-| 77 | `chr_ryoma_05_shonbori.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 しょんぼり | 立ち絵差分 両馬二郎／しょんぼり | ◯ 白紙プレースホルダ | `image2/white_039.png` |
-| 78 | `chr_ryoma_06_nakiwarai.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 泣き笑い | 立ち絵差分 両馬二郎／泣き笑い | ◯ 白紙プレースホルダ | `image1/white_040.png` |
-| 79 | `chr_ryoma_07_shinken_ketsui.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 真剣な決意顔 | 立ち絵差分 両馬二郎／真剣な決意顔 | ◯ 白紙プレースホルダ | `image3/white_041.png` |
-| 80 | `chr_ryoma_08_terekakushi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 照れ隠しで頭をかく | 立ち絵差分 両馬二郎／照れ隠しで頭をかく | ◯ 白紙プレースホルダ | `image3/white_042.png` |
-| 81 | `chr_ryoma_09_goukyuu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 両馬二郎 号泣 | 立ち絵差分 両馬二郎／号泣 | ◯ 白紙プレースホルダ | `image3/white_043.png` |
-| 82 | `chr_sakura_01_tsuujou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 櫻優 通常 | 立ち絵差分 櫻優／通常 | ◯ 白紙プレースホルダ | `image3/white_108.png` |
-| 83 | `chr_sakura_02_kenkyuusha.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 櫻優 真剣（研究者モード） | 立ち絵差分 櫻優／真剣（研究者モード） | ◯ 白紙プレースホルダ | `image3/white_109.png` |
-| 84 | `chr_sakura_03_tere.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 櫻優 照れ | 立ち絵差分 櫻優／照れ | ◯ 白紙プレースホルダ | `image1/white_110.png` |
-| 85 | `chr_sakura_04_douyou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 櫻優 動揺 | 立ち絵差分 櫻優／動揺 | ◯ 白紙プレースホルダ | `image1/white_111.png` |
-| 86 | `chr_sakura_05_egao.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 櫻優 笑顔 | 立ち絵差分 櫻優／笑顔 | ◯ 白紙プレースホルダ | `image1/white_112.png` |
-| 87 | `chr_sakura_06_yawarakai.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 櫻優 柔らかい表情 | 立ち絵差分 櫻優／柔らかい表情 | ◯ 白紙プレースホルダ | `image1/white_113.png` |
-| 88 | `chr_satou_01_game_shuuchuu.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 通常（ゲーム画面凝視） | 立ち絵差分 砂糖東洋／通常（ゲーム画面凝視） | ◯ 白紙プレースホルダ | `image1/white_062.png` |
-| 89 | `chr_satou_02_muten.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 無表情（素） | 立ち絵差分 砂糖東洋／無表情（素） | ◯ 白紙プレースホルダ | `image1/white_063.png` |
-| 90 | `chr_satou_03_kao_ageta.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 驚き（画面から顔を上げる） | 立ち絵差分 砂糖東洋／驚き（画面から顔を上げる） | ◯ 白紙プレースホルダ | `image3/white_064.png` |
-| 91 | `chr_satou_04_soppo.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 照れ隠しでそっぽを向く | 立ち絵差分 砂糖東洋／照れ隠しでそっぽを向く | ◯ 白紙プレースホルダ | `image2/white_065.png` |
-| 92 | `chr_satou_05_camera.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 真剣にカメラを構える顔 | 立ち絵差分 砂糖東洋／真剣にカメラを構える顔 | ◯ 白紙プレースホルダ | `image3/white_066.png` |
-| 93 | `chr_satou_06_hohoemi.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 微笑み（レア） | 立ち絵差分 砂糖東洋／微笑み（レア） | ◯ 白紙プレースホルダ | `image2/white_067.png` |
-| 94 | `chr_satou_07_tsumaru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 言葉に詰まる顔 | 立ち絵差分 砂糖東洋／言葉に詰まる顔 | ◯ 白紙プレースホルダ | `image3/white_068.png` |
-| 95 | `chr_satou_08_hikari_koraeru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 砂糖東洋 目に光るものを堪える顔 | 立ち絵差分 砂糖東洋／目に光るものを堪える顔 | ◯ 白紙プレースホルダ | `image3/white_069.png` |
-| 96 | `chr_terachi_01_nemusou.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 通常（眠そう・淡々） | 立ち絵差分 寺地星／通常（眠そう・淡々） | ◯ 白紙プレースホルダ | `image1/white_054.png` |
-| 97 | `chr_terachi_02_komatte_kataaru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 困惑して固まる | 立ち絵差分 寺地星／困惑して固まる | ◯ 白紙プレースホルダ | `image3/white_055.png` |
-| 98 | `chr_terachi_03_hansya_shinken.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 真剣な配信者の顔 | 立ち絵差分 寺地星／真剣な配信者の顔 | ◯ 白紙プレースホルダ | `image2/white_056.png` |
-| 99 | `chr_terachi_04_ureshii.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 嬉しい | 立ち絵差分 寺地星／嬉しい | ◯ 白紙プレースホルダ | `image1/white_057.png` |
-| 100 | `chr_terachi_05_nakisou_koraeru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 泣きそうなのを堪える | 立ち絵差分 寺地星／泣きそうなのを堪える | ◯ 白紙プレースホルダ | `image3/white_058.png` |
-| 101 | `chr_terachi_06_maiku_no_ketsui.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 マイク前の決意顔 | 立ち絵差分 寺地星／マイク前の決意顔 | ◯ 白紙プレースホルダ | `image3/white_059.png` |
-| 102 | `chr_terachi_07_yomiage.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 声を震わせながら読み上げる | 立ち絵差分 寺地星／声を震わせながら読み上げる | ◯ 白紙プレースホルダ | `image3/white_060.png` |
-| 103 | `chr_terachi_08_namida.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 寺地星 涙 | 立ち絵差分 寺地星／涙 | ◯ 白紙プレースホルダ | `image3/white_061.png` |
-| 104 | `chr_wakaki-katsuya_01_waratteiru.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 若き日の塀勝也（回想専用） 笑っている | 立ち絵差分 若き日の塀勝也（回想専用）／笑っている | ◯ 白紙プレースホルダ | `image2/white_128.png` |
-| 105 | `chr_wakaki-katsuya_02_bousen.png` | 400×300 | 810B | 420×700 viewBox（表示 420×640, 実素材推奨 840×1280 透過PNG）/ bottom中央配置 | 若き日の塀勝也（回想専用） 呆然としている | 立ち絵差分 若き日の塀勝也（回想専用）／呆然としている | ◯ 白紙プレースホルダ | `image3/white_129.png` |
-
-### 立ち絵 表情バリエーション（抜粋）
-
-- `01 通常/穏やか` → `02 微笑/笑顔` → `03 悩み/困り` → `04 驚き/怒り` → `05 悲しみ/切なさ` → `06 決意/真剣` → `07 照れ/喜び` → `08 泣き/涙` → `09 以降 個別（晴れやか・全力等）`
-- 表現は `expr` 番号で濃度（`darken`）と `#halo` の有無が変わる（`figureSVG` 内 `exprN>=8` で後光が付く）
-- 実装では `game.js` が `chr:{set:{slug:expr}}` で `store.meta.chr[slug]` に回収を記録
+| スラッグ | 名前 | 差分 | 本編の呼ばれ数 | 台詞色 |
+|---|---|---|---|---|
+| `futami` | 二見玲子（ふたみ・れいこ） | 5 | 4 | `#b9a2cc` |
+| `inaba` | 稲葉悌二（いなば・ていじ／回想の声） | 2 | 1 | `#c0a888` |
+| `izaki` | 伊崎（いざき） | 6 | 7 | `#dcbd92` |
+| `izumi` | 伊豆見（いずみ） | 6 | 5 | `#e0cba2` |
+| `katsuya` | 塀勝也（へい・かつや／通称ヘイカツ） | 10 | 23 | `#cbb27c` |
+| `kuraishi` | 倉石暁（くらいし・あきら） | 7 | 11 | `#d6d46e` |
+| `meshino` | 召野カイト（めしの・かいと） | 6 | 5 | `#e2a8bc` |
+| `mie` | 三重県臣（みえ・けんしん） | 10 | 47 | `#7fa9d8` |
+| `mitsumine` | 三峰瑠衣（みつみね・るい） | 6 | 6 | `#e2b79e` |
+| `naitou` | 内藤蘭（ないとう・らん） | 6 | 5 | `#b6d8c6` |
+| `rei` | 数理零（すうり・れい） | 8 | 10 | `#d3d9e8` |
+| `ryoma` | 両馬二郎（りょうま・じろう） | 9 | 27 | `#e2853f` |
+| `sakura` | 櫻優（さくら・ゆう） | 6 | 3 | `#a8c8e0` |
+| `satou` | 砂糖東洋（さとう・とうよう） | 8 | 15 | `#7fd0c8` |
+| `terachi` | 寺地星（てらち・せい） | 8 | 9 | `#9ec98f` |
+| `wakaki-katsuya` | 若き日の勝也（わかき・かつや／回想の声） | 2 | 0 | `#c0a888` |
 
 ---
-*このMDは自動生成（`tools/gen_asset_md.mjs`）。手編集より台帳 `data/assets.json` を正本にしてください。*
+
+## キャラごとの解説（差分を1枚ずつ）
+
+### `futami` ― 二見玲子（ふたみ・れいこ）
+
+- **書き方**: `@chr futami=01`〜`@chr futami=05`（差分 5 枚・`@chr futami all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 二見玲子／色 `#b9a2cc`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 5 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常** ― `@chr futami=01` ／ `chr_futami_01_tsuujou.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:91`（職員室前）
+- **② 微笑** ― `@chr futami=02` ／ `chr_futami_02_hohoemi.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **③ 心配顔** ― `@chr futami=03` ／ `chr_futami_03_shinpai.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:108`（食い下がった方）
+- **④ いたずらっぽい笑み** ― `@chr futami=04` ／ `chr_futami_04_itazura.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:117`（二見の後押し）
+- **⑤ しんみりした横顔** ― `@chr futami=05` ／ `chr_futami_05_yokogao.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:97`（職員室前）
+
+### `inaba` ― 稲葉悌二（いなば・ていじ／回想の声）
+
+- **書き方**: `@chr inaba=01`〜`@chr inaba=02`（差分 2 枚・`@chr inaba all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 稲葉悌二／色 `#c0a888`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 2 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 古写真の中の柔らかい笑み** ― `@chr inaba=01` ／ `chr_inaba_01_shashin_no_waraui.png`
+  本編 **1 回**。初出 `60_climax:66`（回想：はじめての地形図）
+- **② 山を指差す横顔** ― `@chr inaba=02` ／ `chr_inaba_02_yama_sasu.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+
+### `izaki` ― 伊崎（いざき）
+
+- **書き方**: `@chr izaki=01`〜`@chr izaki=06`（差分 6 枚・`@chr izaki all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 伊崎／色 `#dcbd92`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常** ― `@chr izaki=01` ／ `chr_izaki_01_tsuujou.png`
+  本編 **1 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み）
+- **② 笑顔** ― `@chr izaki=02` ／ `chr_izaki_02_egao.png`
+  本編 **2 回**。初出 `00_prologue:94`（二月、北棟三年B組・昼休み） → ほか 1 回
+- **③ 困り顔** ― `@chr izaki=03` ／ `chr_izaki_03_komari.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **④ 真剣（仕切る顔）** ― `@chr izaki=04` ／ `chr_izaki_04_shikiri.png`
+  本編 **3 回**。初出 `50_converge:19`（放課後、誰もいない北棟三年B組教室） → ほか 2 回
+- **⑤ 驚き** ― `@chr izaki=05` ／ `chr_izaki_05_odoroki.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑥ しみじみとした微笑み** ― `@chr izaki=06` ／ `chr_izaki_06_shimiemi.png`
+  本編 **1 回**。初出 `70_endings:179`（GOOD END 伊崎＋伊豆見「それぞれの歩幅」）
+
+### `izumi` ― 伊豆見（いずみ）
+
+- **書き方**: `@chr izumi=01`〜`@chr izumi=06`（差分 6 枚・`@chr izumi all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 伊豆見／色 `#e0cba2`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常** ― `@chr izumi=01` ／ `chr_izumi_01_tsuujou.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **② 笑顔** ― `@chr izumi=02` ／ `chr_izumi_02_egao.png`
+  本編 **2 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み） → ほか 1 回
+- **③ 緊張** ― `@chr izumi=03` ／ `chr_izumi_03_kinchou.png`
+  本編 **1 回**。初出 `50_converge:90`（当日の設計）
+- **④ 決意** ― `@chr izumi=04` ／ `chr_izumi_04_ketsui.png`
+  本編 **1 回**。初出 `50_converge:59`（「思い出の地形図」制作）
+- **⑤ 照れ** ― `@chr izumi=05` ／ `chr_izumi_05_tere.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑥ 誇らしげ** ― `@chr izumi=06` ／ `chr_izumi_06_hokorashige.png`
+  本編 **1 回**。初出 `70_endings:179`（GOOD END 伊崎＋伊豆見「それぞれの歩幅」）
+
+### `katsuya` ― 塀勝也（へい・かつや／通称ヘイカツ）
+
+- **書き方**: `@chr katsuya=01`〜`@chr katsuya=10`（差分 10 枚・`@chr katsuya all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 塀勝也／色 `#cbb27c`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 10 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常（穏やか）** ― `@chr katsuya=01` ／ `chr_katsuya_01_tsuujou.png`
+  本編 **2 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 1 回
+- **② 微笑** ― `@chr katsuya=02` ／ `chr_katsuya_02_hohoemi.png`
+  本編 **6 回**。初出 `60_climax:36`（卒業式前日、放課後の教室） → ほか 5 回
+- **③ 遠い目** ― `@chr katsuya=03` ／ `chr_katsuya_03_tooi_me.png`
+  本編 **1 回**。初出 `00_prologue:54`（三年間ダイジェスト（共通・スキップ可））
+- **④ 驚き** ― `@chr katsuya=04` ／ `chr_katsuya_04_odoroki.png`
+  本編 **3 回**。初出 `10_chapter1:30`（地図保管庫） → ほか 2 回
+- **⑤ 目を伏せる** ― `@chr katsuya=05` ／ `chr_katsuya_05_me_fuseru.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑥ 硬い無表情** ― `@chr katsuya=06` ／ `chr_katsuya_06_kataki_muten.png`
+  本編 **3 回**。初出 `10_chapter1:43`（地図保管庫） → ほか 2 回
+- **⑦ 回想・目を細める** ― `@chr katsuya=07` ／ `chr_katsuya_07_kaisou_me_soseru.png`
+  本編 **2 回**。初出 `60_climax:124`（気づき） → ほか 1 回
+- **⑧ 涙をこらえる** ― `@chr katsuya=08` ／ `chr_katsuya_08_namida_koraeru.png`
+  本編 **3 回**。初出 `60_climax:96`（回想：最後の日） → ほか 2 回
+- **⑨ 泣く** ― `@chr katsuya=09` ／ `chr_katsuya_09_naku.png`
+  本編 **1 回**。初出 `60_climax:92`（回想：最後の日）
+- **⑩ 晴れやかな笑み** ― `@chr katsuya=10` ／ `chr_katsuya_10_hareyaka_emmi.png`
+  本編 **2 回**。初出 `60_climax:176`（締めの言葉） → ほか 1 回
+
+### `kuraishi` ― 倉石暁（くらいし・あきら）
+
+- **書き方**: `@chr kuraishi=01`〜`@chr kuraishi=07`（差分 7 枚・`@chr kuraishi all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 倉石暁／色 `#d6d46e`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 7 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常（熱狂）** ― `@chr kuraishi=01` ／ `chr_kuraishi_01_kekkyou.png`
+  本編 **4 回**。初出 `00_prologue:81`（二月、北棟三年B組・昼休み） → ほか 3 回
+- **② 感激** ― `@chr kuraishi=02` ／ `chr_kuraishi_02_kanshou.png`
+  本編 **1 回**。初出 `70_endings:163`（GOOD END 両馬「✝本質✝、その後」）
+- **③ 真剣（調査中）** ― `@chr kuraishi=03` ／ `chr_kuraishi_03_chousa_shinken.png`
+  本編 **3 回**。初出 `40_route_minamitou_meshino:138`（図書室、書庫） → ほか 2 回
+- **④ しょんぼり** ― `@chr kuraishi=04` ／ `chr_kuraishi_04_shonbori.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑤ 誇らしげ** ― `@chr kuraishi=05` ／ `chr_kuraishi_05_hokorashige.png`
+  本編 **2 回**。初出 `50_converge:68`（「思い出の地形図」制作） → ほか 1 回
+- **⑥ 言葉を失う顔** ― `@chr kuraishi=06` ／ `chr_kuraishi_06_kotoba_usinau.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:144`（図書室、書庫）
+- **⑦ 涙ぐむ** ― `@chr kuraishi=07` ／ `chr_kuraishi_07_namidagumu.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+
+### `meshino` ― 召野カイト（めしの・かいと）
+
+- **書き方**: `@chr meshino=01`〜`@chr meshino=06`（差分 6 枚・`@chr meshino all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 召野カイト／色 `#e2a8bc`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常** ― `@chr meshino=01` ／ `chr_meshino_01_tsuujou.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:117`（二見の後押し）
+- **② 決め顔** ― `@chr meshino=02` ／ `chr_meshino_02_kimegao.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **③ 照れ** ― `@chr meshino=03` ／ `chr_meshino_03_tere.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **④ 真剣** ― `@chr meshino=04` ／ `chr_meshino_04_shinken.png`
+  本編 **2 回**。初出 `40_route_minamitou_meshino:91`（職員室前） → ほか 1 回
+- **⑤ 英語ドヤ顔** ― `@chr meshino=05` ／ `chr_meshino_05_eigo_doya.png`
+  本編 **1 回**。初出 `50_converge:63`（「思い出の地形図」制作）
+- **⑥ しんみり** ― `@chr meshino=06` ／ `chr_meshino_06_shinmiri.png`
+  本編 **1 回**。初出 `70_endings:195`（GOOD END 召野「言葉を届ける」）
+
+### `mie` ― 三重県臣（みえ・けんしん）
+
+- **書き方**: `@chr mie=01`〜`@chr mie=10`（差分 10 枚・`@chr mie all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 三重県臣／色 `#7fa9d8`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 10 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常（冷笑・半目）** ― `@chr mie=01` ／ `chr_mie_01_reishou.png`
+  本編 **19 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 18 回
+- **② 「は？」** ― `@chr mie=02` ／ `chr_mie_02_ha.png`
+  本編 **4 回**。初出 `00_prologue:74`（二月、北棟三年B組・昼休み） → ほか 3 回
+- **③ 動揺** ― `@chr mie=03` ／ `chr_mie_03_douyou.png`
+  本編 **1 回**。初出 `20_route_satou_rei:171`（零の中の変化）
+- **④ 気まずい沈黙** ― `@chr mie=04` ／ `chr_mie_04_chimatsu.png`
+  本編 **8 回**。初出 `10_chapter1:68`（放課後、屋上へ続く階段の踊り場） → ほか 7 回
+- **⑤ 照れ** ― `@chr mie=05` ／ `chr_mie_05_tere.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑥ 苛立ち混じりの真剣** ― `@chr mie=06` ／ `chr_mie_06_iraduki_shinken.png`
+  本編 **2 回**。初出 `10_chapter1:75`（放課後、屋上へ続く階段の踊り場） → ほか 1 回
+- **⑦ 本気の真剣** ― `@chr mie=07` ／ `chr_mie_07_honki_shinken.png`
+  本編 **7 回**。初出 `10_chapter1:152`（HUB ― ルート選択） → ほか 6 回
+- **⑧ 涙をこらえて唇を噛む** ― `@chr mie=08` ／ `chr_mie_08_namida_kamu.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑨ 初めての素直な微笑み** ― `@chr mie=09` ／ `chr_mie_09_sunao_hohoemi.png`
+  本編 **5 回**。初出 `10_chapter1:140`（選択後共通 ―― 夕方の廊下） → ほか 4 回
+- **⑩ 泣き顔** ― `@chr mie=10` ／ `chr_mie_10_nakigao.png`
+  本編 **1 回**。初出 `60_climax:131`（気づき）
+
+### `mitsumine` ― 三峰瑠衣（みつみね・るい）
+
+- **書き方**: `@chr mitsumine=01`〜`@chr mitsumine=06`（差分 6 枚・`@chr mitsumine all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 三峰瑠衣／色 `#e2b79e`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常** ― `@chr mitsumine=01` ／ `chr_mitsumine_01_tsuujou.png`
+  本編 **2 回**。初出 `40_route_minamitou_meshino:16`（桜並木、まだ蕾） → ほか 1 回
+- **② ツッコミ顔** ― `@chr mitsumine=02` ／ `chr_mitsumine_02_tsukkomi.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:20`（桜並木、まだ蕾）
+- **③ 笑顔** ― `@chr mitsumine=03` ／ `chr_mitsumine_03_egao.png`
+  本編 **2 回**。初出 `40_route_minamitou_meshino:66`（決意） → ほか 1 回
+- **④ 呆れ** ― `@chr mitsumine=04` ／ `chr_mitsumine_04_akire.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑤ 優しい顔** ― `@chr mitsumine=05` ／ `chr_mitsumine_05_yasashii.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑥ 「は？」（ハモリ専用）** ― `@chr mitsumine=06` ／ `chr_mitsumine_06_ha.png`
+  本編 **1 回**。初出 `70_endings:97`（（おまけ）ハモり）
+
+### `naitou` ― 内藤蘭（ないとう・らん）
+
+- **書き方**: `@chr naitou=01`〜`@chr naitou=06`（差分 6 枚・`@chr naitou all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 内藤蘭／色 `#b6d8c6`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常** ― `@chr naitou=01` ／ `chr_naitou_01_tsuujou.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:35`（南棟三年教室）
+- **② 微笑** ― `@chr naitou=02` ／ `chr_naitou_02_hohoemi.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:39`（南棟三年教室）
+- **③ 読書中（伏し目）** ― `@chr naitou=03` ／ `chr_naitou_03_dokusho.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **④ 驚き** ― `@chr naitou=04` ／ `chr_naitou_04_odoroki.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:49`（茶化した場合）
+- **⑤ 優しい目** ― `@chr naitou=05` ／ `chr_naitou_05_yasashii_me.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:62`（決意）
+- **⑥ 少し笑う** ― `@chr naitou=06` ／ `chr_naitou_06_sukoshi_warau.png`
+  本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
+
+### `rei` ― 数理零（すうり・れい）
+
+- **書き方**: `@chr rei=01`〜`@chr rei=08`（差分 8 枚・`@chr rei all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 数理零／色 `#d3d9e8`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 8 枚・実画像 0 枚（各 現 400×300・810B）
+- **その人が主役のルート**: B「零編」 ― 面白いの向こう側（開始シーン `b1`）
+
+- **① 通常（涼しい顔）** ― `@chr rei=01` ／ `chr_rei_01_suzushii.png`
+  本編 **2 回**。初出 `20_route_satou_rei:119`（放課後、黒板の前） → ほか 1 回
+- **② 微笑** ― `@chr rei=02` ／ `chr_rei_02_hohoemi.png`
+  本編 **2 回**。初出 `20_route_satou_rei:176`（零の中の変化） → ほか 1 回
+- **③ 考え中（顎に手）** ― `@chr rei=03` ／ `chr_rei_03_kangaechuu.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **④ 驚き** ― `@chr rei=04` ／ `chr_rei_04_odoroki.png`
+  本編 **1 回**。初出 `20_route_satou_rei:126`（放課後、黒板の前）
+- **⑤ 真剣（データと向き合う）** ― `@chr rei=05` ／ `chr_rei_05_data_shinken.png`
+  本編 **4 回**。初出 `20_route_satou_rei:130`（放課後、黒板の前） → ほか 3 回
+- **⑥ 優しい目** ― `@chr rei=06` ／ `chr_rei_06_yasashii_me.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑦ 言葉を選ぶ顔** ― `@chr rei=07` ／ `chr_rei_07_kotoba_erabu.png`
+  本編 **1 回**。初出 `20_route_satou_rei:164`（零の中の変化）
+- **⑧ 目を潤ませる** ― `@chr rei=08` ／ `chr_rei_08_me_rumaseru.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+
+### `ryoma` ― 両馬二郎（りょうま・じろう）
+
+- **書き方**: `@chr ryoma=01`〜`@chr ryoma=09`（差分 9 枚・`@chr ryoma all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 両馬二郎／色 `#e2853f`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 9 枚・実画像 0 枚（各 現 400×300・810B）
+- **その人が主役のルート**: D「両馬編」 ― 祖父と✝本質✝（開始シーン `d1`）
+
+- **① 通常** ― `@chr ryoma=01` ／ `chr_ryoma_01_tsuujou.png`
+  本編 **4 回**。初出 `00_prologue:81`（二月、北棟三年B組・昼休み） → ほか 3 回
+- **② ニヤリ** ― `@chr ryoma=02` ／ `chr_ryoma_02_niyari.png`
+  本編 **5 回**。初出 `00_prologue:74`（二月、北棟三年B組・昼休み） → ほか 4 回
+- **③ 全力** ― `@chr ryoma=03` ／ `chr_ryoma_03_zenryoku.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **④ 急に真顔** ― `@chr ryoma=04` ／ `chr_ryoma_04_kinimo_majime.png`
+  本編 **6 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 5 回
+- **⑤ しょんぼり** ― `@chr ryoma=05` ／ `chr_ryoma_05_shonbori.png`
+  本編 **1 回**。初出 `10_chapter1:163`（まだ聞けていない話がある気がする）
+- **⑥ 泣き笑い** ― `@chr ryoma=06` ／ `chr_ryoma_06_nakiwarai.png`
+  本編 **4 回**。初出 `30_route_terachi_ryoma:99`（両馬の家、夕方） → ほか 3 回
+- **⑦ 真剣な決意顔** ― `@chr ryoma=07` ／ `chr_ryoma_07_shinken_ketsui.png`
+  本編 **4 回**。初出 `10_chapter1:152`（HUB ― ルート選択） → ほか 3 回
+- **⑧ 照れ隠しで頭をかく** ― `@chr ryoma=08` ／ `chr_ryoma_08_terekakushi.png`
+  本編 **2 回**。初出 `30_route_terachi_ryoma:90`（両馬の家、夕方） → ほか 1 回
+- **⑨ 号泣** ― `@chr ryoma=09` ／ `chr_ryoma_09_goukyuu.png`
+  本編 **1 回**。初出 `30_route_terachi_ryoma:122`（祖父の口癖）
+
+### `sakura` ― 櫻優（さくら・ゆう）
+
+- **書き方**: `@chr sakura=01`〜`@chr sakura=06`（差分 6 枚・`@chr sakura all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 櫻優／色 `#a8c8e0`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 通常** ― `@chr sakura=01` ／ `chr_sakura_01_tsuujou.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **② 真剣（研究者モード）** ― `@chr sakura=02` ／ `chr_sakura_02_kenkyuusha.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:35`（南棟三年教室）
+- **③ 照れ** ― `@chr sakura=03` ／ `chr_sakura_03_tere.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **④ 動揺** ― `@chr sakura=04` ／ `chr_sakura_04_douyou.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑤ 笑顔** ― `@chr sakura=05` ／ `chr_sakura_05_egao.png`
+  本編 **1 回**。初出 `40_route_minamitou_meshino:68`（決意）
+- **⑥ 柔らかい表情** ― `@chr sakura=06` ／ `chr_sakura_06_yawarakai.png`
+  本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
+
+### `satou` ― 砂糖東洋（さとう・とうよう）
+
+- **書き方**: `@chr satou=01`〜`@chr satou=08`（差分 8 枚・`@chr satou all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 砂糖東洋／色 `#7fd0c8`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 8 枚・実画像 0 枚（各 現 400×300・810B）
+- **その人が主役のルート**: A「砂糖編」 ― 窓の外の続き（開始シーン `a1`）
+
+- **① 通常（ゲーム画面凝視）** ― `@chr satou=01` ／ `chr_satou_01_game_shuuchuu.png`
+  本編 **3 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み） → ほか 2 回
+- **② 無表情（素）** ― `@chr satou=02` ／ `chr_satou_02_muten.png`
+  本編 **3 回**。初出 `20_route_satou_rei:25`（放課後、教室に残る砂糖） → ほか 2 回
+- **③ 驚き（画面から顔を上げる）** ― `@chr satou=03` ／ `chr_satou_03_kao_ageta.png`
+  本編 **1 回**。初出 `20_route_satou_rei:53`（正面から頼んだ方）
+- **④ 照れ隠しでそっぽを向く** ― `@chr satou=04` ／ `chr_satou_04_soppo.png`
+  本編 **1 回**。初出 `20_route_satou_rei:19`（放課後、教室に残る砂糖）
+- **⑤ 真剣にカメラを構える顔** ― `@chr satou=05` ／ `chr_satou_05_camera.png`
+  本編 **2 回**。初出 `20_route_satou_rei:79`（砂糖のスマートフォン） → ほか 1 回
+- **⑥ 微笑み（レア）** ― `@chr satou=06` ／ `chr_satou_06_hohoemi.png`
+  本編 **2 回**。初出 `20_route_satou_rei:100`（砂糖のスマートフォン） → ほか 1 回
+- **⑦ 言葉に詰まる顔** ― `@chr satou=07` ／ `chr_satou_07_tsumaru.png`
+  本編 **2 回**。初出 `20_route_satou_rei:90`（砂糖のスマートフォン） → ほか 1 回
+- **⑧ 目に光るものを堪える顔** ― `@chr satou=08` ／ `chr_satou_08_hikari_koraeru.png`
+  本編 **1 回**。初出 `60_climax:116`（窓の外の五秒）
+
+### `terachi` ― 寺地星（てらち・せい）
+
+- **書き方**: `@chr terachi=01`〜`@chr terachi=08`（差分 8 枚・`@chr terachi all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 寺地星／色 `#9ec98f`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 8 枚・実画像 0 枚（各 現 400×300・810B）
+- **その人が主役のルート**: C「寺地編」 ― 最後の朗読、まだ早いけど（開始シーン `c1`）
+
+- **① 通常（眠そう・淡々）** ― `@chr terachi=01` ／ `chr_terachi_01_nemusou.png`
+  本編 **2 回**。初出 `30_route_terachi_ryoma:12`（放課後、誰もいない教室） → ほか 1 回
+- **② 困惑して固まる** ― `@chr terachi=02` ／ `chr_terachi_02_komatte_kataaru.png`
+  本編 **1 回**。初出 `30_route_terachi_ryoma:32`（正面から頼んだ方）
+- **③ 真剣な配信者の顔** ― `@chr terachi=03` ／ `chr_terachi_03_hansya_shinken.png`
+  本編 **1 回**。初出 `30_route_terachi_ryoma:17`（放課後、誰もいない教室）
+- **④ 嬉しい** ― `@chr terachi=04` ／ `chr_terachi_04_ureshii.png`
+  本編 **1 回**。初出 `70_endings:145`（GOOD END 寺地「配信は続く」）
+- **⑤ 泣きそうなのを堪える** ― `@chr terachi=05` ／ `chr_terachi_05_nakisou_koraeru.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑥ マイク前の決意顔** ― `@chr terachi=06` ／ `chr_terachi_06_maiku_no_ketsui.png`
+  本編 **3 回**。初出 `30_route_terachi_ryoma:59`（三年分の紙） → ほか 2 回
+- **⑦ 声を震わせながら読み上げる** ― `@chr terachi=07` ／ `chr_terachi_07_yomiage.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **⑧ 涙** ― `@chr terachi=08` ／ `chr_terachi_08_namida.png`
+  本編 **1 回**。初出 `60_climax:168`（最後の朗読）
+
+### `wakaki-katsuya` ― 若き日の勝也（わかき・かつや／回想の声）
+
+- **書き方**: `@chr wakaki-katsuya=01`〜`@chr wakaki-katsuya=02`（差分 2 枚・`@chr wakaki-katsuya all` は非対応、`@chr clear` で全員下げる）
+- **名前ボックス**: 若き日の勝也／色 `#c0a888`
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 2 枚・実画像 0 枚（各 現 400×300・810B）
+
+- **① 笑っている** ― `@chr wakaki-katsuya=01` ／ `chr_wakaki-katsuya_01_waratteiru.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+- **② 呆然としている** ― `@chr wakaki-katsuya=02` ／ `chr_wakaki-katsuya_02_bousen.png`
+  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
+
+## 差し替え手順（立ち絵共通）
+
+1. `assets/chr/` に**同名・透過PNG**で上書き（840×1280 推奨／下揃え）
+2. 台帳の `placeholder` を `false` に → シルエット補完（`figureSVG`）が消えて実画像になる
+3. `sw.js` の `CACHE` を上げる
+4. 白背景のまま置きたいときだけ CONFIG「画像合成」= multiply（ `#stage[data-blend="multiply"] .chr img` にだけ掛かる）
+
+### 演出（JS/CSS 側で自動）
+
+| 効く場所 | 挙動 |
+|---|---|
+| `data-enter="left/right/center"` | 入場スライド＋ブラー（88ms ずつスタッガ） |
+| `chrBreathe` 8.4s | **`translate` だけ**動かす（ぼかしの再計算を毎フレームやめた）。CONFIG「立ち絵の動き」で lite/off/full |
+| `.talk` | `chrTalkSettle` .5s 単発（旧来は .34s 無限＝再ラスタ源だった） |
+| `.dim` | 非話者を明度60%・彩度52%・0.985 |
+| 3人時 | 中央 1.016／左右 0.988 で奥行き |
