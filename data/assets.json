@@ -1,8 +1,8 @@
 {
  "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。",
  "engine_limit": 300,
- "assigned": 201,
- "buffer": 99,
+ "assigned": 193,
+ "buffer": 107,
  "assets": [
   {
    "id": "BG01",
@@ -1365,16 +1365,6 @@
    "placeholder": true
   },
   {
-   "id": "cg08",
-   "cat": "cg",
-   "file": "assets/cg/cg_08_rei_tosho_note.png",
-   "label": "零（単独）／BG09。ノートPCの画面光が横顔を照らす。",
-   "desc": "零（単独）／BG09。ノートPCの画面光が横顔を照らす。",
-   "meta": "scene",
-   "source": "image1/white_137.png",
-   "placeholder": true
-  },
-  {
    "id": "cg09",
    "cat": "cg",
    "file": "assets/cg/cg_09_rei-ryoma-mie_daiji.png",
@@ -1392,16 +1382,6 @@
    "desc": "寺地（単独）／BG01・放課後。引き出しの三年分の紙束。",
    "meta": "scene",
    "source": "image1/white_139.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg11",
-   "cat": "cg",
-   "file": "assets/cg/cg_11_terachi-ryoma-mie_unsei.png",
-   "label": "寺地／両馬／三重／BG01。「暴露じゃなくて、ありがとうの会」で頷き合う。",
-   "desc": "寺地／両馬／三重／BG01。「暴露じゃなくて、ありがとうの会」で頷き合う。",
-   "meta": "scene",
-   "source": "image3/white_140.png",
    "placeholder": true
   },
   {
@@ -1435,16 +1415,6 @@
    "placeholder": true
   },
   {
-   "id": "cg15",
-   "cat": "cg",
-   "file": "assets/cg/cg_15_kuraishi-ryoma-mie_houkoku.png",
-   "label": "倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。",
-   "desc": "倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。",
-   "meta": "scene",
-   "source": "image1/white_144.png",
-   "placeholder": true
-  },
-  {
    "id": "cg16",
    "cat": "cg",
    "file": "assets/cg/cg_16_meshino-futami_jimushitsu.png",
@@ -1462,16 +1432,6 @@
    "desc": "三重／三峰／BG16。国境をまたぐ桜並木（まだ蕾）。",
    "meta": "scene",
    "source": "image3/white_146.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg18",
-   "cat": "cg",
-   "file": "assets/cg/cg_18_mie-minamitou3_kyoudai.png",
-   "label": "三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。",
-   "desc": "三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。",
-   "meta": "scene",
-   "source": "image3/white_147.png",
    "placeholder": true
   },
   {
@@ -1495,16 +1455,6 @@
    "placeholder": true
   },
   {
-   "id": "cg21",
-   "cat": "cg",
-   "file": "assets/cg/cg_21_ryoma_yohaku_ni_kaku.png",
-   "label": "両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。",
-   "desc": "両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。",
-   "meta": "scene",
-   "source": "image3/white_150.png",
-   "placeholder": true
-  },
-  {
    "id": "cg22",
    "cat": "cg",
    "file": "assets/cg/cg_22_omoide_no_chizu_kansei.png",
@@ -1522,26 +1472,6 @@
    "desc": "勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。",
    "meta": "scene",
    "source": "image2/white_152.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg24",
-   "cat": "cg",
-   "file": "assets/cg/cg_24_katsuya_zecchuu.png",
-   "label": "勝也（単独）／BG13相当。地図を渡され絶句する正面カット。",
-   "desc": "勝也（単独）／BG13相当。地図を渡され絶句する正面カット。",
-   "meta": "scene",
-   "source": "image2/white_153.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg25",
-   "cat": "cg",
-   "file": "assets/cg/cg_25_mie-katsuya_kiite_ii.png",
-   "label": "三重／勝也。ミディアムショット、「先生、聞いていいですか」。",
-   "desc": "三重／勝也。ミディアムショット、「先生、聞いていいですか」。",
-   "meta": "scene",
-   "source": "image3/white_154.png",
    "placeholder": true
   },
   {
@@ -1612,16 +1542,6 @@
    "desc": "寺地（単独・朗読）／BG13。スマホのライトが顔を照らす。",
    "meta": "scene",
    "source": "image3/white_161.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg33",
-   "cat": "cg",
-   "file": "assets/cg/cg_33_all-katsuya_hitorizutsu.png",
-   "label": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
-   "desc": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
-   "meta": "scene",
-   "source": "image3/white_162.png",
    "placeholder": true
   },
   {
@@ -2123,6 +2043,70 @@
   "assets/_buffer/white_297.png",
   "assets/_buffer/white_298.png",
   "assets/_buffer/white_299.png",
-  "assets/_buffer/white_300.png"
+  "assets/_buffer/white_300.png",
+  {
+   "file": "assets/_buffer/cg_08_rei_tosho_note.png",
+   "id": "cg08",
+   "cat": "cg",
+   "label": "零（単独）／BG09。ノートPCの画面光が横顔を照らす。",
+   "source": "image1/white_137.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出調整）"
+  },
+  {
+   "file": "assets/_buffer/cg_11_terachi-ryoma-mie_unsei.png",
+   "id": "cg11",
+   "cat": "cg",
+   "label": "寺地／両馬／三重／BG01。「暴露じゃなくて、ありがとうの会」で頷き合う。",
+   "source": "image3/white_140.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出調整）"
+  },
+  {
+   "file": "assets/_buffer/cg_24_katsuya_zecchuu.png",
+   "id": "cg24",
+   "cat": "cg",
+   "label": "勝也（単独）／BG13相当。地図を渡され絶句する正面カット。",
+   "source": "image2/white_153.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出調整）"
+  },
+  {
+   "file": "assets/_buffer/cg_25_mie-katsuya_kiite_ii.png",
+   "id": "cg25",
+   "cat": "cg",
+   "label": "三重／勝也。ミディアムショット、「先生、聞いていいですか」。",
+   "source": "image3/white_154.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出調整）"
+  },
+  {
+   "file": "assets/_buffer/cg_15_kuraishi-ryoma-mie_houkoku.png",
+   "id": "cg15",
+   "cat": "cg",
+   "label": "倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。",
+   "source": "image1/white_144.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
+  },
+  {
+   "file": "assets/_buffer/cg_18_mie-minamitou3_kyoudai.png",
+   "id": "cg18",
+   "cat": "cg",
+   "label": "三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。",
+   "source": "image3/white_147.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
+  },
+  {
+   "file": "assets/_buffer/cg_21_ryoma_yohaku_ni_kaku.png",
+   "id": "cg21",
+   "cat": "cg",
+   "label": "両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。",
+   "source": "image3/white_150.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
+  },
+  {
+   "file": "assets/_buffer/cg_33_all-katsuya_hitorizutsu.png",
+   "id": "cg33",
+   "cat": "cg",
+   "label": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
+   "source": "image3/white_162.png",
+   "note": "脚本から外した予備CG（2026-09-11 演出整理）"
+  }
  ]
 }
