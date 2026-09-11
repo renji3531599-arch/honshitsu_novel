@@ -275,14 +275,41 @@ export class Game {
           if (this.store.config.cgMode === 'full') this.dom.textwrap.classList.add('hidden');
         } else this.dom.textwrap.classList.remove('hidden');
         return;
-      case 'chr':
+      case 'chr': {
+        // 既に同じ表情が出ているものはインパクトを出さない
+        const prevExpr = {};
+        Object.keys(ins.set || {}).forEach(slug=>{
+          const rec = this.stage.chrMap.get(slug);
+          if(rec) prevExpr[slug]=rec.expr;
+        });
         this.stage.setChr(ins);
         Object.entries(ins.set || {}).forEach(([slug, expr]) => {
           const m = this.store.meta;
           m.chr[slug] = m.chr[slug] || [];
           if (!m.chr[slug].includes(expr)) { m.chr[slug].push(expr); this.store.saveMeta(); }
+          // インパクト演出：ツッコミ/驚き/決意などは画面揺れ＋SE＋立ち絵ダッシュ
+          if(prevExpr[slug] === expr) return;
+          try{
+            const a = this.stage.assets.chrFor(slug, expr);
+            const label = a ? (a.label||'') : '';
+            let kind = null;
+            if(/ツッコミ|は？/.test(label)) kind='tsukkomi';
+            else if(/驚き|驚/.test(label)) kind='shock';
+            else if(/決意|全力|真剣/.test(label)) kind='impact';
+            // 三重の「は？」は特にツッコミとして強調
+            if(slug==='mie' && expr==='02') kind='tsukkomi';
+            if(slug==='mitsumine' && (expr==='02'||expr==='06')) kind='tsukkomi';
+            if(kind){
+              setTimeout(()=>{
+                try{ this.stage.impact(slug, kind); }catch(_){}
+                const se = kind==='tsukkomi' ? 'se_thud' : kind==='shock' ? 'se_shutter' : 'se_reveal';
+                try{ this.audio.se(se); }catch(_){}
+              }, 86);
+            }
+          }catch(_){}
         });
         return;
+      }
       case 'bgm':
         this.audio.bgm(ins.id, ins.fade);
         if (ins.id && !silent) metaUnlock(this.store, 'music', ins.id);

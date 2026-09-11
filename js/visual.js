@@ -775,10 +775,29 @@ export class Stage {
   }
   fx(name) {
     const st = this.el.stage;
-    if (name === 'shake') { st.classList.remove('shake'); void st.offsetWidth; st.classList.add('shake'); setTimeout(() => st.classList.remove('shake'), 460); }
-    else if (name === 'flash') { const f = this.el.fxFlash; f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); }
+    if (name === 'shake' || name === 'shakeStrong' || name === 'shake-strong') {
+      const cls = name === 'shakeStrong' || name === 'shake-strong' ? 'shake-strong' : 'shake';
+      st.classList.remove('shake','shake-strong'); void st.offsetWidth;
+      st.classList.add(cls); setTimeout(() => st.classList.remove(cls), 480);
+    }
+    else if (name === 'flash') { const f = this.el.fxFlash; f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); setTimeout(()=> f.classList.remove('go'), 340); }
+    else if (name === 'flashImpact' || name === 'impactFlash') { const f = this.el.fxFlash; f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); setTimeout(()=> f.classList.remove('go'), 340); }
     else if (name === 'fadeblack') { this.el.fxVeil.style.background = 'rgba(0,0,0,1)'; setTimeout(() => this.el.fxVeil.style.background = '', 200); }
     else if (name === 'blur') { st.dataset.tone = st.dataset.tone === 'dream' ? '' : 'dream'; }
+  }
+  /** ツッコミ等のインパクト演出：立ち絵に一時クラス＋画面揺れ＋フラッシュ */
+  impact(slug, kind='tsukkomi'){
+    const rec = this.chrMap.get(slug);
+    if(!rec || !rec.el) return;
+    const el = rec.el;
+    const cls = kind === 'shock' ? 'shock' : kind === 'impact' ? 'impact' : 'tsukkomi';
+    el.classList.remove('tsukkomi','shock','impact'); void el.offsetWidth;
+    el.classList.add(cls);
+    setTimeout(()=> el.classList.remove(cls), 560);
+    // 画面も揺らす（ツッコミは強め）
+    this.fx(cls==='tsukkomi' ? 'shakeStrong' : 'shake');
+    // 軽いフラッシュを添える（ツッコミ時のみ）
+    if(cls==='tsukkomi') { setTimeout(()=> this.fx('flash'), 46); }
   }
   setBars(on) { this.el.stage.dataset.bars = on ? 'on' : ''; }
   setTone(t) { if (t) this.el.stage.dataset.tone = t; else this.el.stage.removeAttribute('data-tone'); }
