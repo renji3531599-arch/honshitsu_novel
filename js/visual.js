@@ -725,8 +725,12 @@ export class Stage {
   applyChr(talking = null) {
     const layer = this.el.layChr;
     const keys = [...this.chrMap.keys()];
-    const posArrFor = (n) => n === 1 ? [50] : n === 2 ? [31, 69] : [19, 50, 81];
-    const posArr = posArrFor(keys.length);
+    const n = keys.length;
+    // 均等スロット配置: n人 → (i+1)/(n+1)%。人数が増えても同じ座標に重ねない
+    // （旧実装は3スロット固定で、4人目以降が既存の枠に完全に重なっていた）
+    const posArr = keys.map((_, i) => 100 * (i + 1) / (n + 1));
+    // 大所帯では全体を縮小する（transform-origin が下端なので足元は固定される）
+    const shrink = n <= 2 ? 1 : n === 3 ? 0.94 : n === 4 ? 0.85 : n === 5 ? 0.78 : 0.72;
     keys.forEach((slug, i) => {
       const rec = this.chrMap.get(slug);
       const isNew = !rec.el;
@@ -737,8 +741,7 @@ export class Stage {
         layer.appendChild(el);
         rec.el = el;
       }
-      const n = keys.length;
-      const pos = posArr[Math.min(i, posArr.length-1)];
+      const pos = posArr[i];
       const enter = pos < 40 ? 'left' : pos > 60 ? 'right' : 'center';
       const el = rec.el;
       el.dataset.enter = enter;
@@ -746,11 +749,12 @@ export class Stage {
       el.dataset.pos = String(pos);
       el.style.setProperty('--chr-delay', `${i*88}ms`);
       el.style.setProperty('--chr-index', String(i));
-      // depth scale: central slightly larger, sides slightly smaller
-      const baseScale = n === 3 ? (i === 1 ? 1.015 : 0.992) : 1;
+      // depth scale: central slightly larger, sides slightly smaller（×人数縮小）
+      const baseScale = (n === 3 ? (i === 1 ? 1.015 : 0.992) : 1) * shrink;
       el.style.setProperty('--chr-base', String(baseScale));
-      el.style.left = `calc(${pos}% - var(--u)*210)`;
-      el.style.width = 'calc(var(--u)*420)';
+      el.style.left = `calc(${pos}% - var(--u)*${(210 * shrink).toFixed(1)})`;
+      el.style.width = `calc(var(--u)*${(420 * shrink).toFixed(1)})`;
+      el.style.height = `calc(var(--u)*${(640 * shrink).toFixed(1)})`;
       const a = this.assets.chrFor(slug, rec.expr);
       const sil = el.querySelector('.sil'), img = el.querySelector('img'), tag = el.querySelector('.nametag');
       if (a && !this.isPlaceholder(a)) { img.src = a.file; sil.innerHTML = ''; img.style.opacity=''; }

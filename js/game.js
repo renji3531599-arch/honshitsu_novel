@@ -228,6 +228,8 @@ export class Game {
         }
         d.stage.dataset.spk = isNarration ? '__narration' : (ins.sp || '');
         d.stage.style.setProperty('--sp', sp.color || '#cbb27c');
+        // textwrap は stage の兄弟要素のため --sp が継承されない → ネームプレート用にこちらへも反映
+        d.textwrap.style.setProperty('--sp', sp.color || '#cbb27c');
         d.text.classList.toggle('board', !!sp.board);
         d.textwrap.classList.remove('hidden');
         if (ins.sp) {
@@ -266,11 +268,13 @@ export class Game {
       case 'cg':
         this.stage.cg(ins.id, { kb: ins.kb });
         if (ins.id) {
+          // CGを見せている間はテキストウィンドウを引っ込める（次の text で自動復帰）。
+          // 隠さないと「CGが出たのに吹き出しに隠れて見えない」状態になるため設定に関係なく隠す
+          this.dom.textwrap.classList.add('hidden');
           if (!silent) {
             if (metaUnlock(this.store, 'cg', ins.id)) this.shell.cgNote(ins.id);
             this.audio.se('se_reveal');
           }
-          if (this.store.config.cgMode === 'full') this.dom.textwrap.classList.add('hidden');
         } else this.dom.textwrap.classList.remove('hidden');
         return;
       case 'chr': {
@@ -337,16 +341,20 @@ export class Game {
         d.cardNo.textContent = ins.no || '';
         d.cardTitle.textContent = ins.title || '';
         d.cardSub.textContent = ins.sub || '';
+        d.textwrap.classList.add('hidden');   // カードを見せている間は窓を引っ込める
         d.cardOverlay.classList.add('on');
         await this.waitForClick(ins.hold);
         d.cardOverlay.classList.remove('on');
+        d.textwrap.classList.remove('hidden');
         this._mode = 'flow';
         return;
       }
       case 'caption': {
         if (silent) return;
+        this.dom.textwrap.classList.add('hidden');   // キャプション演出中も窓を引っ込める
         await this.stage.caption({ on: true, text: ins.text, hand: ins.hand, hold: this.skip ? 500 : ins.hold });
         this.stage.caption({ on: false });
+        this.dom.textwrap.classList.remove('hidden');
         return;
       }
       case 'tip': if (!silent) this.giveTip(ins.id); return;
@@ -462,12 +470,20 @@ export class Game {
     if (!chat) { console.warn('[chat] 不明なID:', id); return; }
     metaUnlock(this.store, 'chat', id);
     this._mode = 'chat';
-    return new Promise(res => this.shell.openChat(chat, () => { this._mode = 'flow'; res(); }));
+    // チャット画面（screen-wrap）の下にテキストウィンドウが透けないように引っ込める
+    this.dom.textwrap.classList.add('hidden');
+    return new Promise(res => this.shell.openChat(chat, () => {
+      this._mode = 'flow';
+      this.dom.textwrap.classList.remove('hidden');
+      res();
+    }));
   }
   showHub() {
     this._mode = 'hub';
+    this.dom.textwrap.classList.add('hidden');
     return new Promise(res => this.shell.openHub((sceneId) => {
       this._mode = 'flow';
+      this.dom.textwrap.classList.remove('hidden');
       if (sceneId) { this.state.scene = sceneId; this.state.idx = 0; this.shell.setScene(sceneId); }
       res();
     }));

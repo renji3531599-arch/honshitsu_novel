@@ -188,7 +188,7 @@ img{display:block;max-width:100%}
 @keyframes itemglow{0%,60%{box-shadow:0 0 calc(var(--u)*16) rgba(203,178,124,.85)}100%{box-shadow:0 calc(var(--u)*3) calc(var(--u)*10) rgba(0,0,0,.5)}}
 
 /* --------------------------------------------------------- caption -------- */
-.caption{position:absolute;z-index:7;inset:0;display:grid;place-items:center;opacity:0;
+.caption{position:absolute;z-index:15;inset:0;display:grid;place-items:center;opacity:0;
   transition:opacity .8s ease;pointer-events:none;padding:0 calc(var(--u)*60)}
 .caption.on{opacity:1}
 .caption .memo{font-family:var(--ff-serif);font-size:calc(var(--u)*22);letter-spacing:.1em;
@@ -325,21 +325,22 @@ img{display:block;max-width:100%}
 /* NOTE: 以前は #textwrap.enter で twin アニメーション（横からシュッと吹き出し）＋ se_page が付いていたが
    ユーザ要望により演出を撤廃。出現は即時（opacity/transform のアニメなし）で美しさの最終見た目は同一 */
 #textwrap.enter{animation:none}
-#namebox{position:absolute;left:0;bottom:100%;margin-bottom:0;
-  display:flex;align-items:center;gap:calc(var(--u)*8);
-  background:linear-gradient(180deg,color-mix(in srgb,var(--sp) 62%,#1d1a16) 0%,rgba(16,14,12,.96) 100%);
-  border:1px solid color-mix(in srgb,var(--sp) 68%,transparent);border-bottom:0;
-  border-left-width:calc(var(--u)*3);
-  padding:calc(var(--u)*7) calc(var(--u)*20) calc(var(--u)*8) calc(var(--u)*14);
-  font-size:calc(var(--u)*15.5);font-weight:800;letter-spacing:.08em;color:#fff8e6;white-space:nowrap;max-width:72%;
+/* ネームプレート: ウィンドウ右上に載せる小さな枠（一般的なノベルゲーム形式）。
+   話者のイメージカラー（--sp）で枠・文字を染め分ける。#textwrap は paint containment 無し
+   （上端からはみ出すため。contain 側の NOTE 参照） */
+#namebox{position:absolute;right:calc(var(--u)*18);bottom:calc(100% - var(--u)*1);left:auto;margin-bottom:0;z-index:2;
+  display:flex;align-items:baseline;gap:calc(var(--u)*6);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--sp) 26%,#17140f) 0%,rgba(15,13,11,.97) 100%);
+  border:1px solid color-mix(in srgb,var(--sp) 60%,transparent);border-bottom:0;
+  padding:calc(var(--u)*4.5) calc(var(--u)*18) calc(var(--u)*6);
+  font-size:calc(var(--u)*13.5);font-weight:700;letter-spacing:.1em;color:#fff6e0;white-space:nowrap;max-width:72%;
   overflow:hidden;text-overflow:ellipsis;
-  border-radius:calc(var(--u)*5) calc(var(--u)*5) 0 0;
-  box-shadow:0 calc(var(--u)*8) calc(var(--u)*18) rgba(0,0,0,.42), 0 1px 0 rgba(255,255,255,.08) inset;
-  opacity:0;transform:translateY(4px);transition:opacity .26s ease, transform .26s ease, background .3s}
+  border-radius:calc(var(--u)*4) calc(var(--u)*4) 0 0;
+  box-shadow:0 calc(var(--u)*-6) calc(var(--u)*16) rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.07) inset;
+  opacity:0;transform:translateY(4px);transition:opacity .22s ease, transform .22s ease, background .3s}
 #namebox.on{opacity:1;transform:none}
-#namebox::before{content:"";width:calc(var(--u)*8);height:calc(var(--u)*8);border-radius:50%;background:var(--sp);box-shadow:0 0 calc(var(--u)*8) color-mix(in srgb,var(--sp) 58%,transparent);flex:0 0 auto}
-#namebox .kana{font-family:var(--ff-sans);font-size:calc(var(--u)*9);font-weight:400;letter-spacing:.16em;color:rgba(255,248,230,.72);margin-left:.2em}
-#namebox[data-narration="1"]{background:rgba(14,12,10,.88);border-color:rgba(203,178,124,.18);border-left-width:1px;color:rgba(240,232,214,.65);font-weight:600;font-size:calc(var(--u)*11);letter-spacing:.18em;padding:calc(var(--u)*5) calc(var(--u)*14)}
+#namebox .kana{font-family:var(--ff-sans);font-size:calc(var(--u)*8.5);font-weight:400;letter-spacing:.16em;color:rgba(255,248,230,.66);margin-left:.1em}
+#namebox[data-narration="1"]{background:rgba(14,12,10,.88);border-color:rgba(203,178,124,.18);color:rgba(240,232,214,.65);font-weight:600;font-size:calc(var(--u)*10.5);letter-spacing:.18em;padding:calc(var(--u)*3) calc(var(--u)*13) calc(var(--u)*4.5)}
 #namebox[data-narration="1"]::before{display:none}
 #textbox{position:relative;background:var(--boxbg);backdrop-filter:blur(6px) saturate(.85);
   -webkit-backdrop-filter:blur(6px) saturate(.85);
@@ -879,7 +880,7 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
   #textbox{padding:16px 16px 24px}
   #text{font-size:15px;min-height:0;max-height:32dvh}
   #text.board{font-size:16px}
-  #namebox{font-size:14px}
+  #namebox{font-size:13px;right:10px;padding:3px 12px 4px;max-width:78%}
   .tbtn{font-size:10px;padding:8px 10px}
   #choices{width:calc(100% - 32px);top:auto;bottom:calc(10px + 116px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);left:50%}
   .choice{font-size:15px}
@@ -1293,7 +1294,7 @@ button, a{ -webkit-tap-highlight-color: transparent; }
 
 /* ————— 3人時の奥行き強調：中央を少し大きく、左右を奥に ————— */
 .chr.in[data-count="3"][data-pos="50"]{ --chr-base: 1.016; }
-.chr.in[data-count="3"][data-pos="19"], .chr.in[data-count="3"][data-pos="81"]{ --chr-base: .988; }
+.chr.in[data-count="3"][data-pos="25"], .chr.in[data-count="3"][data-pos="75"]{ --chr-base: .988; }
 
 /* ————— nameタグ ————— */
 .chr .nametag{
@@ -1405,7 +1406,11 @@ button, a{ -webkit-tap-highlight-color: transparent; }
    ========================================================================== */
 /* 1. 合成レイヤーの分離：ブラーを持つ大きな面を isolate して再描画を局所化 */
 #viewport, #stage, .lay-bg, .lay-chr, .lay-cg, .lay-fx{ contain: paint; }
-#textwrap, #textbox, .ov-panel, .screen-frame, .hub{ contain: layout paint style; }
+/* NOTE: #textwrap には paint を使わない。ネームプレート(#namebox)がウィンドウ上端の
+   外側にはみ出して立つため、paint containment が付いているとプレートが丸ごとクリップされ、
+   「誰が話しているかの表示が消える」バグになる（2026-09 実害確認） */
+#textwrap{ contain: layout style; }
+#textbox, .ov-panel, .screen-frame, .hub{ contain: layout paint style; }
 
 /* 2. オフスクリーン・コンテンツは描画をスキップ（見た目は変わらない） */
 .hub-list, .ov-body, .screen-body, .slots, .cg-grid, .chr-lab, .doc-list{
