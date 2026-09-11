@@ -16,7 +16,7 @@
 |---|---|---|
 | 背景(BG) | 24 | 24 |
 | 立ち絵差分 | 113 | 105（第5章の表情リスト合計。企画書の計数是差 -8） |
-| 名場面CG | 38 | 38 |
+| 名場面CG | 38 | 34（4枚は演出調整で予備退避） |
 | ED専用CG | 14 | 14 |
 | UI／アイテム | 20 | 20 |
 | 未割当バッファ | 約90 | 99（`assets/_buffer/`） |
@@ -166,10 +166,10 @@
 | 134 | `image1/white_134.png` | `assets/cg/cg_05_mie-ryoma_rouka_yuuyake.png` | 三重／両馬／BG05・放課後。夕陽の廊下で打ち明ける横並び構図。 |
 | 135 | `image1/white_135.png` | `assets/cg/cg_06_satou_shadou_scratch.png` | 砂糖（単独）／BG15。三年分の車窓写真をスマホでスクロールする手元。 |
 | 136 | `image2/white_136.png` | `assets/cg/cg_07_satou-mie_miteru_to_iu.png` | 砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。 |
-| 137 | `image1/white_137.png` | `assets/cg/cg_08_rei_tosho_note.png` | 零（単独）／BG09。ノートPCの画面光が横顔を照らす。 |
+| 137 | `image1/white_137.png` | `assets/_buffer/cg_08_rei_tosho_note.png` | 零（単独）／BG09。ノートPCの画面光が横顔を照らす。 |
 | 138 | `image1/white_138.png` | `assets/cg/cg_09_rei-ryoma-mie_daiji.png` | 零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。 |
 | 139 | `image1/white_139.png` | `assets/cg/cg_10_terachi_kami_no_tasoku.png` | 寺地（単独）／BG01・放課後。引き出しの三年分の紙束。 |
-| 140 | `image3/white_140.png` | `assets/cg/cg_11_terachi-ryoma-mie_unsei.png` | 寺地／両馬／三重／BG01。「暴露じゃなくて、ありがとうの会」で頷き合う。 |
+| 140 | `image3/white_140.png` | `assets/_buffer/cg_11_terachi-ryoma-mie_unsei.png` | 寺地／両馬／三重／BG01。「暴露じゃなくて、ありがとうの会」で頷き合う。 |
 | 141 | `image1/white_141.png` | `assets/cg/cg_12_ryoma_butsudan_ushiro.png` | 両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。 |
 | 142 | `image1/white_142.png` | `assets/cg/cg_13_ryoma-mie_narabu_zaseki.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 |
 | 143 | `image2/white_143.png` | `assets/cg/cg_14_kuraishi_shinbun_haikyou.png` | 倉石（単独）／BG10。埃まみれの学校新聞を読んで言葉を失う。 |
@@ -182,8 +182,8 @@
 | 150 | `image3/white_150.png` | `assets/cg/cg_21_ryoma_yohaku_ni_kaku.png` | 両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。 |
 | 151 | `image1/white_151.png` | `assets/cg/cg_22_omoide_no_chizu_kansei.png` | 「思い出の地形図」完成図。画面いっぱいの作品アート。 |
 | 152 | `image2/white_152.png` | `assets/cg/cg_23_katsuya_yuugata_madobe.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 |
-| 153 | `image2/white_153.png` | `assets/cg/cg_24_katsuya_zecchuu.png` | 勝也（単独）／BG13相当。地図を渡され絶句する正面カット。 |
-| 154 | `image3/white_154.png` | `assets/cg/cg_25_mie-katsuya_kiite_ii.png` | 三重／勝也。ミディアムショット、「先生、聞いていいですか」。 |
+| 153 | `image2/white_153.png` | `assets/_buffer/cg_24_katsuya_zecchuu.png` | 勝也（単独）／BG13相当。地図を渡され絶句する正面カット。 |
+| 154 | `image3/white_154.png` | `assets/_buffer/cg_25_mie-katsuya_kiite_ii.png` | 三重／勝也。ミディアムショット、「先生、聞いていいですか」。 |
 | 155 | `image2/white_155.png` | `assets/cg/cg_26_katsuya_chii_shijima.png` | 勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。 |
 | 156 | `image2/white_156.png` | `assets/cg/cg_27_wakaki-inaba_hajimete_chizu.png` | 若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。 |
 | 157 | `image1/white_157.png` | `assets/cg/cg_28_wakaki-katsuya_fukumu.png` | 若き勝也（回想・単独）／BG22。生意気を言った日、俯く。 |

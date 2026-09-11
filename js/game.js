@@ -227,9 +227,14 @@ export class Game {
           d.namebox.classList.add('on');
         }
         d.stage.dataset.spk = isNarration ? '__narration' : (ins.sp || '');
-        d.stage.style.setProperty('--sp', sp.color || '#cbb27c');
-        // textwrap は stage の兄弟要素のため --sp が継承されない → ネームプレート用にこちらへも反映
-        d.textwrap.style.setProperty('--sp', sp.color || '#cbb27c');
+        const spColor = sp.color || '#cbb27c';
+        if (d.stage.dataset.spc !== spColor) {
+          // 話者色は変わったときだけ反映（毎行のスタイル再計算を避ける）
+          d.stage.dataset.spc = spColor;
+          d.stage.style.setProperty('--sp', spColor);
+          // textwrap は stage の兄弟要素のため --sp が継承されない → ネームプレート用にこちらへも反映
+          d.textwrap.style.setProperty('--sp', spColor);
+        }
         d.text.classList.toggle('board', !!sp.board);
         d.textwrap.classList.remove('hidden');
         if (ins.sp) {
@@ -237,6 +242,8 @@ export class Game {
           if (slug) this.stage.applyChr(slug);
         } else this.stage.applyChr(null);
         this.history.push({ sp: ins.sp, tag: ins.tag, txt: ins.txt, scene: this.state.scene });
+        // バックログの保持は上限付き（重さ・メモリ対策。表示は最新100行のみ）
+        if (this.history.length > 300) this.history.splice(0, this.history.length - 300);
         this.countLine(ins);
         this.shell.renderLog();
         this.typing = true;

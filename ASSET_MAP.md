@@ -154,10 +154,10 @@
 | cg05 | white_134.png | `cg_05_mie-ryoma_rouka_yuuhi.png` | 三重／両馬　夕陽の差し込む誰もいない廊下 |
 | cg06 | white_135.png | `cg_06_satou_shamado_sumafo.png` | 砂糖(単独)　三年分の車窓写真をスクロールする手元 |
 | cg07 | white_136.png | `cg_07_satou-mie_mado_ushiro.png` | 砂糖／三重　窓を背にした二人の構図 |
-| cg08 | white_137.png | `cg_08_rei_toshoshitsu_pc.png` | 零(単独)　三年分のデータを整理する横顔 |
+| cg08 | white_137.png | `cg_08_rei_toshoshitsu_pc.png` | 零(単独)　三年分のデータを整理する横顔 ｜ 2026-09-11 演出調整で脚本から外し `assets/_buffer/` へ退避
 | cg09 | white_138.png | `cg_09_rei-ryoma-mie_tsukue_kakomu.png` | 零／両馬／三重　机を囲み「大事だと思うから」と零が |
 | cg10 | white_139.png | `cg_10_terachi_hikidashi_kamitabane.png` | 寺地(単独)　引き出しから三年分の紙束を取り出す |
-| cg11 | white_140.png | `cg_11_terachi-ryoma-mie_unazuku.png` | 寺地／両馬／三重　「ありがとうの会にする」と頷き合う |
+| cg11 | white_140.png | `cg_11_terachi-ryoma-mie_unazuku.png` | 寺地／両馬／三重　「ありがとうの会にする」と頷き合う ｜ 2026-09-11 演出調整で脚本から外し `assets/_buffer/` へ退避
 | cg12 | white_141.png | `cg_12_ryoma_butsudan_ushiro.png` | 両馬(単独)　祖父の遺影の前で正座する後ろ姿 |
 | cg13 | white_142.png | `cg_13_ryoma-mie_butsudan_narabu.png` | 両馬／三重　仏壇の前で並んで座る |
 | cg14 | white_143.png | `cg_14_kuraishi_shoko_shinbun.png` | 倉石(単独)　古い学校新聞を読み言葉を失う |
@@ -170,8 +170,8 @@
 | cg21 | white_150.png | `cg_21_ryoma_temoto_kakikomu.png` | 両馬(手元アップ)　地図の隅に何かを書き足す |
 | cg22 | white_151.png | `cg_22_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図　画面いっぱいの作品アートワーク |
 | cg23 | white_152.png | `cg_23_katsuya_ushirosugata_yuugata.png` | 勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る |
-| cg24 | white_153.png | `cg_24_katsuya_chizu_watasu_zekkyu.png` | 勝也(正面)　地図を渡され絶句する瞬間 |
-| cg25 | white_154.png | `cg_25_mie-katsuya_mediumshot.png` | 三重／勝也　「先生、聞いていいですか」二人の間合い |
+| cg24 | white_153.png | `cg_24_katsuya_chizu_watasu_zekkyu.png` | 勝也(正面)　地図を渡され絶句する瞬間 ｜ 2026-09-11 演出調整で脚本から外し `assets/_buffer/` へ退避
+| cg25 | white_154.png | `cg_25_mie-katsuya_mediumshot.png` | 三重／勝也　「先生、聞いていいですか」二人の間合い ｜ 2026-09-11 演出調整で脚本から外し `assets/_buffer/` へ退避
 | cg26 | white_155.png | `cg_26_katsuya_nagai_chinmoku.png` | 勝也(単独)　いつもの5秒より長い沈黙 |
 | cg27 | white_156.png | `cg_27_wakaki-inaba_yama_ue.png` | 若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調) |
 | cg28 | white_157.png | `cg_28_wakaki_utsumuku.png` | 若き勝也(回想・単独)　生意気な口を利いた日、俯く |
@@ -336,7 +336,7 @@
 
 ---
 
-- 合計: 300スロット (背景24 / 立ち絵105 / 名場面CG 38 / ED用CG 14 / UI 20 / 予備 99)
+- 合計: 300スロット (背景24 / 立ち絵105 / 名場面CG 34（4枚は予備退避） / ED用CG 14 / UI 20 / 予備 103)
 - 企画書§8.2では立ち絵113本と計上されているが、第5章の表情リストを実列挙すると105本のため、
   差分8本は予備スロット(追加表情用バッファ)として確保している(§8.6「約90枚分のバッファ」の一部)。
 - 元 `image1/`, `image2/`, `image3/` フォルダはリネーム後に撤去。

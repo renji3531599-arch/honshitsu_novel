@@ -480,7 +480,7 @@ export class Shell {
     if (!body.dataset.kind || body.dataset.kind !== 'log') return;
     body.innerHTML = '';
     const box = el('div', 'doc-list');
-    this.game.history.slice().reverse().slice(0, 200).reverse().forEach(h => {
+    this.game.history.slice().reverse().slice(0, 100).reverse().forEach(h => {
       const sp = h.sp ? (this.def.speakers[h.sp] || {}) : {};
       box.appendChild(el('div', 'doc', `<h4 style="color:${sp.color || '#cbb27c'}">${esc(sp.name || '───')}${h.tag ? `<span class="tag">${esc(h.tag)}</span>` : ''}</h4><p>${esc(h.txt)}</p>`));
     });

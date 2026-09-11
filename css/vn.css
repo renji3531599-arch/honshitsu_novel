@@ -71,14 +71,17 @@ img{display:block;max-width:100%}
 /* -------------------------------------------------------------- 背景 ------- */
 .lay-bg{z-index:1;background:#0c0a08}
 .lay-bg .art-back,.lay-bg .art-img{position:absolute;inset:0;width:100%;height:100%}
-.lay-bg .art-img{object-fit:cover;mix-blend-mode:multiply;
-  transform:scale(1.03);transition:opacity .55s ease,transform 14s linear}
+.lay-bg .art-img{object-fit:cover;mix-blend-mode:multiply;transform:scale(1.03)}
 .lay-bg .art-back svg{width:100%;height:100%;display:block}
-/* 読み込み済みの新背景へ、旧背景を重ねたまま静かにディゾルブする。 */
+/* 背景切替：新背景（#bgBack/#bgImg）のフェードインと旧背景（.bg-outgoing）の
+   フェードアウトを同時に走らせるクロスフェード。
+   .bg-outgoing 内の複製は id を剥がしてあるのでこの遷移に巻き込まれない。 */
+#bgBack,#bgImg{opacity:1;transition:opacity 1.05s var(--ease-smooth),filter 1.1s var(--ease-soft),transform 18s var(--ease-soft)}
+.lay-bg.bg-enter #bgBack,.lay-bg.bg-enter #bgImg{opacity:0;transition:none}
 .bg-outgoing{position:absolute;inset:0;background:#0c0a08;opacity:1;
-  pointer-events:none;transition:opacity .95s cubic-bezier(.4,0,.2,1)}
+  pointer-events:none;transition:opacity 1.05s var(--ease-smooth)}
 .bg-outgoing.leaving{opacity:0}
-@media (prefers-reduced-motion:reduce){.bg-outgoing{transition:none}}
+@media (prefers-reduced-motion:reduce){#bgBack,#bgImg,.bg-outgoing{transition:none}}
 
 .grade{position:absolute;inset:0;transition:background 1.1s ease,opacity 1.1s ease;mix-blend-mode:soft-light}
 .lightshaft{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;
@@ -100,7 +103,8 @@ img{display:block;max-width:100%}
 .chr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center;
   mix-blend-mode:multiply}
 .chr .sil{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply}
-.chr .sil svg{position:absolute;inset:0;width:100%;height:100%}
+.chr .sil svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .22s var(--ease-soft)}
+.chr.talk .sil svg{transform:translateX(calc(var(--u)*-3))}
 .chr .rim{position:absolute;left:50%;bottom:calc(var(--u)*6);transform:translateX(-50%);
   width:calc(var(--u)*250);height:calc(var(--u)*10);border-radius:50%;
   background:radial-gradient(closest-side,color-mix(in srgb,var(--sp) 45%,transparent),transparent);
@@ -960,8 +964,10 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
 #viewport::after{ border-color: rgba(203,178,124,.18); box-shadow:inset 0 0 0 1px rgba(0,0,0,.45), inset 0 0 40px rgba(203,178,124,.06); }
 /* tickPulse は 4要素が常時 infinite で僅かに脈打つだけのため、見た目を保ったまま停止して軽量化 */
 .tick{ animation:none; border-color:rgba(203,178,124,.38); }
-/* ---- 背景：より滑らかなズームと光 ---- */
-.lay-bg .art-img{ transition: opacity .9s var(--ease-expo), transform 18s var(--ease-soft), filter 1.1s var(--ease-soft); filter:saturate(.98) contrast(1.02); }
+/* ---- 背景：より滑らかなズームと光 ----
+   切替の opacity 遷移は #bgBack/#bgImg（ID指定・クロスフェード）側に一本化。
+   ここでは色調だけを担う。 */
+.lay-bg .art-img{ filter:saturate(.98) contrast(1.02); }
 #stage[data-light="warm"] .lay-bg .art-img{ filter:saturate(1.05) contrast(1.04) brightness(1.03); }
 .grade{ transition: background 1.4s var(--ease-soft), opacity 1.2s var(--ease-soft); }
 .lightshaft{ transition: opacity 1.6s var(--ease-soft), transform 1.6s var(--ease-soft); transform: translateZ(0); }
@@ -975,7 +981,10 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
 .chr .rim{ transition: opacity .6s var(--ease-soft), filter .6s var(--ease-soft); opacity:.9; }
 .chr.talk .rim{ opacity:1; filter: brightness(1.15); background:radial-gradient(closest-side, color-mix(in srgb, var(--sp) 62%, transparent), transparent); }
 @keyframes chrFloat{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-1.5px) } }
-.chr.in{ animation: chrIn .75s var(--ease-spring) both, chrFloat 5.6s ease-in-out 1.2s infinite; }
+/* 呼吸する浮遊アニメは人数が少ないときだけ（群衆シーンでは常時コンポジットの
+   負荷になるため停止。見た目の変化はわずか） */
+.chr.in{ animation: chrIn .75s var(--ease-spring) both; }
+.chr.in[data-count="1"],.chr.in[data-count="2"]{ animation: chrIn .75s var(--ease-spring) both, chrFloat 5.6s ease-in-out 1.2s infinite; }
 /* ---- CG：映画的なフェードとケンバーンズ ---- */
 .lay-cg{ transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo); }
 .lay-cg.on{ animation: cgReveal 1s var(--ease-expo) both; }
