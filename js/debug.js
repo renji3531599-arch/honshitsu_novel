@@ -156,7 +156,7 @@ export function createDebug({ game, shell, store, data, def, stage, dom }){
     if(!sceneId){ toast('jump: sceneId を指定してください'); return; }
     if(!data.scenes[sceneId]){ toast(`不明なシーン: ${sceneId}`); console.warn('[debug] unknown scene', sceneId, Object.keys(data.scenes).slice(0,10)); return; }
     // タイトルが表示中なら一旦ゲームへ
-    try{ dom.title.classList.add('out'); }catch(_){}
+    try{ dom.title.classList.add('out'); shell._titleSleep(); }catch(_){}
     game.goto(sceneId);
     toast(`→ ${sceneId} へジャンプ`);
   };

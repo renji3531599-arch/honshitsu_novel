@@ -301,6 +301,7 @@ export class Shell {
   }
   hideTitle() {
     this.dom.title.classList.add('out');
+    this._titleSleep();
     const tw = this.dom.textwrap;
     tw.classList.remove('hidden');
     tw.classList.remove('enter');
@@ -310,12 +311,20 @@ export class Shell {
   }
   showTitle() {
     this.dom.title.classList.remove('out');
+    this._titleWake();
     this.buildTitle();
     this.revealTitle();
     this.audio.bgm('bgm01', 1.5);
   }
-  toGame() { this.dom.title.classList.add('out'); }
+  toGame() { this.dom.title.classList.add('out'); this._titleSleep(); }
   toTitle() { this.showTitle(); }
+  /* タイトルが画面外のあいだは装飾（塵パーティクル等）の描画を止める ― 見た目は変わらない */
+  _titleSleep() {
+    try { if (this.stage && this.stage.titleFx && this.stage.titleFx.mode) this.stage.titleFx.set(null); } catch (_) {}
+  }
+  _titleWake() {
+    try { if (this.stage && this.stage.titleFx) this.stage.titleFx.set('dust'); } catch (_) {}
+  }
 
   /* --------------------------------------------------------------- 選択肢 -- */
   showChoices(prompt, opts, cb) {
@@ -384,7 +393,7 @@ export class Shell {
     const body = d.screenBody;
     body.innerHTML = '';
     if (chat.kind === 'live') body.appendChild(el('div', 'stream-head', `<span>星と地面とせいちちゃんねる</span><span>視聴者 32人 ／ 非公開配信</span>`));
-    (chat.lines || []).forEach((ln, i) => {
+    (chat.lines || []).forEach((ln) => {
       let node;
       if (ln.kind === 'msg') node = el('div', 'msg', `<span class="who">${esc(ln.who)}</span><div class="bub">${esc(ln.text)}</div>`);
       else if (ln.kind === 'me') node = el('div', 'msg me', `<div class="bub">${esc(ln.text)}</div><span class="who">${esc(ln.who)}</span>`);
@@ -393,11 +402,10 @@ export class Shell {
       else if (ln.kind === 'post') node = el('div', 'post' + (ln.self ? ' self' : ''),
         `<div class="hd"><b>&gt;&gt;${esc(ln.no)}</b><span>${esc(ln.who)}</span></div><div class="bd">${esc(ln.text)}</div>`);
       else node = el('div', 'live-cmt', `<b>${esc(ln.who)}</b>${esc(ln.text)}`);
-      node.style.animation = `ovin .45s ${Math.min(i * 60, 900)}ms ease both`;
+      // 吹き出しはアニメーションなしでそのまま並べる（SEも鳴らさない）
       body.appendChild(node);
     });
     d.screenWrap.classList.add('on');
-    this.audio.se('se_notify');
     const close = () => {
       d.screenWrap.classList.remove('on');
       d.screenWrap.removeEventListener('click', close);
@@ -769,10 +777,10 @@ export class Shell {
         if (got) cell.addEventListener('click', () => {
           // 端末画面はステージ層なので、タイトルから開いた場合はタイトルを一旦退ける
           const fromTitle = !this.dom.title.classList.contains('out');
-          if (fromTitle) this.dom.title.classList.add('out');
+          if (fromTitle) { this.dom.title.classList.add('out'); this._titleSleep(); }
           this.close();
           this.openChat(c, () => {
-            if (fromTitle) this.dom.title.classList.remove('out');
+            if (fromTitle) { this.dom.title.classList.remove('out'); this._titleWake(); }
             this.open('gallery', 'chat');
           });
         });

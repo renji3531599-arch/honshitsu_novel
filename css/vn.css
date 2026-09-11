@@ -132,7 +132,8 @@ img{display:block;max-width:100%}
 .fx-bars{position:absolute;left:0;right:0;height:0;background:#000;transition:height .6s cubic-bezier(.4,0,.2,1)}
 .fx-bars.top{top:0}.fx-bars.bottom{bottom:0}
 #stage[data-bars="on"] .fx-bars{height:11.5%}
-.fx-grain{position:absolute;inset:-20%;opacity:.14;mix-blend-mode:overlay;
+/* 余白は grainMove の移動量(±1.3%)＋回転ぶんだけあれば足りる。140%の巨大レイヤはblend負荷が無駄に重い */
+.fx-grain{position:absolute;inset:-3%;opacity:.14;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
   animation:grain 1.2s steps(4) infinite}
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-2%,1%)}50%{transform:translate(1%,-2%)}75%{transform:translate(-1%,-1%)}100%{transform:translate(0,0)}}
@@ -188,9 +189,9 @@ img{display:block;max-width:100%}
 @keyframes itemglow{0%,60%{box-shadow:0 0 calc(var(--u)*16) rgba(203,178,124,.85)}100%{box-shadow:0 calc(var(--u)*3) calc(var(--u)*10) rgba(0,0,0,.5)}}
 
 /* --------------------------------------------------------- caption -------- */
-.caption{position:absolute;z-index:7;inset:0;display:grid;place-items:center;opacity:0;
-  transition:opacity .8s ease;pointer-events:none;padding:0 calc(var(--u)*60)}
-.caption.on{opacity:1}
+.caption{position:absolute;z-index:7;inset:0;display:grid;place-items:center;opacity:0;visibility:hidden;
+  transition:opacity .8s ease,visibility 0s linear .85s;pointer-events:none;padding:0 calc(var(--u)*60)}
+.caption.on{opacity:1;visibility:visible;transition:opacity .8s ease,visibility 0s linear 0s}
 .caption .memo{font-family:var(--ff-serif);font-size:calc(var(--u)*22);letter-spacing:.1em;
   color:#efe7d4;background:rgba(8,7,6,.55);padding:calc(var(--u)*18) calc(var(--u)*30);
   border-top:1px solid rgba(203,178,124,.5);border-bottom:1px solid rgba(203,178,124,.5);
@@ -205,10 +206,10 @@ img{display:block;max-width:100%}
 .caption .memo.hand span{position:relative;color:#2f2718}
 
 /* --------------------------------------------------------- chapter card --- */
-.card-overlay{position:absolute;inset:0;z-index:14;display:grid;place-items:center;opacity:0;
-  pointer-events:none;transition:opacity .9s ease;overflow:hidden;
+.card-overlay{position:absolute;inset:0;z-index:14;display:grid;place-items:center;opacity:0;visibility:hidden;
+  pointer-events:none;transition:opacity .9s ease,visibility 0s linear .95s;overflow:hidden;
   background:radial-gradient(120% 100% at 50% 50%,rgba(28,24,19,.88),rgba(8,7,6,.97))}
-.card-overlay.on{opacity:1}
+.card-overlay.on{opacity:1;visibility:visible;transition:opacity .9s ease,visibility 0s linear 0s}
 .card-contours{position:absolute;inset:0;opacity:.5}
 .card-contours svg{width:100%;height:100%}
 .card-inner{position:relative;text-align:center;transform:translateY(calc(var(--u)*6));
@@ -233,11 +234,12 @@ img{display:block;max-width:100%}
 .card-overlay.on .card-sub{animation:cardfade 1.1s .8s var(--ease-out) both}
 
 /* --------------------------------------------------------- HUB ------------ */
-.hub{position:absolute;inset:0;z-index:13;opacity:0;pointer-events:none;transition:opacity .6s ease;
+.hub{position:absolute;inset:0;z-index:13;opacity:0;pointer-events:none;
+  transition:opacity .6s ease,visibility 0s linear .65s;visibility:hidden;
   background:linear-gradient(180deg,rgba(10,9,7,.94),rgba(14,12,9,.97));
   padding:calc(var(--u)*48) calc(var(--u)*64) calc(var(--u)*34);
   display:flex;flex-direction:column;gap:calc(var(--u)*16)}
-.hub.on{opacity:1;pointer-events:auto}
+.hub.on{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .6s ease,visibility 0s linear 0s}
 .hub-head{flex:0 0 auto;padding-bottom:calc(var(--u)*12);border-bottom:1px solid rgba(203,178,124,.18)}
 .hub-kicker{font-family:var(--ff-sans);font-size:calc(var(--u)*10);letter-spacing:.42em;color:var(--gold)}
 .hub-title{font-size:calc(var(--u)*28);letter-spacing:.12em;margin:calc(var(--u)*8) 0 calc(var(--u)*4);line-height:1.4}
@@ -274,8 +276,8 @@ img{display:block;max-width:100%}
 
 /* --------------------------------------------------------- 端末風 ---------- */
 .screen-wrap{position:absolute;inset:0;z-index:12;display:grid;place-items:center;opacity:0;pointer-events:none;
-  transition:opacity .45s ease;background:rgba(4,4,3,.55);backdrop-filter:blur(2px);padding:calc(var(--u)*20)}
-.screen-wrap.on{opacity:1;pointer-events:auto}
+  transition:opacity .45s ease,visibility 0s linear .6s;visibility:hidden;background:rgba(4,4,3,.55);backdrop-filter:blur(2px);padding:calc(var(--u)*20)}
+.screen-wrap.on{opacity:1;pointer-events:auto;visibility:visible;transition:opacity .45s ease,visibility 0s linear 0s}
 .screen-frame{width:min(calc(var(--u)*640),100%);max-height:100%;display:flex;flex-direction:column;overflow:hidden;
   background:#12100e;border:1px solid rgba(203,178,124,.3);border-radius:calc(var(--u)*10);
   box-shadow:0 calc(var(--u)*30) calc(var(--u)*70) rgba(0,0,0,.8);transform:translateY(calc(var(--u)*14)) scale(.985);
@@ -698,9 +700,10 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
    ========================================================================== */
 #title{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;
   padding:calc(var(--u)*30) calc(var(--u)*52) calc(var(--u)*24);
-  transition:opacity 1s ease,filter 1s ease,transform 1.1s var(--ease-out);
-  background:#0a0908;overflow:hidden}
-#title.out{opacity:0;pointer-events:none;filter:blur(10px);transform:scale(1.035)}
+  transition:opacity 1s ease,filter 1s ease,transform 1.1s var(--ease-out),visibility 0s linear 0s;
+  background:#0a0908;overflow:hidden;visibility:visible}
+#title.out{opacity:0;pointer-events:none;filter:blur(10px);transform:scale(1.035);visibility:hidden;
+  transition:opacity 1s ease,filter 1s ease,transform 1.1s var(--ease-out),visibility 0s linear 1.2s}
 #titleBg{position:absolute;inset:0;opacity:.9;transition:opacity 2s ease}
 #titleBg.dim{opacity:0}
 #titleBg svg{width:100%;height:100%}
@@ -952,8 +955,8 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
 .lightshaft{ transition: opacity 1.6s var(--ease-soft), transform 1.6s var(--ease-soft); transform: translateZ(0); }
 #stage[data-light="warm"] .lightshaft{ filter: blur(1px) brightness(1.05); }
 /* ---- 立ち絵：ふわりと浮く、呼吸する ---- */
-.chr{ transition: opacity .65s var(--ease-expo), transform .75s var(--ease-spring), filter .7s var(--ease-soft); will-change: transform, opacity, filter; }
-.chr.in{ animation: chrIn .75s var(--ease-spring) both; }
+/* will-change の filter は常時フィルタ面を確保させてしまうだけなので外す（遷移中の見た目は変わらない） */
+.chr{ transition: opacity .65s var(--ease-expo), transform .75s var(--ease-spring), filter .7s var(--ease-soft); will-change: transform, opacity; }
 @keyframes chrIn{ from{ opacity:0; transform: translateY(18px) scale(.965); filter:brightness(.92) } to{ opacity:1; transform: translateY(0) scale(1); filter:brightness(1) } }
 .chr.talk{ filter: brightness(1.06) contrast(1.03) saturate(1.05); transform: translateY(-2px) scale(1.012); }
 .chr.dim{ filter: brightness(.68) saturate(.58) contrast(.96) blur(.15px); transform: translateY(1px) scale(.987); }
@@ -1021,7 +1024,7 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
 .screen-frame{ border-radius:14px; box-shadow: 0 24px 64px rgba(0,0,0,.72), 0 0 0 1px rgba(203,178,124,.18) inset; }
 .screen-wrap.on .screen-frame{ animation: screenIn .6s var(--ease-spring) both; }
 @keyframes screenIn{ from{ opacity:0; transform: translateY(14px) scale(.97); filter: blur(6px) } to{ opacity:1; transform:none; filter: blur(0) } }
-.msg .bub{ backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 2px 10px rgba(0,0,0,.18); transition: transform .25s var(--ease-spring), box-shadow .25s var(--ease-soft); }
+.msg .bub{ box-shadow: 0 2px 10px rgba(0,0,0,.18); transition: transform .25s var(--ease-spring), box-shadow .25s var(--ease-soft); }
 .msg .bub:hover{ transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,.22); }
 /* ---- テキストボックス：ガラスと金の縁取りが呼吸 ---- */
 #textbox{ background: linear-gradient(180deg, rgba(14,12,10,.86) 0%, rgba(10,9,8,.84) 100%); backdrop-filter: blur(14px) saturate(1.08); -webkit-backdrop-filter: blur(14px) saturate(1.08); border-color: rgba(203,178,124,.36); box-shadow: 0 18px 48px rgba(0,0,0,.68), inset 0 1px 0 rgba(255,255,255,.06), inset 0 -1px 0 rgba(0,0,0,.5), var(--shadow-gold); transition: border-color .7s var(--ease-soft), box-shadow .7s var(--ease-soft), transform .7s var(--ease-spring); }
