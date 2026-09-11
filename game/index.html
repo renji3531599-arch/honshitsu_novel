@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>まだ地図の途中で　〜✝本質✝特別編〜</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+
+    <!-- ゲーム画面レイヤー -->
+    <div id="bg-layer">
+      <img id="bg-img" alt="" draggable="false">
+      <div class="bg-tint tint-day"></div>
+      <div class="bg-contour"></div>
+      <div class="bg-vignette"></div>
+    </div>
+
+    <div id="cg-layer-wrap">
+      <div id="cg-layer" style="position:absolute;inset:0;display:none;z-index:20;"></div>
+      <div id="cg-caption" class="cg-caption"></div>
+    </div>
+
+    <div id="dim-layer"></div>
+    <div id="sprite-layer"></div>
+    <div id="flash-layer"></div>
+
+    <!-- 窓の外、五秒 -->
+    <div id="five-overlay">
+      <div class="label">窓の外――</div>
+      <div class="dots"></div>
+    </div>
+
+    <!-- メッセージウィンドウ -->
+    <div id="msg-frame">
+      <div id="name-plate"></div>
+      <div id="msg-text"></div>
+      <div id="next-arrow"></div>
+    </div>
+
+    <!-- 選択肢 -->
+    <div id="choice-box"></div>
+
+    <!-- ネット画面 -->
+    <div id="net-overlay" class="net-overlay"></div>
+
+    <!-- HUB -->
+    <div id="hub-overlay"></div>
+
+    <!-- 章タイトル / 中央テキスト -->
+    <div id="chapter-card">
+      <div class="frame">
+        <div id="chapter-title"></div>
+        <div id="chapter-sub"></div>
+      </div>
+    </div>
+    <div id="center-text"><div class="inner"></div></div>
+
+    <!-- システムメニュー -->
+    <div id="sys-menu">
+      <div class="sys-btn" id="sm-save">SAVE</div>
+      <div class="sys-btn" id="sm-load">LOAD</div>
+      <div class="sys-btn" id="sm-log">LOG</div>
+      <div class="sys-btn" id="sm-auto">AUTO</div>
+      <div class="sys-btn" id="sm-skip">SKIP</div>
+      <div class="sys-btn" id="sm-config">CONFIG</div>
+      <div class="sys-btn" id="sm-title">TITLE</div>
+    </div>
+
+    <div id="skip-indicator">スキップ中 ― CLICK/Ctrl で停止</div>
+    <div id="toast"></div>
+    <div id="debug-panel"></div>
+
+    <!-- バックログ -->
+    <div class="ov" id="ov-log">
+      <div class="panel">
+        <div class="panel-head"><span class="pt">バックログ</span><span class="pc panel-close">✕</span></div>
+        <div class="panel-body" id="log-body"></div>
+      </div>
+    </div>
+
+    <!-- セーブ/ロード -->
+    <div class="ov" id="ov-saveload">
+      <div class="panel">
+        <div class="panel-head"><span class="pt" id="sl-title">セーブ</span><span class="pc panel-close">✕</span></div>
+        <div class="panel-body" id="sl-body"></div>
+      </div>
+    </div>
+
+    <!-- 設定 -->
+    <div class="ov" id="ov-config">
+      <div class="panel">
+        <div class="panel-head"><span class="pt">設定</span><span class="pc panel-close">✕</span></div>
+        <div class="panel-body">
+          <div class="cfg-section">テキスト</div>
+          <div class="cfg-row">
+            <div class="lbl">文字表示速度</div>
+            <input type="range" id="cfg-text" min="0" max="9" step="1" value="3">
+            <div class="val" id="cfg-text-v">3</div>
+          </div>
+          <div class="cfg-row">
+            <div class="lbl">オート待ち時間</div>
+            <input type="range" id="cfg-auto" min="0" max="9" step="1" value="3">
+            <div class="val" id="cfg-auto-v">3</div>
+          </div>
+          <div class="cfg-note">キーボード操作：Enter/空白＝進む　Ctrl＝スキップ　A＝オート　B＝バックログ　Esc＝閉じる</div>
+          <div class="cfg-section">音量</div>
+          <div class="cfg-row">
+            <div class="lbl">BGM</div>
+            <input type="range" id="cfg-bgm" min="0" max="100" step="1" value="50">
+            <div class="val" id="cfg-bgm-v">50%</div>
+          </div>
+          <div class="cfg-row">
+            <div class="lbl">効果音</div>
+            <input type="range" id="cfg-se" min="0" max="100" step="1" value="60">
+            <div class="val" id="cfg-se-v">60%</div>
+          </div>
+          <div class="cfg-section">その他</div>
+          <div class="cfg-toggle" id="cfg-debug"><div class="tg"></div>開発者向け：内部パラメータ（心Point／Flag）を表示する</div>
+          <div class="cfg-note">BGM・効果音はすべてブラウザ内でリアルタイム合成しています（音源ファイル不使用）。音量はお好みで調整してください。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ギャラリー -->
+    <div class="ov" id="ov-gallery">
+      <div class="panel">
+        <div class="panel-head"><span class="pt">ギャラリー</span><span class="pc panel-close">✕</span></div>
+        <div class="panel-body" id="gal-body"></div>
+      </div>
+    </div>
+
+    <!-- ✝本質✝辞典 -->
+    <div class="ov" id="ov-tips">
+      <div class="panel">
+        <div class="panel-head"><span class="pt">✝本質✝辞典</span><span class="pc panel-close">✕</span></div>
+        <div class="panel-body" id="tips-body"></div>
+      </div>
+    </div>
+
+    <!-- ENDリスト -->
+    <div class="ov" id="ov-endlist">
+      <div class="panel">
+        <div class="panel-head"><span class="pt">ENDリスト</span><span class="pc panel-close">✕</span></div>
+        <div class="panel-body" id="endlist-body"></div>
+      </div>
+    </div>
+
+    <!-- CGビューア -->
+    <div id="cg-viewer">
+      <div class="big"><div class="cap"></div></div>
+      <div class="pc">✕</div>
+    </div>
+
+    <!-- クレジット -->
+    <div id="credits-view">
+      <div id="credits-inner">
+        <div class="c-block">
+          <div class="c-role">原作</div>
+          <div class="c-name">桐葉高校理数科三部作<br>「偏差値60の教室から✝本質✝が漏れ出している件について」</div>
+        </div>
+        <div class="c-block">
+          <div class="c-role">本編</div>
+          <div class="c-name">『まだ地図の途中で』　〜✝本質✝特別編〜<br>完全オリジナル・番外編シナリオ</div>
+        </div>
+        <div class="c-block">
+          <div class="c-role">企画・シナリオ</div>
+          <div class="c-name">―――――――</div>
+        </div>
+        <div class="c-block">
+          <div class="c-role">キャラクター原案準拠</div>
+          <div class="c-name">原作登場人物一同</div>
+        </div>
+        <div class="c-block">
+          <div class="c-role">イラスト</div>
+          <div class="c-name">（仮アセット準備中）</div>
+        </div>
+        <div class="c-block">
+          <div class="c-role">プログラム</div>
+          <div class="c-name">ノベルゲームエンジン（専用実装）</div>
+        </div>
+        <div class="c-block">
+          <div class="c-role">音楽・効果音</div>
+          <div class="c-name">リアルタイム合成（WebAudio）</div>
+        </div>
+        <div class="c-block">
+          <div class="c-role">特別協力</div>
+          <div class="c-name">桐葉高校理数科三年B組、および南棟の面々</div>
+        </div>
+        <div class="c-final">
+          そして、窓の外を見ていた、あの人へ。<br><br>
+          卒業しても、✝本質✝は終わらない。<br>
+          地面は、忘れない。<br>
+          ――それだけで、十分だ。
+        </div>
+      </div>
+      <div id="credits-skip">SKIP</div>
+    </div>
+
+    <!-- タイトル画面 -->
+    <div id="title-screen">
+      <div id="title-bg"><img id="title-bg-img" alt="" draggable="false"></div>
+      <div class="bg-tint"></div>
+      <div class="bg-contour"></div>
+      <div id="title-vignette"></div>
+      <div class="petals" id="petals"></div>
+
+      <div id="title-logo">
+        <div class="t-cross">✝ ✝ ✝</div>
+        <div class="t-main">まだ地図の<br>途中で</div>
+        <div class="t-sub">〜✝本質✝特別編〜</div>
+        <div class="t-copy">桐葉高校理数科三年B組・卒業前ノベルゲーム<br>原作：『偏差値60の教室から✝本質✝が漏れ出している件について』</div>
+        <div class="plate" id="title-logo-plate"></div>
+      </div>
+
+      <div id="title-menu">
+        <div class="title-btn" id="btn-new">はじめから<span class="b-cross">✝</span></div>
+        <div class="title-btn" id="btn-continue">つづきから<span class="b-cross">✝</span></div>
+        <div class="title-btn" id="btn-gallery">ギャラリー<span class="b-cross">✝</span></div>
+        <div class="title-btn" id="btn-tips">✝本質✝辞典<span class="b-cross">✝</span></div>
+        <div class="title-btn" id="btn-endlist">ENDリスト<span class="b-cross">✝</span></div>
+        <div class="title-btn" id="btn-config">設定<span class="b-cross">✝</span></div>
+        <div class="title-btn bonus" id="btn-bonus" style="display:none">BONUS EXTRA<span class="b-cross">✝</span></div>
+      </div>
+
+      <div id="title-footer">
+        この作品は原作小説の世界観を土台にした非公式オリジナル番外編です。<br>
+        卒業しても、✝本質✝は終わらない。地面は、忘れない。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="loading">
+  <div class="ld-cross">✝ ✝ ✝</div>
+  <div class="ld-text">地図を広げています……</div>
+</div>
+
+<script src="js/assets_manifest.js"></script>
+<script src="js/characters.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/script_00_common.js"></script>
+<script src="js/script_01_routes_abc.js"></script>
+<script src="js/script_02_routes_cef.js"></script>
+<script src="js/script_03_climax.js"></script>
+<script src="js/script_04_endings.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // タイトルロゴのプレート (ui01) とタイトル背景の初期化
+  window.addEventListener("DOMContentLoaded", () => {
+    const MAN = window.ASSET_MANIFEST;
+    const plate = document.getElementById("title-logo-plate");
+    plate.style.backgroundImage = `url('assets/img/${MAN.ui.ui01.file}')`;
+    // タイトル画面表示 (エンジン初期化後)
+    setTimeout(() => { try { window.__engine.showTitle(); } catch(e) {} }, 300);
+  });
+</script>
+</body>
+</html>
