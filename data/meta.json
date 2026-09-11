@@ -1,0 +1,498 @@
+{
+  "title": "まだ地図の途中で",
+  "subtitle": "〜✝本質✝特別編〜",
+  "speakers": {
+    "両馬": {
+      "name": "両馬二郎",
+      "kana": "りょうま・じろう",
+      "color": "#e2853f",
+      "sprite": "ryoma"
+    },
+    "三重": {
+      "name": "三重県臣",
+      "kana": "みえ・けんしん",
+      "color": "#7fa9d8",
+      "sprite": "mie"
+    },
+    "勝也": {
+      "name": "塀勝也",
+      "kana": "へい・かつや／通称ヘイカツ",
+      "color": "#cbb27c",
+      "sprite": "katsuya"
+    },
+    "寺地": {
+      "name": "寺地星",
+      "kana": "てらち・せい",
+      "color": "#9ec98f",
+      "sprite": "terachi"
+    },
+    "砂糖": {
+      "name": "砂糖東洋",
+      "kana": "さとう・とうよう",
+      "color": "#7fd0c8",
+      "sprite": "satou"
+    },
+    "零": {
+      "name": "数理零",
+      "kana": "すうり・れい",
+      "color": "#d3d9e8",
+      "sprite": "rei"
+    },
+    "伊崎": {
+      "name": "伊崎",
+      "kana": "いざき",
+      "color": "#dcbd92",
+      "sprite": "izaki"
+    },
+    "伊豆見": {
+      "name": "伊豆見",
+      "kana": "いずみ",
+      "color": "#e0cba2",
+      "sprite": "izumi"
+    },
+    "召野": {
+      "name": "召野カイト",
+      "kana": "めしの・かいと",
+      "color": "#e2a8bc",
+      "sprite": "meshino"
+    },
+    "倉石": {
+      "name": "倉石暁",
+      "kana": "くらいし・あきら",
+      "color": "#d6d46e",
+      "sprite": "kuraishi"
+    },
+    "二見": {
+      "name": "二見玲子",
+      "kana": "ふたみ・れいこ",
+      "color": "#b9a2cc",
+      "sprite": "futami"
+    },
+    "櫻": {
+      "name": "櫻優",
+      "kana": "さくら・ゆう",
+      "color": "#a8c8e0",
+      "sprite": "sakura"
+    },
+    "三峰": {
+      "name": "三峰瑠衣",
+      "kana": "みつみね・るい",
+      "color": "#e2b79e",
+      "sprite": "mitsumine"
+    },
+    "内藤": {
+      "name": "内藤蘭",
+      "kana": "ないとう・らん",
+      "color": "#b6d8c6",
+      "sprite": "naitou"
+    },
+    "稲葉": {
+      "name": "稲葉悌二",
+      "kana": "いなば・ていじ／回想の声",
+      "color": "#c0a888",
+      "sprite": "inaba",
+      "voice": true
+    },
+    "若き勝也": {
+      "name": "若き日の勝也",
+      "kana": "わかき・かつや／回想の声",
+      "color": "#c0a888",
+      "sprite": "wakaki-katsuya",
+      "voice": true
+    },
+    "489": {
+      "name": "489 名無しの地形図好き",
+      "kana": "匿名掲示板 住人",
+      "color": "#9fb0a5",
+      "board": true
+    },
+    "フェイカツ": {
+      "name": "フェイカツ",
+      "kana": "両馬の裏アカウント",
+      "color": "#c9a06c",
+      "board": true
+    },
+    "生徒": {
+      "name": "生徒",
+      "color": "#b6ad9a"
+    },
+    "ナ": {
+      "name": "",
+      "color": "#ece2cd"
+    },
+    "黒板": {
+      "name": "黒板",
+      "kana": "KOKUHAKU",
+      "color": "#dcecdf",
+      "sprite": null,
+      "board": true
+    }
+  },
+  "routes": [
+    {
+      "key": "satou",
+      "no": "A",
+      "title": "砂糖編",
+      "sub": "窓の外の続き",
+      "scene": "a1",
+      "who": "砂糖東洋",
+      "blurb": "「見てない」と言い張ってきた男に、三年分の車窓写真を頼む。"
+    },
+    {
+      "key": "rei",
+      "no": "B",
+      "title": "零編",
+      "sub": "面白いの向こう側",
+      "scene": "b1",
+      "who": "数理零",
+      "blurb": "詮索とお礼の違いを、学年首席に真っ向から問われる。"
+    },
+    {
+      "key": "terachi",
+      "no": "C",
+      "title": "寺地編",
+      "sub": "最後の朗読、まだ早いけど",
+      "scene": "c1",
+      "who": "寺地星",
+      "blurb": "炎上を知った配信者に、読み上げ役を頼む。"
+    },
+    {
+      "key": "ryoma",
+      "no": "D",
+      "title": "両馬編",
+      "sub": "祖父と✝本質✝",
+      "scene": "d1",
+      "who": "両馬二郎",
+      "blurb": "✝本質✝が始まった理由を、仏壇の前で聞く。"
+    },
+    {
+      "key": "minamitou",
+      "no": "E",
+      "title": "南棟編",
+      "sub": "境界線の向こう側",
+      "scene": "e1",
+      "who": "三峰・櫻・内藤",
+      "blurb": "国境の向こうに、協力を頼みに行く。"
+    },
+    {
+      "key": "meshino",
+      "no": "F",
+      "title": "召野＋倉石編",
+      "sub": "調査と応援",
+      "scene": "f1",
+      "who": "召野カイト／倉石暁",
+      "blurb": "二見先生の手がかりと、書庫の記録を拾い集める。"
+    }
+  ],
+  "flags": [
+    {
+      "key": "flag_mie",
+      "label": "三重",
+      "desc": "写真を独り占めせず、誠実に向き合ったか"
+    },
+    {
+      "key": "flag_satou",
+      "label": "砂糖",
+      "desc": "「見てた」を素直に認めさせられたか"
+    },
+    {
+      "key": "flag_rei",
+      "label": "零",
+      "desc": "「詮索とお礼の違い」を共有できたか"
+    },
+    {
+      "key": "flag_terachi",
+      "label": "寺地",
+      "desc": "暴露でなく\"ありがとうの会\"にすると合意できたか"
+    },
+    {
+      "key": "flag_ryoma",
+      "label": "両馬",
+      "desc": "祖父のエピソードを本人の言葉で話してもらえたか"
+    },
+    {
+      "key": "flag_minamitou",
+      "label": "南棟",
+      "desc": "三峰・櫻・内藤を他人事にせず巻き込めたか"
+    },
+    {
+      "key": "flag_meshino",
+      "label": "召野＋倉石",
+      "desc": "ヒントと書庫調査、両方を丁寧に扱えたか"
+    },
+    {
+      "key": "flag_izaki",
+      "label": "伊崎＋伊豆見",
+      "desc": "当日の段取りを破綻なくまとめられたか"
+    },
+    {
+      "key": "flag_kuraishi",
+      "who": "倉石暁",
+      "label": "倉石の記録",
+      "color": "#7f8ea3",
+      "desc": "書庫の記録を一緒に掘り、自分の言葉で語れるようになったか。"
+    }
+  ],
+  "counters": [
+    {
+      "key": "ryoma_honshitsu",
+      "label": "両馬二郎 ―― 「✝本質✝」投下回数",
+      "unit": "回"
+    },
+    {
+      "key": "mie_ha",
+      "label": "三重県臣 ―― 「は？」発言回数",
+      "unit": "回"
+    },
+    {
+      "key": "satou_urusai",
+      "label": "砂糖東洋 ―― 「うるさい」発言回数",
+      "unit": "回"
+    },
+    {
+      "key": "rei_omoshiro",
+      "label": "数理零 ―― 「面白い」発言回数",
+      "unit": "回"
+    },
+    {
+      "key": "kuraishi_kiroku",
+      "label": "倉石暁 ―― 「記録です」発言回数",
+      "unit": "回"
+    },
+    {
+      "key": "terachi_freeze",
+      "label": "寺地星 ―― フリーズ（平均長:長め）",
+      "unit": "回"
+    },
+    {
+      "key": "katsuya_gobyou",
+      "label": "塀勝也 ―― 窓の外で黙った時間",
+      "unit": "秒"
+    },
+    {
+      "key": "izumi_hen",
+      "label": "伊豆見 ―― 「変な感じ」",
+      "unit": "回"
+    },
+    {
+      "key": "meshino_eigo",
+      "label": "召野カイト ―― 英語が混じる",
+      "unit": "回"
+    },
+    {
+      "key": "naitou_sukoshi",
+      "label": "内藤蘭 ―― 少し笑う",
+      "unit": "回"
+    },
+    {
+      "key": "corn",
+      "label": "コーンスープ（北棟自販機・在庫）",
+      "unit": "本"
+    },
+    {
+      "key": "satou_mita",
+      "label": "砂糖東洋 ―― 「見てた」を口にした",
+      "unit": "回"
+    },
+    {
+      "key": "rei_daiji",
+      "label": "数理零 ―― 「面白い」以外で肯定した",
+      "unit": "回"
+    }
+  ],
+  "items": {
+    "chizutsutsu": {
+      "label": "地図筒",
+      "icon": "ui10_icon_chizutsutsu",
+      "desc": "勝也の私物。古いものが下、新しいものが上。地面と同じ順で積まれている。"
+    },
+    "ko_shashin": {
+      "label": "古写真",
+      "icon": "ui09_icon_ko_shashin",
+      "desc": "山の上で地形図を広げる若い勝也と、見知らぬ大人。裏に万年筆で「稲葉先生と、はじめての地形図」。"
+    },
+    "nenkan": {
+      "label": "✝本質✝年鑑 三年生編",
+      "icon": "ui06_icon_honshitsu_nenkan",
+      "desc": "倉石暁が編纂中。未完成のまま卒業するのが完成形、とのこと。"
+    },
+    "guide": {
+      "label": "✝本質✝入門ガイド",
+      "icon": "ui07_icon_honshitsu_guide",
+      "desc": "A4冊子八ページ。表紙にも裏表紙にも✝。"
+    },
+    "shinbun": {
+      "label": "古い学校新聞",
+      "icon": "ui08_icon_gakko_shinbun",
+      "desc": "地学部活動記録と、小さな追悼記事。稲葉悌二の名前がある。"
+    },
+    "kami": {
+      "label": "紙とマジックペン",
+      "icon": "ui11_icon_kami_magicpen",
+      "desc": "寺地の配信道具。三年分、捨てずに溜めてあった。"
+    },
+    "omoide_chizu": {
+      "label": "思い出の地形図",
+      "icon": "ui12_icon_omoide_chizu",
+      "desc": "三年間を等高線代わりに描いた手作り地図。両馬が隅に何もかも書き足している。"
+    },
+    "corn": {
+      "label": "コーンスープ缶",
+      "icon": "ui20_icon_corn_soup",
+      "desc": "北棟の自販機。半年と三日の不在を経て帰還した実績を持つ。"
+    },
+    "shoujo": {
+      "label": "卒業証書",
+      "icon": "ui19_icon_sotsugyou_shousho",
+      "desc": "四十人分。名字の五十音順で、三年間変わらなかった席順と同じ匂いがする。"
+    },
+    "sotsugyou": {
+      "label": "卒業証書",
+      "icon": "ui19",
+      "desc": "式終了後に配布。中身は全員同じだが、三重の它だけ封筒の角が潰れている。"
+    }
+  },
+  "endings": {
+    "true": {
+      "label": "地面は、忘れない。",
+      "tier": "TRUE END",
+      "color": "#e8c98a",
+      "cg": "cg_end_true",
+      "cond": "心Point 24以上 ＋ 主要Flag 6種以上"
+    },
+    "good_mie": {
+      "label": "否定の向こう側",
+      "tier": "GOOD END ― 三重編",
+      "color": "#7fa9d8",
+      "cg": "cg_end_mie",
+      "cond": "FLAG_MIE最高 ＋ 心Point 18以上"
+    },
+    "good_satou": {
+      "label": "見ている、それだけで",
+      "tier": "GOOD END ― 砂糖編",
+      "color": "#7fd0c8",
+      "cg": "cg_end_satou",
+      "cond": "FLAG_SATOU最高 ＋ 心Point 18以上"
+    },
+    "good_rei": {
+      "label": "面白いを仕事にする",
+      "tier": "GOOD END ― 零編",
+      "color": "#d3d9e8",
+      "cg": "cg_end_rei",
+      "cond": "FLAG_REI最高 ＋ 心Point 18以上"
+    },
+    "good_terachi": {
+      "label": "配信は続く",
+      "tier": "GOOD END ― 寺地編",
+      "color": "#9ec98f",
+      "cg": "cg_end_terachi",
+      "cond": "FLAG_TERACHI最高 ＋ 心Point 18以上"
+    },
+    "good_ryoma": {
+      "label": "✝本質✝、その後",
+      "tier": "GOOD END ― 両馬編",
+      "color": "#e2853f",
+      "cg": "cg_end_ryoma",
+      "cond": "FLAG_RYOMA最高 ＋ 心Point 18以上"
+    },
+    "good_izaki": {
+      "label": "隣にいた二人、それぞれの歩幅",
+      "tier": "GOOD END ― 伊崎＋伊豆見編",
+      "color": "#e0cba2",
+      "cg": "cg_end_izaki_izumi",
+      "cond": "FLAG_IZAKI_IZUMI最高 ＋ 心Point 18以上"
+    },
+    "good_meshino": {
+      "label": "言葉を届ける",
+      "tier": "GOOD END ― 召野編",
+      "color": "#e2a8bc",
+      "cg": "cg_end_meshino",
+      "cond": "FLAG_MESHINO_KURAISHI（召野側）＋ 心Point 18以上"
+    },
+    "good_kuraishi": {
+      "label": "年鑑、完結せず",
+      "tier": "GOOD END ― 倉石編",
+      "color": "#d6d46e",
+      "cg": "cg_end_kuraishi",
+      "cond": "FLAG_MESHINO_KURAISHI（倉石側）＋ 心Point 18以上"
+    },
+    "good_minamitou": {
+      "label": "境界のない春",
+      "tier": "GOOD END ― 南棟編",
+      "color": "#a8c8e0",
+      "cg": "cg_end_minamitou",
+      "cond": "FLAG_MINAMITOU最高 ＋ 心Point 18以上"
+    },
+    "normal": {
+      "label": "見えないけど、ある",
+      "tier": "NORMAL END",
+      "color": "#b6ad9a",
+      "cg": "cg_end_normal",
+      "cond": "心Point 12〜23（突出Flagなし）"
+    },
+    "bittersweet": {
+      "label": "こぼれた地図",
+      "tier": "BITTERSWEET END",
+      "color": "#a58aa0",
+      "cg": "cg_end_bittersweet",
+      "cond": "心Point 11以下"
+    },
+    "comedy": {
+      "label": "原✝本質✝、完全体",
+      "tier": "COMEDY SECRET END",
+      "color": "#f0c060",
+      "cg": "cg_end_comedy",
+      "cond": "FLAG_RYOMA最大＋倉石の茶化し全選択＋心Point 12〜17"
+    },
+    "bonus": {
+      "label": "また、この教室で",
+      "tier": "BONUS EXTRA",
+      "color": "#ffe6a8",
+      "cg": "cg_end_bonus",
+      "cond": "他13種のエンディング回収後にタイトル画面へ出現"
+    }
+  },
+  "bgmLabels": {
+    "bgm01": "プロローグ／日常回想ダイジェスト",
+    "bgm02": "教室の日常（コメディ基調）",
+    "bgm03": "✝本質✝ギャグシーン専用",
+    "bgm04": "地図保管庫、写真発見",
+    "bgm05": "三重の独白・思案",
+    "bgm06": "日常の中の真剣な会話",
+    "bgm07": "砂糖編・車窓の回想",
+    "bgm08": "零編・データと向き合う",
+    "bgm09": "寺地編・配信シーン",
+    "bgm10": "両馬編・祖父の思い出",
+    "bgm11": "南棟編・境界を越える",
+    "bgm12": "召野＋倉石編",
+    "bgm13": "収束章「地図を作る夜」",
+    "bgm14": "クライマックス前半",
+    "bgm15": "クライマックス後半（主題曲）",
+    "bgm16": "寺地の最後の朗読",
+    "bgm17": "エンディング共通（卒業式）",
+    "bgm18": "TRUE END専用",
+    "bgm19": "各GOOD END共通",
+    "bgm20": "NORMAL END",
+    "bgm21": "BITTERSWEET END",
+    "bgm22": "COMEDY SECRET END",
+    "bgm23": "BONUS EXTRA（同窓会）",
+    "bgm24": " スタッフロール"
+  },
+  "seLabels": {
+    "se01": "ページめくり",
+    "se02": "通知音",
+    "se03": "写真のシャッター",
+    "se04": "教室のざわめき",
+    "se05": "チャイム",
+    "se06": "スマホ通知（LINE）",
+    "se07": "マジックペンで紙に書く音",
+    "se08": "窓を開ける音",
+    "se09": "桜が舞う音（環境音）",
+    "se10": "拍手",
+    "se11": "涙をこらえる息づかい",
+    "se12": "地図を広げる音",
+    "se13": "万年筆の音",
+    "se14": "体育館のざわめき",
+    "se15": "卒業式の鐘"
+  }
+}
