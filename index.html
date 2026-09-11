@@ -1,213 +1,177 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>まだ地図の途中で 〜✝本質✝特別編〜 | Visual Novel</title>
-<meta name="description" content="桐葉高校理数科三年B組、卒業前ノベルゲーム『まだ地図の途中で』。地図の筒からこぼれた一枚の写真が、先生と生徒の三年間を最後に繋ぐ。">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>まだ地図の途中で 〜✝本質✝特別編〜</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div id="app">
-  <!-- Viewport / Stage (game) -->
-  <div id="viewport">
-    <div id="stage" role="application" aria-label="まだ地図の途中で">
-      <div id="bg-layer">
-        <div id="bg-placeholder"></div>
-        <img id="bg-img" src="assets/bg/bg_sakura_namiki.png" alt="背景" draggable="false">
-        <div id="bg-overlay"></div>
-        <div id="film-grain"></div>
-        <div id="vignette"></div>
-        <div id="bg-label">BG: --</div>
-        <div id="placeholder-watermark">仮素材 — 製品版では描き下ろしに差し替え</div>
+
+  <!-- ============ ゲーム本体 ============ -->
+  <div id="game">
+    <div id="stage">
+      <div id="mood-layer"></div>
+      <div id="sprites"></div>
+      <div id="grain"></div>
+      <div id="vignette"></div>
+      <div id="cg-layer"></div>
+      <div id="plate"></div>
+      <div id="click-catcher"></div>
+
+      <!-- テキストウィンドウ -->
+      <div id="textbox">
+        <div id="nameplate"></div>
+        <div id="maintext"></div>
+        <div id="next-arrow">▼</div>
       </div>
-      <div id="cg-layer">
-        <div id="cg-frame">
-          <img id="cg-img" src="assets/cg/cg_02.png" alt="CG">
-          <div id="cg-label-badge">cg_02</div>
-          <div id="cg-caption">EVENT CG — 専用一枚絵</div>
+
+      <!-- コントロール -->
+      <div id="control-bar">
+        <button id="btn-auto">AUTO</button>
+        <button id="btn-skip">SKIP</button>
+        <button id="btn-log">LOG</button>
+        <button id="btn-save">SAVE</button>
+        <button id="btn-load">LOAD</button>
+        <button id="btn-menu">MENU</button>
+      </div>
+
+      <!-- 選択肢 -->
+      <div id="choices"></div>
+
+      <!-- 章タイトルカード -->
+      <div id="chapter-card"></div>
+
+      <!-- 掲示板/LINE -->
+      <div id="board-overlay"></div>
+
+      <!-- 心ポイント -->
+      <div id="heart-pulse"></div>
+
+      <!-- HUB -->
+      <div id="hub-screen"></div>
+
+      <!-- エンドカード -->
+      <div id="end-card"></div>
+
+      <!-- スタッフロール -->
+      <div id="staffroll"></div>
+    </div>
+  </div>
+
+  <!-- ============ タイトル画面 ============ -->
+  <div id="title-screen" class="screen title-screen">
+    <div class="title-contour"></div>
+    <div class="title-inner">
+      <div class="title-kasumi">桐葉高校理数科三年B組・卒業前　ノベルゲーム</div>
+      <h1 class="title-logo">まだ地図の<span class="tl-accent">途中</span>で</h1>
+      <div class="title-sub">〜✝本質✝特別編〜</div>
+      <div class="title-cross">✝</div>
+      <div class="title-menu">
+        <button id="btn-new" class="tm-btn">―　はじめから</button>
+        <button id="btn-continue" class="tm-btn">―　つづきから</button>
+        <button id="btn-gallery" class="tm-btn">―　ギャラリー</button>
+        <button id="btn-endlist" class="tm-btn">―　エンディング</button>
+        <button id="btn-dict" class="tm-btn">―　✝本質✝辞典</button>
+        <button id="btn-config" class="tm-btn">―　設定</button>
+        <button id="btn-bonus" class="tm-btn bonus" style="display:none">―　また、この教室で</button>
+      </div>
+      <div class="title-foot">地面は、忘れない。／ プレイ時間目安：本編6時間超・仮画像仕様</div>
+    </div>
+  </div>
+
+  <!-- ============ ログ ============ -->
+  <div id="log-screen" class="screen modal">
+    <div class="modal-box wide">
+      <div class="modal-head"><span>バックログ</span><button class="close-btn" data-close>×　閉じる</button></div>
+      <div id="log-entries" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ============ セーブ/ロード ============ -->
+  <div id="save-screen" class="screen modal">
+    <div class="modal-box">
+      <div class="modal-head"><span id="save-title">セーブ</span><button class="close-btn" data-close>×　閉じる</button></div>
+      <div id="save-slots" class="modal-body slots"></div>
+    </div>
+  </div>
+
+  <!-- ============ 設定 ============ -->
+  <div id="config-screen" class="screen modal">
+    <div class="modal-box">
+      <div class="modal-head"><span>設定</span><button class="close-btn" data-close>×　閉じる</button></div>
+      <div class="modal-body config-body">
+        <div class="cfg-row"><label>文字表示速度</label><input type="range" id="cfg-speed" min="4" max="70" step="1"><span id="speed-val" class="cfg-val"></span></div>
+        <div class="cfg-row"><label>オート速度</label><input type="range" id="cfg-auto" min="0.4" max="4" step="0.1"><span id="auto-val" class="cfg-val"></span></div>
+        <div class="cfg-row"><label>BGM音量</label><input type="range" id="cfg-bgm" min="0" max="1" step="0.05"></div>
+        <div class="cfg-row"><label>SE音量</label><input type="range" id="cfg-se" min="0" max="1" step="0.05"></div>
+        <div class="cfg-row"><label>仮画像演出スタイル</label>
+          <label class="cfg-check"><input type="checkbox" id="cfg-ph">白紙アセットを「舞台札スタイル」で演出する<br><small>（本番画像を assets/ に同名で入れると自動で切り替わります）</small></label>
         </div>
+        <div class="cfg-note">操作：クリック/Space=進む　Ctrl=スキップ　A=オート　L=ログ　Esc=メニュー</div>
       </div>
-      <div id="chara-layer"></div>
-      <div id="top-bar">
-        <div id="chapter-title">Prologue — 三度目の春、まだ来ない</div>
-        <div id="bgm-indicator" style="display:none"><span class="dot"></span><span id="bgm-text">♪ bgm01</span></div>
-      </div>
-      <div id="choice-layer" class="hidden">
-        <div id="choice-box">
-          <div id="choice-title">選択肢</div>
-          <div id="choice-list"></div>
-        </div>
-      </div>
-      <div id="dialogue-box" role="complementary" aria-live="polite">
-        <div id="name-plate" class="empty">
-          <div id="speaker-icon" class="speaker-icon">三</div>
-          <div>
-            <div id="speaker-name"></div>
-            <div id="speaker-ruby"></div>
-          </div>
-        </div>
-        <div id="text-box">
-          <p id="dialogue-text">タイトル画面の「はじめる」から物語が始まります。クリックまたは Enter / Space で進行。ESCでメニュー。</p>
-          <div id="next-indicator" title="クリックで次へ">▼</div>
-        </div>
-        <div id="dialogue-controls">
-          <div class="ctrl-left">
-            <button class="ctrl-btn" id="btn-auto">AUTO</button>
-            <button class="ctrl-btn" id="btn-skip">SKIP</button>
-            <button class="ctrl-btn" id="btn-log">LOG</button>
-          </div>
-          <div class="ctrl-right">
-            <button class="ctrl-btn" id="btn-save">SAVE</button>
-            <button class="ctrl-btn" id="btn-load">LOAD</button>
-            <button class="ctrl-btn" id="btn-config">CONFIG</button>
-            <button class="ctrl-btn" id="btn-gallery">GALLERY</button>
-            <button class="ctrl-btn" id="btn-tips">TIPS</button>
-            <button class="ctrl-btn" id="btn-title">TITLE</button>
-          </div>
-        </div>
-      </div>
-      <div id="hub-screen" class="hidden">
-        <div class="hub-header">
-          <div class="hub-title">見送りの準備、始めます — 好きな順番で 6ルートを選択</div>
-          <div id="hub-progress" class="hub-progress">0 / 6 ルート完了</div>
-        </div>
-        <div id="hub-map" class="hub-map"></div>
-        <div class="hub-actions">
-          <button class="hub-btn" id="hub-close">収束章へ進む（全ルート完了後に開放）</button>
-          <button class="hub-btn" data-close>閉じる</button>
-        </div>
-      </div>
-      <div id="history-screen" class="overlay-screen hidden">
-        <div class="overlay-header"><h2>BACKLOG — 履歴</h2><button class="overlay-close" data-close>×</button></div>
-        <div id="history-body" class="history-body"></div>
-      </div>
-      <div id="save-screen" class="overlay-screen hidden">
-        <div class="overlay-header"><h2>SAVE — セーブ</h2><button class="overlay-close" data-close>×</button></div>
-        <div id="save-grid" class="save-grid"></div>
-      </div>
-      <div id="load-screen" class="overlay-screen hidden">
-        <div class="overlay-header"><h2>LOAD — ロード</h2><button class="overlay-close" data-close>×</button></div>
-        <div id="load-grid" class="save-grid"></div>
-      </div>
-      <div id="config-screen" class="overlay-screen hidden">
-        <div class="overlay-header"><h2>CONFIG — 設定</h2><button class="overlay-close" data-close>×</button></div>
-        <div class="config-body">
-          <div class="config-group">
-            <h3>テキスト</h3>
-            <div class="config-row"><span class="config-label">文字表示速度</span>
-              <div class="config-control"><input id="cfg-text-speed" class="range" type="range" min="1" max="50" value="30"><span id="cfg-text-speed-val" style="font-size:11px;min-width:20px;text-align:right">30</span></div>
-            </div>
-            <div class="config-row"><span class="config-label">オート速度</span>
-              <div class="config-control"><input id="cfg-auto-speed" class="range" type="range" min="1" max="80" value="40"><span id="cfg-auto-speed-val" style="font-size:11px;min-width:20px;text-align:right">40</span></div>
-            </div>
-            <div class="config-row"><span class="config-label">既読スキップ</span><span class="config-label" style="font-size:10px;opacity:0.7">SKIPボタンで既読テキストのみ高速化します</span></div>
-          </div>
-          <div class="config-group">
-            <h3>サウンド（表示のみ・仮）</h3>
-            <div class="config-row"><span class="config-label">BGM 音量</span>
-              <div class="config-control"><input id="cfg-bgm-vol" class="range" type="range" min="0" max="100" value="72"><span id="cfg-bgm-vol-val" style="font-size:11px;min-width:20px;text-align:right">72</span></div>
-            </div>
-            <div class="config-row"><span class="config-label">SE 音量</span>
-              <div class="config-control"><input class="range" type="range" min="0" max="100" value="80" disabled><span style="font-size:11px;opacity:0.5">80</span></div>
-            </div>
-            <div style="font-size:11px;line-height:1.7;color:rgba(255,255,255,0.65);margin-top:8px">
-              本作はシナリオ企画書準拠のBGMキュー24曲・SE15種を想定しています。<br>
-              右上の「♪」表示で現在再生中のトラックを確認できます。仮素材では実際の音声の代わりにテキスト表示と軽い効果音で演出しています。<br>
-              製品版では bgm01〜bgm24 / se01〜se15 を assets/bgm, assets/se に配置してください。
-            </div>
-          </div>
-          <div class="config-group">
-            <h3>情報</h3>
-            <div style="font-size:11.5px;line-height:1.8;color:rgba(255,255,255,0.8)">
-              <strong>『まだ地図の途中で 〜✝本質✝特別編〜』</strong><br>
-              原作: 「偏差値60の教室から✝本質✝が漏れ出している件について」（桐葉高校理数科三部作）<br>
-              本特別編は完全オリジナルのIFストーリーです。原作二学期編以降とは独立しています。<br>
-              プレイ目安: 6〜9時間（フルコンプ） / 本デモは主要ルートをダイジェストで約20〜40分<br>
-              エンジン: Vanilla JS Visual Novel Engine（セーブ/ロード/既読/オート/スキップ/バックログ/ギャラリー/TIPS 対応）<br>
-              画像: 仮素材300枚を企画書準拠の命名（bg_* / chr_* / cg_* / ui_*）にリネームして使用。仮素材の中身はダミー（白）ですが、製品版では描き下ろしに差し替え可能です。
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="gallery-screen" class="overlay-screen hidden">
-        <div class="overlay-header">
-          <h2>GALLERY — <span id="gallery-count">0 / 0 開放</span></h2>
-          <div style="display:flex;gap:8px;align-items:center">
-            <select id="gallery-filter" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);color:var(--paper);padding:6px 8px;border-radius:999px;font-size:11px">
-              <option value="all">ALL</option>
-              <option value="cg">名場面CG (38)</option>
-              <option value="ed">ED CG (14)</option>
-            </select>
-            <button class="overlay-close" data-close>×</button>
-          </div>
-        </div>
+    </div>
+  </div>
+
+  <!-- ============ ギャラリー ============ -->
+  <div id="gallery-screen" class="screen modal">
+    <div class="modal-box wide">
+      <div class="modal-head"><span>ギャラリー</span><button class="close-btn" data-close>×　閉じる</button></div>
+      <div class="modal-body">
         <div id="gallery-grid" class="gallery-grid"></div>
       </div>
-      <div id="tips-screen" class="overlay-screen hidden">
-        <div class="overlay-header"><h2>TIPS — ✝本質✝辞典</h2><button class="overlay-close" data-close>×</button></div>
-        <div id="tips-body" class="history-body"></div>
-      </div>
-      <div id="ending-screen" class="hidden">
-        <div class="ending-card">
-          <div class="ending-thumb">
-            <img id="ending-thumb-img" src="assets/cg/cg_end_true.png" alt="ending">
-            <div id="ending-badge" class="ending-badge">TRUE END</div>
-          </div>
-          <div class="ending-body">
-            <div id="ending-title" class="ending-title">TRUE END — 地面は、忘れない。</div>
-            <div id="ending-subtitle" class="ending-subtitle"></div>
-            <div id="ending-text" class="ending-text"></div>
-            <div class="ending-actions">
-              <button id="ending-continue" class="ending-btn primary">HUBに戻って他のENDを回収</button>
-              <button id="ending-to-title" class="ending-btn">TITLEへ</button>
-            </div>
-            <div style="font-size:10px;letter-spacing:0.1em;color:rgba(0,0,0,0.5);margin-top:10px;text-align:center">進行は自動保存されます。GALLERY / TIPS で収集状況を確認できます。</div>
-          </div>
-        </div>
-      </div>
-      <div id="toast">♪ BGM</div>
     </div>
+    <div id="gallery-view" class="gallery-view"></div>
   </div>
 
-  <!-- Title Screen (overlays viewport) -->
-  <div id="title-screen">
-    <div id="title-bg">
-      <img id="title-bg-img" src="assets/bg/bg_sakura_namiki.png" alt="">
-      <div id="title-vignette"></div>
-      <canvas id="sakura-canvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
-    </div>
-    <div class="version-badge">Ver 0.1.0 — 特別編 Visual Novel Demo</div>
-    <div class="title-content">
-      <div class="title-logo-wrap">
-        <div class="title-kicker">桐葉高校理数科三年B組・卒業前ノベルゲーム</div>
-        <div class="title-main">まだ<span class="accent">地図</span>の<span class="accent">途中</span>で</div>
-        <div style="font-family:'Shippori Mincho',serif;font-size:13px;letter-spacing:0.22em;color:var(--mauve);margin-top:4px">〜<span class="cross">✝</span>本質<span class="cross">✝</span>特別編〜</div>
-        <div class="title-sub">The map is still unfinished.</div>
-        <div class="title-meta">原作「偏差値60の教室から✝本質✝が漏れ出している件について」IF特別編 / 企画書 scenareo.txt 完全準拠</div>
-      </div>
-      <div class="title-menu">
-        <button id="title-start" class="title-btn primary">はじめる</button>
-        <button id="title-continue" class="title-btn">つづきから</button>
-        <button id="title-gallery" class="title-btn">GALLERY</button>
-        <button id="title-config" class="title-btn">CONFIG</button>
-      </div>
-      <div class="title-foot">
-        <span id="title-unlocked-count">0 / 14 ENDINGS</span>
-        <span>◆ 209枚アセット計画・仮素材300枚リネーム済</span>
-        <span>◆ BGM 24 / SE 15 キュー対応</span>
-      </div>
-      <div class="title-foot" style="max-width:680px;line-height:1.7;color:rgba(255,255,255,0.62);font-size:10px">
-        本作は原作小説の地の文・台詞を引用せず、全編書き下ろしの新規ストーリーとして構成しています。<br>
-        画像は仮（白）ですが、企画書通りのファイル名（bg_* / chr_*[*表情] / cg_* / ui_*）で300枚を配置済み。製品版では描き下ろしに差し替え可能です。<br>
-        操作: クリック / Enter / Space で進行、ESCでメニュー、右下ボタンで AUTO/SKIP/LOG/SAVE 等。
+  <!-- ============ ED一覧 ============ -->
+  <div id="endlist-screen" class="screen modal">
+    <div class="modal-box">
+      <div class="modal-head"><span>エンディング一覧</span><button class="close-btn" data-close>×　閉じる</button></div>
+      <div class="modal-body">
+        <div id="endlist-items"></div>
+        <div id="endlist-note" class="endlist-note"></div>
       </div>
     </div>
   </div>
 
-  <div id="game-screen" class="hidden" style="position:absolute;inset:0;pointer-events:none"></div>
+  <!-- ============ ✝本質✝辞典 ============ -->
+  <div id="dict-screen" class="screen modal">
+    <div class="modal-box">
+      <div class="modal-head"><span>✝本質✝辞典</span><button class="close-btn" data-close>×　閉じる</button></div>
+      <div class="modal-body" id="dict-items"></div>
+    </div>
+  </div>
+
+  <!-- ============ ゲーム内メニュー ============ -->
+  <div id="menu-screen" class="screen modal">
+    <div class="menu-box">
+      <button id="menu-config" class="menu-btn">設定</button>
+      <button id="menu-to-title" class="menu-btn">タイトルへ戻る</button>
+      <button id="menu-close" class="menu-btn">閉じる</button>
+    </div>
+  </div>
+
+  <!-- トースト -->
+  <div id="toast"></div>
 </div>
-<script src="js/scenario.js"></script>
+
+<!-- ゲームスクリプトデータ（順序重要） -->
+<script src="js/data/manifest.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/data/10_prologue.js"></script>
+<script src="js/data/20_routeA.js"></script>
+<script src="js/data/21_routeB.js"></script>
+<script src="js/data/22_routeC.js"></script>
+<script src="js/data/23_routeD.js"></script>
+<script src="js/data/24_routeE.js"></script>
+<script src="js/data/25_routeF.js"></script>
+<script src="js/data/30_convergence.js"></script>
+<script src="js/data/31_climax.js"></script>
+<script src="js/data/40_endings.js"></script>
+<script src="js/data/45_bonus.js"></script>
 <script src="js/engine.js"></script>
+<script>window.addEventListener('DOMContentLoaded', function(){ VN.boot(); });</script>
 </body>
 </html>
