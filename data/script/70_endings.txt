@@ -72,7 +72,6 @@
 ナ：忘れない誰かが、きっとどこかにいる。それだけで、十分だった。
 @chr katsuya=07
 勝也：……お前らも、元気でやってるか。
-@cg cg36
 @fx fadeblack
 @bgm bgm24 fade=1.4
 ナ：――ここまでの、全員分の記録。
@@ -94,13 +93,12 @@
 @jump end_good_mie_end
 
 #scene end_good_mie_2 | （おまけ）ハモり
-@cg cg37
+@cg off
 @chr mitsumine=06,mie=02
 三峰：あんた、先生になったんだっけ。
 三重：なってない。まだ。
 三峰：は?
 三重：は?
-@cg off
 @jump end_good_mie_end
 
 #scene end_good_mie_end | GOOD END 三重・了
@@ -155,12 +153,11 @@
 #scene end_good_ryoma | GOOD END 両馬「✝本質✝、その後」
 @bg bg_ryoma_ie_butsudan
 @bgm bgm10 fade=2.4
-@cg cg38 kb
+@cg cg_end_ryoma kb
 ナ：両馬二郎は、祖父の墓の前で、変わらず笑っていた。
 @chr ryoma=06
 両馬：爺ちゃん、聞こえてる?　俺、後輩に引き継いだよ。✝本質✝、まだ終わってない。
 ナ：倉石暁が、その隣で神妙な顔で手を合わせていた。
-@cg cg_end_ryoma kb
 ナ：墓前で笑って報告できる孫は、たぶん、そう多くない。
 @cg off
 @chr kuraishi=02,ryoma=06

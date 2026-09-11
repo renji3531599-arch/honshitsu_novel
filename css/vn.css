@@ -71,14 +71,28 @@ img{display:block;max-width:100%}
 /* -------------------------------------------------------------- 背景 ------- */
 .lay-bg{z-index:1;background:#0c0a08}
 .lay-bg .art-back,.lay-bg .art-img{position:absolute;inset:0;width:100%;height:100%}
-.lay-bg .art-img{object-fit:cover;mix-blend-mode:multiply;
-  transform:scale(1.03);transition:opacity .55s ease,transform 14s linear}
+.lay-bg .art-img{object-fit:cover}
 .lay-bg .art-back svg{width:100%;height:100%;display:block}
-/* 読み込み済みの新背景へ、旧背景を重ねたまま静かにディゾルブする。 */
-.bg-outgoing{position:absolute;inset:0;background:#0c0a08;opacity:1;
-  pointer-events:none;transition:opacity .95s cubic-bezier(.4,0,.2,1)}
-.bg-outgoing.leaving{opacity:0}
-@media (prefers-reduced-motion:reduce){.bg-outgoing{transition:none}}
+/* 背景は2枚組み（.bg-slab）をopacityだけで受け渡す。JS が隠れている側に先に描き込むので、
+   切り替えの瞬間に暗転も飛びも起きない。--bg-fade が「滑らかさ」のつまみ。 */
+.bg-slab{position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity var(--bg-fade,1.15s) var(--ease-smooth,cubic-bezier(.4,0,.2,1)),
+             visibility 0s linear var(--bg-fade,1.15s)}
+.bg-slab.on{opacity:1;visibility:visible;
+  transition:opacity var(--bg-fade,1.15s) var(--ease-smooth,cubic-bezier(.4,0,.2,1)),visibility 0s}
+/* 切り替え中だけ別レイヤに昇格させて、合成（blend）の再計算を局所化する */
+.bg-slab.fade{will-change:opacity}
+.lay-bg[data-fading] .grade,.lay-bg[data-fading] .lightshaft{transition-duration:calc(var(--bg-fade,1.15s) * 1.15)}
+/* 最初の1枚は黒から立ち上がる（場面転換の「始まり」に見える） */
+@keyframes bgRise{from{opacity:0;transform:scale(1.028)}to{opacity:1;transform:scale(1)}}
+.bg-slab.on.rise{animation:bgRise calc(var(--bg-fade,1.15s) * 1.35) var(--ease-expo,cubic-bezier(.16,1,.3,1)) both}
+@keyframes bgSettle{from{transform:scale(1.016)}to{transform:scale(1)}}
+/* ベクトル下地で scale を動かすと毎フレーム再描画になる。実写素材（ビットマップ）のときだけ
+   合成上のカメラ揺れを許す。 */
+#stage[data-art="real"] .bg-slab.fade.on{animation:bgSettle calc(var(--bg-fade,1.15s) * 1.25) var(--ease-soft,cubic-bezier(.25,.46,.45,.94)) both}
+@media (prefers-reduced-motion:reduce){
+  .bg-slab,.bg-slab.on{transition-duration:.01ms;animation:none!important}
+}
 
 .grade{position:absolute;inset:0;transition:background 1.1s ease,opacity 1.1s ease;mix-blend-mode:soft-light}
 .lightshaft{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;
@@ -97,9 +111,8 @@ img{display:block;max-width:100%}
 .chr.in{opacity:1;transform:translateY(0) scale(1)}
 .chr.talk{filter:brightness(1.03) contrast(1.02)}
 .chr.dim{filter:brightness(.72) saturate(.6) contrast(.95)}
-.chr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center;
-  mix-blend-mode:multiply}
-.chr .sil{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply}
+.chr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center}
+.chr .sil{position:absolute;inset:0;width:100%;height:100%}
 .chr .sil svg{position:absolute;inset:0;width:100%;height:100%}
 .chr .rim{position:absolute;left:50%;bottom:calc(var(--u)*6);transform:translateX(-50%);
   width:calc(var(--u)*250);height:calc(var(--u)*10);border-radius:50%;
@@ -115,7 +128,7 @@ img{display:block;max-width:100%}
 .lay-cg.on{opacity:1}
 .cg-holder{position:absolute;inset:0;overflow:hidden;background:#0c0a08}
 .cg-holder .art-back,.cg-holder .art-img{position:absolute;inset:0;width:100%;height:100%}
-.cg-holder .art-img{object-fit:cover;mix-blend-mode:multiply}
+.cg-holder .art-img{object-fit:cover}
 .cg-holder.kb .art-img,.cg-holder.kb .art-back{animation:kenburns 26s ease-out both}
 .cg-holder.kb .art-back{animation-name:kenburnsB}
 @keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.11) translate(-1.2%,-1%)}}
@@ -961,7 +974,9 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
 /* tickPulse は 4要素が常時 infinite で僅かに脈打つだけのため、見た目を保ったまま停止して軽量化 */
 .tick{ animation:none; border-color:rgba(203,178,124,.38); }
 /* ---- 背景：より滑らかなズームと光 ---- */
-.lay-bg .art-img{ transition: opacity .9s var(--ease-expo), transform 18s var(--ease-soft), filter 1.1s var(--ease-soft); filter:saturate(.98) contrast(1.02); }
+/* 全面レイヤの常時 filter は「色を2%いじるためだけ」に毎フレーム再ラスタを強いていたので撤廃。
+   実写素材でも差が分からない水準（saturate .98 / contrast 1.02）なので見た目の変更はない。 */
+.lay-bg .art-img{ transition: opacity .9s var(--ease-expo); }
 #stage[data-light="warm"] .lay-bg .art-img{ filter:saturate(1.05) contrast(1.04) brightness(1.03); }
 .grade{ transition: background 1.4s var(--ease-soft), opacity 1.2s var(--ease-soft); }
 .lightshaft{ transition: opacity 1.6s var(--ease-soft), transform 1.6s var(--ease-soft); transform: translateZ(0); }
@@ -1440,3 +1455,111 @@ button, a{ -webkit-tap-highlight-color: transparent; }
 
 /* 7. ビネット/グレインのタイルは contain で再計算を抑制 */
 .fx-vignette, .fx-scan, .title-grain{ contain: strict; pointer-events:none; }
+/* ==========================================================================
+   SMOOTH & LIGHT — 「背景の切り替えを滑らかに」「プレイ中に重い」への同時対策（2026-09-11）
+   --------------------------------------------------------------------------
+   計測（node tools/perf_probe.mjs）で重い原因は画像ファイルではなく次と判った:
+     1. 背景SVGが全面 feTurbulence（1600×900 のノイズ生成）＋SVG内で infinite アニメ
+        → 1つ動くたびに全面を毎フレーム描き直し
+     2. 立ち絵に .chr .sil / .chr.in / .chr.talk / .rim で 4本の infinite アニメ
+        → mix-blend-mode と filter を通した再ラスタが毎フレーム発生
+     3. #textbox の backdrop-filter:blur(6px) — 全面アニメの“上”に常時固定
+     4. JS: 1ラインごとに立ち絵SVGを innerHTML へ書き戻し（＝話者のところで一瞬消える）
+        ＋ 3ラインに1回の localStorage 同期書き込み（1ライン平均 1.7KB 書いていた）
+   以下は 1〜4 を押さえた上での「見た目を保つための上書き」です。
+   ========================================================================== */
+/* ---- 1. 背景：切り替え時間は設定から。既定 1.15s のクロスディゾルブ ---- */
+#layBg{ --bg-fade:1.15s }
+#viewport[data-bg-fade="slow"] #layBg{ --bg-fade:1.85s }
+#viewport[data-bg-fade="off"] #layBg{ --bg-fade:0s }
+#viewport[data-bg-fade="off"] .bg-slab.on.rise{animation:none}
+/* 旧・白プレースホルダ前提の multiply は、.lay-bg 自身の #0c0a08 と掛け合わせて
+   実写背景をほぼ黒く潰す方向に働いていた。全面レイヤでは不要なので常に normal。
+   立ち絵（.chr img）だけ「白＝透明」運用が残るので、config.blend で選べるようにする。 */
+#stage[data-blend="multiply"] .lay-chr{ contain: layout style; }
+#stage[data-blend="multiply"] .chr img{ mix-blend-mode:multiply }
+#stage[data-blend="multiply"] .chr .sil{ mix-blend-mode:normal }
+#stage[data-blend="multiply"][data-art="real"] .lay-bg{ background:#fff }
+
+/* ---- 2. 立ち絵：infinite を減らす（喋っている感はそのままで） ---- */
+/* .sil 側の二重呼吸は保護者（.chr）が既に動いているので不要 → 削除 */
+.chr .sil{ animation:none !important }
+/* 話者の小刻みな上下（0.34s infinite）は「毎フレーム全面再合成」の張本人。
+   入りの1発だけ動かし、そのあとは長い呼吸に一本化する。 */
+.chr.talk{ animation: chrTalkSettle .5s var(--ease-expo) both !important }
+@keyframes chrTalkSettle{
+  0%{ transform: translateY(0) scale(var(--chr-base)) }
+  34%{ transform: translateY(-4px) scale(calc(var(--chr-base)*1.014)) }
+  100%{ transform: translateY(-1.5px) scale(calc(var(--chr-base)*1.006)) }
+}
+#stage[data-chr-motion="lite"] .chr.in,
+#stage[data-chr-motion="lite"] .chr.in[data-enter="left"],
+#stage[data-chr-motion="lite"] .chr.in[data-enter="right"],
+#stage[data-chr-motion="lite"] .chr.in[data-enter="center"]{
+  animation: chrBreathe 8.4s ease-in-out calc(.9s + var(--chr-delay)) infinite !important;
+  transform: translateY(0) scale(var(--chr-base));
+}
+#stage[data-chr-motion="off"] .chr.in,
+#stage[data-chr-motion="off"] .chr.in[data-enter="left"],
+#stage[data-chr-motion="off"] .chr.in[data-enter="right"],
+#stage[data-chr-motion="off"] .chr.in[data-enter="center"],
+#stage[data-chr-motion="off"] .chr.talk,
+#stage[data-chr-motion="off"] .chr.talk .rim,
+#stage[data-chr-motion="off"] .chr .rim{ animation:none !important }
+#stage[data-chr-motion="off"] .chr.talk{ transform: translateY(-1.5px) scale(calc(var(--chr-base)*1.006)) }
+#stage[data-chr-motion="off"] .chr.in{ transform: translateY(0) scale(var(--chr-base)) }
+/* .lay-chr に paint containment は無いが、一応 blend 用に明示（standalone な合成レイヤにしない） */
+.lay-chr{ contain: layout style }
+/* リムの脈打ちは 1.45s → 3.2s に（視差はほぼ無し、再合成の頻度は半分以下） */
+.chr.talk .rim{ animation: rimPulse 3.2s ease-in-out infinite alternate }
+/* .chr をペイント隔離から外す（layout/style のみ）。paint を戻すと子要素の
+   mix-blend-mode が自レイヤとしか合成されず「白＝透明」が効かなくなる。 */
+.chr{ contain: layout style }
+
+/* ---- 3. テキスト窓：背面ぼかしは任意（既定 OFF＝見た目はグラデで擬似的に同じ） ---- */
+#textbox{ backdrop-filter:none; -webkit-backdrop-filter:none;
+  background:linear-gradient(180deg,rgba(14,12,10,.9) 0%,rgba(10,9,7,.955) 58%,rgba(8,7,6,.97) 100%) }
+#textwrap[data-blur="on"] #textbox{ backdrop-filter:blur(6px) saturate(.85); -webkit-backdrop-filter:blur(6px) saturate(.85);
+  background:var(--boxbg) }
+/* トースト／所持品／キャプションも全面アニメの上に常時乗る。ぼかしは外して影で立てる。 */
+.toast{ backdrop-filter:none; -webkit-backdrop-filter:none }
+.item{ backdrop-filter:none; -webkit-backdrop-filter:none }
+.caption .memo{ backdrop-filter:none; -webkit-backdrop-filter:none }
+#pageMark{ animation:bob 2.6s ease-in-out infinite }
+
+/* ---- 4. パネルを開いている間は、舞台側のアニメを止めてパネルを軽くする ---- */
+#viewport:has(#overlay:not(.hidden)) .lay-chr .chr,
+#viewport:has(#overlay:not(.hidden)) .bg-slab,
+#viewport:has(.hub.on) .lay-chr .chr,
+#viewport:has(.screen-wrap.on) .lay-chr .chr{ animation-play-state:paused !important }
+#viewport:has(#overlay:not(.hidden)) .fx-grain,
+#viewport:has(.hub.on) .fx-grain,
+#viewport:has(#overlay:not(.hidden)) .fx-scan,
+#viewport:has(.hub.on) .fx-scan,
+#viewport:has(#overlay:not(.hidden)) #fxParticles,
+#viewport:has(.hub.on) #fxParticles{ visibility:hidden }
+/* 非表示のレイヤに blend 宣言だけ残すとコンポジタの判断を鈍らせるので、明確に normal へ */
+.fx-grain{ mix-blend-mode:normal; opacity:.075; animation:grainMove 6s steps(2) infinite; will-change:initial; contain:paint }
+.fx-scan{ mix-blend-mode:normal; opacity:.09 }
+
+/* ---- 4-b. 呼吸は「移動だけ」にする（毎フレームの再ラスタを止める） ----
+   旧 chrBreathe は transform:translateY()+scale()+rotate() を4段階で動かしていた。
+   .chr .sil の中身は feGaussianBlur を通した SVG なので、scale が変わるたびに
+   フィルタごと描き直し＝立ち絵1人ぶんを毎フレーム再ラスタしていた。
+   transform の代わりに個別プロパティ translate だけ-animate すれば、見た目の揺れは
+   そのまま、スケールは静的（＝ぼかしは1回だけ）。base のスケージは下の rule で確保する。 */
+@keyframes chrBreathe{
+  0%,100%{ translate:0 0 }
+  28%{ translate:0 -1.6px }
+  52%{ translate:0 -2.8px }
+  76%{ translate:0 -1px }
+}
+/* ---- 5. 立ち絵スロット名の表示（JS が要素を後から作っても効くように属性制御へ） ---- */
+.chr .nametag{ display:none }
+#stage[data-sprite-tag="on"] .chr .nametag{ display:block }
+
+/* ---- 6. CG：差し替えは「完全に下がってから」上げる（半透明のままで切らない） ---- */
+.lay-cg.dip{ opacity:0; transition:opacity .42s var(--ease-in,cubic-bezier(.52,0,.74,0)) }
+.lay-cg.dip.on{ animation:none }
+/* ギャラリー／セーブ画面の縮略図は静的SVGになった（旧: 1コマ毎にノイズ再生成） */
+.slots .thumb svg,.cg-cell .im svg{ pointer-events:none }

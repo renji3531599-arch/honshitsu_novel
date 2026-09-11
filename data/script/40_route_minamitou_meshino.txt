@@ -160,7 +160,6 @@
 @set flag_kuraishi + 1
 @bg bg_hokutou_kyoshitsu_hiru
 @bgm bgm06 fade=1.6
-@cg cg15
 @chr kuraishi=03,ryoma=04,mie=01
 倉石：先輩方。塀先生は、桐葉高校のOBです。理数科の卒業生で、当時の地学部の外部講師が、稲葉悌二という方でした。
 三重：……卒業生だったのか、あの人。
@@ -168,7 +167,6 @@
 ナ：一同が息を呑む。
 両馬：……それだけじゃ、まだ何も分かってないのと同じだな。
 倉石：はい。でも、少なくとも――知らずに卒業するのだけは、避けられそうです。
-@cg off
 @set flag_meshino + 2
 @heart +2
 @chat bbs_heikatsu

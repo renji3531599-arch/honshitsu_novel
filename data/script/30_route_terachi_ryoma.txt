@@ -59,7 +59,6 @@
 @chr terachi=06
 寺地：……暴露じゃなくて、ありがとうの会にする。それなら、俺にもできる。
 @item kami
-@cg cg11
 @chr terachi=06,ryoma=02,mie=01
 寺地：読み上げ役、俺でいいのか。
 両馬：お前しかいないだろ。
@@ -67,7 +66,6 @@
 両馬：言ってない。
 寺地：言いそうだった。
 両馬：言いそうだったけど言ってない。今回は、ちゃんと"読む人"って言う。
-@cg off
 @set flag_terachi + 2
 @tip mina
 @chat live_honshitsu

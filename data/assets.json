@@ -1,5 +1,5 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。reserve:true は「本作ってあるが本編で出していない予備枠」＝ギャラリーと回収枚数から数えない（CGを置きすぎた箇所を整理して 2026-09-11 に 11 枚を降板させた）。",
  "engine_limit": 300,
  "assigned": 201,
  "buffer": 99,
@@ -1332,7 +1332,8 @@
    "desc": "勝也（単独）／BG08。写真を静かに回収する硬い表情。",
    "meta": "scene",
    "source": "image1/white_133.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg05",
@@ -1372,7 +1373,8 @@
    "desc": "零（単独）／BG09。ノートPCの画面光が横顔を照らす。",
    "meta": "scene",
    "source": "image1/white_137.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg09",
@@ -1402,7 +1404,8 @@
    "desc": "寺地／両馬／三重／BG01。「暴露じゃなくて、ありがとうの会」で頷き合う。",
    "meta": "scene",
    "source": "image3/white_140.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg12",
@@ -1442,7 +1445,8 @@
    "desc": "倉石／両馬／三重／BG01。調査結果の報告。息を呑む二人。",
    "meta": "scene",
    "source": "image1/white_144.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg16",
@@ -1502,7 +1506,8 @@
    "desc": "両馬（手元アップ）／BG01・夜。地図の隅に何かを書き足す。",
    "meta": "scene",
    "source": "image3/white_150.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg22",
@@ -1532,7 +1537,8 @@
    "desc": "勝也（単独）／BG13相当。地図を渡され絶句する正面カット。",
    "meta": "scene",
    "source": "image2/white_153.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg25",
@@ -1542,7 +1548,8 @@
    "desc": "三重／勝也。ミディアムショット、「先生、聞いていいですか」。",
    "meta": "scene",
    "source": "image3/white_154.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg26",
@@ -1612,7 +1619,8 @@
    "desc": "寺地（単独・朗読）／BG13。スマホのライトが顔を照らす。",
    "meta": "scene",
    "source": "image3/white_161.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg33",
@@ -1652,7 +1660,8 @@
    "desc": "勝也（単独）／BG24。数年後、新一年に同じ地図を見せる。",
    "meta": "scene",
    "source": "image2/white_165.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg37",
@@ -1662,7 +1671,8 @@
    "desc": "三重／三峰／BG16。満開の桜（南棟編Flag高で挿入）。",
    "meta": "scene",
    "source": "image3/white_166.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg38",
@@ -1672,7 +1682,8 @@
    "desc": "両馬（単独）／BG19。墓参りシーン（共通カットの派生）。",
    "meta": "scene",
    "source": "image2/white_167.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg_end_true",

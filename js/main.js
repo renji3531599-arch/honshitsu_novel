@@ -15,7 +15,7 @@ import { createDebug } from './debug.js';
 const D = (id) => document.getElementById(id);
 const dom = {
   viewport: D('viewport'), stage: D('stage'),
-  bgBack: D('bgBack'), bgImg: D('bgImg'), bgGrade: D('bgGrade'), bgLight: D('bgLight'),
+  layBg: D('layBg'), bgBack: D('bgBack'), bgImg: D('bgImg'), bgGrade: D('bgGrade'), bgLight: D('bgLight'),
   layChr: D('layChr'), layCg: D('layCg'), cgHolder: D('cgHolder'), cgBack: D('cgBack'), cgImg: D('cgImg'),
   fxParticles: D('fxParticles'), fxVeil: D('fxVeil'), fxFlash: D('fxFlash'), fxGrain: D('fxGrain'),
   caption: D('caption'), cardOverlay: D('cardOverlay'), cardContours: D('cardContours'),
@@ -142,6 +142,7 @@ async function boot() {
     shell.applyGrade();
     shell.applyBlend();
     shell.applySpriteTag();
+    shell.applyMotion();
     dom.textwrap.classList.add('hidden');
     stage.scaleU();
     let _resizeRaf = 0;
@@ -157,10 +158,16 @@ async function boot() {
     warmUp(assets);
 
     setProgress(68, '画像を読み込んでいます…');
+    // 起動時に読むのは「これから始まる数シーン」だけ。全201枚を待たない。
+    const seen = new Set();
+    const first = assets.priorityList(data, 5, def);
+    first.forEach(a => seen.add(a.id));
     await assets.preload((done, total) => {
       if (!total) { setProgress(88, '画像の準備ができました'); return; }
       setProgress(68 + done / total * 20, `画像を読み込んでいます… ${done}/${total}`);
-    });
+    }, first);
+    // 残りはタイトル表示之后、手が空いたときに少しずつ（差し替え素材が増えても起動は一定）
+    assets.warmRest(seen).catch(() => {});
 
     setProgress(91, '活字を揃えています…');
     await fontsReady();

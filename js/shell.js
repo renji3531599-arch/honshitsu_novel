@@ -5,6 +5,7 @@ import { backdropSVG, figureSVG, contourSVG } from './visual.js';
 import { fmtDate, fmtTime } from './store.js';
 
 const $ = (s, r = document) => r.querySelector(s);
+const LOG_MAX = 150;      // バックログに並べる最大件数（古いのから落とす）
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])';
 function trapFocus(container){
   const nodes = [...container.querySelectorAll(FOCUSABLE)].filter(n=> n.offsetParent!==null || container===n);
@@ -129,9 +130,7 @@ export class Shell {
     t.classList.add('reveal');
   }
   setHud(chapter, id) {
-    const m = this.store.meta;
-    m.visited = m.visited || {};
-    if (id) { m.visited['ch:' + id] = 1; this.store.saveMeta(); }
+    // ※ visited はどこからも読まれない保存物だった（増え続けるので廃止）
     this.dom.hudLeft.innerHTML = chapter
       ? `<b>${esc(chapter.title)}</b>${chapter.sub ? '　' + esc(chapter.sub) : ''}`
       : '';
@@ -140,10 +139,6 @@ export class Shell {
     this.dom.hudLeft.classList.add('pop');
   }
   setScene(sceneId) {
-    const m = this.store.meta;
-    m.visited = m.visited || {};
-    m.visited['sc:' + sceneId] = 1;
-    this.store.saveMeta();
     this.dom.hudRight.innerHTML = `<b>${esc(sceneId)}</b>　<span class="k">CH ${esc(this.game.state.chapter || '-')}</span>`;
     const fl = this.flagSummary();
     this.dom.hudRight.dataset.flags = fl;
@@ -229,7 +224,7 @@ export class Shell {
     const ep = this.dom.titleProgress;
     ep.innerHTML = Object.entries(this.def.endings).map(([id, e]) =>
       `<i class="${m.endings[id] ? 'on' : ''}" title="${esc(e.tier)}">${esc(id === 'bonus' ? 'BONUS' : e.tier.split(' ')[0].replace('END', ''))}</i>`).join('')
-      + `<i title="回収CG">${(m.cg || []).length}/52</i>`
+      + `<i title="回収CG">${(m.cg || []).length}/${this.data.assets ? this.data.assets.collectible('cg').length : 41}</i>`
       + `<i title="周回">RUN ${m.runs || 0}</i>`;
   }
   async titlePick(id) {
@@ -480,7 +475,7 @@ export class Shell {
     if (!body.dataset.kind || body.dataset.kind !== 'log') return;
     body.innerHTML = '';
     const box = el('div', 'doc-list');
-    this.game.history.slice().reverse().slice(0, 200).reverse().forEach(h => {
+    this.game.history.slice(-LOG_MAX).reverse().forEach(h => {
       const sp = h.sp ? (this.def.speakers[h.sp] || {}) : {};
       box.appendChild(el('div', 'doc', `<h4 style="color:${sp.color || '#cbb27c'}">${esc(sp.name || '───')}${h.tag ? `<span class="tag">${esc(h.tag)}</span>` : ''}</h4><p>${esc(h.txt)}</p>`));
     });
@@ -578,6 +573,7 @@ export class Shell {
           [...box.children].forEach((x, i) => x.classList.toggle('on', opts[i][0] === v));
           if (key === 'cgMode') { this.stage.cg(this.stage.cgId, {}); }
           if (key === 'blend') this.applyBlend();
+          if (key === 'bgFade' || key === 'chrMotion') this.applyMotion();
         });
         box.appendChild(b);
       });
@@ -600,7 +596,9 @@ export class Shell {
     colA.appendChild(check('テキストクリック送り', 'advanceClick'));
     colA.appendChild(check('立ち絵スロット名を表示', 'showSpriteTag', () => this.applySpriteTag()));
     colA.appendChild(seg('CG表示', 'cgMode', [['window', '箱あり'], ['full', '全画面']]));
-    colA.appendChild(seg('画像合成', 'blend', [['multiply', 'multiply（白背景用）'], ['normal', 'normal（透過素材用）']]));
+    colA.appendChild(seg('画像合成', 'blend', [['normal', 'normal（透過PNG・推奨）'], ['multiply', 'multiply（白背景の素材用）']]));
+    colA.appendChild(seg('背景の切り替え', 'bgFade', [['soft', 'なめらか（1.15秒）'], ['slow', 'ゆっくり（1.85秒）'], ['off', '即時']]));
+    colA.appendChild(seg('立ち絵の動き', 'chrMotion', [['full', 'よく動く'], ['lite', '控えめ（推奨）'], ['off', '止め']]));
     g2.appendChild(colA);
     const colB = el('div');
     colB.appendChild(el('h3', null, '音量・効果'));
@@ -613,9 +611,10 @@ export class Shell {
     colB.appendChild(check('画面シェイク', 'shake'));
     colB.appendChild(check('未読スキップを許可', 'skipUnread', ()=> this.toast(this.store.config.skipUnread? '未読スキップ: ON':'未読スキップ: OFF')));
     colB.appendChild(check('自動セーブ', 'autosave'));
+    colB.appendChild(check('テキスト窓をぼかす（重い）', 'boxBlur', () => this.applyMotion()));
     g2.appendChild(colB);
     sect.appendChild(g2);
-    sect.appendChild(el('p', 'hint', '※ 画像は起動時に先読みされます。背景・立ち絵の実素材を <b>assets/…</b> に同名で配置し、<b>data/assets.json</b> の該当行の placeholder を false にすると、そのまま画面に出ます（合成は multiply＝白＝透明）。白紙のあいだはエンジンが SVG で補完描画します。'));
+    sect.appendChild(el('p', 'hint', '※ 実素材を <b>assets/…</b> に同名で置き、<b>data/assets.json</b> の該当行の placeholder を false にすると画面に出ます。<b>透過PNG推奨</b>（合成=normal）。白抜きの四角で置きたい素材だけ「画像合成=multiply」にしてください。<br>※ 動きすぎて重いときは「背景の切り替え＝即時」「立ち絵の動き＝止め」「テキスト窓をぼかす＝OFF」が効きます。'));
     const danger = el('div', 'btnrow');
     const b1 = el('button', null, '回収データを初期化する');
     b1.addEventListener('click', () => {
@@ -633,14 +632,26 @@ export class Shell {
     sect.appendChild(danger);
     body.appendChild(sect);
   }
+  /* 合成・動きの設定は「データ属性 1 発」で CSS に渡す。
+     以前は JS で each(n.style.mixBlendMode=…) と inline 指定していたため、
+     後から生成される立ち絵ノードに効かず、かつ .lay-bg/.cg-holder の自背景と
+     掛け合わさって実写素材が黒く沈む原因になっていた。 */
   applyBlend() {
-    const mode = this.store.config.blend || 'multiply';
-    const st = this.dom.stage;
-    st.dataset.blend = mode;
-    st.querySelectorAll('.chr img,.chr .sil,#bgImg,#cgImg').forEach(n => n.style.mixBlendMode = mode);
+    this.dom.stage.dataset.blend = this.store.config.blend || 'normal';
   }
   applySpriteTag() {
-    this.dom.stage.querySelectorAll('.chr .nametag').forEach(n => n.style.display = this.store.config.showSpriteTag ? '' : 'none');
+    this.dom.stage.dataset.spriteTag = this.store.config.showSpriteTag ? 'on' : 'off';
+  }
+  /** 背景フェード／テキスト窓のぼかし／立ち絵の動き — 重さのつまみは全部ここ */
+  applyMotion() {
+    const c = this.store.config;
+    const vp = this.dom.viewport, st = this.dom.stage;
+    vp.dataset.bgFade = c.bgFade || 'soft';
+    if (this.dom.textwrap) this.dom.textwrap.dataset.blur = c.boxBlur ? 'on' : 'off';
+    st.dataset.chrMotion = c.chrMotion || 'lite';
+    const ms = c.bgFade === 'off' ? '0ms' : c.bgFade === 'slow' ? '1850ms' : '1150ms';
+    vp.style.setProperty('--bg-fade', ms);
+    if (st) st.style.setProperty('--bg-fade', ms);
   }
   applyGrade() {
     const c = this.store.config;
@@ -699,7 +710,8 @@ export class Shell {
     body.appendChild(tabs);
     const m = this.store.meta;
     if (tab === 'cg' || tab === 'end') {
-      const list = this.data.assets.list.filter(a => a.cat === 'cg' && (tab === 'end' ? /cg_end/.test(a.id) : !/cg_end/.test(a.id)));
+      // 予備枠（reserve）はギャラリーに出さない：未回収が「埋まらない」と挫ける原因になる
+      const list = this.data.assets.collectible('cg').filter(a => tab === 'end' ? /cg_end/.test(a.id) : !/cg_end/.test(a.id));
       const grid = el('div', 'cg-grid');
       list.forEach(a => {
         const got = m.cg.includes(a.id);
@@ -904,7 +916,7 @@ ${ends}
         <span>今回の心Point <b>${j.heart}</b></span>
         <span>主要Flag <b>${j.flagcount}</b> / ${j.maj}</span>
         <span>周回 <b>${m.runs || 1}</b></span>
-        <span>CG <b>${(m.cg || []).length}</b> / 52</span>
+        <span>CG <b>${(m.cg || []).length}</b> / ${this.data.assets ? this.data.assets.collectible('cg').length : 41}</span>
       </div>
       <p class="hint">条件を満たすと、収束章のあと自動で振り分けられます。到達済みは金色、未到達は半透明。クリックでCGプレビュー（到達済みのみ）。</p>`;
     wrap.appendChild(head);

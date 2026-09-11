@@ -16,6 +16,25 @@ function rng(seed) {
   return () => { a += 0x6D2B79F5; let t = a; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
 const R = (n) => Math.round(n * 10) / 10;
+
+/* ------------------------------------------------- SVG の id 衝突を避ける --
+   同一ページ内に同じ id を持つ SVG が2つ並ぶと、url(#sky) は DOM 先頭側の定義に
+   解決されてしまう（背景クロスフェード中・セーブ13スロット・ギャラリー52枠で実害）。
+   → 生成ごとに接尾辞を付けて局所化する。                                          */
+function tagOf(seed) { return 'a' + (hash(String(seed)) % 46656).toString(36); }
+function scopeSVG(svg, tag) {
+  if (!tag || svg.indexOf('id="') < 0) return svg;
+  const ids = new Set();
+  for (const m of svg.matchAll(/id="([^"]+)"/g)) ids.add(m[1]);
+  if (!ids.size) return svg;
+  let out = svg;
+  for (const id of ids) {
+    const es = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    out = out.split(`id="${id}"`).join(`id="${id}${tag}"`)
+             .split(`url(#${id})`).join(`url(#${id}${tag})`);
+  }
+  return out;
+}
 const prefersReduced = () => { try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(_) { return false; } };
 
 /* -------------------------------------------------------------- 時間帯 ---- */
@@ -326,24 +345,25 @@ export function backdropSVG(asset) {
       g += `<rect y="560" width="${W}" height="340" fill="url(#flr)"/>`;
   }
 
-  // 紙の質感・滲み（numOctaves 2→1 で軽量化、視覚差は極小）
+  // 紙の質感・滲み ── 2026-09 の轻量化で「全面 feTurbulence」をタイル状に置き換えた。
+  //   以前: 1600×900 の全面に feTurbulence を掛けていた（＝画面内アニメが1つ動くたび
+  //         144万px分のノイズ生成を再計算）。今は 128px タイル 1回分 only。
+  //   暗転Film（旧 black rect × opacity .42）は等価なベールで再現している。
   g += `<rect width="${W}" height="${H}" fill="url(#lamp)" opacity=".5"/>`;
-  g += `<filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".88" numOctaves="1" result="n"/>
-        <feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".06"/></feComponentTransfer>
-        <feComposite operator="over" in2="SourceGraphic"/></filter>`;
-  g += `<rect width="${W}" height="${H}" filter="url(#paper)" opacity=".42"/>`;
+  g += `<filter id="paper" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse">
+          <feTurbulence type="fractalNoise" baseFrequency=".88" numOctaves="1" seed="${hash(asset ? asset.id : 'x') % 90 + 3}" result="n"/>
+          <feColorMatrix in="n" type="saturate" values="0"/>
+          <feComponentTransfer><feFuncA type="linear" slope=".5"/></feComponentTransfer>
+        </filter>
+        <pattern id="papertile" width="128" height="128" patternUnits="userSpaceOnUse">
+          <rect width="128" height="128" fill="#0d0b09"/><rect width="128" height="128" filter="url(#paper)" opacity=".3"/>
+        </pattern>
+        <rect width="${W}" height="${H}" fill="url(#papertile)" opacity=".42"/>`;
 
-  const style = `<style>
-    .poles{animation:poles .9s linear infinite}
-    @keyframes poles{from{transform:translateX(0)}to{transform:translateX(-420px)}}
-    .dust circle{animation:dust 9s ease-in-out infinite}
-    @keyframes dust{0%,100%{transform:translate(0,0);opacity:.2}50%{transform:translate(24px,-40px);opacity:.7}}
-    .smoke{stroke-dasharray:1200;animation:smoke 12s linear infinite;opacity:.55}
-    @keyframes smoke{from{stroke-dashoffset:1200}to{stroke-dashoffset:-1200}}
-    .ripple{animation:rip 6s ease-out infinite}
-    @keyframes rip{0%{transform:scale(.4);opacity:.7}100%{transform:scale(2.2);opacity:0}}
-  </style>`;
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${style}${g}</svg>`;
+  // 背景SVG内部の CSS アニメ（dust/smoke/ripple/poles）は撤廃。
+  //  infinite は「SVG全体を毎フレーム再ラスタ」＝上のノイズや等高線を毎フレーム描き直す意味で、
+  //  空気中の埃は #fxParticles（dust モード）が既に担っている。静止画として缓存させる。
+  return scopeSVG(`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${g}</svg>`, tagOf(asset ? asset.id : 'x'));
 }
 
 /* ============================================================ 立ち絵 ===== */
@@ -366,7 +386,20 @@ const FIG = {
   'wakaki-katsuya': { h: 592, sh: 100, hair: 'short', tie: '#9c2f40', prop: 'bag', gender: 'm' },
 };
 
+/** 立ち絵 SVG は「slug + expr」で決まる静止画。
+ *  旧実装は話者（talk/normal）で文字列が変わったため、台詞を1行送るたびに
+ *  innerHTML を差し替え → その1フレームだけ何も描画されず「一瞬消える」見えていた。
+ *  talk の揺れは CSS（.chr.talk）に任せて、文字列は常に安定させる。 */
+const _figureCache = new Map();
 export function figureSVG(slug, expr = '01', mood = 'normal') {
+  const key = slug + '|' + expr;
+  const hit = _figureCache.get(key);
+  if (hit) return hit;
+  const made = _figureSVG(slug, expr);
+  _figureCache.set(key, made);
+  return made;
+}
+function _figureSVG(slug, expr) {
   const f = FIG[slug] || FIG.mie;
   const rand = rng(hash(slug + '|' + expr));
   const H = 700, cx = 210;
@@ -378,7 +411,6 @@ export function figureSVG(slug, expr = '01', mood = 'normal') {
   const ink = 'rgba(26,20,14,.62)';
   const soft = 'rgba(26,20,14,.34)';
   let g = '';
-
   // 髪型（後ろ）
   let hair = '';
   switch (f.hair) {
@@ -401,8 +433,8 @@ export function figureSVG(slug, expr = '01', mood = 'normal') {
   // 頭
   g += hair;
   g += `<ellipse cx="${cx}" cy="${R(bodyTop + head)}" rx="${head}" ry="${head + 6}" fill="${ink}"/>`;
-  // 首〜胴
-  const sway = (mood === 'talk' ? -3 : 0);
+  // 首〜胴（talk の揺りは CSS 側。ここでは文字列を変えない）
+  const sway = 0;
   g += `<path d="M${cx - 16} ${R(neck)} h32 v16 l${R(f.sh / 2)} ${R(20)} v${R(hemY - shoulderY - 20)} h${R(-f.sh)} v${R(-(hemY - shoulderY - 20))} l${R(f.sh / 2 - 16)} -16 z"
         fill="${ink}" transform="translate(${sway} 0)"/>`;
   // 肩・腕
@@ -434,10 +466,11 @@ export function figureSVG(slug, expr = '01', mood = 'normal') {
   if (darken) g += `<rect width="420" height="${H}" fill="#000" fill-opacity="${darken}"/>`;
   if (exprN >= 8) g += `<circle cx="${cx}" cy="${R(neck + 120)}" r="300" fill="url(#halo)"/>
     <radialGradient id="halo"><stop offset="0" stop-color="#ffe9bd" stop-opacity=".35"/><stop offset="1" stop-color="#ffe9bd" stop-opacity="0"/></radialGradient>`;
-  return `<svg viewBox="0 0 420 700" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+  const tag = tagOf(slug + '|' + expr);
+  return scopeSVG(`<svg viewBox="0 0 420 700" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
     <defs><filter id="blur${exprN}"><feGaussianBlur stdDeviation="${rand() * .6 + .3}"/></filter></defs>
     <g filter="url(#blur${exprN})">${g}</g>
-  </svg>`;
+  </svg>`, tag);
 }
 
 /* ============================================================ パーティクル = */
@@ -558,10 +591,13 @@ export class Stage {
     this.assets = assets;
     this.bgId = null; this.cgId = null;
     this.chrMap = new Map();
+    this._slabs = null; this._bgCur = 0;
+    this._chrDirty = true; this._talking = null;
     this.particles = new Particles(els.fxParticles);
     this.titleFx = els.titleFx ? new Particles(els.titleFx) : null;
     this._bgToken = 0;
     this._cgToken = 0;
+    this._cgDipMs = 470;
     this.t = (ms) => new Promise(r => setTimeout(r, ms));
     this._visPaused = null;
     try {
@@ -610,66 +646,93 @@ export class Stage {
   }
   isPlaceholder(a) { return !a || a.placeholder !== false; }
 
+  /* ---- 背景：2枚スラブのクロスディゾルブ ---------------------------------
+     旧実装は「表示中の背景を cloneNode して、その上に新背景を即时反映」していた。
+     clone だと SVG 内部のアニメが 0ms から再生し直して旧レイヤがカクつき、
+     さらに「新背景が1フレームだけ全画面に出る」＝一瞬で切り替わったように見えた。
+     → 表示側の DOM には一切触れず、隠れているスラブに先に描き込んでから
+       透明度だけをなめらかに受け渡す（暗転・飛び・再生とも無し）。            */
+  bgSlabs() {
+    if (this._slabs) return this._slabs;
+    const roots = this.el.layBg ? [...this.el.layBg.querySelectorAll('.bg-slab')] : [];
+    this._slabs = roots.map(r => ({ root: r, back: r.querySelector('.art-back'), img: r.querySelector('.art-img') }));
+    if (this._slabs.length) this._bgCur = 0;
+    return this._slabs;
+  }
+  /** 背景クロスディゾルブの長さ（ms）。CONFIG「背景の切り替え」と CSS の --bg-fade と同一源。 */
+  bgFadeMs() {
+    if (prefersReduced()) return 0;
+    const k = (this.el.viewport && this.el.viewport.dataset && this.el.viewport.dataset.bgFade) || 'soft';
+    return k === 'off' ? 0 : k === 'slow' ? 1850 : 1150;
+  }
   async bg(id, opt = {}) {
     const my = ++this._bgToken;
-    const img = this.el.bgImg;
-    const back = this.el.bgBack;
+    const slabs = this.bgSlabs();
+    if (!slabs.length) return;
+    const lay = this.el.layBg, st = this.el.stage;
+    const cur = slabs[this._bgCur] || slabs[0];
+    const art = id ? (this.assets.byId[id] || null) : null;
+    // 背景が「差し替え素材」か「エンジン補完描画」かを CSS に伝える（合成の重い方を切替）
+    st.dataset.art = (!id || this.isPlaceholder(art)) ? 'placeholder' : 'real';
+
     if (!id) {
-      this._bgOutgoing?.remove();
-      this._bgOutgoing = null;
-      img.removeAttribute('src');
-      back.innerHTML = '';
-      this.bgId = null;
-      delete this.el.stage.dataset.bg;
-      delete this.el.stage.dataset.bgkind;
+      slabs.forEach(s => { s.root.classList.remove('on', 'fade'); s.back.innerHTML = ''; s.img.removeAttribute('src'); });
+      this.bgId = null; this._bgCur = 0;
+      delete st.dataset.bg; delete st.dataset.bgkind;
       return;
     }
+    if (opt.time) this.mood(opt.time);
     if (id === this.bgId) return;
-    const a = this.assets.byId[id];
-    const placeholder = this.isPlaceholder(a);
-    // 表示中の背景には触れず、次の画像を先にデコードする。
+
+    const placeholder = this.isPlaceholder(art);
+    // 実画像は「見えていないスラブ」に先にデコードしておく（切替の待ち時間をゼロに）
+    let target = cur, swap = !!this.bgId && slabs.length > 1;
+    if (swap) target = slabs[1 - this._bgCur];
     if (!placeholder) {
-      const next = new Image();
-      next.src = a.file;
-      try { await next.decode(); }
-      catch (e) { return; } // 読み込み失敗時は現在の背景を維持
-      if (my !== this._bgToken) return;
+      const pre = new Image();
+      pre.src = art.file;
+      try { await pre.decode(); }
+      catch (e) { if (my !== this._bgToken) return; /* 失敗時は今の背景を維持 */ return; }
     }
-    this._bgOutgoing?.remove();
-    const outgoing = document.createElement('div');
-    outgoing.className = 'bg-outgoing';
-    outgoing.setAttribute('aria-hidden', 'true');
-    for (const source of [back, img]) {
-      const copy = source.cloneNode(true);
-      copy.removeAttribute('id');
-      outgoing.appendChild(copy);
-    }
-    const hasPrevious = !!this.bgId;
-    const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (hasPrevious && !reduced) {
-      img.after(outgoing);
-      this._bgOutgoing = outgoing;
-    }
+    if (my !== this._bgToken) return;             // 途中で新しい要求が来たら諦める
+
     if (placeholder) {
-      back.innerHTML = backdropSVG(a || { id, meta: '' });
-      img.removeAttribute('src');
+      target.back.innerHTML = backdropSVG(art || { id, meta: '' });
+      target.img.removeAttribute('src');
     } else {
-      back.innerHTML = '';
-      img.src = a.file;
+      target.back.innerHTML = '';
+      target.img.src = art.file;
+      const label = (art && art.label) || id;
+      if (target.img.getAttribute('alt') !== label) target.img.setAttribute('alt', label);
+    }
+    const fade = this.bgFadeMs();
+    if (swap) {
+      const prev = cur;
+      lay.dataset.fading = '1';
+      target.root.classList.add('fade'); prev.root.classList.add('fade');
+      void target.root.offsetWidth;                // 書き込みを1フレーム確定させてから受け渡す
+      target.root.classList.add('on');
+      prev.root.classList.remove('on');
+      this._bgCur = 1 - this._bgCur;
+      clearTimeout(this._bgFadeTimer);
+      this._bgFadeTimer = setTimeout(() => {
+        if (this.bgId === id) { prev.back.innerHTML = ''; prev.img.removeAttribute('src'); }
+        prev.root.classList.remove('fade'); target.root.classList.remove('fade');
+        delete lay.dataset.fading;
+      }, fade + 140);
+    } else {
+      // 最初の1枚（または単独スラブ）：黒からふわっと立ち上がる
+      target.root.classList.add('rise');
+      target.root.classList.add('on');
+      clearTimeout(this._bgRiseTimer);
+      this._bgRiseTimer = setTimeout(() => target.root.classList.remove('rise'), fade + 260);
     }
     this.bgId = id;
-    // 新背景の上で旧背景だけをフェードアウト。途中に暗転を挟まない。
-    if (outgoing.isConnected) {
-      void outgoing.offsetWidth;
-      outgoing.classList.add('leaving');
-      setTimeout(() => {
-        outgoing.remove();
-        if (this._bgOutgoing === outgoing) this._bgOutgoing = null;
-      }, 1000);
-    }
-    const kind = ((a && a.meta) || '').split('/')[0];
-    this.el.stage.dataset.bgkind = kind;
-    this.el.stage.dataset.bg = id;
+    this._markBgKind((art && art.meta || '').split('/')[0], id);
+  }
+  _markBgKind(kind, id) {
+    this.el.stage.dataset.bgkind = kind || '';
+    this.el.stage.dataset.bg = id || '';
   }
   mood(time) {
     const m = MOODS[time] || MOODS.hiru;
@@ -679,47 +742,61 @@ export class Stage {
     this.el.bgGrade.style.background = `linear-gradient(180deg,${m.sky[1]}00 0%,${m.sky[0]}22 100%)`;
   }
   cg(id, opt = {}) {
-    const st = this.el.stage;
+    const st = this.el.stage, lay = this.el.layCg, hold = this.el.cgHolder;
     if (!id) {
       this._cgToken++;
-      this.el.layCg.classList.remove('on');
+      lay.classList.remove('on', 'dip');
       st.removeAttribute('stage-mode');
-      this.el.cgHolder.classList.remove('kb');
+      hold.classList.remove('kb');
       this.cgId = null;
       return;
     }
-    // 表示中のCGから別CGへの切り替えは、一度ディップしてから差し替える
-    if (this.cgId && this.cgId !== id && this.el.layCg.classList.contains('on')) {
-      const my = ++this._cgToken;
-      this.el.layCg.classList.remove('on');
-      setTimeout(() => {
-        if (my !== this._cgToken) return;
-        this._cgSwap(id, opt);
-        this.el.layCg.classList.add('on');
-      }, 380);
+    if (id === this.cgId) {                 // 同じCGの再指定＝ディップもしない（二重演出の防止）
+      hold.classList.toggle('kb', !!opt.kb);
+      lay.classList.add('on');
+      st.setAttribute('stage-mode', 'cg');
       return;
     }
-    this._cgToken++;
-    this._cgSwap(id, opt);
-    this.el.layCg.classList.add('on');
-    this.el.cgHolder.classList.toggle('kb', !!opt.kb);
-    st.setAttribute('stage-mode', 'cg');
-  }
-  _cgSwap(id, opt = {}) {
-    const a = this.assets.byId[id];
-    this.cgId = id;
-    if (this.isPlaceholder(a)) {
-      this.el.cgBack.innerHTML = this.cgBackdrop(a);
-      this.el.cgImg.removeAttribute('src');
-    } else {
-      this.el.cgBack.innerHTML = '';
-      this.el.cgImg.src = a.file;
+    const a = this.assets.byId[id] || null;
+    const dip = lay.classList.contains('on');
+    const my = ++this._cgToken;
+    const paint = () => {
+      if (this.isPlaceholder(a)) {
+        this.el.cgBack.innerHTML = this.cgBackdrop(a);
+        this.el.cgImg.removeAttribute('src');
+      } else {
+        this.el.cgBack.innerHTML = '';
+        this.el.cgImg.src = a.file;
+        const label = (a && a.label) || id;
+        if (this.el.cgImg.getAttribute('alt') !== label) this.el.cgImg.setAttribute('alt', label);
+      }
+      this.cgId = id;
+      hold.classList.toggle('kb', !!opt.kb);
+      st.setAttribute('stage-mode', 'cg');
+      lay.classList.remove('dip');
+      lay.classList.add('on');
+    };
+    // 実CGはデコードを待ってから差し替える（待たないと1コマ「白枠」が見える）
+    const ready = this.isPlaceholder(a) ? Promise.resolve(true)
+      : (() => { const im = new Image(); im.src = a.file; return im.decode ? im.decode().then(() => true, () => false) : new Promise(r => { im.onload = () => r(true); im.onerror = () => r(false); }); })();
+    if (dip) {
+      lay.classList.add('dip');             // 一度しっかり下げてから差し替える
+      lay.classList.remove('on');           // on を残すと reveal アニメが opacity を掴んで下げ切らない
+      const wait = prefersReduced() ? 0 : this._cgDipMs;
+      ready.then((ok) => {
+        if (my !== this._cgToken) return;
+        if (!ok) { lay.classList.remove('dip'); return; }   // 読み込み失敗：前のCGを復唱
+        setTimeout(() => { if (my === this._cgToken) paint(); }, wait);
+      });
+      return;
     }
-    this.el.cgHolder.classList.toggle('kb', !!opt.kb);
-    this.el.stage.setAttribute('stage-mode', 'cg');
+    ready.then((ok) => { if (ok && my === this._cgToken) paint(); });
   }
   cgBackdrop(a) {
-    const rand = rng(hash((a && a.id) || 'cg'));
+    const key = (a && a.id) || 'cg';
+    const hit = Stage._cgArt && Stage._cgArt.get(key);
+    if (hit) return hit;
+    const rand = rng(hash(key));
     const base = (a && /end/.test((a.meta || '') + (a.id || ''))) ? '#1a1611' : '#151210';
     let shapes = '';
     for (let i = 0; i < 7; i++) {
@@ -727,25 +804,45 @@ export class Stage {
       shapes += `<circle cx="${R(cx)}" cy="${R(cy)}" r="${R(r)}" fill="#fff" fill-opacity=".0${2 + Math.floor(rand() * 4)}"/>`;
     }
     const c = contourField(rand, 12, 380, 420, '#d9c9a6', .08);
-    return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    const made = scopeSVG(`<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <rect width="1600" height="900" fill="${base}"/>${c}${shapes}
       <rect width="1600" height="900" fill="url(#g)"/><defs><radialGradient id="g"><stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient></defs>
-    </svg>`;
+    </svg>`, tagOf(key));
+    (Stage._cgArt || (Stage._cgArt = new Map())).set(key, made);
+    return made;
   }
   setChr(spec) {
-    if (spec.clear) { this.chrMap.forEach(v => { v.el.classList.remove('in'); }); this.chrMap.clear(); this.applyChr(); return; }
-    if (spec.del) { spec.del.forEach(k => this.chrMap.delete(k.trim())); this.applyChr(); return; }
+    if (spec.clear) {
+      this.chrMap.forEach(v => { if (v.el) v.el.classList.remove('in'); });
+      this.chrMap.clear(); this._chrDirty = true; this.applyChr(); return;
+    }
+    if (spec.del) {
+      let hit = false;
+      spec.del.forEach(k => { if (this.chrMap.delete(k.trim())) hit = true; });
+      if (!hit) return;                      // 変化がなければ再レイアウトもしない
+      this._chrDirty = true; this.applyChr(); return;
+    }
+    let changed = false;
     Object.entries(spec.set || {}).forEach(([slug, expr]) => {
       const cur = this.chrMap.get(slug);
-      if (cur && cur.expr === expr) return;
-      this.chrMap.set(slug, { expr, el: cur && cur.el });
+      if (cur && cur.expr === expr) return;  // 同じ表情の再指定は何もしない
+      this.chrMap.set(slug, { expr, el: cur && cur.el, artKey: cur && cur.artKey });
+      changed = true;
     });
-    this.applyChr();
+    if (changed) { this._chrDirty = true; this.applyChr(); }
   }
   applyChr(talking = null) {
+    // ★ 台詞を1行送るたびに走るのは「話者の切り替え」だけ。
+    //   旧実装はここで毎ライン全員の立ち絵 SVG を innerHTML に書き戻していたため、
+    //   書き換えの1フレームだけ描画が空になり「しゃべると一瞬消える」ように見えた。
+    if (!this._chrDirty && talking === this._talking) return;
+    const dirty = this._chrDirty;
+    this._talking = talking;
+    this._chrDirty = false;
     const layer = this.el.layChr;
     const keys = [...this.chrMap.keys()];
     const n = keys.length;
+    if (!n) { this._pruneChr(layer); return; }
     // 大人数でも身長を変えず、左右の余白を使って配置する。
     // 重なった場合は話者を前面へ（下の zIndex 設定）。
     const posArr = keys.map((_, i) => n <= 2
@@ -761,45 +858,56 @@ export class Stage {
         layer.appendChild(el);
         rec.el = el;
       }
-      const pos = posArr[i];
-      const enter = pos < 40 ? 'left' : pos > 60 ? 'right' : 'center';
       const el = rec.el;
-      el.dataset.enter = enter;
-      el.dataset.count = String(n);
-      el.dataset.pos = String(pos);
-      el.style.setProperty('--chr-delay', `${i*88}ms`);
-      el.style.setProperty('--chr-index', String(i));
-      // 3人時のごく小さな奥行きのみ。人数による縮小はしない。
-      const baseScale = n === 3 ? (i === 1 ? 1.015 : 0.992) : 1;
-      el.style.setProperty('--chr-base', String(baseScale));
-      el.style.left = `calc(${pos}% - var(--u)*210)`;
-      el.style.width = `calc(var(--u)*420)`;
-      el.style.height = `calc(var(--u)*640)`;
-      const a = this.assets.chrFor(slug, rec.expr);
       const sil = el.querySelector('.sil'), img = el.querySelector('img'), tag = el.querySelector('.nametag');
-      if (a && !this.isPlaceholder(a)) { img.src = a.file; sil.innerHTML = ''; img.style.opacity=''; }
-      else { img.removeAttribute('src'); sil.innerHTML = figureSVG(slug, rec.expr, talking===slug ? 'talk' : 'normal'); }
+      if (isNew || (dirty && el.dataset.count !== String(n))) {
+        const pos = posArr[i];
+        el.dataset.enter = pos < 40 ? 'left' : pos > 60 ? 'right' : 'center';
+        el.dataset.count = String(n);
+        el.dataset.pos = String(pos);
+        el.style.setProperty('--chr-delay', `${i * 88}ms`);
+        el.style.setProperty('--chr-index', String(i));
+        // 3人時のごく小さな奥行きのみ。人数による縮小はしない。
+        const baseScale = n === 3 ? (i === 1 ? 1.015 : 0.992) : 1;
+        el.style.setProperty('--chr-base', String(baseScale));
+        el.style.left = `calc(${pos}% - var(--u)*210)`;
+        el.style.width = `calc(var(--u)*420)`;
+        el.style.height = `calc(var(--u)*640)`;
+        void el.offsetWidth;                     // entrance を必ず再生させる
+        el.classList.remove('out');
+        el.classList.add('in');
+      }
+      const a = this.assets.chrFor(slug, rec.expr);
+      const placeholder = this.isPlaceholder(a);
+      // 素材の書き換えは「表情が変わったとき」だけ。話者交代では触らない。
+      const artKey = placeholder ? `svg:${slug}:${rec.expr}` : `img:${a.file}`;
+      if (rec.artKey !== artKey) {
+        rec.artKey = artKey;
+        if (placeholder) { img.removeAttribute('src'); sil.innerHTML = figureSVG(slug, rec.expr); }
+        else { sil.innerHTML = ''; img.src = a.file; img.alt = (a.label || slug) + ' / ' + rec.expr; }
+      }
       const label = a ? a.label.replace(/^\S+\s/, '') : rec.expr;
-      tag.textContent = `${slug} · ${rec.expr} · ${label}`;
-      // restart entrance if newly added
-      if (isNew) { void el.offsetWidth; }
-      el.classList.remove('out');
-      el.classList.add('in');
-      el.classList.toggle('talk', talking === slug);
-      el.classList.toggle('dim', !!talking && talking !== slug);
-      // z: talker front, others back-to-front order
-      el.style.zIndex = talking === slug ? 9 : String(n - i);
-      if (talking === slug) el.style.setProperty('--chr-talk','1');
+      const tagTxt = `${slug} · ${rec.expr} · ${label}`;
+      if (tag.textContent !== tagTxt) tag.textContent = tagTxt;
+      const isTalk = talking === slug;
+      el.classList.toggle('talk', isTalk);
+      el.classList.toggle('dim', !!talking && !isTalk);
+      el.style.zIndex = isTalk ? 9 : String(n - i);
+      if (isTalk) el.style.setProperty('--chr-talk', '1');
       else el.style.removeProperty('--chr-talk');
     });
+    this._pruneChr(layer);
+  }
+  /** chrMap から外れた要素を退場させる（毎ラインではなく、人員が動いたときだけ） */
+  _pruneChr(layer) {
+    const live = new Set();
+    this.chrMap.forEach(v => { if (v.el) live.add(v.el); });
     [...layer.children].forEach(el => {
-      const slug = [...this.chrMap.keys()].find(k => this.chrMap.get(k).el === el);
-      if (!slug) {
-        el.classList.remove('in','talk');
-        el.classList.add('out');
-        el.style.zIndex = '0';
-        setTimeout(() => { if (![...this.chrMap.values()].some(v=>v.el===el)) el.remove(); }, 440);
-      }
+      if (live.has(el)) return;
+      el.classList.remove('in', 'talk', 'dim');
+      el.classList.add('out');
+      el.style.zIndex = '0';
+      setTimeout(() => { if (!live.has(el)) el.remove(); }, 440);
     });
   }
   fx(name) {
@@ -881,12 +989,35 @@ export class AssetDB {
   get(id) { return this.byId[id] || null; }
   /** 実画像（placeholder:false）のみの一覧。起動時プリロードの対象。 */
   realList() { return this.list.filter(a => a.placeholder === false && a.file); }
+  /** 本編で回収できる枚数。reserve:true は「作ってあるがまだ出していない」予備枠なので数えない。 */
+  collectible(cat) { return this.list.filter(a => a.cat === cat && !a.reserve); }
+  /**
+   * 「今から見るシーン」だけで使う実画像だけを取り出す（起動を軽くする）。
+   * 素材を200枚差し替えた瞬間に起動が重量化しないための仕掛け。
+   */
+  priorityList(data, sceneCount = 5, def) {
+    const want = new Set(['title_key']);
+    const order = (data && data.order) || [];
+    for (let i = 0; i < Math.min(sceneCount, order.length); i++) {
+      const sc = data.scenes[order[i]];
+      if (!sc) continue;
+      (sc.body || []).forEach(ins => {
+        if (ins.t === 'bg' || ins.t === 'cg') { if (ins.id) want.add(ins.id); }
+        else if (ins.t === 'chr') Object.keys(ins.set || {}).forEach(slug => {
+          const a = this.chrFor(slug, ins.set[slug]); if (a) want.add(a.id);
+        });
+        else if (ins.t === 'item') { const it = ((def && def.items) || {})[ins.id]; if (it && it.icon) want.add(it.icon); }
+      });
+    }
+    return this.realList().filter(a => want.has(a.id) || want.has(String(a.file || '').replace(/^.*\//, '').replace(/\.\w+$/, '')));
+  }
   /**
    * 実画像を先読みする。onStep(done,total,asset) で進捗を返す。
    * 失敗した画像は警告に留め、起動を止めない（SVGフォールバックが描画される）。
+   * list を渡した場合はその分だけ読む（残り本編分は warmRest() で後追い）。
    */
-  async preload(onStep) {
-    const items = this.realList();
+  async preload(onStep, list) {
+    const items = list ? list.slice() : this.realList();
     const total = items.length;
     onStep && onStep(0, total, null);
     if (!total) return { total: 0, ok: 0 };
@@ -913,6 +1044,25 @@ export class AssetDB {
     };
     await Promise.all(Array.from({ length: Math.min(6, items.length) }, worker));
     return { total, ok };
+  }
+  /** 本編の後半でしか使わない実画像は、手が空いてから少しずつ読む（起動を止めない・切替も待つ必要がない） */
+  warmRest(done) {
+    const rest = this.realList().filter(a => !done.has(a.id));
+    if (!rest.length) return Promise.resolve({ total: 0, ok: 0 });
+    let ok = 0;
+    const queue = rest.slice();
+    const worker = async () => {
+      while (queue.length) {
+        const a = queue.shift();
+        try { await loadImage(a.file, 20000); ok++; done.add(a.id); }
+        catch (e) { console.warn('[warmup] 後読み失敗（その場面では SVG 補完で続けます）:', a.file); }
+      }
+      return ok;
+    };
+    const run = () => Promise.all(Array.from({ length: 2 }, worker));
+    const idle = globalThis.requestIdleCallback;
+    if (idle) return new Promise(res => idle(() => run().then(() => res({ total: rest.length, ok })), { timeout: 6000 }));
+    return new Promise(res => setTimeout(() => run().then(() => res({ total: rest.length, ok })), 1200));
   }
 }
 
