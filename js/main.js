@@ -112,16 +112,22 @@ async function boot() {
     const index = (await fetchText('data/script/index.txt')).split('\n').map(s => s.split(';')[0].trim()).filter(Boolean);
     const speakers = new Set([...Object.keys(def.speakers), 'ナ']);
     const data = { scenes: {}, order: [], chats: {}, chapters: {}, terms, warnings: [] };
+    // 脚本ファイルは並行取得（順次待ちするとRTT分ずつ遊んでしまう）。進捗表示は従来どおりn/Nで刻む
+    let got = 0;
+    const texts = await Promise.all(index.map(f =>
+      fetchText('data/script/' + f).then(t => {
+        got++;
+        setProgress(26 + got / index.length * 24, `脚本を綴じています… ${got}/${index.length}`);
+        return t;
+      })));
     for (let n = 0; n < index.length; n++) {
       const f = index[n];
-      const txt = await fetchText('data/script/' + f);
-      const parsed = parseScript(txt, f, { speakers, strict: false });
+      const parsed = parseScript(texts[n], f, { speakers, strict: false });
       Object.assign(data.scenes, parsed.scenes);
       Object.assign(data.chats, parsed.chats);
       Object.assign(data.chapters, parsed.chapters);
       data.order.push(...parsed.order);
       data.warnings.push(...(parsed.warnings || []).map(w => ({ ...w, file: f })));
-      setProgress(26 + (n + 1) / index.length * 24, `脚本を綴じています… ${n + 1}/${index.length}`);
     }
     // シーンの連結（ファイル跨ぎの next）
     data.order.forEach((id, n) => { data.scenes[id].next = data.order[n + 1] || null; });

@@ -405,7 +405,7 @@ function showNet(kind, cfg) {
     panel.append(bar, posts);
     ov.appendChild(panel);
     ov.classList.add("show");
-    seSafe(kind === "bbs" ? "se_notif" : "se_chime");
+    // 開閉時のSEは鳴らさない（版Aの端末挿入と同様、静かに出す）
     const close = () => { ov.classList.remove("show"); ov.innerHTML = ""; document.removeEventListener("click", close); resolve(); };
     panel.addEventListener("click", close);
     if (G.restoreMode) close();
