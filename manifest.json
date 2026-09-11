@@ -1,0 +1,19 @@
+{
+  "name": "まだ地図の途中で 〜✝本質✝特別編〜",
+  "short_name": "地図の途中",
+  "description": "桐葉高校理数科三年B組・卒業前ノベルゲーム。地図筒からこぼれた一枚の古い写真が、最後の一ヶ月を静かに揺らす。",
+  "lang": "ja",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070604",
+  "theme_color": "#0a0908",
+  "orientation": "landscape-primary",
+  "icons": [
+    {
+      "src": "assets/bg/title_key.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

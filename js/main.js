@@ -10,6 +10,7 @@ import { Stage, AssetDB, backdropSVG, figureSVG } from './visual.js';
 import { GameAudio } from './audio.js';
 import { Store } from './store.js';
 import { parseScript } from './parser.js';
+import { createDebug } from './debug.js';
 
 const D = (id) => document.getElementById(id);
 const dom = {
@@ -169,6 +170,13 @@ async function boot() {
     setProgress(100, '準備完了');
 
     window.__vn = { game, shell, stage, audio, store, data, assets, def };
+    // 管理者デバッグコンソール（常時APIは有効、UIは ?debug=1 / Ctrl+Shift+D で表示）
+    try {
+      const dbg = createDebug({ game, shell, store, data, def, stage, dom });
+      window.__vn.debug = dbg;
+      window.debug = dbg; // エイリアス
+      console.log('[vn] debug console ready — Ctrl+Shift+D / ?debug=1 でパネル表示、 help: window.__vn.debug.help()');
+    } catch(e){ console.warn('[debug] init failed', e); }
     document.body.dataset.ready = '1';
     console.log(`[vn] 準備完了 ― ${data.order.length}シーン / ${Object.keys(data.chats).length}端末 / ${assets.list.length}アセット（実画像 ${assets.realList().length}）`);
 
@@ -224,7 +232,7 @@ function readyGate({ dom, game, shell, audio }) {
 
 /* ---------------------------------------------------------------- 入力 -- */
 function bindInput({ dom, game, shell, store, audio }) {
-  const menuKeys = { s: 'save', l: 'load', c: 'config', g: 'gallery', t: 'tips', r: 'flow', y: 'almanac' };
+  const menuKeys = { s: 'save', l: 'load', c: 'config', g: 'gallery', t: 'tips', r: 'endlist', y: 'almanac' };
   let hudOn = true;
   addEventListener('keydown', (e) => {
     if (!window.__vnReady) return;   // 起動ゲート通過前はゲーム入力を受けない
@@ -257,7 +265,7 @@ function bindInput({ dom, game, shell, store, audio }) {
     }
     if (k === ' ' || k === 'Enter' || k === 'PageDown') { e.preventDefault(); game.advance(); return; }
     if (k === 'Control') { if (!game.skip) game.toggleSkip(); return; }
-    if (k === 'F1') { e.preventDefault(); store.saveAuto(game.snapshot()); shell.toast('QUICK SAVE'); return; }
+    if (k === 'F1') { e.preventDefault(); try{ store.saveAuto(game.snapshot()); shell.toast('QUICK SAVE'); } catch(err){ if(err && err.message==='QUOTA_EXCEEDED'){ shell.toast('保存容量がいっぱいです — 古いスロットを1つ削除してください'); shell.open('save'); } else { shell.toast('保存に失敗しました'); } } return; }
     if (k === 'F2' || k === 'F3') { e.preventDefault(); const s = store.loadAuto(); if (s) { game.restore(s); shell.toast('QUICK LOAD'); } return; }
     const lk = k.toLowerCase();
     if (menuKeys[lk]) { e.preventDefault(); shell.open(menuKeys[lk]); return; }
@@ -290,7 +298,7 @@ function bindInput({ dom, game, shell, store, audio }) {
   function openQuick() {
     const items = [
       ['続きから / BACKLOG', 'log'], ['保存 / SAVE', 'save'], ['読込 / LOAD', 'load'],
-      ['設定 / CONFIG', 'config'], ['ギャラリー / GALLERY', 'gallery'], ['ルート図 / FLOW', 'flow'],
+      ['設定 / CONFIG', 'config'], ['ギャラリー / GALLERY', 'gallery'], ['エンドリスト / END LIST', 'endlist'],
       ['✝本質✝辞典 / TIPS', 'tips'], ['✝本質✝年鑑 / ALMANAC', 'almanac'],
     ];
     dom.qmList.innerHTML = '';

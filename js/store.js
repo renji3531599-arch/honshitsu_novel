@@ -11,7 +11,8 @@ const del = (k) => { try { LS ? localStorage.removeItem(k) : delete mem[k]; } ca
 
 export const SLOTS = 12;
 const P_SAVE = 'honshitsu.save.';
-const K_META = 'honshitsu.meta.v1';
+const K_META = 'honshitsu.meta.v2';
+const K_META_OLD = 'honshitsu.meta.v1';
 const K_CONF = 'honshitsu.config.v1';
 
 export const DEFAULT_CONFIG = {
@@ -29,6 +30,7 @@ export const DEFAULT_CONFIG = {
   vignette: true,
   shake: true,
   autosave: true,
+  skipUnread: false,   // 未読スキップを許可するか
   lang: 'ja',
 };
 
@@ -43,21 +45,54 @@ export const DEFAULT_META = () => ({
   chats: [],
   routes: {},         // key -> 累計到達回数
   music: [],          // 聞いたBGM
+  readScenes: [],       // 既読シーンID（スキップ判定用）
   cleared: false,
 });
 
 export class Store {
   constructor() {
-    this.config = Object.assign({}, DEFAULT_CONFIG, JSON.parse(get(K_CONF) || '{}'));
-    this.meta = Object.assign(DEFAULT_META(), JSON.parse(get(K_META) || '{}'));
+    const rawConf = JSON.parse(get(K_CONF) || '{}');
+    this.config = Object.assign({}, DEFAULT_CONFIG, rawConf);
+    // 軽量マイグレーション: 不明キーの除去と型補正
+    if (typeof this.config.textSpeed !== 'number') this.config.textSpeed = DEFAULT_CONFIG.textSpeed;
+    let rawMetaStr = get(K_META);
+    if (!rawMetaStr) rawMetaStr = get(K_META_OLD);
+    const rawMeta = JSON.parse(rawMetaStr || '{}');
+    const base = DEFAULT_META();
+    this.meta = Object.assign(base, rawMeta);
+    // 旧 meta の互換: endings が配列だった頃の救済
+    if (Array.isArray(this.meta.endings)) {
+      const m = {}; this.meta.endings.forEach(k=> m[k]= {at:Date.now()}); this.meta.endings = m;
+    }
+    // 新規キーの初期化
+    if (!Array.isArray(this.meta.cg)) this.meta.cg = [];
+    if (!this.meta.chr || typeof this.meta.chr !== 'object') this.meta.chr = {};
+    if (!Array.isArray(this.meta.tips)) this.meta.tips = [];
+    if (!this.meta.almanac || typeof this.meta.almanac !== 'object') this.meta.almanac = {};
+    if (!Array.isArray(this.meta.chats)) this.meta.chats = [];
+    if (!this.meta.routes || typeof this.meta.routes !== 'object') this.meta.routes = {};
+    if (!Array.isArray(this.meta.music)) this.meta.music = [];
+    if (!Array.isArray(this.meta.readScenes)) this.meta.readScenes = [];
   }
   saveConfig() { set(K_CONF, JSON.stringify(this.config)); }
-  saveMeta() { set(K_META, JSON.stringify(this.meta)); }
+  saveMeta() { set(K_META, JSON.stringify(this.meta)); try { del(K_META_OLD); } catch(_){} }
   resetMeta() { this.meta = DEFAULT_META(); del(K_META); }
 
   save(slot, data) {
     data.savedAt = Date.now();
-    set(P_SAVE + slot, JSON.stringify(data));
+    data._v = 2;
+    try {
+      set(P_SAVE + slot, JSON.stringify(data));
+    } catch (e) {
+      const isQuota = e && (e.name === 'QuotaExceededError' || /quota|storage/i.test(e.message||''));
+      if (isQuota) {
+        // クォータ超過時は古いスロットを1つ空ける提案 — 呼び出し側で toast できるよう例外を投げる
+        const err = new Error('QUOTA_EXCEEDED');
+        err.cause = e;
+        throw err;
+      }
+      throw e;
+    }
     return data;
   }
   load(slot) {
@@ -73,7 +108,14 @@ export class Store {
     });
   }
   hasSave() { return this.list().some(s => !s.empty) || !!this.load('auto'); }
-  saveAuto(data) { set(P_SAVE + 'auto', JSON.stringify(Object.assign({ savedAt: Date.now() }, data))); }
+  saveAuto(data) {
+    const payload = JSON.stringify(Object.assign({ savedAt: Date.now(), _v: 2 }, data));
+    try { set(P_SAVE + 'auto', payload); }
+    catch (e) {
+      // オートセーブは失敗してもゲームを止めない — 古いautoを消して再試行
+      try { del(P_SAVE + 'auto'); set(P_SAVE + 'auto', payload); } catch (_) {}
+    }
+  }
   loadAuto() { try { return JSON.parse(get(P_SAVE + 'auto') || 'null'); } catch (e) { return null; } }
   quick(slot, data) { set(P_SAVE + 'q' + slot, JSON.stringify(Object.assign({ savedAt: Date.now() }, data))); }
   quickLoad(slot) { try { return JSON.parse(get(P_SAVE + 'q' + slot) || 'null'); } catch (e) { return null; } }

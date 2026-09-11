@@ -63,6 +63,7 @@ const SE = {
 };
 
 const mtof = (m) => 440 * Math.pow(2, (m - 69) / 12);
+const prefersReducedAudio = () => { try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(_) { return false; } };
 
 export class GameAudio {
   constructor() {
@@ -150,7 +151,7 @@ export class GameAudio {
     n.gain.gain.linearRampToValueAtTime(1, t + Math.max(.05, fade));
     n.gain.connect(this.gBgm);
     const send = this.ctx.createGain();
-    send.gain.value = .3; send.connect(this.conv); send.connect(n.gain);
+    send.gain.value = prefersReducedAudio() ? .06 : .3; send.connect(this.conv); send.connect(n.gain);
     n.send = send;
     this.nodes = n;
     this.step = 0;
@@ -159,6 +160,7 @@ export class GameAudio {
     if (th.amb) this._ambience(th.amb, n);
   }
   _ambience(kind, n) {
+    if (prefersReducedAudio()) return;
     const src = this.ctx.createBufferSource();
     src.buffer = this._noise(); src.loop = true;
     const bp = this.ctx.createBiquadFilter();

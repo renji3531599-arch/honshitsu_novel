@@ -5,6 +5,22 @@ import { backdropSVG, figureSVG, contourSVG } from './visual.js';
 import { fmtDate, fmtTime } from './store.js';
 
 const $ = (s, r = document) => r.querySelector(s);
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])';
+function trapFocus(container){
+  const nodes = [...container.querySelectorAll(FOCUSABLE)].filter(n=> n.offsetParent!==null || container===n);
+  if(!nodes.length) return ()=>{};
+  const first = nodes[0], last = nodes[nodes.length-1];
+  const onKey = (e)=>{
+    if(e.key!=='Tab') return;
+    if(e.shiftKey){
+      if(document.activeElement===first){ e.preventDefault(); last.focus(); }
+    } else {
+      if(document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }
+  };
+  container.addEventListener('keydown', onKey);
+  return ()=> container.removeEventListener('keydown', onKey);
+}
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -14,6 +30,8 @@ export class Shell {
     Object.assign(this, opt);   // game, dom, store, audio, stage, data, def
     this.choiceSel = -1;
     this._hubCb = null;
+    this._trapOff = null;
+    this._lastFocus = null;
     this.buildTitle();
     this.buildTicks();
     this.buildTitleBackdrop();
@@ -23,7 +41,9 @@ export class Shell {
   toast(msg) {
     const t = el('div', 'toast', `<em>✝</em>${esc(msg)}`);
     this.dom.toasts.appendChild(t);
-    setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 600); }, 2600);
+    // 出現時にわずかなスケールバウンスをJS側でも付与（CSSのtoastInと二重で立体感）
+    t.style.willChange = 'transform, opacity, filter';
+    setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 620); }, 2800);
   }
   buildTicks() {
     ['tl', 'tr', 'bl', 'br'].forEach(p => {
@@ -50,6 +70,37 @@ export class Shell {
     }
     if (this.stage.titleFx) this.stage.titleFx.set('dust');
     this.prepareLogo();
+    this.bindTitleParallax();
+  }
+  bindTitleParallax(){
+    const title = this.dom.title;
+    if (!title || title.dataset.parallax) return;
+    title.dataset.parallax = '1';
+    let raf = 0, tx = 0, ty = 0;
+    const key = this.dom.titleKey, bg = this.dom.titleBg;
+    title.addEventListener('mousemove', (e) => {
+      const r = title.getBoundingClientRect();
+      const nx = ((e.clientX - r.left)/r.width - 0.5) * 2; // -1..1
+      const ny = ((e.clientY - r.top)/r.height - 0.5) * 2;
+      tx = nx; ty = ny;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const mx = tx * 7, my = ty * 5;
+        if (key) key.style.transform = `translate3d(${mx*0.55}px, ${my*0.6}px, 0) scale(1.018)`;
+        if (bg) bg.style.transform = `translate3d(${mx*0.35}px, ${my*0.32}px, 0) scale(1.03)`;
+        title.style.setProperty('--mx', mx.toFixed(2)+'px');
+        title.style.setProperty('--my', my.toFixed(2)+'px');
+      });
+    });
+    title.addEventListener('mouseleave', () => {
+      if (key) key.style.transform = '';
+      if (bg) bg.style.transform = '';
+    });
+    // Reduced motion への配慮
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      title.dataset.parallax = 'off';
+    }
   }
   /** ロゴを1文字ずつ包み、段階リビールに備える */
   prepareLogo() {
@@ -142,7 +193,7 @@ export class Shell {
       { id: 'continue', ja: 'つづきから', en: 'CONTINUE', dis: !has },
       { id: 'load', ja: 'ロード', en: 'LOAD' },
       { id: 'gallery', ja: 'ギャラリー', en: 'CG / CHARACTER / MUSIC' },
-      { id: 'flow', ja: 'ルート図', en: 'FLOW CHART' },
+      { id: 'endlist', ja: 'エンドリスト', en: 'END LIST' },
       { id: 'tips', ja: '✝本質✝辞典', en: 'TIPS / GLOSSARY' },
       { id: 'almanac', ja: '✝本質✝年鑑', en: 'KURAISHI ARCHIVE' },
       { id: 'config', ja: '環境設定', en: 'CONFIG' },
@@ -179,7 +230,7 @@ export class Shell {
       + `<i title="周回">RUN ${m.runs || 0}</i>`;
   }
   async titlePick(id) {
-    if (['gallery', 'flow', 'tips', 'almanac', 'config', 'keys'].includes(id)) { this.open(id); return; }
+    if (['gallery', 'endlist', 'flow', 'tips', 'almanac', 'config', 'keys'].includes(id)) { this.open(id === 'flow' ? 'endlist' : id); return; }
     if (id === 'bonus') { this.cinematicStart('end_bonus', 'end'); return; }
     if (id === 'new') { this.cinematicStart('prologue_001', 'prologue'); return; }
     if (id === 'continue') {
@@ -213,19 +264,40 @@ export class Shell {
     const v = this.dom.veil;
     clearTimeout(this._veilTimer);
     v.classList.remove('lift');
-    this.dom.veilKicker.textContent = kicker;
-    this.dom.veilTitle.textContent = title;
+    // キッカーとタイトルに文字ごとのふわり演出を付ける
+    const kEl = this.dom.veilKicker, tEl = this.dom.veilTitle;
+    kEl.textContent = kicker; tEl.textContent = title;
+    kEl.style.opacity = '0'; kEl.style.transform = 'translateY(8px)';
+    tEl.style.opacity = '0'; tEl.style.transform = 'translateY(10px)';
     v.classList.remove('on');
     void v.offsetWidth;
     v.classList.add('on');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      kEl.style.transition = 'opacity .7s var(--ease-expo) .12s, transform .7s var(--ease-expo) .12s';
+      tEl.style.transition = 'opacity .8s var(--ease-expo) .22s, transform .8s var(--ease-expo) .22s';
+      kEl.style.opacity = '1'; kEl.style.transform = 'none';
+      tEl.style.opacity = '1'; tEl.style.transform = 'none';
+    }));
     return new Promise(r => setTimeout(r, hold));
   }
   veilLift() {
     const v = this.dom.veil;
-    v.classList.remove('on');
-    v.classList.add('lift');
+    // テキストを先にふわっと消してから幕を上げる
+    const kEl = this.dom.veilKicker, tEl = this.dom.veilTitle;
+    kEl.style.transition = tEl.style.transition = 'opacity .45s var(--ease-soft), transform .45s var(--ease-soft)';
+    kEl.style.opacity = tEl.style.opacity = '0';
+    kEl.style.transform = 'translateY(-6px)'; tEl.style.transform = 'translateY(-8px)';
+    setTimeout(() => {
+      v.classList.remove('on');
+      v.classList.add('lift');
+      kEl.style.transform = tEl.style.transform = '';
+    }, 180);
     clearTimeout(this._veilTimer);
-    this._veilTimer = setTimeout(() => v.classList.remove('lift'), 1700);
+    this._veilTimer = setTimeout(() => {
+      v.classList.remove('lift');
+      kEl.style.transition = tEl.style.transition = '';
+      kEl.style.opacity = tEl.style.opacity = '';
+    }, 1700);
   }
   hideTitle() {
     this.dom.title.classList.add('out');
@@ -250,20 +322,39 @@ export class Shell {
     const wrap = this.dom.choices;
     this._choiceCb = cb;
     this.dom.choicePrompt.textContent = prompt || '';
+    this.dom.choicePrompt.id = 'choicePrompt';
+    this.dom.choiceList.setAttribute('role','listbox');
+    this.dom.choiceList.setAttribute('aria-labelledby','choicePrompt');
     this.dom.choiceList.innerHTML = '';
     this.choiceSel = 0;
     opts.forEach((o, i) => {
       const b = el('button', 'choice', `<span class="lab">${esc(o.label)}</span>${o.sub ? `<span class="sub">${esc(o.sub)}</span>` : ''}`);
+      b.style.setProperty('--i', i);
       b.addEventListener('mouseenter', () => { this.choiceSel = i; this.paintChoices(); this.audio.se('se_hover'); });
       b.addEventListener('click', () => this.pickChoice(i));
       this.dom.choiceList.appendChild(b);
     });
     wrap.classList.remove('hidden');
-    wrap.classList.add('in');
+    // 2フレーム待ってから in を付与すると transition / keyframe が確実に走る
+    requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('in')));
     this.paintChoices();
+    // プロンプトもふわり
+    const pr = this.dom.choicePrompt;
+    pr.style.opacity = '0'; pr.style.transform = 'translateY(4px)';
+    requestAnimationFrame(() => { pr.style.transition = 'opacity .5s var(--ease-expo), transform .5s var(--ease-expo)'; pr.style.opacity = '1'; pr.style.transform = 'none'; });
   }
   paintChoices() {
-    $$('#choiceList .choice').forEach((b, i) => b.style.transform = i === this.choiceSel ? 'translateX(calc(var(--u)*6))' : '');
+    const list = this.dom.choiceList;
+    $$('#choiceList .choice').forEach((b, i) => {
+      const active = i === this.choiceSel;
+      b.classList.toggle('sel', active);
+      b.setAttribute('role','option');
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+      b.id = 'choice-'+i;
+      b.style.transform = active ? 'translateX(calc(var(--u)*6)) scale(1.012)' : '';
+      b.style.borderColor = active ? 'rgba(230,200,140,.82)' : '';
+    });
+    if(list) list.setAttribute('aria-activedescendant', 'choice-'+this.choiceSel);
   }
   moveChoice(d) {
     const n = this.dom.choiceList.children.length;
@@ -275,11 +366,18 @@ export class Shell {
   pickChoice(i) {
     if (this._choiceCb) { const cb = this._choiceCb; this._choiceCb = null; cb(i); }
   }
-  hideChoices() { this.dom.choices.classList.add('hidden'); this.dom.choices.classList.remove('in'); }
+  hideChoices() {
+    const w = this.dom.choices;
+    w.classList.remove('in');
+    w.style.transition = 'opacity .32s var(--ease-soft)';
+    w.style.opacity = '0';
+    setTimeout(() => { w.classList.add('hidden'); w.style.opacity = ''; w.style.transition = ''; this.dom.choicePrompt.style.transition=''; }, 340);
+  }
 
   /* ------------------------------------------------------------- 端末風 --- */
   openChat(chat, onClose) {
     const d = this.dom;
+    this._lastFocus = document.activeElement;
     d.screenFrame.dataset.kind = chat.kind || 'line';
     d.screenTitle.textContent = chat.title || '';
     d.screenKind.textContent = ({ line: 'GROUP CHAT', bbs: 'BBS', juken: 'ENTRANCE BBS', live: 'LIVE' })[chat.kind] || 'MESSAGE';
@@ -304,6 +402,7 @@ export class Shell {
       d.screenWrap.classList.remove('on');
       d.screenWrap.removeEventListener('click', close);
       this._chatClose = null;
+      try { if(this._lastFocus && this._lastFocus.focus) this._lastFocus.focus(); } catch(_){}
       onClose && onClose();
     };
     this._chatClose = close;
@@ -314,7 +413,12 @@ export class Shell {
   openHub(cb) {
     this._hubCb = cb;
     const d = this.dom;
+    this._lastFocus = document.activeElement;
     d.hub.classList.add('on');
+    d.hub.setAttribute('role','dialog');
+    d.hub.setAttribute('aria-modal','true');
+    try { if(this._trapOff) this._trapOff(); } catch(_){}
+    this._trapOff = trapFocus(d.hub);
     d.hubList.innerHTML = '';
     const routes = this.def.routes || [];
     routes.forEach((r, ri) => {
@@ -327,6 +431,7 @@ export class Shell {
         <span class="bar"><i style="width:${done ? 100 : 0}%"></i></span>
         <span class="st">${done ? '✔ 読了' : '未読'}</span>`);
       card.style.setProperty('--i', ri);
+      card.style.opacity = '0'; card.style.transform = 'translateY(10px) scale(.98)';
       card.addEventListener('mouseenter', () => this.audio.se('se_hover'));
       card.addEventListener('click', () => {
         this.audio.se('se_click');
@@ -337,6 +442,13 @@ export class Shell {
       });
       d.hubList.appendChild(card);
     });
+    // 順番にふわりと現す
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      [...d.hubList.children].forEach((c, i) => {
+        c.style.transition = `opacity .55s var(--ease-expo) ${i*65}ms, transform .6s var(--ease-spring) ${i*65}ms`;
+        c.style.opacity = '1'; c.style.transform = 'none';
+      });
+    }));
     const done = routes.filter(r => this.game.state.routes[r.key]).length;
     d.hubFoot.innerHTML = `<span>読了 ${done}／${routes.length} ルート</span>`;
     const all = done >= routes.length;
@@ -353,7 +465,12 @@ export class Shell {
     });
     d.hubFoot.appendChild(btn);
   }
-  closeHub() { this.dom.hub.classList.remove('on'); if (this._hubCb) { const c = this._hubCb; this._hubCb = null; c(null); } }
+  closeHub() {
+    this.dom.hub.classList.remove('on');
+    try { if(this._trapOff){ this._trapOff(); this._trapOff=null; } } catch(_){}
+    try { if(this._lastFocus && this._lastFocus.focus) this._lastFocus.focus(); } catch(_){}
+    if (this._hubCb) { const c = this._hubCb; this._hubCb = null; c(null); }
+  }
 
   /* --------------------------------------------------------------- backlog -- */
   renderLog() {
@@ -372,7 +489,17 @@ export class Shell {
   /* --------------------------------------------------------------- overlay -- */
   open(kind, arg) {
     const d = this.dom;
+    // フォーカス退避とトラップ
+    this._lastFocus = document.activeElement;
     d.overlay.classList.remove('hidden');
+    d.overlay.setAttribute('aria-hidden','false');
+    d.ovPanel.setAttribute('role','dialog');
+    d.ovPanel.setAttribute('aria-modal','true');
+    d.ovPanel.setAttribute('aria-labelledby','ovTitle');
+    try { if(this._trapOff) this._trapOff(); } catch(_){}
+    this._trapOff = trapFocus(d.ovPanel);
+    // 背景を inert に（対応ブラウザでは操作不能化）
+    try { d.stage.inert = true; d.viewport.inert = false; } catch(_){}
     d.ovBody.dataset.kind = kind;
     this._logOpen = kind === 'log';
     const conf = {
@@ -383,20 +510,40 @@ export class Shell {
       log: ['BACKLOG', 'LOG ― 今までの話', () => this.renderLog()],
       tips: ['TIPS', '✝本質✝辞典', () => this.paneTips()],
       almanac: ['ARCHIVE', '✝本質✝年鑑（倉石暁 編）', () => this.paneAlmanac()],
-      flow: ['MAP', 'ROUTE ― まだ地図の途中で', () => this.paneFlow()],
+      endlist: ['ENDING LIST', 'END LIST ― 14の結末', () => this.paneEndList()],
+      flow: ['ENDING LIST', 'END LIST ― 14の結末', () => this.paneEndList()],
       keys: ['SYSTEM', 'KEY BOARD ― 操作', () => this.paneKeys()],
       end: ['ENDING', '', () => this.paneEnd(arg)],
     }[kind];
     if (!conf) return;
     d.ovKicker.textContent = conf[0];
     d.ovTitle.textContent = conf[1];
+    d.ovTitle.id = 'ovTitle';
     d.ovBody.innerHTML = '';
     d.ovFoot.innerHTML = `<span>Esc / ✕ で閉じる</span><span>${esc(this.game.sceneLabel())}</span>`;
     conf[2]();
   }
   close() {
     this.dom.overlay.classList.add('hidden');
+    this.dom.overlay.setAttribute('aria-hidden','true');
+    try { if(this._trapOff){ this._trapOff(); this._trapOff=null; } } catch(_){}
+    try { this.dom.stage.inert = false; } catch(_){}
     this._logOpen = false;
+    // フォーカス復帰
+    try {
+      const t = this._lastFocus;
+      if(t && t.focus && document.contains(t)) t.focus();
+      else {
+        // タイトルが表示中なら最初のメニューへ、ゲーム中なら stage へ
+        const titleOut = this.dom.title.classList.contains('out');
+        if(!titleOut){
+          const first = this.dom.titleMenu.querySelector('button');
+          if(first) first.focus();
+        } else {
+          this.dom.stage.focus && this.dom.stage.focus();
+        }
+      }
+    } catch(_){}
     if (this._pendingEnd) { const f = this._pendingEnd; this._pendingEnd = null; f(); }
   }
   hideMenus() { this.close(); this.hideChoices(); this.dom.hub.classList.remove('on'); this.dom.screenWrap.classList.remove('on'); }
@@ -463,6 +610,7 @@ export class Shell {
     colB.appendChild(check('フィルム粒子', 'grain', () => this.applyGrade()));
     colB.appendChild(check('ビネット', 'vignette', () => this.applyGrade()));
     colB.appendChild(check('画面シェイク', 'shake'));
+    colB.appendChild(check('未読スキップを許可', 'skipUnread', ()=> this.toast(this.store.config.skipUnread? '未読スキップ: ON':'未読スキップ: OFF')));
     colB.appendChild(check('自動セーブ', 'autosave'));
     g2.appendChild(colB);
     sect.appendChild(g2);
@@ -520,7 +668,7 @@ export class Shell {
       card.addEventListener('click', (ev) => {
         if (ev.target.classList.contains('kill')) { delFn && delFn(); this.audio.se('se_deny'); this.open(mode === 'save' ? 'save' : 'load', mode); return; }
         this.audio.se('se_click');
-        if (mode === 'save') { this.store.save(idx, this.game.snapshot()); this.toast(`SLOT ${idx} に記録した`); this.open('save'); }
+        if (mode === 'save') { try{ this.store.save(idx, this.game.snapshot()); this.toast(`SLOT ${idx} に記録した`); } catch(err){ if(err && err.message==='QUOTA_EXCEEDED'){ this.toast('保存容量がいっぱいです — 別のスロットを削除してから再試行してください'); } else { this.toast('保存に失敗しました: '+(err.message||'')); } } this.open('save'); }
         else {
           if (!d) { this.audio.se('se_deny'); this.toast('空きスロットです'); return; }
           this.close(); this.hideTitle(); this.game.restore(d);
@@ -722,68 +870,109 @@ ${ends}
     body.appendChild(sect);
   }
 
-  /* ------------------------------------------------------------ FLOW ------ */
-  paneFlow() {
+  /* -------------------------------------------------------- END LIST ------ */
+  paneEndList() {
     const body = this.dom.ovBody;
-    const v = this.store.meta.visited || {};
-    const sc = (id) => !!v['sc:' + id];
-    const wrap = el('div', 'flow2');
-    const node = (k, t, id) => {
-      const done = sc(id);
-      return el('div', 'f2-node' + (done ? ' done' : ''),
-        `<span class="k">${esc(k)}</span><span class="t">${esc(t)}</span>` +
-        `<span class="s">${done ? '✔ 到達済み' : '― 未到達 ―'}</span>`);
-    };
-    // 本筋：プロローグ→第一章→HUB
-    const spine = el('div', 'f2-spine');
-    spine.appendChild(node('PROLOGUE', '三度目の春、まだ来ない', 'prologue_001'));
-    spine.appendChild(node('CHAPTER 1', '差出人不明の写真', 'c004_hokanko'));
-    spine.appendChild(node('HUB', '見送りの準備、始めます', 'hub_open'));
-    wrap.appendChild(spine);
-    // 分岐：HUB ― 6ルート
-    const bus = el('div', 'f2-bus');
-    bus.appendChild(el('div', 'f2-bus-label', '― HUB ― 好きな順番で ―'));
-    const rg = el('div', 'f2-routes');
-    (this.def.routes || []).forEach(r => {
-      const seen = sc(r.scene) || !!this.game.state.routes[r.key] || !!this.store.meta.routes[r.key];
-      rg.appendChild(el('div', 'f2-route' + (seen ? ' done' : ''),
-        `<span class="no">ROUTE ${esc(r.no)} ／ ${esc(r.who)}</span>` +
-        `<span class="nm">${esc(r.title)}</span>` +
-        `<span class="tt">「${esc(r.sub)}」</span>` +
-        `<span class="st">${seen ? '✔ 読了' : '未読'}</span>`));
-    });
-    bus.appendChild(rg);
-    wrap.appendChild(bus);
-    // 収束：地図を作る夜→終章
-    const spine2 = el('div', 'f2-spine');
-    spine2.appendChild(node('CONVERGE', '地図を作る夜', 'g1'));
-    spine2.appendChild(node('CLIMAX', '窓の外に、ずっといた人', 'h1'));
-    wrap.appendChild(spine2);
-    // 結末：エンディング一覧
     const m = this.store.meta;
-    const ends = el('div', 'f2-bus');
-    ends.appendChild(el('div', 'f2-bus-label',
-      `― ENDINGS ― ${Object.keys(m.endings || {}).length} / ${Object.keys(this.def.endings).length} 到達 ―`));
-    const eg = el('div', 'f2-ends');
-    Object.entries(this.def.endings).forEach(([id, e]) => {
-      const has = !!m.endings[id];
-      const cls = /TRUE/.test(e.tier) ? 'true' : /COMEDY|BONUS/.test(e.tier) ? 'secret' : /GOOD/.test(e.tier) ? 'good' : '';
-      const d = el('div', `f2-end ${cls}${has ? ' done' : ' lock'}`,
-        `<span class="k">${esc(e.tier)}</span><span class="t">${has ? '「' + esc(e.label) + '」' : '？？？'}</span>`);
-      d.title = has ? (e.cond || '') : 'まだ到達していません';
-      eg.appendChild(d);
+    const endings = this.def.endings || {};
+    const ids = Object.keys(endings);
+    const got = ids.filter(id => m.endings[id]).length;
+    const total = ids.length;
+    const pct = total ? Math.round(got / total * 100) : 0;
+
+    // 現在周回の参考値（HUD非表示の心Pointをここでは明かす）
+    const j = (() => {
+      try {
+        const s = this.game.state;
+        const maj = (this.def.flags || []).filter(f => f.key !== 'flag_kuraishi').length;
+        let flagcount = 0;
+        (this.def.flags || []).forEach(f => { if (f.key === 'flag_kuraishi') return; if ((s.flags[f.key] || 0) >= 2) flagcount++; });
+        return { heart: s.heart || 0, flagcount, maj };
+      } catch (_) { return { heart: 0, flagcount: 0, maj: 8 }; }
+    })();
+
+    const wrap = el('div', 'elist');
+    // ---- header ----
+    const head = el('div', 'elist-head');
+    head.innerHTML = `
+      <div class="elist-progress">
+        <div class="bar"><i style="width:${pct}%"></i></div>
+        <div class="num"><b>${got}</b> / ${total} <span>到達</span><small>${pct}%</small></div>
+      </div>
+      <div class="elist-stats">
+        <span>今回の心Point <b>${j.heart}</b></span>
+        <span>主要Flag <b>${j.flagcount}</b> / ${j.maj}</span>
+        <span>周回 <b>${m.runs || 1}</b></span>
+        <span>CG <b>${(m.cg || []).length}</b> / 52</span>
+      </div>
+      <p class="hint">条件を満たすと、収束章のあと自動で振り分けられます。到達済みは金色、未到達は半透明。クリックでCGプレビュー（到達済みのみ）。</p>`;
+    wrap.appendChild(head);
+
+    const groups = [
+      { id: 'true', label: 'TRUE END', desc: '全員で地図を完成させた結末', ids: ['true'] },
+      { id: 'good', label: 'GOOD END — 9種', desc: '誰か一人と、とくに丁寧に向き合った結末。心18以上＋そのFlagが最大のときに選ばれます', ids: ['good_mie','good_satou','good_rei','good_terachi','good_ryoma','good_izaki','good_meshino','good_kuraishi','good_minamitou'] },
+      { id: 'normal', label: 'NORMAL / BITTERSWEET', desc: 'どのFlagも突出せず、心Pointだけで決まる結末', ids: ['normal','bittersweet'] },
+      { id: 'secret', label: 'SECRET / EXTRA', desc: '隠し条件。普段は選ばれない選び方をしたときだけ現れます', ids: ['comedy','bonus'] },
+    ];
+
+    groups.forEach(g => {
+      const sect = el('div', 'egroup');
+      const hd = el('div', 'egroup-head');
+      const cntGot = g.ids.filter(id => m.endings[id]).length;
+      hd.innerHTML = `<h4>${esc(g.label)} <small>${cntGot}/${g.ids.length}</small></h4><p>${esc(g.desc)}</p>`;
+      sect.appendChild(hd);
+      const grid = el('div', 'ecards');
+      g.ids.forEach(id => {
+        const e = endings[id];
+        if (!e) return;
+        const has = !!m.endings[id];
+        const cg = e.cg ? this.data.assets.byId[e.cg] : null;
+        const tierClass = /TRUE/.test(e.tier) ? 'true' : /COMEDY|BONUS/.test(e.tier) ? 'secret' : /GOOD/.test(e.tier) ? 'good' : (id === 'normal' ? 'normal' : id === 'bittersweet' ? 'bitter' : '');
+        const card = el('button', `ecard ${tierClass}${has ? ' done' : ' lock'}`);
+        if (e.color) card.style.setProperty('--accent', e.color);
+        const thumb = has && cg ? `<div class="thumb">${this.cellArt(cg)}</div>` : `<div class="thumb lock"><span>LOCKED</span></div>`;
+        card.innerHTML = `
+          ${thumb}
+          <div class="meta">
+            <span class="tier">${esc(e.tier)}</span>
+            <span class="title">${has ? '「' + esc(e.label) + '」' : '？？？'}</span>
+            <span class="cond">${esc(e.cond || '')}</span>
+          </div>
+          <span class="st">${has ? '✔ 到達済み' : '未到達'}</span>`;
+        card.title = has ? `${e.tier}「${e.label}」 — ${e.cond || ''}` : `${e.tier} — ${e.cond || ''}（未到達）`;
+        if (has && cg) {
+          card.addEventListener('click', () => this.showArt(cg, true));
+        } else if (has) {
+          card.style.cursor = 'default';
+        } else {
+          card.addEventListener('click', () => {
+            this.audio.se('se_deny');
+            this.toast('まだ到達していません — 条件：' + (e.cond || ''));
+          });
+        }
+        card.addEventListener('mouseenter', () => this.audio.se('se_hover'));
+        grid.appendChild(card);
+      });
+      sect.appendChild(grid);
+      wrap.appendChild(sect);
     });
-    ends.appendChild(eg);
-    wrap.appendChild(ends);
+
+    const foot = el('div', 'elist-foot');
+    foot.innerHTML = `
+      <div class="legend">
+        <span><i class="on"></i>到達済み</span>
+        <span><i></i>未到達</span>
+        <span>判定順：COMEDY → BONUS → TRUE → GOOD(最大Flag) → NORMAL/BITTER</span>
+      </div>
+      <p class="hint">判定の詳細は <b>docs/SCRIPT_SPEC.md §7</b> とエンドカード（到達時）に表示されます。BONUS「また、この教室で」は他13種を回収するとタイトルに出現します。</p>`;
+    wrap.appendChild(foot);
 
     const sect = el('div', 'sect');
     sect.appendChild(wrap);
-    const chCount = Object.keys(v).filter(k => k.startsWith('ch:')).length;
-    sect.appendChild(el('div', 'legend',
-      `<span><i></i>到達済み</span><span class="g"><i></i>読了ルート</span>` +
-      `<span>HUBの6ルートは訪問順自由</span><span>章 ${chCount}/${Object.keys(this.data.chapters).length}</span>`));
     body.appendChild(sect);
   }
+  // 旧名エイリアス（後方互換）
+  paneFlow() { return this.paneEndList(); }
 
   /* -------------------------------------------------------------- KEYS ----- */
   paneKeys() {
@@ -797,7 +986,7 @@ ${ends}
       ['F1 / F2', 'クイックセーブ／クイックロード'],
       ['Q', 'クイックメニュー'],
       ['S / L / C', 'セーブ／ロード／環境設定'],
-      ['G / T / R', 'ギャラリー／辞典／ルート図'],
+      ['G / T / R', 'ギャラリー／辞典／エンドリスト'],
       ['Y', '✝本質✝年鑑（倉石暁 編）'],
       ['I', '所持品の表示・非表示'],
       ['Esc', 'ウインドウを閉じる／メニュー'],
