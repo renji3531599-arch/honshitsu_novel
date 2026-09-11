@@ -1,0 +1,20 @@
+# deps
+node_modules/
+package-lock.json
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
+
+# 将来 _buffer は LFS か除外推奨（現在は履歴保持のため残置）
+# assets/_buffer/
+
+# build / cache
+.cache/
+.parcel-cache/
+dist/

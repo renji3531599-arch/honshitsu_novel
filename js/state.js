@@ -76,6 +76,13 @@ export function parseEffect(str) {
 }
 
 /** 企画書 7.1／7.3 に基づくエンディング判定 */
+/**
+ * エンディング判定 — 企画書 §7.1〜7.4 準拠
+ * BONUS EXTRA (id='bonus') は本関数では返さない。BONUSは shell 側で
+ * persistent.endings の回収数 (>=13) を見てタイトルに生やす/遷移で指定する
+ * ための“メタ解禁”であり、周回内の heart/flag だけで決まる振り分けではない。
+ * そのため judge() は 5分岐 (comedy/true/good/normal/bittersweet) のみを返す。
+ */
 export function judge(def, state, persistent) {
   const get = makeGetter(def, state, persistent);
   const heart = state.heart;

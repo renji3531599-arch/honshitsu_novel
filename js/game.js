@@ -109,9 +109,15 @@ export class Game {
   /* ---------------------------------------------------------------- 進行 -- */
   start(sceneId) {
     const m = this.store.meta;
+    const firstRun = !m.runs;
     m.runs = (m.runs || 0) + 1;
     this._t0 = Date.now();
     this.store.saveMeta();
+    // 初回プレイ時のミニチュートリアル（邪魔にならないトーストで1回だけ）
+    if (firstRun && sceneId === 'prologue_001') {
+      setTimeout(()=> this.shell.toast('ヒント: Enter/クリックで送る / Qでメニュー / 右クリックでログ'), 1400);
+      setTimeout(()=> this.shell.toast('F1:クイックセーブ / 設定はCキー / 所持品はIキー'), 4200);
+    }
     this.state = this.freshState();
     this._get = makeGetter(this.def, this.state, this.store.meta);
     this.history = [];
@@ -126,6 +132,11 @@ export class Game {
     this.state.scene = sceneId;
     this.state.idx = 0;
     this.shell.setScene(sceneId);
+    // 既読マーク（スキップ判定用）
+    try {
+      const rs = this.store.meta.readScenes || [];
+      if (!rs.includes(sceneId)) { rs.push(sceneId); if(rs.length>300) rs.shift(); this.store.saveMeta(); }
+    } catch(_){}
     this.run();
   }
   stopFlow() {
@@ -153,7 +164,11 @@ export class Game {
       const sc = this.data.scenes[this.state.scene];
       if (!sc) break;
       if (this.state.idx >= sc.body.length) {
-        if (sc.next) { this.state.scene = sc.next; this.state.idx = 0; this.shell.setScene(sc.next); continue; }
+        if (sc.next) {
+          this.state.scene = sc.next; this.state.idx = 0; this.shell.setScene(sc.next);
+          try { const rs=this.store.meta.readScenes||[]; if(!rs.includes(sc.next)){ rs.push(sc.next); if(rs.length>300) rs.shift(); this.store.saveMeta(); } } catch(_){}
+          continue;
+        }
         this.shell.toast('―― ここまでが実装範囲です（企画書 第10〜11章の全ルート・全EDを収録済み）');
         break;
       }
@@ -169,10 +184,21 @@ export class Game {
   waitForClick(extra = 0) {
     return new Promise((resolve) => {
       let settled = false;
-      const go = () => { if (settled) return; settled = true; clearTimeout(this._autoTimer); this._res = null; resolve(); };
+      const go = () => { if (settled) return; settled = true; clearTimeout(this._autoTimer); this._res = null; 
+        // クリック直後の光の残像を textbox に残す — 触覚的な美しさ
+        if (this.dom.textwrap && !this.skip) {
+          const tw = this.dom.textwrap;
+          tw.style.transform = 'scale(0.998)';
+          requestAnimationFrame(() => { tw.style.transition = 'transform .28s var(--ease-soft)'; tw.style.transform = ''; setTimeout(()=> tw.style.transition='', 320); });
+        }
+        resolve(); };
       this._res = go;
-      if (this.skip) { setTimeout(go, 60); return; }
-      if (this.auto) this._autoTimer = setTimeout(go, extra || this.store.config.autoDelay);
+      if (this.skip) { setTimeout(go, 42); return; }
+      // AUTOは文字数に比例して余韻を残す（短文でも420msは保証、長文は 45ms/字）
+      if (this.auto) {
+        const base = extra || (this._lastTextLen ? Math.min(4200, Math.max(800, this._lastTextLen * 42 + 620)) : this.store.config.autoDelay);
+        this._autoTimer = setTimeout(go, Math.max(420, base));
+      }
       if (this.store.config.autosave && this._clickCount === undefined) this._clickCount = 0;
     });
   }
@@ -188,10 +214,25 @@ export class Game {
         d.nameText.innerHTML = sp.name
           ? `${sp.name}` + (ins.tag ? `<span class="kana">${esc(ins.tag)}</span>` : sp.kana ? `<span class="kana">${sp.kana}</span>` : '')
           : `<span class="kana">${ins.tag ? esc(ins.tag) : 'NARRATION'}</span>`;
+        // 話者が変わる瞬間だけ namebox をふわりと差し替える
+        const prevSp = d.stage.dataset.spk || '';
+        const curSp = ins.sp || '__narration';
+        if (prevSp !== curSp) {
+          d.namebox.classList.remove('on');
+          // force reflow for restart
+          void d.namebox.offsetWidth;
+        }
+        d.stage.dataset.spk = curSp;
         d.namebox.classList.add('on');
         d.stage.style.setProperty('--sp', sp.color || '#cbb27c');
         d.text.classList.toggle('board', !!sp.board);
         d.textwrap.classList.remove('hidden');
+        // 地の文→発話の切り替えで textbox の縁が淡く光る
+        if (prevSp !== curSp && !ins.sp) {
+          d.textwrap.style.transition = 'filter .6s var(--ease-soft)';
+          d.textwrap.style.filter = 'brightness(1.04)';
+          setTimeout(() => { d.textwrap.style.filter = ''; }, 340);
+        }
         if (ins.sp) {
           const slug = sp.sprite;
           if (slug) this.stage.applyChr(slug);
@@ -208,7 +249,9 @@ export class Game {
         });
         if (sp.voice) this.audio.duck(600);
         this.shell.setPage(ins.txt);
-        await this.waitForClick(ins.txt.length > 52 ? 1300 : undefined);
+        this._lastTextLen = ins.txt.length;
+        // 長文は 1300ms 相当の余韻を、それ以外は文字数比例の autoDelay を使う
+        await this.waitForClick(ins.txt.length > 52 ? Math.min(2600, 900 + ins.txt.length * 18) : undefined);
         if (this.store.config.autosave && this.state.idx % 3 === 0) this.store.saveAuto(this.snapshot());
         return;
       }
@@ -304,7 +347,19 @@ export class Game {
       case 'savepoint':
         if (!silent && this.store.config.autosave) this.store.saveAuto(this.snapshot());   // 静かに保存（トーストなし）
         return;
-      case 'wait': await sleep(this.skip ? 90 : (ins.ms || 600)); return;
+      case 'wait': {
+        if (!silent && ins.ms && ins.ms > 800) {
+          // 長い待機は画面が深呼吸するように — わずかに暗転→復帰
+          this.dom.stage.style.transition = 'filter .9s var(--ease-soft)';
+          this.dom.stage.style.filter = 'brightness(.98) saturate(1.02)';
+          await sleep(this.skip ? 90 : (ins.ms || 600));
+          this.dom.stage.style.filter = '';
+          setTimeout(()=> this.dom.stage.style.transition='', 1000);
+        } else {
+          await sleep(this.skip ? 90 : (ins.ms || 600));
+        }
+        return;
+      }
       case 'end': if (silent) return; return this.finish(ins);
       case 'title': if (silent) return; this.toTitle(); return 'stop';
       case 'stop': return 'stop';
@@ -340,7 +395,17 @@ export class Game {
   toggleSkip() {
     this.skip = !this.skip;
     this.shell.syncModeButtons();
-    if (this.skip) this.advance();
+    if (this.skip) {
+      // 未読スキップを許可しない設定なら、未読シーンでは低速スキップに留める
+      const isUnread = this.store.meta.readScenes && !this.store.meta.readScenes.includes(this.state.scene);
+      if (isUnread && !this.store.config.skipUnread) {
+        this.skip = false;
+        this.shell.syncModeButtons();
+        this.shell.toast('未読区間です — 設定で「未読スキップ」をONにすると飛ばせます');
+        return;
+      }
+      this.advance();
+    }
   }
   toggleAuto() {
     this.auto = !this.auto;

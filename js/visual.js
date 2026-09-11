@@ -16,6 +16,7 @@ function rng(seed) {
   return () => { a += 0x6D2B79F5; let t = a; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
 }
 const R = (n) => Math.round(n * 10) / 10;
+const prefersReduced = () => { try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(_) { return false; } };
 
 /* -------------------------------------------------------------- 時間帯 ---- */
 const MOODS = {
@@ -27,6 +28,7 @@ const MOODS = {
   sepia:   { sky: ['#d9c9a4', '#c1ab84'], ink: '#4b3d28', warm: '#ffe8b8', light: 'warm', veil: '' },
   gensou:  { sky: ['#c9b48b', '#a8906a'], ink: '#453822', warm: '#ffe9c0', light: 'warm', veil: '' },
   sotsu:   { sky: ['#dfe6df', '#f2ece0'], ink: '#464438', warm: '#fff1d4', light: 'on', veil: '' },
+  // yoru/warmは backdropSVG側で光が柔らかく滲むように粒子の揺らぎを深くする
 };
 
 /* ------------------------------------------------------------- 等高線 ---- */
@@ -128,8 +130,11 @@ function hills(rand, base, amp, color, op) {
   return `<path d="${d}" fill="${color}" fill-opacity="${op}"/>`;
 }
 
+const _backdropCache = new Map();
 /* --------------------------------------------------------- 場面別 SVG ----- */
 export function backdropSVG(asset) {
+  const cacheKey = asset ? (asset.id + '|' + (asset.meta||'')) : 'null';
+  if(_backdropCache.has(cacheKey)) return _backdropCache.get(cacheKey);
   const meta = (asset && asset.meta) || '';
   const [kindRaw, timeRaw] = meta.split('/');
   const kind = kindRaw || 'kyoshitsu';
@@ -440,21 +445,47 @@ export class Particles {
   constructor(canvas) { this.cv = canvas; this.ctx = canvas.getContext('2d'); this.mode = null; this.parts = []; this.raf = 0; }
   set(mode) {
     if (mode === this.mode) return;
+    // OSの省モーション設定では粒子を停止（バッテリー/酔い対策）
+    if (prefersReduced() && mode) {
+      this.mode = null;
+      this.parts = [];
+      this.clear();
+      return;
+    }
     this.mode = mode;
     this.parts = [];
     if (!mode) { this.clear(); return; }
-    const n = mode === 'sakura' ? 46 : mode === 'ash' ? 26 : 40;
+    const n = mode === 'sakura' ? 52 : mode === 'ash' ? 28 : mode === 'yoru' ? 36 : 48;
     for (let i = 0; i < n; i++) this.parts.push(this.spawn(true));
     if (!this.raf) this.tick();
   }
   spawn(init) {
     const { width: w, height: h } = this.cv;
     const m = this.mode;
-    const p = { x: Math.random() * w, y: init ? Math.random() * h : -20, r: 0, v: 0, a: 0, ph: Math.random() * 6.28, rot: 0 };
-    if (m === 'dust') { p.r = Math.random() * 1.7 + .4; p.v = -(Math.random() * .12 + .02); p.a = Math.random() * .5 + .15; p.vx = Math.random() * .16 - .08; }
-    else if (m === 'sakura') { p.r = Math.random() * 5 + 3.4; p.v = Math.random() * .7 + .35; p.a = Math.random() * .5 + .3; p.vx = Math.random() * .5 + .12; }
-    else if (m === 'ash') { p.r = Math.random() * 2.2 + .8; p.v = -(Math.random() * .35 + .1); p.a = Math.random() * .3 + .1; p.vx = Math.random() * .2 - .1; }
-    else { p.r = Math.random() * 2.6 + 1; p.v = Math.random() * .25 + .06; p.a = Math.random() * .8 + .2; }
+    const p = { x: Math.random() * w, y: init ? Math.random() * h : -20, r: 0, v: 0, a: 0, ph: Math.random() * 6.28, rot: 0, spin: (Math.random()-.5)*.045, depth: .7 + Math.random()*.6 };
+    if (m === 'dust') {
+      p.r = (Math.random() * 1.9 + .45) * p.depth;
+      p.v = -(Math.random() * .11 + .02) * (0.7 + p.depth*.5);
+      p.a = (Math.random() * .38 + .12) * (0.8 + p.depth*.3);
+      p.vx = (Math.random() * .15 - .075) * p.depth;
+      p.blur = p.depth < .85 ? 0.6 : 0;
+    } else if (m === 'sakura') {
+      p.r = (Math.random() * 5.2 + 3.2) * (0.75 + p.depth*.4);
+      p.v = (Math.random() * .62 + .28) * (0.8 + p.depth*.45);
+      p.a = Math.random() * .42 + .28;
+      p.vx = (Math.random() * .48 + .1) * (0.9 + p.depth*.2);
+      p.wobble = Math.random()*1.6 + .6;
+    } else if (m === 'ash') {
+      p.r = (Math.random() * 2.4 + .7) * p.depth;
+      p.v = -(Math.random() * .3 + .09);
+      p.a = Math.random() * .28 + .1;
+      p.vx = (Math.random() * .18 - .09);
+    } else {
+      p.r = (Math.random() * 2.8 + .9) * p.depth;
+      p.v = (Math.random() * .22 + .05);
+      p.a = Math.random() * .72 + .18;
+      p.vx = (Math.random()*.14-.07);
+    }
     p.y = init ? p.y : (m === 'dust' || m === 'ash' ? h + 10 : -10);
     return p;
   }
@@ -466,21 +497,45 @@ export class Particles {
       const w = cv.width, h = cv.height;
       ctx.clearRect(0, 0, w, h);
       const m = this.mode;
+      const t = Date.now() * 0.001;
       for (let i = 0; i < this.parts.length; i++) {
         const p = this.parts[i];
-        p.ph += .014;
-        p.x += (p.vx || 0) + Math.sin(p.ph) * (m === 'sakura' ? .8 : .2);
-        p.y += p.v * (m === 'sakura' ? 1.2 : 1);
-        p.rot += .01;
-        if (p.y < -30 || p.y > h + 30 || p.x < -40 || p.x > w + 40) { this.parts[i] = this.spawn(false); continue; }
+        p.ph += 0.011 + (p.depth ? (p.depth-0.7)*0.004 : 0);
+        // sakura ひらひら：正弦波＋回転の位相をずらして自然に
+        const sway = Math.sin(p.ph) * (m === 'sakura' ? (0.9 + (p.wobble||1)*0.45) : 0.18) + Math.cos(p.ph*0.53) * (m === 'sakura' ? 0.35 : 0.06);
+        p.x += (p.vx || 0) + sway * 0.22;
+        p.y += p.v * (m === 'sakura' ? 1.18 : 1);
+        p.rot += p.spin || 0.01;
+        // ゆっくり点滅する dust は明滅をまろやかに
+        const twinkle = m === 'dust' ? (0.55 + Math.sin(p.ph*1.9 + i)*0.45) : (0.75 + Math.sin(p.ph)*0.25);
+        if (p.y < -36 || p.y > h + 36 || p.x < -50 || p.x > w + 50) { this.parts[i] = this.spawn(false); continue; }
         if (m === 'sakura') {
           ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-          ctx.globalAlpha = p.a; ctx.fillStyle = '#f7dfe6';
-          ctx.beginPath(); ctx.ellipse(0, 0, p.r, p.r * .58, 0, 0, 6.3); ctx.fill(); ctx.restore();
+          // 奥の花びらは少し暗く・小さく、手前は明るく
+          const depthA = p.depth ? (0.72 + (p.depth-0.7)*0.55) : 1;
+          ctx.globalAlpha = p.a * depthA * (0.9 + Math.sin(p.ph*1.3)*0.1);
+          // 花びらの表裏で色をわずかに変える
+          const flip = Math.cos(p.rot*2) > 0 ? '#f8e2ea' : '#f3cfdc';
+          ctx.fillStyle = flip;
+          ctx.shadowColor = 'rgba(255, 220, 232, .45)';
+          ctx.shadowBlur = p.r > 5 ? 6 : 0;
+          ctx.beginPath();
+          // より花びららしい形：尖り＋丸みのブレンド
+          ctx.moveTo(0, -p.r*0.92);
+          ctx.bezierCurveTo(p.r*0.72, -p.r*0.48, p.r*0.58, p.r*0.62, 0, p.r*0.88);
+          ctx.bezierCurveTo(-p.r*0.58, p.r*0.62, -p.r*0.72, -p.r*0.48, 0, -p.r*0.92);
+          ctx.fill();
+          // 中心の筋
+          ctx.strokeStyle = 'rgba(200,150,160,.32)'; ctx.lineWidth = 0.7; ctx.beginPath(); ctx.moveTo(0,-p.r*0.5); ctx.lineTo(0,p.r*0.55); ctx.stroke();
+          ctx.restore();
         } else {
-          ctx.globalAlpha = p.a * (.6 + Math.sin(p.ph * 2) * .4);
-          ctx.fillStyle = m === 'dust' ? '#fff6de' : '#e8e2d6';
-          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.3); ctx.fill();
+          const a = p.a * twinkle;
+          ctx.globalAlpha = Math.max(0, Math.min(1, a));
+          if (p.blur) { ctx.shadowColor = m === 'dust' ? 'rgba(255,246,222,.9)' : 'rgba(232,226,214,.65)'; ctx.shadowBlur = p.blur * 5; }
+          else ctx.shadowBlur = 0;
+          ctx.fillStyle = m === 'dust' ? '#fff7de' : m === 'ash' ? '#e9e2d6' : '#f0e8d8';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28319); ctx.fill();
+          ctx.shadowBlur = 0;
         }
       }
       ctx.globalAlpha = 1;
@@ -503,6 +558,33 @@ export class Stage {
     this._bgToken = 0;
     this._cgToken = 0;
     this.t = (ms) => new Promise(r => setTimeout(r, ms));
+    this._visPaused = null;
+    try {
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          // タブ非表示では粒子を一時停止（復帰時に再開）
+          this._visPaused = { p: this.particles.mode, t: this.titleFx ? this.titleFx.mode : null };
+          if (this._visPaused.p) this.particles.set(null);
+          if (this._visPaused.t && this.titleFx) this.titleFx.set(null);
+        } else if (this._visPaused) {
+          if (this._visPaused.p) this.particles.set(this._visPaused.p);
+          if (this._visPaused.t && this.titleFx) this.titleFx.set(this._visPaused.t);
+          this._visPaused = null;
+        }
+      });
+    } catch(_) {}
+    // 省モーション変更を監視（ユーザが設定を切り替えたら即反映）
+    try {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const onChange = () => {
+        if (mq.matches) {
+          if (this.particles.mode) this.particles.set(null);
+          if (this.titleFx && this.titleFx.mode) this.titleFx.set(null);
+        }
+      };
+      if (mq.addEventListener) mq.addEventListener('change', onChange);
+      else if (mq.addListener) mq.addListener(onChange);
+    } catch(_){}
   }
   scaleU() {
     const w = this.el.viewport.clientWidth || 1;
@@ -543,9 +625,10 @@ export class Stage {
       img.style.opacity = '';
       img.style.transform = '';
     } else {
-      // 実画像：軽くディップしてクロスフェード＋緩いズームアウト
+      // 実画像：映画的なディップ＋クロスフェード。わずかに長くして滑らかに
       img.style.opacity = '0';
-      await this.t(170);
+      img.style.filter = 'blur(6px) brightness(.96)';
+      await this.t(220);
       if (my !== this._bgToken) return;
       this.el.bgBack.innerHTML = '';
       img.style.transform = 'scale(1.1)';
@@ -556,6 +639,7 @@ export class Stage {
       await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
       if (my !== this._bgToken) return;
       img.style.opacity = '';
+      img.style.filter = '';
       img.style.transform = '';
     }
     const kind = ((a && a.meta) || '').split('/')[0];
@@ -740,8 +824,18 @@ export class AssetDB {
     const worker = async () => {
       while (queue.length) {
         const a = queue.shift();
-        try { await loadImage(a.file); ok++; }
-        catch (e) { console.warn('[preload] 読込失敗（フォールバック描画で続行）:', a.file); }
+        let success = false;
+        for (let attempt=0; attempt<2; attempt++){
+          try { await loadImage(a.file); ok++; success=true; break; }
+          catch (e) {
+            if(attempt===0){
+              // 指数バックオフ 400ms 後に再試行
+              await new Promise(r=> setTimeout(r, 420));
+              continue;
+            }
+            console.warn('[preload] 読込失敗（フォールバック描画で続行）:', a.file, e.message||e);
+          }
+        }
         done++;
         onStep && onStep(done, total, a);
       }
