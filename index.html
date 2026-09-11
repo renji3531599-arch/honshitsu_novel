@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>まだ地図の途中で 〜✝本質✝特別編〜</title>
 <meta name="description" content="桐葉高校理数科三年B組・卒業前ノベルゲーム『まだ地図の途中で』〜✝本質✝特別編〜">
+<meta name="theme-color" content="#0a0908">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;900&display=swap">
+<link rel="preload" as="image" href="assets/bg/title_key.jpg">
 <link rel="stylesheet" href="css/vn.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2315120f'/%3E%3Cpath d='M16 5v22M6 16h20' stroke='%23d8c9a8' stroke-width='2.2'/%3E%3C/svg%3E">
 </head>
@@ -19,7 +21,7 @@
     <div id="stage">
       <div class="layer lay-bg" id="layBg">
         <div class="art-back" id="bgBack"></div>
-        <img class="art-img" id="bgImg" alt="" decoding="async">
+        <img class="art-img" id="bgImg" alt="" decoding="async" fetchpriority="high">
         <div class="grade" id="bgGrade"></div>
         <div class="lightshaft" id="bgLight"></div>
       </div>
@@ -49,9 +51,10 @@
 
       <!-- 章タイトルカード -->
       <div class="card-overlay" id="cardOverlay">
+        <div class="card-contours" id="cardContours" aria-hidden="true"></div>
         <div class="card-inner">
           <div class="card-no" id="cardNo"></div>
-          <div class="card-rule"></div>
+          <div class="card-rule"><i></i></div>
           <div class="card-title" id="cardTitle"></div>
           <div class="card-sub" id="cardSub"></div>
         </div>
@@ -71,7 +74,6 @@
       <!-- 常時HUD -->
       <div class="hud-mark" id="hudLeft"></div>
       <div class="hud-mark right" id="hudRight"></div>
-      <div class="toast-stack" id="toasts"></div>
 
       <!-- 所持品 -->
       <div class="items hidden" id="items"></div>
@@ -85,6 +87,9 @@
         </div>
       </div>
     </div>
+
+    <!-- 通知トースト（タイトル・パネルも含め全画面の最前面に出す） -->
+    <div class="toast-stack" id="toasts"></div>
 
     <!-- ======================= TEXT BOX ======================= -->
     <div id="textwrap" class="hidden">
@@ -125,26 +130,59 @@
       </div>
     </div>
 
+    <!-- ======================= SCENE VEIL（場面転換） ======================= -->
+    <div id="veil" aria-hidden="true">
+      <div class="veil-contours" id="veilContours"></div>
+      <div class="veil-center">
+        <div class="veil-kicker" id="veilKicker"></div>
+        <div class="veil-rule"><i></i></div>
+        <div class="veil-title" id="veilTitle"></div>
+      </div>
+    </div>
+
     <!-- ======================= TITLE ======================= -->
-    <div id="title">
+    <div id="title" class="pre">
       <div class="title-bg" id="titleBg"></div>
+      <img class="title-key" id="titleKey" alt="" decoding="async" fetchpriority="high">
+      <div class="title-shade"></div>
+      <canvas id="titleFx"></canvas>
       <div class="title-grain"></div>
       <div class="title-inner">
-        <div class="title-meta">
+        <div class="title-meta rv" style="--d:.15s">
           <span>桐葉高校理数科三部作 ― 非公式オリジナル番外編</span>
-          <span>KIRYUA HIGH SCHOOL · NORTH BUILDING · CLASS 3B</span>
+          <span class="meta-en">KIRYUA HIGH SCHOOL · NORTH BUILDING · CLASS 3B</span>
         </div>
         <div class="title-logo">
-          <div class="logo-orn">✝</div>
-          <h1>まだ地図の途中で</h1>
-          <div class="logo-sub">〜✝本質✝特別編〜</div>
-          <div class="logo-tag">卒業まで、あと一ヶ月。<br class="pc">地図筒から、一枚の古い写真がこぼれ落ちた。</div>
+          <div class="logo-orn rv" style="--d:.35s"><span class="orn-ring"></span><span class="orn-cross">✝</span></div>
+          <h1 id="logoTitle">まだ地図の途中で</h1>
+          <div class="logo-sub rv" style="--d:1.15s">〜✝本質✝特別編〜</div>
+          <div class="logo-tag rv" style="--d:1.35s">卒業まで、あと一ヶ月。<br class="pc">地図筒から、一枚の古い写真がこぼれ落ちた。</div>
         </div>
-        <nav class="title-menu" id="titleMenu"></nav>
-        <div class="title-foot">
+        <nav class="title-menu" id="titleMenu" aria-label="タイトルメニュー"></nav>
+        <div class="title-foot rv" style="--d:1.9s">
           <div id="titleProgress"></div>
           <div class="copy">© 桐葉高校理数科三年B組、および南棟の面々 ／ And to the one who was looking out of the window.</div>
         </div>
+      </div>
+    </div>
+
+    <!-- ======================= BOOT（起動ローダー） ======================= -->
+    <div id="boot">
+      <div class="boot-contours" id="bootContours" aria-hidden="true"></div>
+      <div class="boot-inner">
+        <div class="boot-emblem"><span class="ring"></span><span class="ring r2"></span><span class="cross">✝</span></div>
+        <div class="boot-kicker">KIRYUA HIGH SCHOOL · NORTH BUILDING · CLASS 3B</div>
+        <div class="boot-logo">まだ地図の途中で</div>
+        <div class="boot-sub">〜✝本質✝特別編〜</div>
+        <div class="boot-load" id="bootLoad">
+          <div class="boot-bar"><i id="bootBar"></i><b class="sheen"></b></div>
+          <div class="boot-meta"><span id="bootPct">0%</span><span class="boot-msg" id="bootMsg">地図を広げています…</span></div>
+          <div class="boot-tip" id="bootTip"></div>
+        </div>
+        <button class="boot-start hidden" id="bootStart">
+          <span class="ja">― 画面に触れて始める ―</span>
+          <span class="en">TOUCH / ENTER TO START</span>
+        </button>
       </div>
     </div>
   </div>
@@ -153,5 +191,17 @@
 </div>
 
 <script type="module" src="js/main.js"></script>
+<script>
+/* 起動番兵：モジュールが何らかの理由で動かなかった場合の救済表示 */
+setTimeout(function () {
+  if (document.body.dataset.ready) return;
+  var boot = document.getElementById('boot');
+  if (boot && boot.classList.contains('ready')) return;
+  var msg = document.getElementById('bootMsg');
+  var tip = document.getElementById('bootTip');
+  if (msg) msg.textContent = '起動に時間がかかっています…';
+  if (tip) tip.textContent = 'ネットワークかブラウザの調子が悪いようです。ページの再読み込みをお試しください（file:// 直開きではなく http(s) での配信が必要です）。';
+}, 15000);
+</script>
 </body>
 </html>

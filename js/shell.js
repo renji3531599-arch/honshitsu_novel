@@ -1,7 +1,7 @@
 /* ============================================================================
    shell.js ―― UIシェル（タイトル／メニュー各種／ギャラリー／HUB／端末風演出）
    ========================================================================== */
-import { backdropSVG, figureSVG } from './visual.js';
+import { backdropSVG, figureSVG, contourSVG } from './visual.js';
 import { fmtDate, fmtTime } from './store.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -32,7 +32,47 @@ export class Shell {
     });
   }
   buildTitleBackdrop() {
+    // 下地のSVG（キービジュアル読み込み前のつなぎ・読み込み失敗時の保険）
     this.dom.titleBg.innerHTML = backdropSVG({ id: 'bg_sotsugyoushiki_kaijou', meta: 'sotsugyou/sotsu' });
+    this.dom.bootContours.innerHTML = contourSVG('boot', { lines: 13, op: .09 });
+    this.dom.veilContours.innerHTML = contourSVG('veil', { lines: 12, op: .11 });
+    this.dom.cardContours.innerHTML = contourSVG('card', { lines: 9, op: .13 });
+    // タイトルキービジュアル（実画像）。読めたら下地とクロスフェードする。
+    const key = this.data.assets.byId['title_key'];
+    const img = this.dom.titleKey;
+    if (key && key.file && img) {
+      img.addEventListener('load', () => {
+        img.classList.add('on');
+        this.dom.titleBg.classList.add('dim');
+      }, { once: true });
+      img.addEventListener('error', () => { img.remove(); }, { once: true });
+      img.src = key.file;
+    }
+    if (this.stage.titleFx) this.stage.titleFx.set('dust');
+    this.prepareLogo();
+  }
+  /** ロゴを1文字ずつ包み、段階リビールに備える */
+  prepareLogo() {
+    const h1 = document.getElementById('logoTitle');
+    if (!h1 || h1.dataset.split) return;
+    const txt = h1.textContent;
+    h1.textContent = '';
+    [...txt].forEach((c, i) => {
+      const s = document.createElement('span');
+      s.className = 'lg-ch';
+      s.style.setProperty('--i', i);
+      s.textContent = c;
+      h1.appendChild(s);
+    });
+    h1.dataset.split = '1';
+  }
+  /** タイトルの段階リビールを最初から再生する */
+  revealTitle() {
+    const t = this.dom.title;
+    t.classList.remove('pre');
+    t.classList.remove('reveal');
+    void t.offsetWidth;
+    t.classList.add('reveal');
   }
   setHud(chapter, id) {
     const m = this.store.meta;
@@ -41,6 +81,9 @@ export class Shell {
     this.dom.hudLeft.innerHTML = chapter
       ? `<b>${esc(chapter.title)}</b>${chapter.sub ? '　' + esc(chapter.sub) : ''}`
       : '';
+    this.dom.hudLeft.classList.remove('pop');
+    void this.dom.hudLeft.offsetWidth;
+    this.dom.hudLeft.classList.add('pop');
   }
   setScene(sceneId) {
     const m = this.store.meta;
@@ -50,6 +93,9 @@ export class Shell {
     this.dom.hudRight.innerHTML = `<b>${esc(sceneId)}</b>　<span class="k">CH ${esc(this.game.state.chapter || '-')}</span>`;
     const fl = this.flagSummary();
     this.dom.hudRight.dataset.flags = fl;
+    this.dom.hudRight.classList.remove('pop');
+    void this.dom.hudRight.offsetWidth;
+    this.dom.hudRight.classList.add('pop');
   }
   flagSummary() {
     const f = this.game.state.flags;
@@ -109,9 +155,17 @@ export class Shell {
       const b = el('button', 'tmenu ' + (it.cls || '') + (it.dis ? ' lock' : ''),
         `<span class="ja">${esc(it.ja)}</span><span class="en">${esc(it.en)}</span>`);
       b.dataset.i = i;
+      b.style.setProperty('--i', i);
       b.addEventListener('mouseenter', () => this.audio.se('se_hover'));
       b.addEventListener('click', () => {
-        if (it.dis) { this.audio.se('se_deny'); this.toast('セーブデータがありません'); return; }
+        if (it.dis) {
+          this.audio.se('se_deny');
+          b.classList.remove('deny');
+          void b.offsetWidth;
+          b.classList.add('deny');
+          this.toast('セーブデータがありません');
+          return;
+        }
         this.audio.se('se_click');
         this.titlePick(it.id);
       });
@@ -125,25 +179,67 @@ export class Shell {
       + `<i title="周回">RUN ${m.runs || 0}</i>`;
   }
   async titlePick(id) {
-    if (id === 'bonus') { this.hideTitle(); this.game.start('end_bonus'); return; }
     if (['gallery', 'flow', 'tips', 'almanac', 'config', 'keys'].includes(id)) { this.open(id); return; }
-    this.hideTitle();
-    if (id === 'new') {
-      this.audio.bgm(null, 1.2);
-      this.game.start('prologue_001');
-      return;
-    }
+    if (id === 'bonus') { this.cinematicStart('end_bonus', 'end'); return; }
+    if (id === 'new') { this.cinematicStart('prologue_001', 'prologue'); return; }
     if (id === 'continue') {
       const snap = this.store.loadAuto() || this.store.list().find(s => !s.empty);
+      if (!snap) { this.toast('セーブデータがありません'); return; }
+      this.hideTitle();
+      await this.veilCover('RECORD ― AUTO SAVE', 'つづきから', 620);
       this.game.restore(snap);
+      this.veilLift();
       return;
     }
-    if (id === 'load') { this.hideTitle(); this.open('load'); }
+    // パネル系はタイトルの前面（#overlay z40）に開く。閉じればタイトルに戻る。
+    if (id === 'load') { this.open('load'); }
   }
-  hideTitle() { this.dom.title.classList.add('out'); this.dom.textwrap.classList.remove('hidden'); }
+  /** はじめから／BONUS：タイトル→本編のシネマティックな橋渡し */
+  async cinematicStart(sceneId, chapterId) {
+    const ch = (chapterId && this.data.chapters[chapterId]) || this.data.chapters['prologue'] || {};
+    this.stage.setBars(true);
+    this.hideTitle();
+    this.audio.bgm(null, 1.4);
+    await this.veilCover(
+      ch.sub ? `${String(chapterId || '').toUpperCase()} ― ${ch.sub}` : 'PROLOGUE',
+      ch.title || '',
+      950);
+    this.game.start(sceneId);
+    this.veilLift();
+    setTimeout(() => this.stage.setBars(false), 1800);
+  }
+  /* ------------------------------- 場面転換ヴェール ---------------------- */
+  veilCover(kicker = '', title = '', hold = 650) {
+    const v = this.dom.veil;
+    clearTimeout(this._veilTimer);
+    v.classList.remove('lift');
+    this.dom.veilKicker.textContent = kicker;
+    this.dom.veilTitle.textContent = title;
+    v.classList.remove('on');
+    void v.offsetWidth;
+    v.classList.add('on');
+    return new Promise(r => setTimeout(r, hold));
+  }
+  veilLift() {
+    const v = this.dom.veil;
+    v.classList.remove('on');
+    v.classList.add('lift');
+    clearTimeout(this._veilTimer);
+    this._veilTimer = setTimeout(() => v.classList.remove('lift'), 1700);
+  }
+  hideTitle() {
+    this.dom.title.classList.add('out');
+    const tw = this.dom.textwrap;
+    tw.classList.remove('hidden');
+    tw.classList.remove('enter');
+    void tw.offsetWidth;
+    tw.classList.add('enter');
+    setTimeout(() => tw.classList.remove('enter'), 1000);
+  }
   showTitle() {
     this.dom.title.classList.remove('out');
     this.buildTitle();
+    this.revealTitle();
     this.audio.bgm('bgm01', 1.5);
   }
   toGame() { this.dom.title.classList.add('out'); }
@@ -221,7 +317,7 @@ export class Shell {
     d.hub.classList.add('on');
     d.hubList.innerHTML = '';
     const routes = this.def.routes || [];
-    routes.forEach(r => {
+    routes.forEach((r, ri) => {
       const done = !!this.game.state.routes[r.key];
       const card = el('button', 'hub-card' + (done ? ' done' : ''), `
         <span class="no">ROUTE ${r.no} ／ ${esc(r.who)}</span>
@@ -230,6 +326,7 @@ export class Shell {
         <span class="bl">${esc(r.blurb)}</span>
         <span class="bar"><i style="width:${done ? 100 : 0}%"></i></span>
         <span class="st">${done ? '✔ 読了' : '未読'}</span>`);
+      card.style.setProperty('--i', ri);
       card.addEventListener('mouseenter', () => this.audio.se('se_hover'));
       card.addEventListener('click', () => {
         this.audio.se('se_click');
@@ -369,7 +466,7 @@ export class Shell {
     colB.appendChild(check('自動セーブ', 'autosave'));
     g2.appendChild(colB);
     sect.appendChild(g2);
-    sect.appendChild(el('p', 'hint', '※ 画像は現在プレースホルダー（白紙）です。背景・立ち絵はエンジンが SVG で補完描画しています。実素材を <b>assets/…</b> に同名で上書きし、<b>data/assets.json</b> の該当行の placeholder を false にすれば、そのまま画面に出ます（合成は multiply＝白＝透明）。'));
+    sect.appendChild(el('p', 'hint', '※ 画像は起動時に先読みされます。背景・立ち絵の実素材を <b>assets/…</b> に同名で配置し、<b>data/assets.json</b> の該当行の placeholder を false にすると、そのまま画面に出ます（合成は multiply＝白＝透明）。白紙のあいだはエンジンが SVG で補完描画します。'));
     const danger = el('div', 'btnrow');
     const b1 = el('button', null, '回収データを初期化する');
     b1.addEventListener('click', () => {
@@ -426,7 +523,7 @@ export class Shell {
         if (mode === 'save') { this.store.save(idx, this.game.snapshot()); this.toast(`SLOT ${idx} に記録した`); this.open('save'); }
         else {
           if (!d) { this.audio.se('se_deny'); this.toast('空きスロットです'); return; }
-          this.close(); this.game.restore(d);
+          this.close(); this.hideTitle(); this.game.restore(d);
         }
       });
       grid.appendChild(card);
@@ -511,7 +608,7 @@ export class Shell {
       sect.appendChild(tbl2);
       sect.appendChild(el('p', 'hint', '※ 現在 BGM/SE は WebAudio による手続き生成（仮音源）です。実音源を <b>audio/bgm01.ogg</b> 等の名前で置けば、後述の <b>data/audio.json</b> で差し替えられます。'));
       body.appendChild(sect);
-      $$('button[data-bgm]', sect).forEach(b => b.addEventListener('click', () => { this.audio.bgm(b.dataset.bgm, .6); this.toast('BGM試聴: ' + b.dataset.bgm); }));
+      $$('button[data-bgm]', sect).forEach(b => b.addEventListener('click', () => this.audio.bgm(b.dataset.bgm, .6)));
       $$('button[data-se]', sect).forEach(b => b.addEventListener('click', () => this.audio.se(b.dataset.se)));
     } else if (tab === 'chat') {
       const sect = el('div', 'sect');
@@ -521,7 +618,16 @@ export class Shell {
         const cell = el('button', 'cg-cell' + (got ? '' : ' lock'));
         cell.innerHTML = `<div class="im" style="background:#141210;display:grid;place-items:center;font-family:var(--ff-sans);font-size:11px;color:${got ? 'var(--gold)' : '#666'}">${got ? esc(c.kind.toUpperCase()) : 'LOCK'}</div>
           <div class="lb">${esc(got ? c.title : '───')}</div>`;
-        if (got) cell.addEventListener('click', () => { this.openChat(c, () => { }); });
+        if (got) cell.addEventListener('click', () => {
+          // 端末画面はステージ層なので、タイトルから開いた場合はタイトルを一旦退ける
+          const fromTitle = !this.dom.title.classList.contains('out');
+          if (fromTitle) this.dom.title.classList.add('out');
+          this.close();
+          this.openChat(c, () => {
+            if (fromTitle) this.dom.title.classList.remove('out');
+            this.open('gallery', 'chat');
+          });
+        });
         grid.appendChild(cell);
       });
       sect.appendChild(el('h3', null, 'グループライン／掲示板／配信 画面'));
@@ -548,7 +654,7 @@ export class Shell {
     v.innerHTML = `<div class="box">
       <div class="art">${this.cellArt(a)}</div>
       <div class="cap">${esc(a.id)} ― ${esc(a.desc || a.label)}</div>
-      <div class="note">※ プレースホルダー表示中。実素材は <b>${esc(a.file)}</b> に配置されます。</div>
+      <div class="note">${a.placeholder === false ? '実画像を表示しています。' : `※ プレースホルダー表示中。実素材は <b>${esc(a.file)}</b> に配置されます。`}</div>
       <div class="zoom">${zoom ? `<button data-z="1">等倍</button><button data-z="1.6">1.6×</button><button data-z="2.4">2.4×</button>` : ''}<button class="close">閉じる (Esc)</button></div>
     </div>`;
     document.body.appendChild(v);
@@ -620,44 +726,62 @@ ${ends}
   paneFlow() {
     const body = this.dom.ovBody;
     const v = this.store.meta.visited || {};
-    const on = (id) => v['sc:' + id] ? 'done' : '';
-    const chOn = (id) => v['ch:' + id] ? 'done' : '';
-    const nodes = [
-      { x: 400, y: 40, w: 200, k: 'PROLOGUE', t: '三度目の春、まだ来ない', id: 'prologue_001' },
-      { x: 400, y: 120, w: 220, k: 'CHAPTER 1', t: '差出人不明の写真', id: 'c003_kyoshitsu' },
-      { x: 400, y: 205, w: 240, k: 'HUB', t: '見送りの準備、始めます', id: 'hub_open' },
-    ];
-    const routes = this.def.routes || [];
-    routes.forEach((r, i) => nodes.push({ x: 90 + i * 145, y: 300, w: 130, k: 'ROUTE ' + r.no, t: r.title.replace('編', ''), id: r.scene }));
-    nodes.push({ x: 400, y: 390, w: 200, k: 'CONVERGE', t: '地図を作る夜', id: 'g1' });
-    nodes.push({ x: 400, y: 465, w: 240, k: 'CLIMAX', t: '窓の外に、ずっといた人', id: 'h1' });
-    const ends = Object.entries(this.def.endings);
-    ends.forEach(([id, e], i) => nodes.push({ x: 60 + (i % 7) * 130, y: 560 + (i > 6 ? 90 : 0), w: 118, k: e.tier.split(' ')[0], t: e.label, end: id }));
-    let svg = `<svg viewBox="0 0 1000 720" xmlns="http://www.w3.org/2000/svg">`;
-    const P = (n) => ({ cx: n.x + (n.w || 200) / 2, cy: n.y + 22 });
-    const links = [[0, 1], [1, 2], ...routes.map((_, i) => [2, 3 + i]), ...routes.map((_, i) => [3 + i, 9]), [9, 10]];
-    links.forEach(([a, b]) => {
-      const A = P(nodes[a]), B = P(nodes[b]);
-      const done = nodes[b].id && v['sc:' + nodes[b].id];
-      svg += `<path class="${done ? 'done' : ''}" d="M${A.cx} ${A.cy + 14} C ${A.cx} ${A.cy + 56}, ${B.cx} ${B.cy - 46}, ${B.cx} ${B.cy - 8}"/>`;
+    const sc = (id) => !!v['sc:' + id];
+    const wrap = el('div', 'flow2');
+    const node = (k, t, id) => {
+      const done = sc(id);
+      return el('div', 'f2-node' + (done ? ' done' : ''),
+        `<span class="k">${esc(k)}</span><span class="t">${esc(t)}</span>` +
+        `<span class="s">${done ? '✔ 到達済み' : '― 未到達 ―'}</span>`);
+    };
+    // 本筋：プロローグ→第一章→HUB
+    const spine = el('div', 'f2-spine');
+    spine.appendChild(node('PROLOGUE', '三度目の春、まだ来ない', 'prologue_001'));
+    spine.appendChild(node('CHAPTER 1', '差出人不明の写真', 'c004_hokanko'));
+    spine.appendChild(node('HUB', '見送りの準備、始めます', 'hub_open'));
+    wrap.appendChild(spine);
+    // 分岐：HUB ― 6ルート
+    const bus = el('div', 'f2-bus');
+    bus.appendChild(el('div', 'f2-bus-label', '― HUB ― 好きな順番で ―'));
+    const rg = el('div', 'f2-routes');
+    (this.def.routes || []).forEach(r => {
+      const seen = sc(r.scene) || !!this.game.state.routes[r.key] || !!this.store.meta.routes[r.key];
+      rg.appendChild(el('div', 'f2-route' + (seen ? ' done' : ''),
+        `<span class="no">ROUTE ${esc(r.no)} ／ ${esc(r.who)}</span>` +
+        `<span class="nm">${esc(r.title)}</span>` +
+        `<span class="tt">「${esc(r.sub)}」</span>` +
+        `<span class="st">${seen ? '✔ 読了' : '未読'}</span>`));
     });
-    const C = P(nodes[10]);
-    ends.forEach(([id, e], i) => {
-      const n = nodes[11 + i], N = P(n);
-      const done = this.store.meta.endings[id];
-      svg += `<path class="${done ? 'done' : ''}" d="M${C.cx} ${C.cy + 12} C ${C.cx} ${C.cy + 50}, ${N.cx} ${N.cy - 44}, ${N.cx} ${N.cy - 9}"/>`;
+    bus.appendChild(rg);
+    wrap.appendChild(bus);
+    // 収束：地図を作る夜→終章
+    const spine2 = el('div', 'f2-spine');
+    spine2.appendChild(node('CONVERGE', '地図を作る夜', 'g1'));
+    spine2.appendChild(node('CLIMAX', '窓の外に、ずっといた人', 'h1'));
+    wrap.appendChild(spine2);
+    // 結末：エンディング一覧
+    const m = this.store.meta;
+    const ends = el('div', 'f2-bus');
+    ends.appendChild(el('div', 'f2-bus-label',
+      `― ENDINGS ― ${Object.keys(m.endings || {}).length} / ${Object.keys(this.def.endings).length} 到達 ―`));
+    const eg = el('div', 'f2-ends');
+    Object.entries(this.def.endings).forEach(([id, e]) => {
+      const has = !!m.endings[id];
+      const cls = /TRUE/.test(e.tier) ? 'true' : /COMEDY|BONUS/.test(e.tier) ? 'secret' : /GOOD/.test(e.tier) ? 'good' : '';
+      const d = el('div', `f2-end ${cls}${has ? ' done' : ' lock'}`,
+        `<span class="k">${esc(e.tier)}</span><span class="t">${has ? '「' + esc(e.label) + '」' : '？？？'}</span>`);
+      d.title = has ? (e.cond || '') : 'まだ到達していません';
+      eg.appendChild(d);
     });
-    nodes.forEach((n) => {
-      const cls = (n.id && v['sc:' + n.id]) || (n.end && this.store.meta.endings[n.end]) ? 'node done' : 'node';
-      svg += `<g class="${cls}" transform="translate(${n.x - (n.w || 200) / 2} ${n.y})">
-        <rect width="${n.w || 200}" height="44" rx="3"/>
-        <text class="k" x="10" y="16">${esc(n.k)}</text>
-        <text x="10" y="34">${esc(n.t)}</text></g>`;
-    });
-    svg += '</svg>';
-    const sect = el('div', 'sect flow');
-    sect.innerHTML = svg;
-    sect.appendChild(el('div', 'legend', `<span><i></i>到達済み</span><span>■ 全14エンド／HUBの6ルートは訪問順自由</span><span>章: ${Object.keys(this.store.meta.visited || {}).filter(k => k.startsWith('ch:')).length}/${Object.keys(this.data.chapters).length}</span>`));
+    ends.appendChild(eg);
+    wrap.appendChild(ends);
+
+    const sect = el('div', 'sect');
+    sect.appendChild(wrap);
+    const chCount = Object.keys(v).filter(k => k.startsWith('ch:')).length;
+    sect.appendChild(el('div', 'legend',
+      `<span><i></i>到達済み</span><span class="g"><i></i>読了ルート</span>` +
+      `<span>HUBの6ルートは訪問順自由</span><span>章 ${chCount}/${Object.keys(this.data.chapters).length}</span>`));
     body.appendChild(sect);
   }
 
@@ -719,21 +843,18 @@ ${ends}
         <div>回収CG　<b>${(m.cg || []).length}</b>　エンド <b>${Object.keys(m.endings).length}/14</b>　周回 <b>${m.runs || 1}</b></div>
       </div>
       <div class="gauge">${flagsRows}</div>`;
-    const right = el('div');
-    const art = el('div', 'cg-view');
-    art.style.position = 'relative';
-    art.innerHTML = `<div class="box"><div class="art" style="aspect-ratio:16/9;position:relative;overflow:hidden;background:#0b0a09;border:1px solid rgba(203,178,124,.3)">${cg ? this.cellArt(cg) : ''}</div>
-      <div class="cap">${cg ? esc(cg.id) : ''}</div>
+    const right = el('div', 'end-art');
+    right.innerHTML = `<div class="art">${cg ? this.cellArt(cg) : ''}</div>
+      <div class="cap">${cg ? esc(cg.id) + ' ― ' + esc(cg.label) : ''}</div>
       <div class="note">到達条件：${esc(e.cond)}<br>${bonusReady ? '★ BONUS EXTRA「また、この教室で」がタイトル画面に解禁されました。' : `BONUS EXTRA 解禁まであと ${allBut.filter(k => !m.endings[k]).length} 種`}</div>
-      <div class="btnrow" style="justify-content:flex-start"></div></div>`;
-    right.appendChild(art);
+      <div class="btnrow" style="justify-content:flex-start"></div>`;
     const btns = right.querySelector('.btnrow');
     const mk = (label, fn) => { const b = el('button', null, label); b.addEventListener('click', () => { this.audio.se('se_click'); fn(); }); btns.appendChild(b); };
     mk('この続きを読む（バックログ）', () => { this.close(); this.open('log'); });
-    mk('もう一度、この学期を', () => { this.close(); this.game.start('prologue_001'); });
+    mk('もう一度、この学期を', () => { this.close(); this.cinematicStart('prologue_001', 'prologue'); });
     mk('回収した地図を見る', () => { this.close(); this.open('gallery', 'end'); });
     mk('タイトルへ', () => { this.close(); this.game.toTitle(); });
-    if (bonusReady) mk('★ BONUS EXTRA を読む', () => { this.close(); this.game.start('end_bonus'); });
+    if (bonusReady) mk('★ BONUS EXTRA を読む', () => { this.close(); this.cinematicStart('end_bonus', 'end'); });
     sect.appendChild(left); sect.appendChild(right);
     body.appendChild(sect);
     if (cg) metaUnlockCg(this.store, cg.id);
