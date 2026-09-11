@@ -144,7 +144,11 @@ async function boot() {
     shell.applySpriteTag();
     dom.textwrap.classList.add('hidden');
     stage.scaleU();
-    addEventListener('resize', () => stage.scaleU());
+    let _resizeRaf = 0;
+    addEventListener('resize', () => {
+      if (_resizeRaf) return;
+      _resizeRaf = requestAnimationFrame(() => { _resizeRaf = 0; stage.scaleU(); });
+    });
     // 画面回転・リサイズ時のパーティクル再配置
     addEventListener('orientationchange', () => setTimeout(() => stage.scaleU(), 350));
 

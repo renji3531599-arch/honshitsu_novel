@@ -184,13 +184,7 @@ export class Game {
   waitForClick(extra = 0) {
     return new Promise((resolve) => {
       let settled = false;
-      const go = () => { if (settled) return; settled = true; clearTimeout(this._autoTimer); this._res = null; 
-        // クリック直後の光の残像を textbox に残す — 触覚的な美しさ
-        if (this.dom.textwrap && !this.skip) {
-          const tw = this.dom.textwrap;
-          tw.style.transform = 'scale(0.998)';
-          requestAnimationFrame(() => { tw.style.transition = 'transform .28s var(--ease-soft)'; tw.style.transform = ''; setTimeout(()=> tw.style.transition='', 320); });
-        }
+      const go = () => { if (settled) return; settled = true; clearTimeout(this._autoTimer); this._res = null;
         resolve(); };
       this._res = go;
       if (this.skip) { setTimeout(go, 42); return; }
@@ -209,30 +203,33 @@ export class Game {
       /* ---------------------------------------------------- 発話・地の文 -- */
       case 'text': {
         if (silent) return;
-        const sp = ins.sp ? (this.def.speakers[ins.sp] || { name: ins.sp }) : {};
+        const spRaw = ins.sp ? (this.def.speakers[ins.sp] || null) : null;
+        const sp = spRaw || (ins.sp ? { name: ins.sp, color: '#cbb27c' } : {});
+        const isNarration = !ins.sp || !sp.name;
         const d = this.dom;
-        d.nameText.innerHTML = sp.name
-          ? `${sp.name}` + (ins.tag ? `<span class="kana">${esc(ins.tag)}</span>` : sp.kana ? `<span class="kana">${sp.kana}</span>` : '')
-          : `<span class="kana">${ins.tag ? esc(ins.tag) : 'NARRATION'}</span>`;
-        // 話者が変わる瞬間だけ namebox をふわりと差し替える
-        const prevSp = d.stage.dataset.spk || '';
-        const curSp = ins.sp || '__narration';
-        if (prevSp !== curSp) {
+        if (isNarration) {
+          // 地の文（ナレーション）は名札を隠す — 誰の声でもないことを明確に
+          d.namebox.dataset.narration = "1";
           d.namebox.classList.remove('on');
-          // force reflow for restart
-          void d.namebox.offsetWidth;
+          d.nameText.innerHTML = ins.tag ? `<span class="kana">${esc(ins.tag)}</span>` : "";
+          // 空のときは完全に非表示（opacity 0 のまま）にしておくが、tag があれば小さく見せる
+          if (ins.tag) d.namebox.classList.add('on');
+        } else {
+          d.namebox.dataset.narration = "0";
+          const displayName = sp.name || ins.sp;
+          d.nameText.innerHTML = `${esc(displayName)}` + (ins.tag ? `<span class="kana">${esc(ins.tag)}</span>` : sp.kana ? `<span class="kana">${esc(sp.kana)}</span>` : '');
+          const prevSp = d.stage.dataset.spk || '';
+          const curSp = ins.sp;
+          if (prevSp !== curSp) {
+            d.namebox.classList.remove('on');
+            void d.namebox.offsetWidth;
+          }
+          d.namebox.classList.add('on');
         }
-        d.stage.dataset.spk = curSp;
-        d.namebox.classList.add('on');
+        d.stage.dataset.spk = isNarration ? '__narration' : (ins.sp || '');
         d.stage.style.setProperty('--sp', sp.color || '#cbb27c');
         d.text.classList.toggle('board', !!sp.board);
         d.textwrap.classList.remove('hidden');
-        // 地の文→発話の切り替えで textbox の縁が淡く光る
-        if (prevSp !== curSp && !ins.sp) {
-          d.textwrap.style.transition = 'filter .6s var(--ease-soft)';
-          d.textwrap.style.filter = 'brightness(1.04)';
-          setTimeout(() => { d.textwrap.style.filter = ''; }, 340);
-        }
         if (ins.sp) {
           const slug = sp.sprite;
           if (slug) this.stage.applyChr(slug);
@@ -243,7 +240,8 @@ export class Game {
         this.typing = true;
         this._mode = 'text';
         this.typer.speed = this.skip ? 99 : this.store.config.textSpeed;
-        if (!this.skip) this.audio.se('se_page');
+        // se_page（横からシュッという吹き出し音）は要望により撤廃。無音で即時表示
+        
         await new Promise(r => {
           this.typer.render(ins.txt, { instant: this.skip, onDone: () => { this.typing = false; r(); } });
         });

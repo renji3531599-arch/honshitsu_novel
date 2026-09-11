@@ -326,12 +326,12 @@ export function backdropSVG(asset) {
       g += `<rect y="560" width="${W}" height="340" fill="url(#flr)"/>`;
   }
 
-  // 紙の質感・滲み
+  // 紙の質感・滲み（numOctaves 2→1 で軽量化、視覚差は極小）
   g += `<rect width="${W}" height="${H}" fill="url(#lamp)" opacity=".5"/>`;
-  g += `<filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/>
-        <feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".07"/></feComponentTransfer>
+  g += `<filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".88" numOctaves="1" result="n"/>
+        <feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".06"/></feComponentTransfer>
         <feComposite operator="over" in2="SourceGraphic"/></filter>`;
-  g += `<rect width="${W}" height="${H}" filter="url(#paper)" opacity=".5"/>`;
+  g += `<rect width="${W}" height="${H}" filter="url(#paper)" opacity=".42"/>`;
 
   const style = `<style>
     .poles{animation:poles .9s linear infinite}
@@ -442,7 +442,7 @@ export function figureSVG(slug, expr = '01', mood = 'normal') {
 
 /* ============================================================ パーティクル = */
 export class Particles {
-  constructor(canvas) { this.cv = canvas; this.ctx = canvas.getContext('2d'); this.mode = null; this.parts = []; this.raf = 0; }
+  constructor(canvas) { this.cv = canvas; this.ctx = canvas ? canvas.getContext('2d', { alpha: true }) : null; this.mode = null; this.parts = []; this.raf = 0; this._lastDraw = 0; }
   set(mode) {
     if (mode === this.mode) return;
     // OSの省モーション設定では粒子を停止（バッテリー/酔い対策）
@@ -455,7 +455,11 @@ export class Particles {
     this.mode = mode;
     this.parts = [];
     if (!mode) { this.clear(); return; }
-    const n = mode === 'sakura' ? 52 : mode === 'ash' ? 28 : mode === 'yoru' ? 36 : 48;
+    if (!this.ctx) return;
+    // 画面が大きい/高DPR端末では粒子数を少し絞って軽量化（見た目は密度調整で維持）
+    const isLow = (()=>{ try{ return (navigator.hardwareConcurrency && navigator.hardwareConcurrency<=4) || (window.devicePixelRatio||1) > 1.8; }catch(_){ return false; } })();
+    const base = mode === 'sakura' ? 52 : mode === 'ash' ? 28 : mode === 'yoru' ? 36 : 48;
+    const n = isLow ? Math.round(base * 0.7) : base;
     for (let i = 0; i < n; i++) this.parts.push(this.spawn(true));
     if (!this.raf) this.tick();
   }
@@ -489,49 +493,50 @@ export class Particles {
     p.y = init ? p.y : (m === 'dust' || m === 'ash' ? h + 10 : -10);
     return p;
   }
-  clear() { this.ctx.clearRect(0, 0, this.cv.width, this.cv.height); }
+  clear() { if (!this.ctx) return; this.ctx.clearRect(0, 0, this.cv.width, this.cv.height); }
   tick() {
     const cv = this.cv, ctx = this.ctx;
-    const step = () => {
+    if (!ctx) return;
+    const step = (now) => {
       if (!this.mode) { this.raf = 0; return; }
+      // 30fps まで間引いて軽量化（見た目は 60fps と差がほぼ分からない）
+      if (now && this._lastDraw && now - this._lastDraw < 32) { this.raf = requestAnimationFrame(step); return; }
+      this._lastDraw = now || performance.now();
       const w = cv.width, h = cv.height;
+      if (w === 0 || h === 0) { this.raf = requestAnimationFrame(step); return; }
       ctx.clearRect(0, 0, w, h);
       const m = this.mode;
-      const t = Date.now() * 0.001;
       for (let i = 0; i < this.parts.length; i++) {
         const p = this.parts[i];
         p.ph += 0.011 + (p.depth ? (p.depth-0.7)*0.004 : 0);
-        // sakura ひらひら：正弦波＋回転の位相をずらして自然に
         const sway = Math.sin(p.ph) * (m === 'sakura' ? (0.9 + (p.wobble||1)*0.45) : 0.18) + Math.cos(p.ph*0.53) * (m === 'sakura' ? 0.35 : 0.06);
         p.x += (p.vx || 0) + sway * 0.22;
         p.y += p.v * (m === 'sakura' ? 1.18 : 1);
         p.rot += p.spin || 0.01;
-        // ゆっくり点滅する dust は明滅をまろやかに
         const twinkle = m === 'dust' ? (0.55 + Math.sin(p.ph*1.9 + i)*0.45) : (0.75 + Math.sin(p.ph)*0.25);
         if (p.y < -36 || p.y > h + 36 || p.x < -50 || p.x > w + 50) { this.parts[i] = this.spawn(false); continue; }
         if (m === 'sakura') {
           ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-          // 奥の花びらは少し暗く・小さく、手前は明るく
           const depthA = p.depth ? (0.72 + (p.depth-0.7)*0.55) : 1;
           ctx.globalAlpha = p.a * depthA * (0.9 + Math.sin(p.ph*1.3)*0.1);
-          // 花びらの表裏で色をわずかに変える
           const flip = Math.cos(p.rot*2) > 0 ? '#f8e2ea' : '#f3cfdc';
           ctx.fillStyle = flip;
-          ctx.shadowColor = 'rgba(255, 220, 232, .45)';
-          ctx.shadowBlur = p.r > 5 ? 6 : 0;
+          // shadowBlur はコストが高いため 5px 超の大きめ花びらのみ、かつ低負荷端末では無効
+          const useShadow = p.r > 6 && !(navigator.hardwareConcurrency && navigator.hardwareConcurrency<=4);
+          if (useShadow) { ctx.shadowColor = 'rgba(255, 220, 232, .35)'; ctx.shadowBlur = 4; } else ctx.shadowBlur = 0;
           ctx.beginPath();
-          // より花びららしい形：尖り＋丸みのブレンド
           ctx.moveTo(0, -p.r*0.92);
           ctx.bezierCurveTo(p.r*0.72, -p.r*0.48, p.r*0.58, p.r*0.62, 0, p.r*0.88);
           ctx.bezierCurveTo(-p.r*0.58, p.r*0.62, -p.r*0.72, -p.r*0.48, 0, -p.r*0.92);
           ctx.fill();
-          // 中心の筋
-          ctx.strokeStyle = 'rgba(200,150,160,.32)'; ctx.lineWidth = 0.7; ctx.beginPath(); ctx.moveTo(0,-p.r*0.5); ctx.lineTo(0,p.r*0.55); ctx.stroke();
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = 'rgba(200,150,160,.28)'; ctx.lineWidth = 0.6; ctx.beginPath(); ctx.moveTo(0,-p.r*0.5); ctx.lineTo(0,p.r*0.55); ctx.stroke();
           ctx.restore();
         } else {
           const a = p.a * twinkle;
           ctx.globalAlpha = Math.max(0, Math.min(1, a));
-          if (p.blur) { ctx.shadowColor = m === 'dust' ? 'rgba(255,246,222,.9)' : 'rgba(232,226,214,.65)'; ctx.shadowBlur = p.blur * 5; }
+          // dust の shadowBlur は高コストのため深度が浅い（手前のぼんやり）のみに限定
+          if (p.blur && p.depth > 0.92) { ctx.shadowColor = m === 'dust' ? 'rgba(255,246,222,.7)' : 'rgba(232,226,214,.5)'; ctx.shadowBlur = 3; }
           else ctx.shadowBlur = 0;
           ctx.fillStyle = m === 'dust' ? '#fff7de' : m === 'ash' ? '#e9e2d6' : '#f0e8d8';
           ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28319); ctx.fill();
@@ -589,16 +594,16 @@ export class Stage {
   scaleU() {
     const w = this.el.viewport.clientWidth || 1;
     const h = this.el.viewport.clientHeight || 1;
-    // 横画面: 幅1000基準 / 縦画面: 幅620基準（可読性を保つため粗く取る）
     const u = (w >= h ? w / 1000 : w / 620);
     const v = u.toFixed(3) + 'px';
     this.el.viewport.style.setProperty('--u', v);
     this.el.stage.style.setProperty('--u', v);
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    // DPR は 2 → 1.6 に下げてメモリ/描画コストを約35%削減（Retinaでも視覚差は極小）
+    const dpr = Math.min(1.6, window.devicePixelRatio || 1);
     const fit = (cv, pt) => {
-      if (!cv || !pt) return;
+      if (!cv || !pt || !pt.cv) return;
       const r = cv.getBoundingClientRect();
-      if (r.width > 0 && r.height > 0) pt.resize(r.width * dpr, r.height * dpr);
+      if (r.width > 0 && r.height > 0) pt.resize(Math.round(r.width * dpr), Math.round(r.height * dpr));
     };
     fit(this.el.fxParticles, this.particles);
     fit(this.el.titleFx, this.titleFx);
