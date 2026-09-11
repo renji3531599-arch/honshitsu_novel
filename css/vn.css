@@ -1196,3 +1196,125 @@ button, a{ -webkit-tap-highlight-color: transparent; }
   #debugPanel{ inset: 2vh 2vw auto 2vw; width:auto; max-height:92vh}
 }
 
+/* ==========================================================================
+   立ち絵 — 凝った動き（2026-09 強化）
+   enter 3種（left/center/right）、呼吸、talkバウンス、dim、リム脈動、奥行き
+   ========================================================================== */
+.chr{
+  --chr-delay: 0ms;
+  --chr-index: 0;
+  --chr-base: 1;
+  --chr-talk: 0;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity, filter;
+  /* 奥行きのわずかな遠近：ベーススケールを反映 */
+  /* JSが --chr-base を 0.992〜1.015 で付与 */
+}
+.chr.in{
+  /* 初期は非表示 → enter animationで出現、その後 breathe を重ねる */
+  /* 2つのanimationをカンマで重ねる際は delay を --chr-delay でずらす */
+  animation: chrBreathe 4.6s ease-in-out calc(.76s + var(--chr-delay)) infinite;
+}
+.chr.in[data-enter="left"]{ animation: chrInLeft .78s var(--ease-spring, cubic-bezier(.34,1.44,.64,1)) both var(--chr-delay), chrBreathe 4.6s ease-in-out calc(.86s + var(--chr-delay)) infinite; }
+.chr.in[data-enter="right"]{ animation: chrInRight .78s var(--ease-spring, cubic-bezier(.34,1.44,.64,1)) both var(--chr-delay), chrBreathe 4.6s ease-in-out calc(.86s + var(--chr-delay)) infinite; }
+.chr.in[data-enter="center"]{ animation: chrInCenter .76s var(--ease-spring, cubic-bezier(.34,1.44,.64,1)) both var(--chr-delay), chrBreathe 4.6s ease-in-out calc(.86s + var(--chr-delay)) infinite; }
+
+/* ————— enter ————— */
+@keyframes chrInLeft{
+  0%{ opacity:0; transform: translateX(-44px) translateY(20px) scale(.94) rotate(-.6deg); filter: blur(10px) brightness(.9) saturate(.9); }
+  58%{ opacity:1; transform: translateX(7px) translateY(-5px) scale(1.022) rotate(.35deg); filter: blur(0) brightness(1.03) saturate(1.03); }
+  100%{ opacity:1; transform: translateX(0) translateY(0) scale(var(--chr-base)) rotate(0); filter: blur(0) brightness(1) saturate(1); }
+}
+@keyframes chrInRight{
+  0%{ opacity:0; transform: translateX(44px) translateY(20px) scale(.94) rotate(.6deg); filter: blur(10px) brightness(.9) saturate(.9); }
+  58%{ opacity:1; transform: translateX(-7px) translateY(-5px) scale(1.022) rotate(-.35deg); filter: blur(0) brightness(1.03) saturate(1.03); }
+  100%{ opacity:1; transform: translateX(0) translateY(0) scale(var(--chr-base)) rotate(0); filter: blur(0) brightness(1) saturate(1); }
+}
+@keyframes chrInCenter{
+  0%{ opacity:0; transform: translateY(24px) scale(.96); filter: blur(11px) brightness(.9); }
+  62%{ opacity:1; transform: translateY(-6px) scale(1.024); filter: blur(0) brightness(1.04); }
+  100%{ opacity:1; transform: translateY(0) scale(var(--chr-base)); filter: blur(0) brightness(1); }
+}
+.chr.out{ animation: chrOut .42s var(--ease-smooth, cubic-bezier(.4,0,.2,1)) both; pointer-events:none; }
+@keyframes chrOut{
+  0%{ opacity:1; transform: translateY(0) scale(var(--chr-base)); filter: blur(0) brightness(1); }
+  100%{ opacity:0; transform: translateY(16px) scale(.97); filter: blur(7px) brightness(.92); }
+}
+
+/* ————— 呼吸（idle） ————— */
+@keyframes chrBreathe{
+  0%,100%{ transform: translateY(0) scale(var(--chr-base)) rotate(0); }
+  28%{ transform: translateY(-1.6px) scale(calc(var(--chr-base)*1.004)) rotate(.1deg); }
+  52%{ transform: translateY(-2.8px) scale(calc(var(--chr-base)*1.007)) rotate(-.08deg); }
+  76%{ transform: translateY(-1px) scale(calc(var(--chr-base)*1.003)) rotate(.05deg); }
+}
+
+/* ————— talk ————— */
+.chr.talk{
+  filter: brightness(1.08) contrast(1.04) saturate(1.07);
+  /* talk時は breathe に加えて小刻みなバウンスを重ねるため、animationを上書きで2本に */
+  animation: chrTalkBounce .34s ease-in-out infinite alternate, chrBreathe 4.6s ease-in-out infinite !important;
+  /* 2本を同時に走らせるため talk側で重要度を上げる — 実際は下のキーで上書きされるので !important で確保 */
+  animation-delay: 0s, calc(.86s + var(--chr-delay)) !important;
+  z-index: 9 !important;
+}
+@keyframes chrTalkBounce{
+  from{ transform: translateY(-2px) scale(calc(var(--chr-base)*1.012)); }
+  to  { transform: translateY(-5px) scale(calc(var(--chr-base)*1.018)); }
+}
+.chr.talk .rim{
+  opacity:1;
+  filter: blur(2.2px) brightness(1.26);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--sp) 74%, transparent), transparent 72%);
+  animation: rimPulse 1.45s ease-in-out infinite alternate;
+}
+@keyframes rimPulse{
+  from{ opacity:.92; transform: translateX(-50%) scale(1); }
+  to  { opacity:1; transform: translateX(-50%) scale(1.1); }
+}
+.chr.talk img, .chr.talk .sil{
+  /* 話者はわずかに前に出る立体感 */
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.22));
+}
+
+/* ————— dim（非話者） ————— */
+.chr.dim{
+  filter: brightness(.60) saturate(.52) contrast(.96) blur(.45px);
+  opacity:.9;
+  transform: translateY(1.6px) scale(calc(var(--chr-base)*.985));
+}
+.chr.dim img{ filter: saturate(.68) brightness(.93); }
+.chr.dim .rim{ opacity:.55; filter: blur(3px) brightness(.85); }
+
+/* ————— 3人時の奥行き強調：中央を少し大きく、左右を奥に ————— */
+.chr.in[data-count="3"][data-pos="50"]{ --chr-base: 1.016; }
+.chr.in[data-count="3"][data-pos="19"], .chr.in[data-count="3"][data-pos="81"]{ --chr-base: .988; }
+
+/* ————— nameタグ ————— */
+.chr .nametag{
+  transition: opacity .45s var(--ease-soft), transform .45s var(--ease-spring), background .45s var(--ease-soft);
+  transform: translateX(-50%) translateY(0);
+}
+.chr.talk .nametag{
+  opacity:1;
+  transform: translateX(-50%) translateY(-2px);
+  color: rgba(20,17,14,.76);
+  border-bottom-color: color-mix(in srgb, var(--sp) 52%, rgba(20,17,14,.18));
+  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.42));
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
+.chr.dim .nametag{ opacity:.55; }
+
+/* ————— 軽減 ————— */
+@media (prefers-reduced-motion: reduce){
+  .chr.in{ animation: chrInCenter .42s var(--ease-soft) both var(--chr-delay) !important; }
+  .chr.talk{ animation: none !important; filter: brightness(1.04) !important; }
+  .chr .rim{ animation: none !important; }
+}
+@media (max-width: 760px){
+  /* モバイルでは動きを控えめに：breatheのみ、talkバウンス弱め */
+  .chr.in{ animation: chrInCenter .52s var(--ease-out) both var(--chr-delay), chrBreathe 5.2s ease-in-out calc(.6s + var(--chr-delay)) infinite; }
+  .chr.in[data-enter="left"], .chr.in[data-enter="right"]{ animation: chrInCenter .52s var(--ease-out) both var(--chr-delay), chrBreathe 5.2s ease-in-out calc(.6s + var(--chr-delay)) infinite; }
+  .chr.talk{ animation: chrTalkBounce .42s ease-in-out infinite alternate, chrBreathe 5.2s ease-in-out infinite !important; }
+}
+

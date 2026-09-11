@@ -720,11 +720,12 @@ export class Stage {
   applyChr(talking = null) {
     const layer = this.el.layChr;
     const keys = [...this.chrMap.keys()];
-    // 位置（1体:中央 / 2体:左右 / 3体:左中右）
-    const posOf = (i, n) => (n === 1 ? [50] : n === 2 ? [31, 69] : [19, 50, 81])[Math.min(i, n - 1)] || 50;
+    const posArrFor = (n) => n === 1 ? [50] : n === 2 ? [31, 69] : [19, 50, 81];
+    const posArr = posArrFor(keys.length);
     keys.forEach((slug, i) => {
       const rec = this.chrMap.get(slug);
-      if (!rec.el) {
+      const isNew = !rec.el;
+      if (isNew) {
         const el = document.createElement('div');
         el.className = 'chr';
         el.innerHTML = `<div class="sil"></div><img alt=""><div class="rim"></div><div class="nametag"></div>`;
@@ -732,22 +733,44 @@ export class Stage {
         rec.el = el;
       }
       const n = keys.length;
-      rec.el.style.left = `calc(${(n === 1 ? [50] : n === 2 ? [31, 69] : [19, 50, 81])[Math.min(i, 2)]}% - var(--u)*210)`;
-      rec.el.style.width = 'calc(var(--u)*420)';
+      const pos = posArr[Math.min(i, posArr.length-1)];
+      const enter = pos < 40 ? 'left' : pos > 60 ? 'right' : 'center';
+      const el = rec.el;
+      el.dataset.enter = enter;
+      el.dataset.count = String(n);
+      el.dataset.pos = String(pos);
+      el.style.setProperty('--chr-delay', `${i*88}ms`);
+      el.style.setProperty('--chr-index', String(i));
+      // depth scale: central slightly larger, sides slightly smaller
+      const baseScale = n === 3 ? (i === 1 ? 1.015 : 0.992) : 1;
+      el.style.setProperty('--chr-base', String(baseScale));
+      el.style.left = `calc(${pos}% - var(--u)*210)`;
+      el.style.width = 'calc(var(--u)*420)';
       const a = this.assets.chrFor(slug, rec.expr);
-      const sil = rec.el.querySelector('.sil'), img = rec.el.querySelector('img'), tag = rec.el.querySelector('.nametag');
-      if (a && !this.isPlaceholder(a)) { img.src = a.file; sil.innerHTML = ''; }
-      else { img.removeAttribute('src'); sil.innerHTML = figureSVG(slug, rec.expr); }
+      const sil = el.querySelector('.sil'), img = el.querySelector('img'), tag = el.querySelector('.nametag');
+      if (a && !this.isPlaceholder(a)) { img.src = a.file; sil.innerHTML = ''; img.style.opacity=''; }
+      else { img.removeAttribute('src'); sil.innerHTML = figureSVG(slug, rec.expr, talking===slug ? 'talk' : 'normal'); }
       const label = a ? a.label.replace(/^\S+\s/, '') : rec.expr;
       tag.textContent = `${slug} · ${rec.expr} · ${label}`;
-      rec.el.classList.add('in');
-      rec.el.classList.toggle('talk', talking === slug);
-      rec.el.classList.toggle('dim', !!talking && talking !== slug);
-      rec.el.style.zIndex = talking === slug ? 5 : 1;
+      // restart entrance if newly added
+      if (isNew) { void el.offsetWidth; }
+      el.classList.remove('out');
+      el.classList.add('in');
+      el.classList.toggle('talk', talking === slug);
+      el.classList.toggle('dim', !!talking && talking !== slug);
+      // z: talker front, others back-to-front order
+      el.style.zIndex = talking === slug ? 9 : String(n - i);
+      if (talking === slug) el.style.setProperty('--chr-talk','1');
+      else el.style.removeProperty('--chr-talk');
     });
     [...layer.children].forEach(el => {
       const slug = [...this.chrMap.keys()].find(k => this.chrMap.get(k).el === el);
-      if (!slug) { el.classList.remove('in'); setTimeout(() => el.remove(), 460); }
+      if (!slug) {
+        el.classList.remove('in','talk');
+        el.classList.add('out');
+        el.style.zIndex = '0';
+        setTimeout(() => { if (![...this.chrMap.values()].some(v=>v.el===el)) el.remove(); }, 440);
+      }
     });
   }
   fx(name) {
