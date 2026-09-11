@@ -158,7 +158,14 @@ export class Shell {
       b.style.setProperty('--i', i);
       b.addEventListener('mouseenter', () => this.audio.se('se_hover'));
       b.addEventListener('click', () => {
-        if (it.dis) { this.audio.se('se_deny'); this.toast('セーブデータがありません'); return; }
+        if (it.dis) {
+          this.audio.se('se_deny');
+          b.classList.remove('deny');
+          void b.offsetWidth;
+          b.classList.add('deny');
+          this.toast('セーブデータがありません');
+          return;
+        }
         this.audio.se('se_click');
         this.titlePick(it.id);
       });
@@ -184,7 +191,8 @@ export class Shell {
       this.veilLift();
       return;
     }
-    if (id === 'load') { this.hideTitle(); this.open('load'); }
+    // パネル系はタイトルの前面（#overlay z40）に開く。閉じればタイトルに戻る。
+    if (id === 'load') { this.open('load'); }
   }
   /** はじめから／BONUS：タイトル→本編のシネマティックな橋渡し */
   async cinematicStart(sceneId, chapterId) {
@@ -515,7 +523,7 @@ export class Shell {
         if (mode === 'save') { this.store.save(idx, this.game.snapshot()); this.toast(`SLOT ${idx} に記録した`); this.open('save'); }
         else {
           if (!d) { this.audio.se('se_deny'); this.toast('空きスロットです'); return; }
-          this.close(); this.game.restore(d);
+          this.close(); this.hideTitle(); this.game.restore(d);
         }
       });
       grid.appendChild(card);
@@ -610,7 +618,16 @@ export class Shell {
         const cell = el('button', 'cg-cell' + (got ? '' : ' lock'));
         cell.innerHTML = `<div class="im" style="background:#141210;display:grid;place-items:center;font-family:var(--ff-sans);font-size:11px;color:${got ? 'var(--gold)' : '#666'}">${got ? esc(c.kind.toUpperCase()) : 'LOCK'}</div>
           <div class="lb">${esc(got ? c.title : '───')}</div>`;
-        if (got) cell.addEventListener('click', () => { this.close(); this.openChat(c, () => this.open('gallery', 'chat')); });
+        if (got) cell.addEventListener('click', () => {
+          // 端末画面はステージ層なので、タイトルから開いた場合はタイトルを一旦退ける
+          const fromTitle = !this.dom.title.classList.contains('out');
+          if (fromTitle) this.dom.title.classList.add('out');
+          this.close();
+          this.openChat(c, () => {
+            if (fromTitle) this.dom.title.classList.remove('out');
+            this.open('gallery', 'chat');
+          });
+        });
         grid.appendChild(cell);
       });
       sect.appendChild(el('h3', null, 'グループライン／掲示板／配信 画面'));

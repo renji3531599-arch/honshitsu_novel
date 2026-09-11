@@ -215,6 +215,25 @@ const tbtns = [...document.querySelectorAll('#titleMenu button')];
 assert(tbtns.length >= 4, `タイトルメニューの項目数 ${tbtns.length}（4つ以上期待）`);
 notes.push(`タイトル項目 ${tbtns.length}: ${tbtns.map(b => b.textContent.replace(/\s+/g, ' ').trim()).join(' / ')}`);
 
+/* 1b) タイトルからパネルを開く（overlay はタイトルの前面に出る） */
+mark('1b: タイトル→パネル */');
+{
+  const g = tbtns.find(b => b.textContent.includes('ギャラリー'));
+  assert(!!g, 'タイトルにギャラリー項目がありません');
+  if (g) g.click();
+  await tick();
+  assert(!document.getElementById('overlay').classList.contains('hidden'), 'タイトルからギャラリーが開かない');
+  assert((document.getElementById('ovBody').textContent || '').length > 40, 'ギャラリーの中身が薄い');
+  shell.close();
+  await tick();
+  // 未保存状態の「つづきから」は拒否フィードバック（シェイク＋トースト）
+  tbtns[1].click();
+  await tick();
+  assert(document.querySelectorAll('#toasts .toast').length >= 1, 'つづきから（未保存）のトーストが出ない');
+  assert(document.getElementById('title').classList.contains('out') === false, 'つづきから（未保存）でタイトルが隠れた');
+  notes.push('タイトル→パネル導線 OK');
+}
+
 /* 2) 全パネルの描画 */
 mark('2: 全パネルの描画 */');
 for (const kind of ['config', 'save', 'load', 'gallery', 'tips', 'flow', 'almanac', 'log', 'keys']) {

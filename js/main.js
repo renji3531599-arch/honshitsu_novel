@@ -234,6 +234,7 @@ function bindInput({ dom, game, shell, store, audio }) {
     if (k === 'Escape') {
       if (document.querySelector('.cg-view')) return;   // 拡大鑑賞の Esc を優先
       if (ovOpen) { shell.close(); return; }
+      if (!dom.title.classList.contains('out')) return;   // タイトル上では何もしない
       if (dom.quickmenu.classList.contains('hidden')) openQuick(); else closeQuick();
       return;
     }
@@ -243,6 +244,8 @@ function bindInput({ dom, game, shell, store, audio }) {
       const i = btns.indexOf(document.activeElement);
       if (k === 'ArrowDown' || k === 'ArrowUp') { e.preventDefault(); btns[(i + (k === 'ArrowDown' ? 1 : btns.length - 1) + btns.length) % btns.length].focus(); }
       else if (k === 'Enter') { e.preventDefault(); (btns[i] || btns[0]).click(); }
+      else if (/^[1-9]$/.test(k)) { e.preventDefault(); const b = btns[+k - 1]; if (b) b.click(); }
+      else if (menuKeys[k.toLowerCase()]) { e.preventDefault(); shell.open(menuKeys[k.toLowerCase()]); }
       return;
     }
     if (game._mode === 'choice') {

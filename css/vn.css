@@ -161,7 +161,7 @@ img{display:block;max-width:100%}
 .hud-mark b{color:rgba(240,232,214,.9);font-weight:600}
 .hud-mark.pop{animation:hudin .9s var(--ease-out) backwards}
 @keyframes hudin{from{opacity:0;transform:translateY(calc(var(--u)*-6))}to{opacity:1;transform:none}}
-.toast-stack{position:absolute;z-index:8;right:calc(var(--u)*26);top:calc(var(--u)*44);
+.toast-stack{position:absolute;z-index:45;right:calc(var(--u)*26);top:calc(var(--u)*44);
   display:flex;flex-direction:column;gap:calc(var(--u)*6);align-items:flex-end;max-width:60%}
 .toast{background:rgba(14,12,10,.86);border:1px solid rgba(203,178,124,.34);
   padding:calc(var(--u)*7) calc(var(--u)*12);font-family:var(--ff-sans);font-size:calc(var(--u)*11);
@@ -414,7 +414,7 @@ img{display:block;max-width:100%}
 /* ==========================================================================
    オーバーレイ（CONFIG / SAVE / GALLERY 等）
    ========================================================================== */
-#overlay{position:absolute;inset:0;z-index:20;background:rgba(5,4,4,.9);backdrop-filter:blur(7px);
+#overlay{position:absolute;inset:0;z-index:40;background:rgba(5,4,4,.9);backdrop-filter:blur(7px);
   -webkit-backdrop-filter:blur(7px);
   display:grid;place-items:center;animation:ovin .4s ease both;padding:calc(var(--u)*16)}
 @keyframes ovin{from{opacity:0}to{opacity:1}}
@@ -716,6 +716,9 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
 .tmenu:hover .ja{color:#fff6e2}
 .tmenu.lock{opacity:.4;cursor:not-allowed}
 .tmenu.newgame .ja{color:#ffe7bb}
+.tmenu.deny{animation:deny .38s ease}
+@keyframes deny{0%,100%{transform:translateX(0)}25%{transform:translateX(calc(var(--u)*-6))}
+50%{transform:translateX(calc(var(--u)*5))}75%{transform:translateX(calc(var(--u)*-3))}}
 .title-foot{flex:0 0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:calc(var(--u)*20);
   font-family:var(--ff-sans);font-size:calc(var(--u)*9);letter-spacing:.14em;color:rgba(240,232,214,.42)}
 #titleProgress{display:flex;gap:calc(var(--u)*5);flex-wrap:wrap;max-width:62%}
