@@ -74,6 +74,12 @@ img{display:block;max-width:100%}
 .lay-bg .art-img{object-fit:cover;mix-blend-mode:multiply;
   transform:scale(1.03);transition:opacity .55s ease,transform 14s linear}
 .lay-bg .art-back svg{width:100%;height:100%;display:block}
+/* 読み込み済みの新背景へ、旧背景を重ねたまま静かにディゾルブする。 */
+.bg-outgoing{position:absolute;inset:0;background:#0c0a08;opacity:1;
+  pointer-events:none;transition:opacity .95s cubic-bezier(.4,0,.2,1)}
+.bg-outgoing.leaving{opacity:0}
+@media (prefers-reduced-motion:reduce){.bg-outgoing{transition:none}}
+
 .grade{position:absolute;inset:0;transition:background 1.1s ease,opacity 1.1s ease;mix-blend-mode:soft-light}
 .lightshaft{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;
   background:linear-gradient(105deg,rgba(255,244,214,0) 34%,rgba(255,241,206,.5) 46%,rgba(255,240,200,0) 57%);
@@ -325,10 +331,10 @@ img{display:block;max-width:100%}
 /* NOTE: 以前は #textwrap.enter で twin アニメーション（横からシュッと吹き出し）＋ se_page が付いていたが
    ユーザ要望により演出を撤廃。出現は即時（opacity/transform のアニメなし）で美しさの最終見た目は同一 */
 #textwrap.enter{animation:none}
-/* ネームプレート: ウィンドウ右上に載せる小さな枠（一般的なノベルゲーム形式）。
+/* ネームプレート: ウィンドウ左上に載せる小さな枠（一般的なノベルゲーム形式）。
    話者のイメージカラー（--sp）で枠・文字を染め分ける。#textwrap は paint containment 無し
    （上端からはみ出すため。contain 側の NOTE 参照） */
-#namebox{position:absolute;right:calc(var(--u)*18);bottom:calc(100% - var(--u)*1);left:auto;margin-bottom:0;z-index:2;
+#namebox{position:absolute;left:calc(var(--u)*18);bottom:calc(100% - var(--u)*1);right:auto;margin-bottom:0;z-index:2;
   display:flex;align-items:baseline;gap:calc(var(--u)*6);
   background:linear-gradient(180deg,color-mix(in srgb,var(--sp) 26%,#17140f) 0%,rgba(15,13,11,.97) 100%);
   border:1px solid color-mix(in srgb,var(--sp) 60%,transparent);border-bottom:0;
@@ -880,7 +886,7 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
   #textbox{padding:16px 16px 24px}
   #text{font-size:15px;min-height:0;max-height:32dvh}
   #text.board{font-size:16px}
-  #namebox{font-size:13px;right:10px;padding:3px 12px 4px;max-width:78%}
+  #namebox{font-size:13px;left:10px;padding:3px 12px 4px;max-width:78%}
   .tbtn{font-size:10px;padding:8px 10px}
   #choices{width:calc(100% - 32px);top:auto;bottom:calc(10px + 116px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);left:50%}
   .choice{font-size:15px}

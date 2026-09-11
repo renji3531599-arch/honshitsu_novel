@@ -613,39 +613,59 @@ export class Stage {
   async bg(id, opt = {}) {
     const my = ++this._bgToken;
     const img = this.el.bgImg;
+    const back = this.el.bgBack;
     if (!id) {
+      this._bgOutgoing?.remove();
+      this._bgOutgoing = null;
       img.removeAttribute('src');
-      img.style.opacity = '';
-      img.style.transform = '';
-      this.el.bgBack.innerHTML = '';
+      back.innerHTML = '';
       this.bgId = null;
+      delete this.el.stage.dataset.bg;
+      delete this.el.stage.dataset.bgkind;
       return;
     }
+    if (id === this.bgId) return;
     const a = this.assets.byId[id];
-    this.bgId = id;
-    if (this.isPlaceholder(a)) {
-      // SVG 補完描画（プレースホルダー期間の見た目）
-      this.el.bgBack.innerHTML = backdropSVG(a || { id, meta: '' });
+    const placeholder = this.isPlaceholder(a);
+    // 表示中の背景には触れず、次の画像を先にデコードする。
+    if (!placeholder) {
+      const next = new Image();
+      next.src = a.file;
+      try { await next.decode(); }
+      catch (e) { return; } // 読み込み失敗時は現在の背景を維持
+      if (my !== this._bgToken) return;
+    }
+    this._bgOutgoing?.remove();
+    const outgoing = document.createElement('div');
+    outgoing.className = 'bg-outgoing';
+    outgoing.setAttribute('aria-hidden', 'true');
+    for (const source of [back, img]) {
+      const copy = source.cloneNode(true);
+      copy.removeAttribute('id');
+      outgoing.appendChild(copy);
+    }
+    const hasPrevious = !!this.bgId;
+    const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (hasPrevious && !reduced) {
+      img.after(outgoing);
+      this._bgOutgoing = outgoing;
+    }
+    if (placeholder) {
+      back.innerHTML = backdropSVG(a || { id, meta: '' });
       img.removeAttribute('src');
-      img.style.opacity = '';
-      img.style.transform = '';
     } else {
-      // 実画像：映画的なディップ＋クロスフェード。わずかに長くして滑らかに
-      img.style.opacity = '0';
-      img.style.filter = 'blur(6px) brightness(.96)';
-      await this.t(220);
-      if (my !== this._bgToken) return;
-      this.el.bgBack.innerHTML = '';
-      img.style.transform = 'scale(1.1)';
+      back.innerHTML = '';
       img.src = a.file;
-      try { await img.decode(); } catch (e) { /* decode 失敗でも表示は続ける */ }
-      if (my !== this._bgToken) return;
-      // 次フレームで不透明に戻す（transition が効く）
-      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-      if (my !== this._bgToken) return;
-      img.style.opacity = '';
-      img.style.filter = '';
-      img.style.transform = '';
+    }
+    this.bgId = id;
+    // 新背景の上で旧背景だけをフェードアウト。途中に暗転を挟まない。
+    if (outgoing.isConnected) {
+      void outgoing.offsetWidth;
+      outgoing.classList.add('leaving');
+      setTimeout(() => {
+        outgoing.remove();
+        if (this._bgOutgoing === outgoing) this._bgOutgoing = null;
+      }, 1000);
     }
     const kind = ((a && a.meta) || '').split('/')[0];
     this.el.stage.dataset.bgkind = kind;
@@ -726,11 +746,11 @@ export class Stage {
     const layer = this.el.layChr;
     const keys = [...this.chrMap.keys()];
     const n = keys.length;
-    // 均等スロット配置: n人 → (i+1)/(n+1)%。人数が増えても同じ座標に重ねない
-    // （旧実装は3スロット固定で、4人目以降が既存の枠に完全に重なっていた）
-    const posArr = keys.map((_, i) => 100 * (i + 1) / (n + 1));
-    // 大所帯では全体を縮小する（transform-origin が下端なので足元は固定される）
-    const shrink = n <= 2 ? 1 : n === 3 ? 0.94 : n === 4 ? 0.85 : n === 5 ? 0.78 : 0.72;
+    // 大人数でも身長を変えず、左右の余白を使って配置する。
+    // 重なった場合は話者を前面へ（下の zIndex 設定）。
+    const posArr = keys.map((_, i) => n <= 2
+      ? 100 * (i + 1) / (n + 1)
+      : 18 + 64 * i / (n - 1));
     keys.forEach((slug, i) => {
       const rec = this.chrMap.get(slug);
       const isNew = !rec.el;
@@ -749,12 +769,12 @@ export class Stage {
       el.dataset.pos = String(pos);
       el.style.setProperty('--chr-delay', `${i*88}ms`);
       el.style.setProperty('--chr-index', String(i));
-      // depth scale: central slightly larger, sides slightly smaller（×人数縮小）
-      const baseScale = (n === 3 ? (i === 1 ? 1.015 : 0.992) : 1) * shrink;
+      // 3人時のごく小さな奥行きのみ。人数による縮小はしない。
+      const baseScale = n === 3 ? (i === 1 ? 1.015 : 0.992) : 1;
       el.style.setProperty('--chr-base', String(baseScale));
-      el.style.left = `calc(${pos}% - var(--u)*${(210 * shrink).toFixed(1)})`;
-      el.style.width = `calc(var(--u)*${(420 * shrink).toFixed(1)})`;
-      el.style.height = `calc(var(--u)*${(640 * shrink).toFixed(1)})`;
+      el.style.left = `calc(${pos}% - var(--u)*210)`;
+      el.style.width = `calc(var(--u)*420)`;
+      el.style.height = `calc(var(--u)*640)`;
       const a = this.assets.chrFor(slug, rec.expr);
       const sil = el.querySelector('.sil'), img = el.querySelector('img'), tag = el.querySelector('.nametag');
       if (a && !this.isPlaceholder(a)) { img.src = a.file; sil.innerHTML = ''; img.style.opacity=''; }
