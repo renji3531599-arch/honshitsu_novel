@@ -203,21 +203,30 @@ export class Game {
       /* ---------------------------------------------------- 発話・地の文 -- */
       case 'text': {
         if (silent) return;
-        const sp = ins.sp ? (this.def.speakers[ins.sp] || { name: ins.sp }) : {};
+        const spRaw = ins.sp ? (this.def.speakers[ins.sp] || null) : null;
+        const sp = spRaw || (ins.sp ? { name: ins.sp, color: '#cbb27c' } : {});
+        const isNarration = !ins.sp || !sp.name;
         const d = this.dom;
-        d.nameText.innerHTML = sp.name
-          ? `${sp.name}` + (ins.tag ? `<span class="kana">${esc(ins.tag)}</span>` : sp.kana ? `<span class="kana">${sp.kana}</span>` : '')
-          : `<span class="kana">${ins.tag ? esc(ins.tag) : 'NARRATION'}</span>`;
-        // 話者が変わる瞬間だけ namebox をふわりと差し替える
-        const prevSp = d.stage.dataset.spk || '';
-        const curSp = ins.sp || '__narration';
-        if (prevSp !== curSp) {
+        if (isNarration) {
+          // 地の文（ナレーション）は名札を隠す — 誰の声でもないことを明確に
+          d.namebox.dataset.narration = "1";
           d.namebox.classList.remove('on');
-          // force reflow for restart
-          void d.namebox.offsetWidth;
+          d.nameText.innerHTML = ins.tag ? `<span class="kana">${esc(ins.tag)}</span>` : "";
+          // 空のときは完全に非表示（opacity 0 のまま）にしておくが、tag があれば小さく見せる
+          if (ins.tag) d.namebox.classList.add('on');
+        } else {
+          d.namebox.dataset.narration = "0";
+          const displayName = sp.name || ins.sp;
+          d.nameText.innerHTML = `${esc(displayName)}` + (ins.tag ? `<span class="kana">${esc(ins.tag)}</span>` : sp.kana ? `<span class="kana">${esc(sp.kana)}</span>` : '');
+          const prevSp = d.stage.dataset.spk || '';
+          const curSp = ins.sp;
+          if (prevSp !== curSp) {
+            d.namebox.classList.remove('on');
+            void d.namebox.offsetWidth;
+          }
+          d.namebox.classList.add('on');
         }
-        d.stage.dataset.spk = curSp;
-        d.namebox.classList.add('on');
+        d.stage.dataset.spk = isNarration ? '__narration' : (ins.sp || '');
         d.stage.style.setProperty('--sp', sp.color || '#cbb27c');
         d.text.classList.toggle('board', !!sp.board);
         d.textwrap.classList.remove('hidden');

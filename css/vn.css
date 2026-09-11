@@ -325,15 +325,22 @@ img{display:block;max-width:100%}
 /* NOTE: 以前は #textwrap.enter で twin アニメーション（横からシュッと吹き出し）＋ se_page が付いていたが
    ユーザ要望により演出を撤廃。出現は即時（opacity/transform のアニメなし）で美しさの最終見た目は同一 */
 #textwrap.enter{animation:none}
-#namebox{position:absolute;left:0;bottom:100%;margin-bottom:calc(var(--u)*-1);
-  background:linear-gradient(180deg,color-mix(in srgb,var(--sp) 42%,#100e0c),#100e0c);
-  border:1px solid color-mix(in srgb,var(--sp) 55%,transparent);border-bottom:0;
-  padding:calc(var(--u)*6) calc(var(--u)*20) calc(var(--u)*7);
-  font-size:calc(var(--u)*15.5);letter-spacing:.14em;color:#f4ecd9;white-space:nowrap;max-width:100%;
+#namebox{position:absolute;left:0;bottom:100%;margin-bottom:0;
+  display:flex;align-items:center;gap:calc(var(--u)*8);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--sp) 62%,#1d1a16) 0%,rgba(16,14,12,.96) 100%);
+  border:1px solid color-mix(in srgb,var(--sp) 68%,transparent);border-bottom:0;
+  border-left-width:calc(var(--u)*3);
+  padding:calc(var(--u)*7) calc(var(--u)*20) calc(var(--u)*8) calc(var(--u)*14);
+  font-size:calc(var(--u)*15.5);font-weight:800;letter-spacing:.08em;color:#fff8e6;white-space:nowrap;max-width:72%;
   overflow:hidden;text-overflow:ellipsis;
-  clip-path:polygon(0 0,100% 0,calc(100% - var(--u)*12) 100%,0 100%);opacity:0;transition:opacity .3s}
-#namebox.on{opacity:1}
-#namebox .kana{font-family:var(--ff-sans);font-size:calc(var(--u)*9);letter-spacing:.2em;color:rgba(244,236,217,.55);margin-left:.8em}
+  border-radius:calc(var(--u)*5) calc(var(--u)*5) 0 0;
+  box-shadow:0 calc(var(--u)*8) calc(var(--u)*18) rgba(0,0,0,.42), 0 1px 0 rgba(255,255,255,.08) inset;
+  opacity:0;transform:translateY(4px);transition:opacity .26s ease, transform .26s ease, background .3s}
+#namebox.on{opacity:1;transform:none}
+#namebox::before{content:"";width:calc(var(--u)*8);height:calc(var(--u)*8);border-radius:50%;background:var(--sp);box-shadow:0 0 calc(var(--u)*8) color-mix(in srgb,var(--sp) 58%,transparent);flex:0 0 auto}
+#namebox .kana{font-family:var(--ff-sans);font-size:calc(var(--u)*9);font-weight:400;letter-spacing:.16em;color:rgba(255,248,230,.72);margin-left:.2em}
+#namebox[data-narration="1"]{background:rgba(14,12,10,.88);border-color:rgba(203,178,124,.18);border-left-width:1px;color:rgba(240,232,214,.65);font-weight:600;font-size:calc(var(--u)*11);letter-spacing:.18em;padding:calc(var(--u)*5) calc(var(--u)*14)}
+#namebox[data-narration="1"]::before{display:none}
 #textbox{position:relative;background:var(--boxbg);backdrop-filter:blur(6px) saturate(.85);
   -webkit-backdrop-filter:blur(6px) saturate(.85);
   border:1px solid rgba(203,178,124,.34);
@@ -378,12 +385,13 @@ img{display:block;max-width:100%}
 .tbtn.act{color:#12100e;background:var(--gold);border-color:var(--gold)}
 
 /* --------------------------------------------------------- choices --------- */
-#choices{position:absolute;z-index:11;left:50%;top:42%;transform:translate(-50%,-50%);
+#choices{position:absolute;z-index:11;left:50%;bottom:calc(var(--u)*176 + env(safe-area-inset-bottom,0px));top:auto;transform:translateX(-50%);
   width:min(calc(var(--u)*640),calc(100% - calc(var(--u)*48)));
-  max-height:72%;overflow-y:auto;
-  display:flex;flex-direction:column;gap:calc(var(--u)*10);padding:calc(var(--u)*4)}
-#choices.in{animation:choicein .45s var(--ease-out) backwards}
-@keyframes choicein{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}
+  max-height:min(48vh, calc(100% - var(--u)*220));overflow-y:auto;
+  display:flex;flex-direction:column;gap:calc(var(--u)*8);padding:calc(var(--u)*6) calc(var(--u)*4) calc(var(--u)*4);
+  /* テキストボックスの直上に寄せ、キャラの顔を隠さない */}
+#choices.in{animation:choicein .42s var(--ease-out) backwards}
+@keyframes choicein{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 #choicePrompt{text-align:center;font-size:calc(var(--u)*12);letter-spacing:.3em;color:rgba(240,232,214,.55);
   margin-bottom:calc(var(--u)*2);text-shadow:0 2px 8px rgba(0,0,0,.9)}
 .choice{position:relative;text-align:left;padding:calc(var(--u)*13) calc(var(--u)*20) calc(var(--u)*13) calc(var(--u)*42);
@@ -873,7 +881,7 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
   #text.board{font-size:16px}
   #namebox{font-size:14px}
   .tbtn{font-size:10px;padding:8px 10px}
-  #choices{width:calc(100% - 32px);top:36%}
+  #choices{width:calc(100% - 32px);top:auto;bottom:calc(10px + 116px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);left:50%}
   .choice{font-size:15px}
   .hub{padding:56px 16px 18px;gap:12px}
   .hub-list{grid-template-columns:1fr 1fr;gap:8px}
@@ -1027,8 +1035,8 @@ table.almanac tr:hover td{background:rgba(203,178,124,.07)}
 /* ---- テキストボックス：ガラスと金の縁取りが呼吸 ---- */
 #textbox{ background: linear-gradient(180deg, rgba(14,12,10,.86) 0%, rgba(10,9,8,.84) 100%); backdrop-filter: blur(10px) saturate(1.05); -webkit-backdrop-filter: blur(10px) saturate(1.05); border-color: rgba(203,178,124,.36); box-shadow: 0 18px 48px rgba(0,0,0,.68), inset 0 1px 0 rgba(255,255,255,.06), inset 0 -1px 0 rgba(0,0,0,.5), var(--shadow-gold); transition: border-color .7s var(--ease-soft), box-shadow .7s var(--ease-soft); contain: paint; }
 #textbox::before,#textbox::after{ border-color: rgba(203,178,124,.58); transition: border-color .7s var(--ease-soft); }
-/* #textwrap.enter #textbox の textBoxIn と #namebox.on の nameIn は吹き出し演出として撤廃 */
-#namebox{ background: linear-gradient(180deg, color-mix(in srgb, var(--sp) 46%, #14110e), #0f0d0b); box-shadow: 0 6px 18px rgba(0,0,0,.38), 0 1px 0 rgba(255,255,255,.08) inset; border-color: color-mix(in srgb, var(--sp) 58%, transparent); transition: opacity .28s var(--ease-soft), background .5s var(--ease-soft); }
+/* #textwrap.enter #textbox の textBoxIn と #namebox.on の nameIn は吹き出し演出として撤廃 — 上部の新しい namebox 定義を尊重（上書きしない） */
+/* polish の旧 namebox 上書きは削除 — 視認性改善のため上部定義を優先 */
 #text .hs{ background: linear-gradient(180deg, transparent 62%, rgba(203,178,124,.18) 62%); padding: 0 2px; border-radius:2px; text-shadow: 0 0 14px rgba(232,201,138,.54), 0 1px 0 rgba(0,0,0,.5); }
 #text em{ text-shadow: 0 0 12px rgba(255,210,120,.42), 0 1px 0 rgba(0,0,0,.6); }
 .pagecorner{ filter: drop-shadow(0 0 6px rgba(203,178,124,.42)); }
