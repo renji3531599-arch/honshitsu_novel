@@ -85,6 +85,9 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 * 作ったのに本編で出していないCGは `"reserve": true` を付けるとギャラリーと回収枚数から外れる
   （2026-09-11 に11枚を降板。経緯と基準は `docs/PERF_2026-09-11.md` §CG）。
 * 素材IDは脚本内で `bg_hokutou_kyoshitsu_asa`（=ファイル名stem）でも `BG01` でも書ける。
+* 差し替え後は **`sw.js` の `CACHE`（現在 `honshitsu-v2`）を必ず上げる**。CacheFirst で画像を返すため、
+  上げると旧キャッシュ（白紙PNG）を配信し続けて「差し替わってないように見える」ことがある。
+  ※ 脚本 `data/script/*.txt` は NetworkFirst に変えた（直したのに反映されない問題の防止）。
 * 使わなかった予備 99 枚は `assets/_buffer/` に退避済み（一覧は `docs/ASSET_MANIFEST.md`）。
 * リネーム作業自体は `python3 tools/rename_assets.py` で再実行可能（台帳とmanifestも同時に更新）。
 
