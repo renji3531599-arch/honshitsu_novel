@@ -60,18 +60,13 @@ export class Game {
   giveItem(id) {
     if (this.state.items.includes(id)) return;
     this.state.items.push(id);
-    const it = (this.def.items || {})[id];
     this.audio.se('se_reveal');
-    this.shell.toast(it ? `ITEM ／ ${it.label}` : `ITEM ／ ${id}`);
-    this.shell.flashItems();
+    this.shell.flashItems();   // 所持品パネルの表示のみ（トーストは没入のため出さない）
   }
   giveTip(id) {
     if (this.state.tips.includes(id)) return;
     this.state.tips.push(id);
-    if (metaUnlock(this.store, 'tip', id)) {
-      const t = (this.data.terms || {})[id];
-      this.shell.toast(t ? `✝本質✝辞典 を引いた ／ ${t.title}` : `用語収集 ／ ${id}`);
-    }
+    metaUnlock(this.store, 'tip', id);   // 収集は静かに行う（トーストは出さない）
   }
   bump(key, n = 1) {
     this.state.counters[key] = (this.state.counters[key] || 0) + n;
@@ -307,7 +302,7 @@ export class Game {
         }
         return;
       case 'savepoint':
-        if (!silent && this.store.config.autosave) { this.store.saveAuto(this.snapshot()); this.shell.toast('AUTO SAVE 完了'); }
+        if (!silent && this.store.config.autosave) this.store.saveAuto(this.snapshot());   // 静かに保存（トーストなし）
         return;
       case 'wait': await sleep(this.skip ? 90 : (ins.ms || 600)); return;
       case 'end': if (silent) return; return this.finish(ins);

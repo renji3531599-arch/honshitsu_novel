@@ -608,7 +608,7 @@ export class Shell {
       sect.appendChild(tbl2);
       sect.appendChild(el('p', 'hint', '※ 現在 BGM/SE は WebAudio による手続き生成（仮音源）です。実音源を <b>audio/bgm01.ogg</b> 等の名前で置けば、後述の <b>data/audio.json</b> で差し替えられます。'));
       body.appendChild(sect);
-      $$('button[data-bgm]', sect).forEach(b => b.addEventListener('click', () => { this.audio.bgm(b.dataset.bgm, .6); this.toast('BGM試聴: ' + b.dataset.bgm); }));
+      $$('button[data-bgm]', sect).forEach(b => b.addEventListener('click', () => this.audio.bgm(b.dataset.bgm, .6)));
       $$('button[data-se]', sect).forEach(b => b.addEventListener('click', () => this.audio.se(b.dataset.se)));
     } else if (tab === 'chat') {
       const sect = el('div', 'sect');
