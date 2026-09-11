@@ -2013,6 +2013,15 @@
    "meta": "ui",
    "source": "image3/white_201.png",
    "placeholder": true
+  },
+  {
+   "id": "title_key",
+   "cat": "bg",
+   "file": "assets/bg/title_key.jpg",
+   "label": "タイトルキービジュアル（夕方の教室・地図筒・古写真）",
+   "desc": "タイトル背景の実画像。起動時に先読みされる。",
+   "meta": "title",
+   "placeholder": false
   }
  ],
  "bufferFiles": [

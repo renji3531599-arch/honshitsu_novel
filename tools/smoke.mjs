@@ -196,6 +196,19 @@ const vn = window.__vn;
 const { game, shell, data, store, def, assets } = vn;
 if (!game) { errs.push('window.__vn.game がありません'); report(); process.exit(1); }
 
+/* 0) 起動ゲート（TOUCH TO START → タイトルリビール） */
+mark('0: 起動ゲート */');
+{
+  const gate = document.getElementById('bootStart');
+  assert(!!gate, '起動ゲート（#bootStart）がありません');
+  assert(gate && !gate.classList.contains('hidden'), '起動ゲートが表示されていません');
+  if (gate) gate.click();
+  await sleep(60);
+  assert(window.__vnReady === true, '起動ゲート通過後も __vnReady が立たない');
+  assert(document.getElementById('title').classList.contains('reveal'), 'タイトルのリビールが始まらない');
+  notes.push('起動ゲート → タイトルリビール OK');
+}
+
 /* 1) タイトル */
 mark('1: タイトル */');
 const tbtns = [...document.querySelectorAll('#titleMenu button')];
@@ -229,7 +242,8 @@ shell.close();
 /* 4) 1周プレイ（選択肢は素直に先頭、HUB は未読を順に、端末は閉じる） */
 mark('4: 1周プレイ（選択肢は素直に先頭、HUB は未読を順に、端末は閉じる） */');
 tbtns[0].click();
-await sleep(30);
+// シネマティック開始（タイトル→本編のヴェール演出）を待ってからスキップを効かせる
+await waitUntil(() => game._running === true, 8000, 'cinematic start');
 game.skip = true;                 // start() が skip を戻すので後から効かせる
 if (game.typer) game.typer.speed = 99;
 let steps = 0, picks = 0, hubs = 0, chats = 0, cards = 0, endMode = false, stall = 0, lastScene = '';

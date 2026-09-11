@@ -71,6 +71,9 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
   （背景・立ち絵は `js/visual.js` がその場手続き生成した SVG を下地に描く）。
 * 差し替えは同名上書きだけ。`data/assets.json` の該当行の `"placeholder": true` を **`false`** にすると
   補完SVGが消えて、実画像がそのまま出る。
+* 起動は**画像先読み方式**：`false` の行はローダー（`TOUCH TO START` の前）で全枚プリロードされ、
+  本編中の背景/CG切替はクロスフェードする。例外として `assets/bg/title_key.jpg`
+  （タイトルキービジュアル、夕方の教室）は最初から実画像で収録済み。
 * 素材IDは脚本内で `bg_hokutou_kyoshitsu_asa`（=ファイル名stem）でも `BG01` でも書ける。
 * 使わなかった予備 99 枚は `assets/_buffer/` に退避済み（一覧は `docs/ASSET_MANIFEST.md`）。
 * リネーム作業自体は `python3 tools/rename_assets.py` で再実行可能（台帳とmanifestも同時に更新）。

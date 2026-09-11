@@ -50,6 +50,14 @@ function contourField(rand, n = 9, base = 470, amp = 118, color = '#000', op = .
   return out;
 }
 
+/* ------------------------------------------------- 装飾用等高線（単体） -- */
+/** 起動画面・転換ヴェール・章カードの背景に敷く、薄い等高線だけのSVG。 */
+export function contourSVG(seedStr = 'veil', { lines = 10, color = '#d9c9a6', op = .12 } = {}) {
+  const rand = rng(hash(seedStr));
+  const c = contourField(rand, lines, 430, 430, color, op);
+  return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${c}</svg>`;
+}
+
 /* -------------------------------------------------------------- モチーフ -- */
 function windows(mood, count = 5, y = 150, h = 300) {
   let out = '';
@@ -491,29 +499,64 @@ export class Stage {
     this.bgId = null; this.cgId = null;
     this.chrMap = new Map();
     this.particles = new Particles(els.fxParticles);
+    this.titleFx = els.titleFx ? new Particles(els.titleFx) : null;
+    this._bgToken = 0;
+    this._cgToken = 0;
     this.t = (ms) => new Promise(r => setTimeout(r, ms));
   }
   scaleU() {
-    const w = this.el.viewport.clientWidth;
-    this.el.viewport.style.setProperty('--u', (w / 1000).toFixed(3) + 'px');
-    this.el.stage.style.setProperty('--u', (w / 1000).toFixed(3) + 'px');
-    const r = this.el.fxParticles.getBoundingClientRect();
+    const w = this.el.viewport.clientWidth || 1;
+    const h = this.el.viewport.clientHeight || 1;
+    // 横画面: 幅1000基準 / 縦画面: 幅620基準（可読性を保つため粗く取る）
+    const u = (w >= h ? w / 1000 : w / 620);
+    const v = u.toFixed(3) + 'px';
+    this.el.viewport.style.setProperty('--u', v);
+    this.el.stage.style.setProperty('--u', v);
     const dpr = Math.min(2, window.devicePixelRatio || 1);
-    this.particles.resize(r.width * dpr, r.height * dpr);
+    const fit = (cv, pt) => {
+      if (!cv || !pt) return;
+      const r = cv.getBoundingClientRect();
+      if (r.width > 0 && r.height > 0) pt.resize(r.width * dpr, r.height * dpr);
+    };
+    fit(this.el.fxParticles, this.particles);
+    fit(this.el.titleFx, this.titleFx);
   }
   isPlaceholder(a) { return !a || a.placeholder !== false; }
 
   async bg(id, opt = {}) {
-    if (!id) { this.el.bgImg.removeAttribute('src'); this.el.bgBack.innerHTML = ''; this.bgId = null; return; }
+    const my = ++this._bgToken;
+    const img = this.el.bgImg;
+    if (!id) {
+      img.removeAttribute('src');
+      img.style.opacity = '';
+      img.style.transform = '';
+      this.el.bgBack.innerHTML = '';
+      this.bgId = null;
+      return;
+    }
     const a = this.assets.byId[id];
     this.bgId = id;
-    const svg = backdropSVG(a || { id, meta: '' });
     if (this.isPlaceholder(a)) {
-      this.el.bgBack.innerHTML = svg;
-      this.el.bgImg.removeAttribute('src');
+      // SVG 補完描画（プレースホルダー期間の見た目）
+      this.el.bgBack.innerHTML = backdropSVG(a || { id, meta: '' });
+      img.removeAttribute('src');
+      img.style.opacity = '';
+      img.style.transform = '';
     } else {
+      // 実画像：軽くディップしてクロスフェード＋緩いズームアウト
+      img.style.opacity = '0';
+      await this.t(170);
+      if (my !== this._bgToken) return;
       this.el.bgBack.innerHTML = '';
-      this.el.bgImg.src = a.file;
+      img.style.transform = 'scale(1.1)';
+      img.src = a.file;
+      try { await img.decode(); } catch (e) { /* decode 失敗でも表示は続ける */ }
+      if (my !== this._bgToken) return;
+      // 次フレームで不透明に戻す（transition が効く）
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      if (my !== this._bgToken) return;
+      img.style.opacity = '';
+      img.style.transform = '';
     }
     const kind = ((a && a.meta) || '').split('/')[0];
     this.el.stage.dataset.bgkind = kind;
@@ -529,12 +572,31 @@ export class Stage {
   cg(id, opt = {}) {
     const st = this.el.stage;
     if (!id) {
+      this._cgToken++;
       this.el.layCg.classList.remove('on');
       st.removeAttribute('stage-mode');
       this.el.cgHolder.classList.remove('kb');
       this.cgId = null;
       return;
     }
+    // 表示中のCGから別CGへの切り替えは、一度ディップしてから差し替える
+    if (this.cgId && this.cgId !== id && this.el.layCg.classList.contains('on')) {
+      const my = ++this._cgToken;
+      this.el.layCg.classList.remove('on');
+      setTimeout(() => {
+        if (my !== this._cgToken) return;
+        this._cgSwap(id, opt);
+        this.el.layCg.classList.add('on');
+      }, 380);
+      return;
+    }
+    this._cgToken++;
+    this._cgSwap(id, opt);
+    this.el.layCg.classList.add('on');
+    this.el.cgHolder.classList.toggle('kb', !!opt.kb);
+    st.setAttribute('stage-mode', 'cg');
+  }
+  _cgSwap(id, opt = {}) {
     const a = this.assets.byId[id];
     this.cgId = id;
     if (this.isPlaceholder(a)) {
@@ -544,9 +606,8 @@ export class Stage {
       this.el.cgBack.innerHTML = '';
       this.el.cgImg.src = a.file;
     }
-    this.el.layCg.classList.add('on');
     this.el.cgHolder.classList.toggle('kb', !!opt.kb);
-    st.setAttribute('stage-mode', 'cg');
+    this.el.stage.setAttribute('stage-mode', 'cg');
   }
   cgBackdrop(a) {
     const rand = rng(hash((a && a.id) || 'cg'));
@@ -663,4 +724,45 @@ export class AssetDB {
   }
   of(cat) { return this.list.filter(a => a.cat === cat); }
   get(id) { return this.byId[id] || null; }
+  /** 実画像（placeholder:false）のみの一覧。起動時プリロードの対象。 */
+  realList() { return this.list.filter(a => a.placeholder === false && a.file); }
+  /**
+   * 実画像を先読みする。onStep(done,total,asset) で進捗を返す。
+   * 失敗した画像は警告に留め、起動を止めない（SVGフォールバックが描画される）。
+   */
+  async preload(onStep) {
+    const items = this.realList();
+    const total = items.length;
+    onStep && onStep(0, total, null);
+    if (!total) return { total: 0, ok: 0 };
+    let ok = 0, done = 0;
+    const queue = items.slice();
+    const worker = async () => {
+      while (queue.length) {
+        const a = queue.shift();
+        try { await loadImage(a.file); ok++; }
+        catch (e) { console.warn('[preload] 読込失敗（フォールバック描画で続行）:', a.file); }
+        done++;
+        onStep && onStep(done, total, a);
+      }
+    };
+    await Promise.all(Array.from({ length: Math.min(6, items.length) }, worker));
+    return { total, ok };
+  }
+}
+
+/** 画像1枚の読み込み＋デコード待ち（タイムアウト付き） */
+function loadImage(src, timeout = 15000) {
+  return new Promise((resolve, reject) => {
+    const im = new Image();
+    im.decoding = 'async';
+    const to = setTimeout(() => { im.src = ''; reject(new Error('timeout: ' + src)); }, timeout);
+    im.onload = () => {
+      clearTimeout(to);
+      if (im.decode) im.decode().then(() => resolve(im), () => resolve(im));
+      else resolve(im);
+    };
+    im.onerror = () => { clearTimeout(to); reject(new Error('load error: ' + src)); };
+    im.src = src;
+  });
 }
