@@ -41,8 +41,7 @@ export class Shell {
   toast(msg) {
     const t = el('div', 'toast', `<em>✝</em>${esc(msg)}`);
     this.dom.toasts.appendChild(t);
-    // 出現時にわずかなスケールバウンスをJS側でも付与（CSSのtoastInと二重で立体感）
-    t.style.willChange = 'transform, opacity, filter';
+    // willChange は常時付与すると GPU メモリを圧迫するため付与しない（軽量化）
     setTimeout(() => { t.classList.add('out'); setTimeout(() => t.remove(), 620); }, 2800);
   }
   buildTicks() {
@@ -76,9 +75,13 @@ export class Shell {
     const title = this.dom.title;
     if (!title || title.dataset.parallax) return;
     title.dataset.parallax = '1';
-    let raf = 0, tx = 0, ty = 0;
+    let raf = 0, tx = 0, ty = 0, last = 0;
     const key = this.dom.titleKey, bg = this.dom.titleBg;
     title.addEventListener('mousemove', (e) => {
+      const now = performance.now();
+      // 32ms 間引きで mousemove の高頻度更新を軽量化（視覚差なし）
+      if (now - last < 32) return;
+      last = now;
       const r = title.getBoundingClientRect();
       const nx = ((e.clientX - r.left)/r.width - 0.5) * 2; // -1..1
       const ny = ((e.clientY - r.top)/r.height - 0.5) * 2;
@@ -303,10 +306,8 @@ export class Shell {
     this.dom.title.classList.add('out');
     const tw = this.dom.textwrap;
     tw.classList.remove('hidden');
+    // enter アニメ（吹き出し出現）を撤廃したため、クラス付与なしで即表示
     tw.classList.remove('enter');
-    void tw.offsetWidth;
-    tw.classList.add('enter');
-    setTimeout(() => tw.classList.remove('enter'), 1000);
   }
   showTitle() {
     this.dom.title.classList.remove('out');

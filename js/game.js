@@ -184,13 +184,7 @@ export class Game {
   waitForClick(extra = 0) {
     return new Promise((resolve) => {
       let settled = false;
-      const go = () => { if (settled) return; settled = true; clearTimeout(this._autoTimer); this._res = null; 
-        // クリック直後の光の残像を textbox に残す — 触覚的な美しさ
-        if (this.dom.textwrap && !this.skip) {
-          const tw = this.dom.textwrap;
-          tw.style.transform = 'scale(0.998)';
-          requestAnimationFrame(() => { tw.style.transition = 'transform .28s var(--ease-soft)'; tw.style.transform = ''; setTimeout(()=> tw.style.transition='', 320); });
-        }
+      const go = () => { if (settled) return; settled = true; clearTimeout(this._autoTimer); this._res = null;
         resolve(); };
       this._res = go;
       if (this.skip) { setTimeout(go, 42); return; }
@@ -227,12 +221,6 @@ export class Game {
         d.stage.style.setProperty('--sp', sp.color || '#cbb27c');
         d.text.classList.toggle('board', !!sp.board);
         d.textwrap.classList.remove('hidden');
-        // 地の文→発話の切り替えで textbox の縁が淡く光る
-        if (prevSp !== curSp && !ins.sp) {
-          d.textwrap.style.transition = 'filter .6s var(--ease-soft)';
-          d.textwrap.style.filter = 'brightness(1.04)';
-          setTimeout(() => { d.textwrap.style.filter = ''; }, 340);
-        }
         if (ins.sp) {
           const slug = sp.sprite;
           if (slug) this.stage.applyChr(slug);
@@ -243,7 +231,8 @@ export class Game {
         this.typing = true;
         this._mode = 'text';
         this.typer.speed = this.skip ? 99 : this.store.config.textSpeed;
-        if (!this.skip) this.audio.se('se_page');
+        // se_page（横からシュッという吹き出し音）は要望により撤廃。無音で即時表示
+        
         await new Promise(r => {
           this.typer.render(ins.txt, { instant: this.skip, onDone: () => { this.typing = false; r(); } });
         });
