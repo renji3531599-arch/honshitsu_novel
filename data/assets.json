@@ -12,7 +12,7 @@
    "desc": "北棟三年B組教室・朝",
    "meta": "kyoshitsu/asa",
    "source": "image1/white_001.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG02",
@@ -22,7 +22,7 @@
    "desc": "北棟三年B組教室・昼休み",
    "meta": "kyoshitsu/hiru",
    "source": "image2/white_002.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG03",
@@ -32,7 +32,7 @@
    "desc": "北棟三年B組教室・夕方（茜色・逆光）",
    "meta": "kyoshitsu/yuugata",
    "source": "image1/white_003.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG04",
@@ -42,7 +42,7 @@
    "desc": "北棟三年B組教室・夜（サプライズ準備）",
    "meta": "kyoshitsu/yoru",
    "source": "image3/white_004.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG05",
@@ -52,7 +52,7 @@
    "desc": "北棟廊下",
    "meta": "rouka",
    "source": "image3/white_005.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG06",
@@ -62,7 +62,7 @@
    "desc": "階段の踊り場（掲示物あり）",
    "meta": "kaidan",
    "source": "image2/white_006.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG07",
@@ -72,7 +72,7 @@
    "desc": "職員室",
    "meta": "jimushitsu",
    "source": "image3/white_007.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG08",
@@ -82,7 +82,7 @@
    "desc": "地図保管庫",
    "meta": "hokanko",
    "source": "image3/white_008.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG09",
@@ -92,7 +92,7 @@
    "desc": "図書室",
    "meta": "toshoshitsu",
    "source": "image3/white_009.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG10",
@@ -102,7 +102,7 @@
    "desc": "図書室奥の書庫（埃っぽい）",
    "meta": "shoko",
    "source": "image1/white_010.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG11",
@@ -112,7 +112,7 @@
    "desc": "翠湖のほとり",
    "meta": "suiko",
    "source": "image1/white_011.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG12",
@@ -122,7 +122,7 @@
    "desc": "文化祭/謝恩会準備中の校庭",
    "meta": "koutei",
    "source": "image1/white_012.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG13",
@@ -132,7 +132,7 @@
    "desc": "体育館（謝恩会当日）",
    "meta": "taiikukan",
    "source": "image2/white_013.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG14",
@@ -142,7 +142,7 @@
    "desc": "屋上",
    "meta": "okujou",
    "source": "image1/white_014.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG15",
@@ -152,7 +152,7 @@
    "desc": "通学電車の車窓（砂糖視点）",
    "meta": "densha",
    "source": "image2/white_015.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG16",
@@ -162,7 +162,7 @@
    "desc": "南棟と北棟を繋ぐ桜並木（蕾）",
    "meta": "namiki",
    "source": "image3/white_016.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG17",
@@ -172,7 +172,7 @@
    "desc": "卒業式会場",
    "meta": "sotsugyou",
    "source": "image1/white_017.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG18",
@@ -182,7 +182,7 @@
    "desc": "南棟三年教室",
    "meta": "minamitou",
    "source": "image3/white_018.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG19",
@@ -192,7 +192,7 @@
    "desc": "両馬の家・祖父の遺影がある部屋",
    "meta": "butsudan",
    "source": "image3/white_019.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG20",
@@ -202,7 +202,7 @@
    "desc": "回想・ハワイの溶岩台地",
    "meta": "hawaii",
    "source": "image1/white_020.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG21",
@@ -212,7 +212,7 @@
    "desc": "回想・稲葉と勝也がいた山（褪色調）",
    "meta": "yama",
    "source": "image2/white_021.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG22",
@@ -222,7 +222,7 @@
    "desc": "回想・大学時代の野外調査ベースキャンプ",
    "meta": "yakou",
    "source": "image2/white_022.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG23",
@@ -232,7 +232,7 @@
    "desc": "エピローグ・卒業後の春、もぬけの殻の教室",
    "meta": "kyoshitsu/haru",
    "source": "image3/white_023.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "BG24",
@@ -242,7 +242,7 @@
    "desc": "TRUE END後日談・数年後の同じ教室",
    "meta": "kyoshitsu/suunengo",
    "source": "image3/white_024.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_01_tsuujou",
