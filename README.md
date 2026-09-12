@@ -93,6 +93,7 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 * 素材IDは脚本内で `bg_hokutou_kyoshitsu_asa`（=ファイル名stem）でも `BG01` でも書ける。
 * **1素材ずつの解説**（どのシーンで何回出るか／未使用差分／Ken Burns 有無／降板理由）は自动生成：
   `assets/README.md`（総）／ `assets/bg|cg|chr/README.md` ／ **`docs/CG_GUIDE.md`（CG全32枚を物語順に）**。
+  生成用のコピーペースト可能な英語プロンプトは **`docs/CG_PROMPTS.md`** にまとめてある。
   台帳か脚本を直したら `node tools/gen_asset_md.mjs` で再生成。
 * 差し替え後は **`sw.js` の `CACHE`（現在 `honshitsu-v5`）を必ず上げる**。CacheFirst で画像を返すため、
   上げると旧キャッシュ（削除前の白紙PNG）を配信し続けて「削除されていないように見える」ことがある。
