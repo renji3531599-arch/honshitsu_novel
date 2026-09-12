@@ -9,9 +9,8 @@
      assets/bg/README.md       … 背景 25
      assets/cg/README.md       … CG 52
      assets/chr/README.md      … 立ち絵 105（キャラごとにまとめる）
-     assets/ui/README.md       … UI 20
      assets/_buffer/README.md  … 予備枠 99
-     docs/CG_GUIDE.md          … CG 全52枚を「物語順」にまとめたガイド
+     docs/CG_GUIDE.md          … CG 全52枚（本編使用32・予備20）を「物語順」にまとめたガイド
    手編集せず、台帳を直して `node tools/gen_asset_md.mjs` で再生成。
    ========================================================================== */
 import fs from 'fs';
@@ -269,21 +268,6 @@ function blockChr(a) {
   L.push(us.length
     ? `  本編 **${us.length} 回**。初出 \`${path.basename(us[0].file, '.txt')}:${us[0].line}\`${us[0].scene ? '（' + us[0].scene.title + '）' : ''}${us.length > 1 ? ' → ほか ' + (us.length - 1) + ' 回' : ''}`
     : `  本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る`);
-  return L.join('\n');
-}
-function blockUi(a) {
-  const info = imgInfo(a.file);
-  const L = [];
-  L.push(`### \`${a.id}\` ― ${a.label}`);
-  L.push('');
-  L.push(`- **ファイル**: \`${a.file}\`（${dimStr(info)}）`);
-  L.push(`- **差し替え推奨**: ${RECOMMEND.ui}`);
-  L.push(`- **状態**: ${status(a)}`);
-  const item = Object.entries(meta.items || {}).find(([, v]) => v.icon === a.id || v.icon === path.basename(a.file).replace(/\.\w+$/, ''));
-  if (item) L.push(`- **対応アイテム**: \`${item[0]}\`「${item[1].label}」― 所持品欄に出る（${item[1].desc}）`);
-  const refs = codeRefs(a);
-  L.push(`- **使われる場所**: ${refs.length ? refs.map(r => '`' + r + '`').join(' / ') : 'JS/CSS/台帳のいずれにも直参照なし ― エンジンが class だけで代替描画している（置くと初めて効く）'}`);
-  L.push('');
   return L.join('\n');
 }
 const padExpr = (e) => '①②③④⑤⑥⑦⑧⑨⑩'[Number(e) - 1] || e;
@@ -554,50 +538,23 @@ ${[...byChar.entries()].map(([slug, arr]) => {
   return md;
 }
 
-/* ---- assets/ui/README.md ---- */
-function uiDoc() {
-  const list = ASSETS.filter(a => a.cat === 'ui').sort((a, b) => a.id.localeCompare(b.id, 'en'));
-  let md = head('UI — ロゴ・枠・アイコン（20枚）',
-    ['`assets/ui/` のタイトルロゴ／端末フレーム／所持品アイコン。**1点ずつ、どこから参照されているか**まで書く。'],
-    list.length);
-  md += `## 早見表
-
-| ID | ひとこと | 種別 |
-|---|---|---|
-${quickTable(list, (a) => ['`' + a.id + '`', a.label.length > 30 ? a.label.slice(0, 30) + '…' : a.label,
-    /logo/.test(a.file) ? 'ロゴ' : /frame/.test(a.file) ? '枠' : /bg_/.test(a.file) ? '面' : 'アイコン'])}
-
----
-
-## 1点ずつの解説
-
-${list.map(a => blockUi(a)).join('\n')}## 差し替え手順（UI共通）
-
-1. \`assets/ui/\` に同名上書き（透過PNG。**アイコンは 256〜512 正方形**）
-2. 台帳の \`placeholder\` を \`false\` に（ \`false\` にした瞬間、エンジンの代替描画が消える）
-3. \`sw.js\` の \`CACHE\` を上げる
-`;
-  return md;
-}
-
 /* ---- assets/README.md ---- */
 function topDoc() {
   const cats = [
     ['bg', '背景', '1600×900／cover', '等高線SVG（`backdropSVG`）'],
     ['cg', '名場面CG・ENDカード', '1600×900／cover', '―（白紙なら下地のみ）'],
     ['chr', '立ち絵差分', '840×1280／透過PNG', 'シルエット（`figureSVG`）'],
-    ['ui', 'ロゴ・枠・アイコン', '用途ごとに上記', 'CSSだけで代替'],
   ];
   let md = `# Assets — 画像素材总台帳
 
-このフォルダの**すべてが白紙プレースホルダ**（ \`assets/bg/title_key.jpg\` だけが実画像）で、
+このフォルダの**ほとんどが白紙プレースホルダ**（ \`assets/bg/title_key.jpg\` など実画像を除く）で、
 画面に実際に描いているのは \`js/visual.js\` の手続き生成SVGです。
-**「何を・どこに・どう置けば効くか」を1素材ずつ書いたREADMEが、下の4枚**。
+**「何を・どこに・どう置けば効くか」を1素材ずつ書いたREADMEが、下の3枚**。
+（UI画像は2026-09-12に撤去 ―― ロゴ・枠・アイコンまで含め、UIは全てエンジンのCSS/SVG描画で代替済み。）
 
 - \`bg/README.md\` ― 背景 25 枚（出番・時間帯トーン・@bg の書き方）
-- \`cg/README.md\` ― CG 52 枚（出番・Ken Burns・予備枠の理由）
+- \`cg/README.md\` ― CG 52 枚（出番・Ken Burns・予備枠の理由。本編使用は32枚）
 - \`chr/README.md\` ― 立ち絵 105 差分（キャラ別・表情別の本編出現回数）
-- \`ui/README.md\` ― UI 20 点（アイテム対応・参照箇所）
 - \`_buffer/README.md\` ― 未割当の空き枠 99 枚
 - \`../docs/CG_GUIDE.md\` ― **CG 52枚を物語順にまとめた1本**（これだけ読めばCGは足りる）
 
@@ -617,7 +574,7 @@ ${cats.map(([d, n, rec, fb]) => {
 1. **同名で上書き**（フォルダと拡張子を変えるときは台帳の \`file\` も直す）
 2. \`data/assets.json\` の \`"placeholder": true\` → \`false\`
    ― これだけで補完SVGが消えて実画像に切り替わる（ \`#stage[data-art="real"]\` ）
-3. \`sw.js\` の \`CACHE\`（現在 \`honshitsu-v2\`）を上げる ← **忘れると白紙が返る**
+3. \`sw.js\` の \`CACHE\` を上げる ← **忘れると白紙が返る**
 4. \`node tools/vncheck.mjs\` と \`node tools/smoke.mjs\` で崩れを確認
 
 ## 合成（blend）についての注意 ― 2026-09-11 に変更
@@ -674,7 +631,6 @@ const out = {
   'assets/bg/README.md': bgDoc(),
   'assets/cg/README.md': cgDoc(),
   'assets/chr/README.md': chrDoc(),
-  'assets/ui/README.md': uiDoc(),
   'assets/_buffer/README.md': bufferDoc(),
   'docs/CG_GUIDE.md': cgDoc({ byStory: true }),
 };

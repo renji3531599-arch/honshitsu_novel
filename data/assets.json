@@ -1,7 +1,7 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。reserve:true は「本作ってあるが本編で出していない予備枠」＝ギャラリーと回収枚数から数えない（CGを置きすぎた箇所を整理して 2026-09-11 に 11 枚を降板させた）。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。reserve:true は「本作ってあるが本編で出していない予備枠」＝ギャラリーと回収枚数から数えない（CGを置きすぎた箇所を整理して 2026-09-11 に 11 枚を降板させた）。\n2026-09-12: UI画像20枚を撤去（UIは全てCSS/SVG描画に集約）。名場面CGのうち非ピーク9枚（cg01/03/05/06/10/14/16/17/18）をreserveへ降板 ―― CGは印象的・感動的なシーンのみに。",
  "engine_limit": 300,
- "assigned": 201,
+ "assigned": 181,
  "buffer": 99,
  "assets": [
   {
@@ -1302,7 +1302,8 @@
    "desc": "三重（単独）／BG01・朝。入口で勝也に呼び止められる横顔。",
    "meta": "scene",
    "source": "image1/white_130.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg02",
@@ -1322,7 +1323,8 @@
    "desc": "三重（手元アップ）／BG08。写真の裏の万年筆の文字を読む。",
    "meta": "scene",
    "source": "image1/white_132.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg04",
@@ -1343,7 +1345,8 @@
    "desc": "三重／両馬／BG05・放課後。夕陽の廊下で打ち明ける横並び構図。",
    "meta": "scene",
    "source": "image1/white_134.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg06",
@@ -1353,7 +1356,8 @@
    "desc": "砂糖（単独）／BG15。三年分の車窓写真をスマホでスクロールする手元。",
    "meta": "scene",
    "source": "image1/white_135.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg07",
@@ -1394,7 +1398,8 @@
    "desc": "寺地（単独）／BG01・放課後。引き出しの三年分の紙束。",
    "meta": "scene",
    "source": "image1/white_139.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg11",
@@ -1435,7 +1440,8 @@
    "desc": "倉石（単独）／BG10。埃まみれの学校新聞を読んで言葉を失う。",
    "meta": "scene",
    "source": "image2/white_143.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg15",
@@ -1456,7 +1462,8 @@
    "desc": "召野／二見／BG07。窓越しの光、少し距離のある立ち位置。",
    "meta": "scene",
    "source": "image2/white_145.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg17",
@@ -1466,7 +1473,8 @@
    "desc": "三重／三峰／BG16。国境をまたぐ桜並木（まだ蕾）。",
    "meta": "scene",
    "source": "image3/white_146.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg18",
@@ -1476,7 +1484,8 @@
    "desc": "三重／三峰／櫻／内藤／BG18。えんじのネクタイが南棟に浮く構図。",
    "meta": "scene",
    "source": "image3/white_147.png",
-   "placeholder": true
+   "placeholder": true,
+   "reserve": true
   },
   {
    "id": "cg19",
@@ -1823,206 +1832,6 @@
    "desc": "BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット",
    "meta": "ending",
    "source": "image1/white_181.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui01",
-   "cat": "ui",
-   "file": "assets/ui/ui01_title_logo.png",
-   "label": "タイトルロゴ「まだ地図の途中で」",
-   "desc": "タイトルロゴ「まだ地図の途中で」",
-   "meta": "ui",
-   "source": "image1/white_182.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui02",
-   "cat": "ui",
-   "file": "assets/ui/ui02_frame_line_chat.png",
-   "label": "LINEグループチャット画面フレーム",
-   "desc": "LINEグループチャット画面フレーム",
-   "meta": "ui",
-   "source": "image3/white_183.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui03",
-   "cat": "ui",
-   "file": "assets/ui/ui03_frame_bbs_heikatsu.png",
-   "label": "匿名掲示板（ヘイカツスレ）画面フレーム",
-   "desc": "匿名掲示板（ヘイカツスレ）画面フレーム",
-   "meta": "ui",
-   "source": "image1/white_184.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui04",
-   "cat": "ui",
-   "file": "assets/ui/ui04_frame_juken_bbs.png",
-   "label": "受験情報掲示板（フェイカツ書き込み）画面フレーム",
-   "desc": "受験情報掲示板（フェイカツ書き込み）画面フレーム",
-   "meta": "ui",
-   "source": "image3/white_185.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui05",
-   "cat": "ui",
-   "file": "assets/ui/ui05_frame_honshitsu_live.png",
-   "label": "本質配信・配信画面UI（コメント欄含む）",
-   "desc": "本質配信・配信画面UI（コメント欄含む）",
-   "meta": "ui",
-   "source": "image2/white_186.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui06",
-   "cat": "ui",
-   "file": "assets/ui/ui06_icon_honshitsu_nenkan.png",
-   "label": "✝本質✝年鑑・表紙アイコン",
-   "desc": "✝本質✝年鑑・表紙アイコン",
-   "meta": "ui",
-   "source": "image2/white_187.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui07",
-   "cat": "ui",
-   "file": "assets/ui/ui07_icon_honshitsu_guide.png",
-   "label": "✝本質✝入門ガイド・表紙アイコン",
-   "desc": "✝本質✝入門ガイド・表紙アイコン",
-   "meta": "ui",
-   "source": "image2/white_188.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui08",
-   "cat": "ui",
-   "file": "assets/ui/ui08_icon_gakko_shinbun.png",
-   "label": "古い学校新聞・紙面アイコン",
-   "desc": "古い学校新聞・紙面アイコン",
-   "meta": "ui",
-   "source": "image2/white_189.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui09",
-   "cat": "ui",
-   "file": "assets/ui/ui09_icon_ko_shashin.png",
-   "label": "古写真アイコン（単体・所持品表示用）",
-   "desc": "古写真アイコン（単体・所持品表示用）",
-   "meta": "ui",
-   "source": "image3/white_190.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui10",
-   "cat": "ui",
-   "file": "assets/ui/ui10_icon_chizutsutsu.png",
-   "label": "地図筒アイコン",
-   "desc": "地図筒アイコン",
-   "meta": "ui",
-   "source": "image3/white_191.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui11",
-   "cat": "ui",
-   "file": "assets/ui/ui11_icon_kami_magicpen.png",
-   "label": "紙とマジックペン（寺地の配信道具）アイコン",
-   "desc": "紙とマジックペン（寺地の配信道具）アイコン",
-   "meta": "ui",
-   "source": "image2/white_192.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui12",
-   "cat": "ui",
-   "file": "assets/ui/ui12_icon_omoide_chizu.png",
-   "label": "「思い出の地形図」ミニアイコン",
-   "desc": "「思い出の地形図」ミニアイコン",
-   "meta": "ui",
-   "source": "image2/white_193.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui13",
-   "cat": "ui",
-   "file": "assets/ui/ui13_frame_choice.png",
-   "label": "選択肢ウィンドウ用フレーム",
-   "desc": "選択肢ウィンドウ用フレーム",
-   "meta": "ui",
-   "source": "image1/white_194.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui14",
-   "cat": "ui",
-   "file": "assets/ui/ui14_frame_kokoro_gauge.png",
-   "label": "心Pointゲージ用フレーム（内部管理UI）",
-   "desc": "心Pointゲージ用フレーム（内部管理UI）",
-   "meta": "ui",
-   "source": "image2/white_195.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui15",
-   "cat": "ui",
-   "file": "assets/ui/ui15_frame_chapter_title.png",
-   "label": "章タイトル表示用の地形図柄フレーム",
-   "desc": "章タイトル表示用の地形図柄フレーム",
-   "meta": "ui",
-   "source": "image1/white_196.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui16",
-   "cat": "ui",
-   "file": "assets/ui/ui16_bg_save_load.png",
-   "label": "セーブ／ロード画面用の地図柄背景装飾",
-   "desc": "セーブ／ロード画面用の地図柄背景装飾",
-   "meta": "ui",
-   "source": "image3/white_197.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui17",
-   "cat": "ui",
-   "file": "assets/ui/ui17_bg_hub_map.png",
-   "label": "HUB（ルート選択）画面用のマップ風背景",
-   "desc": "HUB（ルート選択）画面用のマップ風背景",
-   "meta": "ui",
-   "source": "image3/white_198.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui18",
-   "cat": "ui",
-   "file": "assets/ui/ui18_frame_end_logo.png",
-   "label": "エンドロゴ共通フレーム（色違いで各EDに流用）",
-   "desc": "エンドロゴ共通フレーム（色違いで各EDに流用）",
-   "meta": "ui",
-   "source": "image1/white_199.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui19",
-   "cat": "ui",
-   "file": "assets/ui/ui19_icon_sotsugyou_shousho.png",
-   "label": "卒業証書アイコン",
-   "desc": "卒業証書アイコン",
-   "meta": "ui",
-   "source": "image2/white_200.png",
-   "placeholder": true
-  },
-  {
-   "id": "ui20",
-   "cat": "ui",
-   "file": "assets/ui/ui20_icon_corn_soup.png",
-   "label": "コーンスープ缶アイコン（小ネタ回収用）",
-   "desc": "コーンスープ缶アイコン（小ネタ回収用）",
-   "meta": "ui",
-   "source": "image3/white_201.png",
    "placeholder": true
   },
   {

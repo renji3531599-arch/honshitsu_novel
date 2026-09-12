@@ -6,7 +6,8 @@
    ============================================================ */
 const fs = require("fs");
 const path = require("path");
-const { JSDOM } = require("/tmp/node_modules/jsdom");
+// jsdom は `npm i --no-save jsdom` で ./node_modules に入る。旧環境向けに /tmp フォールバックも残す
+let JSDOM; try { ({ JSDOM } = require("jsdom")); } catch (e) { ({ JSDOM } = require("/tmp/node_modules/jsdom")); }
 
 const ROOT = path.join(__dirname, "..");
 const html = fs.readFileSync(path.join(ROOT, "game/index.html"), "utf8");

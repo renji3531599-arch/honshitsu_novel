@@ -71,7 +71,6 @@ function cgFile(id) {
   const c = MAN.cg[id] || MAN.ed_cg[id];
   return c ? "assets/img/" + c.file : null;
 }
-function uiFile(id) { const u = MAN.ui[id]; return u ? "assets/img/" + u.file : null; }
 function charName(who) { const c = window.CHARS[who]; return c ? c.name : who; }
 
 /* ============================================================
@@ -368,11 +367,11 @@ function windowGaze(seconds) {
 function showNet(kind, cfg) {
   return new Promise(resolve => {
     const ov = $("net-overlay");
-    const frame = uiFile(cfg.frame || (kind === "bbs" ? "ui03" : "ui05"));
     ov.innerHTML = "";
     const panel = document.createElement("div");
     panel.className = "net-panel";
-    if (frame) panel.style.backgroundImage = `linear-gradient(rgba(14,20,32,.96), rgba(10,14,24,.98)), url('${frame}')`;
+    // 端末フレーム（ui02〜ui05）は2026-09-12に撤去。背景の濃色グラデーションは
+    // style.css の .net-panel に移した（旧: 96〜98%不透過グラデをPNGの上に重ねていた）
     const bar = document.createElement("div");
     bar.className = "bar";
     bar.innerHTML = `<span>${esc(cfg.title || "")}</span><span class="hint">クリックで閉じる</span>`;
@@ -1030,7 +1029,8 @@ function openGallery() {
   const grid = document.createElement("div");
   grid.className = "gal-grid";
   const all = [];
-  Object.keys(MAN.cg).forEach(id => all.push({ id, ...MAN.cg[id] }));
+  // reserve（本編で出していない降板CG）はギャラリーに出さない ―― 2026-09-12
+  Object.keys(MAN.cg).forEach(id => { if (!MAN.cg[id].reserve) all.push({ id, ...MAN.cg[id] }); });
   Object.keys(MAN.ed_cg).forEach(id => all.push({ id, ...MAN.ed_cg[id] }));
   all.forEach(c => {
     const seen = GL.cg[c.id];

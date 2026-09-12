@@ -839,7 +839,8 @@ window.ASSET_MANIFEST = {
     "cg01": {
       "file": "cg_01_mie_kyoshitsu_iriguchi.png",
       "desc": "三重(単独)　教室の入口で勝也に呼び止められる",
-      "slot": 130
+      "slot": 130,
+      "reserve": true
     },
     "cg02": {
       "file": "cg_02_mie-katsuya_chizutsutsu.png",
@@ -849,22 +850,26 @@ window.ASSET_MANIFEST = {
     "cg03": {
       "file": "cg_03_mie_shashin_teme.png",
       "desc": "三重(手元アップ)　写真の裏の万年筆の文字を読む",
-      "slot": 132
+      "slot": 132,
+      "reserve": true
     },
     "cg04": {
       "file": "cg_04_katsuya_shashin_kaishuu.png",
       "desc": "勝也(単独)　写真を静かに回収する",
-      "slot": 133
+      "slot": 133,
+      "reserve": true
     },
     "cg05": {
       "file": "cg_05_mie-ryoma_rouka_yuuhi.png",
       "desc": "三重／両馬　夕陽の差し込む誰もいない廊下",
-      "slot": 134
+      "slot": 134,
+      "reserve": true
     },
     "cg06": {
       "file": "cg_06_satou_shamado_sumafo.png",
       "desc": "砂糖(単独)　三年分の車窓写真をスクロールする手元",
-      "slot": 135
+      "slot": 135,
+      "reserve": true
     },
     "cg07": {
       "file": "cg_07_satou-mie_mado_ushiro.png",
@@ -874,7 +879,8 @@ window.ASSET_MANIFEST = {
     "cg08": {
       "file": "cg_08_rei_toshoshitsu_pc.png",
       "desc": "零(単独)　三年分のデータを整理する横顔",
-      "slot": 137
+      "slot": 137,
+      "reserve": true
     },
     "cg09": {
       "file": "cg_09_rei-ryoma-mie_tsukue_kakomu.png",
@@ -884,12 +890,14 @@ window.ASSET_MANIFEST = {
     "cg10": {
       "file": "cg_10_terachi_hikidashi_kamitabane.png",
       "desc": "寺地(単独)　引き出しから三年分の紙束を取り出す",
-      "slot": 139
+      "slot": 139,
+      "reserve": true
     },
     "cg11": {
       "file": "cg_11_terachi-ryoma-mie_unazuku.png",
       "desc": "寺地／両馬／三重　「ありがとうの会にする」と頷き合う",
-      "slot": 140
+      "slot": 140,
+      "reserve": true
     },
     "cg12": {
       "file": "cg_12_ryoma_butsudan_ushiro.png",
@@ -904,27 +912,32 @@ window.ASSET_MANIFEST = {
     "cg14": {
       "file": "cg_14_kuraishi_shoko_shinbun.png",
       "desc": "倉石(単独)　古い学校新聞を読み言葉を失う",
-      "slot": 143
+      "slot": 143,
+      "reserve": true
     },
     "cg15": {
       "file": "cg_15_kuraishi-ryoma-mie_houkoku.png",
       "desc": "倉石／両馬／三重　調査の報告を受ける一同",
-      "slot": 144
+      "slot": 144,
+      "reserve": true
     },
     "cg16": {
       "file": "cg_16_meshino-futami_shokuinshitsu.png",
       "desc": "召野／二見　職員室、窓越しの光",
-      "slot": 145
+      "slot": 145,
+      "reserve": true
     },
     "cg17": {
       "file": "cg_17_mie-mitsumine_sakura_namiki.png",
       "desc": "三重／三峰　蕾の桜並木、国境をまたぐ二人",
-      "slot": 146
+      "slot": 146,
+      "reserve": true
     },
     "cg18": {
       "file": "cg_18_mie-minamitou_kyoshitsu.png",
       "desc": "三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図",
-      "slot": 147
+      "slot": 147,
+      "reserve": true
     },
     "cg19": {
       "file": "cg_19_naitou_kao_age.png",
@@ -939,7 +952,8 @@ window.ASSET_MANIFEST = {
     "cg21": {
       "file": "cg_21_ryoma_temoto_kakikomu.png",
       "desc": "両馬(手元アップ)　地図の隅に何かを書き足す",
-      "slot": 150
+      "slot": 150,
+      "reserve": true
     },
     "cg22": {
       "file": "cg_22_omoide_chikeizu_kansei.png",
@@ -954,12 +968,14 @@ window.ASSET_MANIFEST = {
     "cg24": {
       "file": "cg_24_katsuya_chizu_watasu_zekkyu.png",
       "desc": "勝也(正面)　地図を渡され絶句する瞬間",
-      "slot": 153
+      "slot": 153,
+      "reserve": true
     },
     "cg25": {
       "file": "cg_25_mie-katsuya_mediumshot.png",
       "desc": "三重／勝也　「先生、聞いていいですか」二人の間合い",
-      "slot": 154
+      "slot": 154,
+      "reserve": true
     },
     "cg26": {
       "file": "cg_26_katsuya_nagai_chinmoku.png",
@@ -994,7 +1010,8 @@ window.ASSET_MANIFEST = {
     "cg32": {
       "file": "cg_32_terachi_dokudoku_roudoku.png",
       "desc": "寺地(単独・朗読)　スマホのライトに照らされて",
-      "slot": 161
+      "slot": 161,
+      "reserve": true
     },
     "cg33": {
       "file": "cg_33_zenin-katsuya_namida_koraeru.png",
@@ -1014,17 +1031,20 @@ window.ASSET_MANIFEST = {
     "cg36": {
       "file": "cg_36_katsuya_suunengo_kyoshitsu.png",
       "desc": "勝也(単独)　数年後の教室、新しい1年生に同じ地図を",
-      "slot": 165
+      "slot": 165,
+      "reserve": true
     },
     "cg37": {
       "file": "cg_37_mie-mitsumine_mankai_sakura.png",
       "desc": "三重／三峰　満開の桜(南棟Flag高で挿入)",
-      "slot": 166
+      "slot": 166,
+      "reserve": true
     },
     "cg38": {
       "file": "cg_38_ryoma_hakamairi.png",
       "desc": "両馬(単独)　墓参り(両馬編で使用)",
-      "slot": 167
+      "slot": 167,
+      "reserve": true
     }
   },
   "ed_cg": {
@@ -1097,108 +1117,6 @@ window.ASSET_MANIFEST = {
       "file": "cg_end_bonus.png",
       "desc": "BONUS EXTRA　数年後・翠湖のほとりの同窓会(全員＋勝也)",
       "slot": 181
-    }
-  },
-  "ui": {
-    "ui01": {
-      "file": "ui01_title_logo.png",
-      "desc": "タイトルロゴ「まだ地図の途中で」",
-      "slot": 182
-    },
-    "ui02": {
-      "file": "ui02_line_frame.png",
-      "desc": "LINEグループチャット画面フレーム",
-      "slot": 183
-    },
-    "ui03": {
-      "file": "ui03_bbs_heikatsu.png",
-      "desc": "匿名掲示板(ヘイカツスレ)画面フレーム",
-      "slot": 184
-    },
-    "ui04": {
-      "file": "ui04_bbs_juken.png",
-      "desc": "受験情報掲示板(フェイカツ書き込み)画面フレーム",
-      "slot": 185
-    },
-    "ui05": {
-      "file": "ui05_haishin_ui.png",
-      "desc": "本質配信・配信画面UI",
-      "slot": 186
-    },
-    "ui06": {
-      "file": "ui06_nenkan_icon.png",
-      "desc": "✝本質✝年鑑・表紙アイコン",
-      "slot": 187
-    },
-    "ui07": {
-      "file": "ui07_nyumon_icon.png",
-      "desc": "✝本質✝入門ガイド・表紙アイコン",
-      "slot": 188
-    },
-    "ui08": {
-      "file": "ui08_shinbun_icon.png",
-      "desc": "古い学校新聞・紙面アイコン",
-      "slot": 189
-    },
-    "ui09": {
-      "file": "ui09_kojashin_icon.png",
-      "desc": "古写真アイコン",
-      "slot": 190
-    },
-    "ui10": {
-      "file": "ui10_chizutsutsu_icon.png",
-      "desc": "地図筒アイコン",
-      "slot": 191
-    },
-    "ui11": {
-      "file": "ui11_kami_magic_icon.png",
-      "desc": "紙とマジックペン(配信道具)アイコン",
-      "slot": 192
-    },
-    "ui12": {
-      "file": "ui12_omoide_chizu_icon.png",
-      "desc": "「思い出の地形図」ミニアイコン",
-      "slot": 193
-    },
-    "ui13": {
-      "file": "ui13_sentakushi_frame.png",
-      "desc": "選択肢ウィンドウ用フレーム",
-      "slot": 194
-    },
-    "ui14": {
-      "file": "ui14_heart_frame.png",
-      "desc": "心Pointゲージ用フレーム",
-      "slot": 195
-    },
-    "ui15": {
-      "file": "ui15_chapter_frame.png",
-      "desc": "章タイトル表示用の地形図柄フレーム",
-      "slot": 196
-    },
-    "ui16": {
-      "file": "ui16_saveload_bg.png",
-      "desc": "セーブ／ロード画面用の地図柄背景装飾",
-      "slot": 197
-    },
-    "ui17": {
-      "file": "ui17_hub_map.png",
-      "desc": "HUB(ルート選択)画面用マップ風背景",
-      "slot": 198
-    },
-    "ui18": {
-      "file": "ui18_end_logo_frame.png",
-      "desc": "エンドロゴ共通フレーム",
-      "slot": 199
-    },
-    "ui19": {
-      "file": "ui19_sotsugyou_syosho.png",
-      "desc": "卒業証書アイコン",
-      "slot": 200
-    },
-    "ui20": {
-      "file": "ui20_cornsoup_can.png",
-      "desc": "コーンスープ缶アイコン",
-      "slot": 201
     }
   },
   "spare": {

@@ -57,7 +57,6 @@ function allImageFiles() {
   Object.values(MAN.bg || {}).forEach(v => push(v.file));
   Object.values(MAN.cg || {}).forEach(v => push(v.file));
   Object.values(MAN.ed_cg || {}).forEach(v => push(v.file));
-  Object.values(MAN.ui || {}).forEach(v => push(v.file));
   Object.values(MAN.chr || {}).forEach(c => (c.exprs || []).forEach(e => push(e.file)));
   return Array.from(new Set(out));
 }

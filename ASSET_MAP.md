@@ -147,44 +147,44 @@
 
 | スロット | 元ファイル | 新ファイル名 | 内容 |
 |---|---|---|---|
-| cg01 | white_130.png | `cg_01_mie_kyoshitsu_iriguchi.png` | 三重(単独)　教室の入口で勝也に呼び止められる |
+| cg01 | white_130.png | `cg_01_mie_kyoshitsu_iriguchi.png`（**予備**＝本編未使用・ギャラリー外） | 三重(単独)　教室の入口で勝也に呼び止められる |
 | cg02 | white_131.png | `cg_02_mie-katsuya_chizutsutsu.png` | 三重／勝也　地図筒から古写真がこぼれ落ちる瞬間 |
-| cg03 | white_132.png | `cg_03_mie_shashin_teme.png` | 三重(手元アップ)　写真の裏の万年筆の文字を読む |
-| cg04 | white_133.png | `cg_04_katsuya_shashin_kaishuu.png` | 勝也(単独)　写真を静かに回収する |
-| cg05 | white_134.png | `cg_05_mie-ryoma_rouka_yuuhi.png` | 三重／両馬　夕陽の差し込む誰もいない廊下 |
-| cg06 | white_135.png | `cg_06_satou_shamado_sumafo.png` | 砂糖(単独)　三年分の車窓写真をスクロールする手元 |
+| cg03 | white_132.png | `cg_03_mie_shashin_teme.png`（**予備**＝本編未使用・ギャラリー外） | 三重(手元アップ)　写真の裏の万年筆の文字を読む |
+| cg04 | white_133.png | `cg_04_katsuya_shashin_kaishuu.png`（**予備**＝本編未使用・ギャラリー外） | 勝也(単独)　写真を静かに回収する |
+| cg05 | white_134.png | `cg_05_mie-ryoma_rouka_yuuhi.png`（**予備**＝本編未使用・ギャラリー外） | 三重／両馬　夕陽の差し込む誰もいない廊下 |
+| cg06 | white_135.png | `cg_06_satou_shamado_sumafo.png`（**予備**＝本編未使用・ギャラリー外） | 砂糖(単独)　三年分の車窓写真をスクロールする手元 |
 | cg07 | white_136.png | `cg_07_satou-mie_mado_ushiro.png` | 砂糖／三重　窓を背にした二人の構図 |
-| cg08 | white_137.png | `cg_08_rei_toshoshitsu_pc.png` | 零(単独)　三年分のデータを整理する横顔 |
+| cg08 | white_137.png | `cg_08_rei_toshoshitsu_pc.png`（**予備**＝本編未使用・ギャラリー外） | 零(単独)　三年分のデータを整理する横顔 |
 | cg09 | white_138.png | `cg_09_rei-ryoma-mie_tsukue_kakomu.png` | 零／両馬／三重　机を囲み「大事だと思うから」と零が |
-| cg10 | white_139.png | `cg_10_terachi_hikidashi_kamitabane.png` | 寺地(単独)　引き出しから三年分の紙束を取り出す |
-| cg11 | white_140.png | `cg_11_terachi-ryoma-mie_unazuku.png` | 寺地／両馬／三重　「ありがとうの会にする」と頷き合う |
+| cg10 | white_139.png | `cg_10_terachi_hikidashi_kamitabane.png`（**予備**＝本編未使用・ギャラリー外） | 寺地(単独)　引き出しから三年分の紙束を取り出す |
+| cg11 | white_140.png | `cg_11_terachi-ryoma-mie_unazuku.png`（**予備**＝本編未使用・ギャラリー外） | 寺地／両馬／三重　「ありがとうの会にする」と頷き合う |
 | cg12 | white_141.png | `cg_12_ryoma_butsudan_ushiro.png` | 両馬(単独)　祖父の遺影の前で正座する後ろ姿 |
 | cg13 | white_142.png | `cg_13_ryoma-mie_butsudan_narabu.png` | 両馬／三重　仏壇の前で並んで座る |
-| cg14 | white_143.png | `cg_14_kuraishi_shoko_shinbun.png` | 倉石(単独)　古い学校新聞を読み言葉を失う |
-| cg15 | white_144.png | `cg_15_kuraishi-ryoma-mie_houkoku.png` | 倉石／両馬／三重　調査の報告を受ける一同 |
-| cg16 | white_145.png | `cg_16_meshino-futami_shokuinshitsu.png` | 召野／二見　職員室、窓越しの光 |
-| cg17 | white_146.png | `cg_17_mie-mitsumine_sakura_namiki.png` | 三重／三峰　蕾の桜並木、国境をまたぐ二人 |
-| cg18 | white_147.png | `cg_18_mie-minamitou_kyoshitsu.png` | 三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図 |
+| cg14 | white_143.png | `cg_14_kuraishi_shoko_shinbun.png`（**予備**＝本編未使用・ギャラリー外） | 倉石(単独)　古い学校新聞を読み言葉を失う |
+| cg15 | white_144.png | `cg_15_kuraishi-ryoma-mie_houkoku.png`（**予備**＝本編未使用・ギャラリー外） | 倉石／両馬／三重　調査の報告を受ける一同 |
+| cg16 | white_145.png | `cg_16_meshino-futami_shokuinshitsu.png`（**予備**＝本編未使用・ギャラリー外） | 召野／二見　職員室、窓越しの光 |
+| cg17 | white_146.png | `cg_17_mie-mitsumine_sakura_namiki.png`（**予備**＝本編未使用・ギャラリー外） | 三重／三峰　蕾の桜並木、国境をまたぐ二人 |
+| cg18 | white_147.png | `cg_18_mie-minamitou_kyoshitsu.png`（**予備**＝本編未使用・ギャラリー外） | 三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図 |
 | cg19 | white_148.png | `cg_19_naitou_kao_age.png` | 内藤(単独)　「本質配信、ずっと見てます」と顔を上げる |
 | cg20 | white_149.png | `cg_20_zenin_chizu_tukuru.png` | 全員集合　机を寄せ合い地図を作る俯瞰構図 |
-| cg21 | white_150.png | `cg_21_ryoma_temoto_kakikomu.png` | 両馬(手元アップ)　地図の隅に何かを書き足す |
+| cg21 | white_150.png | `cg_21_ryoma_temoto_kakikomu.png`（**予備**＝本編未使用・ギャラリー外） | 両馬(手元アップ)　地図の隅に何かを書き足す |
 | cg22 | white_151.png | `cg_22_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図　画面いっぱいの作品アートワーク |
 | cg23 | white_152.png | `cg_23_katsuya_ushirosugata_yuugata.png` | 勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る |
-| cg24 | white_153.png | `cg_24_katsuya_chizu_watasu_zekkyu.png` | 勝也(正面)　地図を渡され絶句する瞬間 |
-| cg25 | white_154.png | `cg_25_mie-katsuya_mediumshot.png` | 三重／勝也　「先生、聞いていいですか」二人の間合い |
+| cg24 | white_153.png | `cg_24_katsuya_chizu_watasu_zekkyu.png`（**予備**＝本編未使用・ギャラリー外） | 勝也(正面)　地図を渡され絶句する瞬間 |
+| cg25 | white_154.png | `cg_25_mie-katsuya_mediumshot.png`（**予備**＝本編未使用・ギャラリー外） | 三重／勝也　「先生、聞いていいですか」二人の間合い |
 | cg26 | white_155.png | `cg_26_katsuya_nagai_chinmoku.png` | 勝也(単独)　いつもの5秒より長い沈黙 |
 | cg27 | white_156.png | `cg_27_wakaki-inaba_yama_ue.png` | 若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調) |
 | cg28 | white_157.png | `cg_28_wakaki_utsumuku.png` | 若き勝也(回想・単独)　生意気な口を利いた日、俯く |
 | cg29 | white_158.png | `cg_29_katsuya_fuhou_shiruetto.png` | 勝也(単独)　訃報を知った瞬間(シルエットのみ) |
 | cg30 | white_159.png | `cg_30_katsuya_genzai_kyoshitsu.png` | 勝也(単独)　「窓の外を見るたび、報告していた」と語る |
 | cg31 | white_160.png | `cg_31_zenin-katsuya_hiroi_kouzu.png` | 全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図 |
-| cg32 | white_161.png | `cg_32_terachi_dokudoku_roudoku.png` | 寺地(単独・朗読)　スマホのライトに照らされて |
+| cg32 | white_161.png | `cg_32_terachi_dokudoku_roudoku.png`（**予備**＝本編未使用・ギャラリー外） | 寺地(単独・朗読)　スマホのライトに照らされて |
 | cg33 | white_162.png | `cg_33_zenin-katsuya_namida_koraeru.png` | 全員／勝也　一人ずつの一言、勝也が涙をこらえる |
 | cg34 | white_163.png | `cg_34_katsuya_hareyaka_emie.png` | 勝也(単独)　晴れやかな笑み(表情⑩解禁カット) |
 | cg35 | white_164.png | `cg_35_zenin_sotsugyoushiki_sakurafubuki.png` | 全員集合　卒業式・桜吹雪 |
-| cg36 | white_165.png | `cg_36_katsuya_suunengo_kyoshitsu.png` | 勝也(単独)　数年後の教室、新しい1年生に同じ地図を |
-| cg37 | white_166.png | `cg_37_mie-mitsumine_mankai_sakura.png` | 三重／三峰　満開の桜(南棟Flag高で挿入) |
-| cg38 | white_167.png | `cg_38_ryoma_hakamairi.png` | 両馬(単独)　墓参り(両馬編で使用) |
+| cg36 | white_165.png | `cg_36_katsuya_suunengo_kyoshitsu.png`（**予備**＝本編未使用・ギャラリー外） | 勝也(単独)　数年後の教室、新しい1年生に同じ地図を |
+| cg37 | white_166.png | `cg_37_mie-mitsumine_mankai_sakura.png`（**予備**＝本編未使用・ギャラリー外） | 三重／三峰　満開の桜(南棟Flag高で挿入) |
+| cg38 | white_167.png | `cg_38_ryoma_hakamairi.png`（**予備**＝本編未使用・ギャラリー外） | 両馬(単独)　墓参り(両馬編で使用) |
 
 ## エンディング専用CG
 
@@ -205,30 +205,33 @@
 | cg_end_comedy | white_180.png | `cg_end_comedy.png` | COMEDY SECRET END　勝也が「……本質かもな」 |
 | cg_end_bonus | white_181.png | `cg_end_bonus.png` | BONUS EXTRA　数年後・翠湖のほとりの同窓会(全員＋勝也) |
 
-## UI／アイテム
+## UI／アイテム（2026-09-12 撤去）
+
+UI画像20枚はエンジンのCSS/SVG描画で全代替のため、実ファイルごと削除した。
+（スロット番号の履歴だけ残す）
 
 | スロット | 元ファイル | 新ファイル名 | 内容 |
 |---|---|---|---|
-| ui01 | white_182.png | `ui01_title_logo.png` | タイトルロゴ「まだ地図の途中で」 |
-| ui02 | white_183.png | `ui02_line_frame.png` | LINEグループチャット画面フレーム |
-| ui03 | white_184.png | `ui03_bbs_heikatsu.png` | 匿名掲示板(ヘイカツスレ)画面フレーム |
-| ui04 | white_185.png | `ui04_bbs_juken.png` | 受験情報掲示板(フェイカツ書き込み)画面フレーム |
-| ui05 | white_186.png | `ui05_haishin_ui.png` | 本質配信・配信画面UI |
-| ui06 | white_187.png | `ui06_nenkan_icon.png` | ✝本質✝年鑑・表紙アイコン |
-| ui07 | white_188.png | `ui07_nyumon_icon.png` | ✝本質✝入門ガイド・表紙アイコン |
-| ui08 | white_189.png | `ui08_shinbun_icon.png` | 古い学校新聞・紙面アイコン |
-| ui09 | white_190.png | `ui09_kojashin_icon.png` | 古写真アイコン |
-| ui10 | white_191.png | `ui10_chizutsutsu_icon.png` | 地図筒アイコン |
-| ui11 | white_192.png | `ui11_kami_magic_icon.png` | 紙とマジックペン(配信道具)アイコン |
-| ui12 | white_193.png | `ui12_omoide_chizu_icon.png` | 「思い出の地形図」ミニアイコン |
-| ui13 | white_194.png | `ui13_sentakushi_frame.png` | 選択肢ウィンドウ用フレーム |
-| ui14 | white_195.png | `ui14_heart_frame.png` | 心Pointゲージ用フレーム |
-| ui15 | white_196.png | `ui15_chapter_frame.png` | 章タイトル表示用の地形図柄フレーム |
-| ui16 | white_197.png | `ui16_saveload_bg.png` | セーブ／ロード画面用の地図柄背景装飾 |
-| ui17 | white_198.png | `ui17_hub_map.png` | HUB(ルート選択)画面用マップ風背景 |
-| ui18 | white_199.png | `ui18_end_logo_frame.png` | エンドロゴ共通フレーム |
-| ui19 | white_200.png | `ui19_sotsugyou_syosho.png` | 卒業証書アイコン |
-| ui20 | white_201.png | `ui20_cornsoup_can.png` | コーンスープ缶アイコン |
+| ui01 | white_182.png | ―（撤去・削除済み） | タイトルロゴ「まだ地図の途中で」 |
+| ui02 | white_183.png | ―（撤去・削除済み） | LINEグループチャット画面フレーム |
+| ui03 | white_184.png | ―（撤去・削除済み） | 匿名掲示板(ヘイカツスレ)画面フレーム |
+| ui04 | white_185.png | ―（撤去・削除済み） | 受験情報掲示板(フェイカツ書き込み)画面フレーム |
+| ui05 | white_186.png | ―（撤去・削除済み） | 本質配信・配信画面UI |
+| ui06 | white_187.png | ―（撤去・削除済み） | ✝本質✝年鑑・表紙アイコン |
+| ui07 | white_188.png | ―（撤去・削除済み） | ✝本質✝入門ガイド・表紙アイコン |
+| ui08 | white_189.png | ―（撤去・削除済み） | 古い学校新聞・紙面アイコン |
+| ui09 | white_190.png | ―（撤去・削除済み） | 古写真アイコン |
+| ui10 | white_191.png | ―（撤去・削除済み） | 地図筒アイコン |
+| ui11 | white_192.png | ―（撤去・削除済み） | 紙とマジックペン(配信道具)アイコン |
+| ui12 | white_193.png | ―（撤去・削除済み） | 「思い出の地形図」ミニアイコン |
+| ui13 | white_194.png | ―（撤去・削除済み） | 選択肢ウィンドウ用フレーム |
+| ui14 | white_195.png | ―（撤去・削除済み） | 心Pointゲージ用フレーム |
+| ui15 | white_196.png | ―（撤去・削除済み） | 章タイトル表示用の地形図柄フレーム |
+| ui16 | white_197.png | ―（撤去・削除済み） | セーブ／ロード画面用の地図柄背景装飾 |
+| ui17 | white_198.png | ―（撤去・削除済み） | HUB(ルート選択)画面用マップ風背景 |
+| ui18 | white_199.png | ―（撤去・削除済み） | エンドロゴ共通フレーム |
+| ui19 | white_200.png | ―（撤去・削除済み） | 卒業証書アイコン |
+| ui20 | white_201.png | ―（撤去・削除済み） | コーンスープ缶アイコン |
 
 ## 予備スロット
 
@@ -336,7 +339,8 @@
 
 ---
 
-- 合計: 300スロット (背景24 / 立ち絵105 / 名場面CG 38 / ED用CG 14 / UI 20 / 予備 99)
+- 合計: 300スロット (背景24 / 立ち絵105 / 名場面CG 38＝本編18・予備20 / ED用CG 14 / UI 20＝撤去済み / 予備 99)
+- 2026-09-12: UI画像20枚を撤去（CSS/SVG描画で全代替）。名場面CGのうち非ピーク20枚を reserve 降板（ファイルは残す）。
 - 企画書§8.2では立ち絵113本と計上されているが、第5章の表情リストを実列挙すると105本のため、
   差分8本は予備スロット(追加表情用バッファ)として確保している(§8.6「約90枚分のバッファ」の一部)。
 - 元 `image1/`, `image2/`, `image3/` フォルダはリネーム後に撤去。

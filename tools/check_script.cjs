@@ -35,7 +35,7 @@ function warn(msg) { console.warn("  △ " + msg); warns++; }
 /* --- アセット存在チェック用 --- */
 function hasBG(id) { return !!MAN.bg[id]; }
 function hasCG(id) { return !!(MAN.cg[id] || MAN.ed_cg[id]); }
-function hasUI(id) { return !!MAN.ui[id]; }
+// UI画像は2026-09-12に撤去（CSS/SVG描画で代替）。frame参照の検証は不要になった。
 function chrExprCount(who) { return MAN.chr[who] ? MAN.chr[who].exprs.length : 0; }
 
 /* --- 遷移グラフ構築 --- */
@@ -43,7 +43,7 @@ const sceneIds = Object.keys(SCENES);
 console.log(`scenes: ${sceneIds.length}`);
 console.log(`tips: ${Object.keys(TIPS).length}`);
 console.log(`chars: ${Object.keys(CHARS).length}`);
-console.log(`assets: bg=${Object.keys(MAN.bg).length} chr=${Object.values(MAN.chr).reduce((a, c) => a + c.exprs.length, 0)} cg=${Object.keys(MAN.cg).length} ed=${Object.keys(MAN.ed_cg).length} ui=${Object.keys(MAN.ui).length} spare=${Object.keys(MAN.spare).length}`);
+console.log(`assets: bg=${Object.keys(MAN.bg).length} chr=${Object.values(MAN.chr).reduce((a, c) => a + c.exprs.length, 0)} cg=${Object.keys(MAN.cg).length}(予備${Object.values(MAN.cg).filter(c=>c.reserve).length}) ed=${Object.keys(MAN.ed_cg).length} spare=${Object.keys(MAN.spare).length}`);
 
 const edges = []; // [from, to]
 let totalCmds = 0, totalText = 0, totalSay = 0;
@@ -95,8 +95,6 @@ for (const [sid, scene] of Object.entries(SCENES)) {
       }
     }
     if (t === "bbs" || t === "stream") {
-      const frame = cmd[1].frame;
-      if (frame && !hasUI(frame)) err(`${sid}[${idx}] ${t}: 不明UI '${frame}'`);
     }
     if (t === "choice") {
       const cfg = cmd[1];

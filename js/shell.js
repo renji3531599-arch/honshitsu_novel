@@ -152,6 +152,13 @@ export class Shell {
   }
   flashHeart() { /* 心Point は非表示が作法（企画書 7.1） */ }
   setPage() { }
+  /* 回収CG数 ―― 2026-09-12 に降板したCGを旧セーブが持っていても、
+     分母（collectible）と同じ基準で数える */
+  cgSeen(meta) {
+    const ids = (meta && meta.cg) || [];
+    if (!this.data.assets) return ids.length;
+    return ids.filter(id => { const a = this.data.assets.byId[id]; return a && a.cat === 'cg' && !a.reserve; }).length;
+  }
   renderItems() {
     const wrap = this.dom.items;
     wrap.innerHTML = '';
@@ -224,7 +231,7 @@ export class Shell {
     const ep = this.dom.titleProgress;
     ep.innerHTML = Object.entries(this.def.endings).map(([id, e]) =>
       `<i class="${m.endings[id] ? 'on' : ''}" title="${esc(e.tier)}">${esc(id === 'bonus' ? 'BONUS' : e.tier.split(' ')[0].replace('END', ''))}</i>`).join('')
-      + `<i title="回収CG">${(m.cg || []).length}/${this.data.assets ? this.data.assets.collectible('cg').length : 41}</i>`
+      + `<i title="回収CG">${this.cgSeen(m)}/${this.data.assets ? this.data.assets.collectible('cg').length : 32}</i>`
       + `<i title="周回">RUN ${m.runs || 0}</i>`;
   }
   async titlePick(id) {
@@ -721,7 +728,7 @@ export class Shell {
         grid.appendChild(cell);
       });
       const s = el('div', 'sect');
-      s.appendChild(el('h3', null, `回収 ${(m.cg || []).length} / ${list.length} 枚`));
+      s.appendChild(el('h3', null, `回収 ${this.cgSeen(m)} / ${list.length} 枚`));
       s.appendChild(grid);
       s.appendChild(el('p', 'hint', '回収したCGはクリックで拡大鑑賞できます（等倍／1.6×／2.4×）。cg02（写真がこぼれる瞬間）と cg22（完成した地形図）は、とくに拡大向きの一枚です。'));
       body.appendChild(s);
@@ -916,7 +923,7 @@ ${ends}
         <span>今回の心Point <b>${j.heart}</b></span>
         <span>主要Flag <b>${j.flagcount}</b> / ${j.maj}</span>
         <span>周回 <b>${m.runs || 1}</b></span>
-        <span>CG <b>${(m.cg || []).length}</b> / ${this.data.assets ? this.data.assets.collectible('cg').length : 41}</span>
+        <span>CG <b>${this.cgSeen(m)}</b> / ${this.data.assets ? this.data.assets.collectible('cg').length : 32}</span>
       </div>
       <p class="hint">条件を満たすと、収束章のあと自動で振り分けられます。到達済みは金色、未到達は半透明。クリックでCGプレビュー（到達済みのみ）。</p>`;
     wrap.appendChild(head);
@@ -1008,7 +1015,7 @@ ${ends}
     const sect = el('div', 'sect');
     sect.innerHTML = `<div class="doc-list">${keys.map(([k, v]) =>
       `<div class="doc" style="display:flex;justify-content:space-between;align-items:center"><h4 style="margin:0"><span class="kbd">${esc(k)}</span></h4><p style="margin:0">${esc(v)}</p></div>`).join('')}</div>`;
-    sect.appendChild(el('p', 'hint', '※ マウスでもキーボードでも、どちらからでも遊べる構成にしてあります。'));
+    sect.appendChild(el('p', 'hint', '※ マウスでもキーボードでも、どちらからでも遊べる構成にしてあります。<br>※ ギャラリー／✝本質✝辞典／✝本質✝年鑑／ENDリストは、タイトル画面から開きます（おまけコンテンツ）。'));
     this.dom.ovBody.appendChild(sect);
   }
 
@@ -1042,7 +1049,7 @@ ${ends}
       <div class="endlog" style="margin-top:14px">
         <div>心Point　<b>${j.heart}</b>　（${e.cond}）</div>
         <div>主要Flag　<b>${j.flagcount} / ${maj}</b>　到達ルート <b>${Object.keys(this.game.state.routes).length}/6</b></div>
-        <div>回収CG　<b>${(m.cg || []).length}</b>　エンド <b>${Object.keys(m.endings).length}/14</b>　周回 <b>${m.runs || 1}</b></div>
+        <div>回収CG　<b>${this.cgSeen(m)}</b>　エンド <b>${Object.keys(m.endings).length}/14</b>　周回 <b>${m.runs || 1}</b></div>
       </div>
       <div class="gauge">${flagsRows}</div>`;
     const right = el('div', 'end-art');
@@ -1054,7 +1061,6 @@ ${ends}
     const mk = (label, fn) => { const b = el('button', null, label); b.addEventListener('click', () => { this.audio.se('se_click'); fn(); }); btns.appendChild(b); };
     mk('この続きを読む（バックログ）', () => { this.close(); this.open('log'); });
     mk('もう一度、この学期を', () => { this.close(); this.cinematicStart('prologue_001', 'prologue'); });
-    mk('回収した地図を見る', () => { this.close(); this.open('gallery', 'end'); });
     mk('タイトルへ', () => { this.close(); this.game.toTitle(); });
     if (bonusReady) mk('★ BONUS EXTRA を読む', () => { this.close(); this.cinematicStart('end_bonus', 'end'); });
     sect.appendChild(left); sect.appendChild(right);

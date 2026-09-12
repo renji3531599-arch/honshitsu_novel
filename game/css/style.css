@@ -218,6 +218,9 @@ body { font-family: var(--font-goth); color: var(--ink); }
 .net-overlay.show { display: flex; }
 .net-panel {
   width: 780px; max-height: 570px; overflow: hidden; display: flex; flex-direction: column;
+  /* 旧: ui03/ui05 のフレームPNGの上に96〜98%不透過グラデを重ねていた。
+     UI画像撤去（2026-09-12）に伴い、実質的に見えていたグラデだけをCSSへ移設。 */
+  background: linear-gradient(rgba(14,20,32,.96), rgba(10,14,24,.98));
   background-size: cover; background-position: center;
   border: 1px solid rgba(120,140,170,.5); border-radius: 8px;
   box-shadow: 0 20px 60px rgba(0,0,0,.7); cursor: pointer;
@@ -289,6 +292,9 @@ body { font-family: var(--font-goth); color: var(--ink); }
 #title-logo .plate {
   position: absolute; left: -36px; top: -30px; z-index: -1;
   width: 440px; height: 230px; border-radius: 6px; background-size: cover;
+  /* 旧: ui01_title_logo.png（白紙プレースホルダ）を opacity .14 で重ねていた。
+     UI画像撤去（2026-09-12）後は、当時の見え方（淡い明るい板）をCSSだけで再現。 */
+  background: radial-gradient(ellipse at 30% 35%, rgba(232,224,204,.5), rgba(232,224,204,.12) 62%, transparent 78%);
   opacity: .14; filter: blur(1px); border: 1px solid rgba(201,168,106,.2);
 }
 #title-logo .t-cross { font-size: 20px; color: var(--accent); letter-spacing: 1.2em; text-indent: .2em; margin-bottom: 14px; opacity: .85; }

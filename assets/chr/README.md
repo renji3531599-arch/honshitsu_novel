@@ -3,7 +3,7 @@
 `assets/chr/` の立ち絵差分。キャラごとに**どの表情が本編で何回出るか**を1枚ずつ書く。
 現在は白紙プレースホルダで、画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。
 
-> 生成: `node tools/gen_asset_md.mjs`（2026-09-11）／総数 105 ファイル／正本は台帳 `data/assets.json`
+> 生成: `node tools/gen_asset_md.mjs`（2026-09-12）／総数 105 ファイル／正本は台帳 `data/assets.json`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
 
 ## 先にまとめ
@@ -45,15 +45,15 @@
 - **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 5 枚・実画像 0 枚（各 現 400×300・810B）
 
 - **① 通常** ― `@chr futami=01` ／ `chr_futami_01_tsuujou.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:91`（職員室前）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:88`（職員室前）
 - **② 微笑** ― `@chr futami=02` ／ `chr_futami_02_hohoemi.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **③ 心配顔** ― `@chr futami=03` ／ `chr_futami_03_shinpai.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:108`（食い下がった方）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:104`（食い下がった方）
 - **④ いたずらっぽい笑み** ― `@chr futami=04` ／ `chr_futami_04_itazura.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:117`（二見の後押し）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:113`（二見の後押し）
 - **⑤ しんみりした横顔** ― `@chr futami=05` ／ `chr_futami_05_yokogao.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:97`（職員室前）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:93`（職員室前）
 
 ### `inaba` ― 稲葉悌二（いなば・ていじ／回想の声）
 
@@ -121,7 +121,7 @@
 - **⑤ 目を伏せる** ― `@chr katsuya=05` ／ `chr_katsuya_05_me_fuseru.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑥ 硬い無表情** ― `@chr katsuya=06` ／ `chr_katsuya_06_kataki_muten.png`
-  本編 **3 回**。初出 `10_chapter1:43`（地図保管庫） → ほか 2 回
+  本編 **3 回**。初出 `10_chapter1:42`（地図保管庫） → ほか 2 回
 - **⑦ 回想・目を細める** ― `@chr katsuya=07` ／ `chr_katsuya_07_kaisou_me_soseru.png`
   本編 **2 回**。初出 `60_climax:124`（気づき） → ほか 1 回
 - **⑧ 涙をこらえる** ― `@chr katsuya=08` ／ `chr_katsuya_08_namida_koraeru.png`
@@ -142,13 +142,13 @@
 - **② 感激** ― `@chr kuraishi=02` ／ `chr_kuraishi_02_kanshou.png`
   本編 **1 回**。初出 `70_endings:163`（GOOD END 両馬「✝本質✝、その後」）
 - **③ 真剣（調査中）** ― `@chr kuraishi=03` ／ `chr_kuraishi_03_chousa_shinken.png`
-  本編 **3 回**。初出 `40_route_minamitou_meshino:138`（図書室、書庫） → ほか 2 回
+  本編 **3 回**。初出 `40_route_minamitou_meshino:133`（図書室、書庫） → ほか 2 回
 - **④ しょんぼり** ― `@chr kuraishi=04` ／ `chr_kuraishi_04_shonbori.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑤ 誇らしげ** ― `@chr kuraishi=05` ／ `chr_kuraishi_05_hokorashige.png`
   本編 **2 回**。初出 `50_converge:68`（「思い出の地形図」制作） → ほか 1 回
 - **⑥ 言葉を失う顔** ― `@chr kuraishi=06` ／ `chr_kuraishi_06_kotoba_usinau.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:144`（図書室、書庫）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:138`（図書室、書庫）
 - **⑦ 涙ぐむ** ― `@chr kuraishi=07` ／ `chr_kuraishi_07_namidagumu.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 
@@ -159,13 +159,13 @@
 - **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
 
 - **① 通常** ― `@chr meshino=01` ／ `chr_meshino_01_tsuujou.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:117`（二見の後押し）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:113`（二見の後押し）
 - **② 決め顔** ― `@chr meshino=02` ／ `chr_meshino_02_kimegao.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **③ 照れ** ― `@chr meshino=03` ／ `chr_meshino_03_tere.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **④ 真剣** ― `@chr meshino=04` ／ `chr_meshino_04_shinken.png`
-  本編 **2 回**。初出 `40_route_minamitou_meshino:91`（職員室前） → ほか 1 回
+  本編 **2 回**。初出 `40_route_minamitou_meshino:88`（職員室前） → ほか 1 回
 - **⑤ 英語ドヤ顔** ― `@chr meshino=05` ／ `chr_meshino_05_eigo_doya.png`
   本編 **1 回**。初出 `50_converge:63`（「思い出の地形図」制作）
 - **⑥ しんみり** ― `@chr meshino=06` ／ `chr_meshino_06_shinmiri.png`
@@ -182,19 +182,19 @@
 - **② 「は？」** ― `@chr mie=02` ／ `chr_mie_02_ha.png`
   本編 **4 回**。初出 `00_prologue:74`（二月、北棟三年B組・昼休み） → ほか 3 回
 - **③ 動揺** ― `@chr mie=03` ／ `chr_mie_03_douyou.png`
-  本編 **1 回**。初出 `20_route_satou_rei:171`（零の中の変化）
+  本編 **1 回**。初出 `20_route_satou_rei:169`（零の中の変化）
 - **④ 気まずい沈黙** ― `@chr mie=04` ／ `chr_mie_04_chimatsu.png`
-  本編 **8 回**。初出 `10_chapter1:68`（放課後、屋上へ続く階段の踊り場） → ほか 7 回
+  本編 **8 回**。初出 `10_chapter1:67`（放課後、屋上へ続く階段の踊り場） → ほか 7 回
 - **⑤ 照れ** ― `@chr mie=05` ／ `chr_mie_05_tere.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑥ 苛立ち混じりの真剣** ― `@chr mie=06` ／ `chr_mie_06_iraduki_shinken.png`
-  本編 **2 回**。初出 `10_chapter1:75`（放課後、屋上へ続く階段の踊り場） → ほか 1 回
+  本編 **2 回**。初出 `10_chapter1:74`（放課後、屋上へ続く階段の踊り場） → ほか 1 回
 - **⑦ 本気の真剣** ― `@chr mie=07` ／ `chr_mie_07_honki_shinken.png`
-  本編 **7 回**。初出 `10_chapter1:152`（HUB ― ルート選択） → ほか 6 回
+  本編 **7 回**。初出 `10_chapter1:149`（HUB ― ルート選択） → ほか 6 回
 - **⑧ 涙をこらえて唇を噛む** ― `@chr mie=08` ／ `chr_mie_08_namida_kamu.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑨ 初めての素直な微笑み** ― `@chr mie=09` ／ `chr_mie_09_sunao_hohoemi.png`
-  本編 **5 回**。初出 `10_chapter1:140`（選択後共通 ―― 夕方の廊下） → ほか 4 回
+  本編 **5 回**。初出 `10_chapter1:137`（選択後共通 ―― 夕方の廊下） → ほか 4 回
 - **⑩ 泣き顔** ― `@chr mie=10` ／ `chr_mie_10_nakigao.png`
   本編 **1 回**。初出 `60_climax:131`（気づき）
 
@@ -205,11 +205,11 @@
 - **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
 
 - **① 通常** ― `@chr mitsumine=01` ／ `chr_mitsumine_01_tsuujou.png`
-  本編 **2 回**。初出 `40_route_minamitou_meshino:16`（桜並木、まだ蕾） → ほか 1 回
+  本編 **2 回**。初出 `40_route_minamitou_meshino:15`（桜並木、まだ蕾） → ほか 1 回
 - **② ツッコミ顔** ― `@chr mitsumine=02` ／ `chr_mitsumine_02_tsukkomi.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:20`（桜並木、まだ蕾）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:19`（桜並木、まだ蕾）
 - **③ 笑顔** ― `@chr mitsumine=03` ／ `chr_mitsumine_03_egao.png`
-  本編 **2 回**。初出 `40_route_minamitou_meshino:66`（決意） → ほか 1 回
+  本編 **2 回**。初出 `40_route_minamitou_meshino:63`（決意） → ほか 1 回
 - **④ 呆れ** ― `@chr mitsumine=04` ／ `chr_mitsumine_04_akire.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑤ 優しい顔** ― `@chr mitsumine=05` ／ `chr_mitsumine_05_yasashii.png`
@@ -224,15 +224,15 @@
 - **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
 
 - **① 通常** ― `@chr naitou=01` ／ `chr_naitou_01_tsuujou.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:35`（南棟三年教室）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
 - **② 微笑** ― `@chr naitou=02` ／ `chr_naitou_02_hohoemi.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:39`（南棟三年教室）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:36`（南棟三年教室）
 - **③ 読書中（伏し目）** ― `@chr naitou=03` ／ `chr_naitou_03_dokusho.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **④ 驚き** ― `@chr naitou=04` ／ `chr_naitou_04_odoroki.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:49`（茶化した場合）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:46`（茶化した場合）
 - **⑤ 優しい目** ― `@chr naitou=05` ／ `chr_naitou_05_yasashii_me.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:62`（決意）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:59`（決意）
 - **⑥ 少し笑う** ― `@chr naitou=06` ／ `chr_naitou_06_sukoshi_warau.png`
   本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
 
@@ -244,19 +244,19 @@
 - **その人が主役のルート**: B「零編」 ― 面白いの向こう側（開始シーン `b1`）
 
 - **① 通常（涼しい顔）** ― `@chr rei=01` ／ `chr_rei_01_suzushii.png`
-  本編 **2 回**。初出 `20_route_satou_rei:119`（放課後、黒板の前） → ほか 1 回
+  本編 **2 回**。初出 `20_route_satou_rei:117`（放課後、黒板の前） → ほか 1 回
 - **② 微笑** ― `@chr rei=02` ／ `chr_rei_02_hohoemi.png`
-  本編 **2 回**。初出 `20_route_satou_rei:176`（零の中の変化） → ほか 1 回
+  本編 **2 回**。初出 `20_route_satou_rei:174`（零の中の変化） → ほか 1 回
 - **③ 考え中（顎に手）** ― `@chr rei=03` ／ `chr_rei_03_kangaechuu.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **④ 驚き** ― `@chr rei=04` ／ `chr_rei_04_odoroki.png`
-  本編 **1 回**。初出 `20_route_satou_rei:126`（放課後、黒板の前）
+  本編 **1 回**。初出 `20_route_satou_rei:124`（放課後、黒板の前）
 - **⑤ 真剣（データと向き合う）** ― `@chr rei=05` ／ `chr_rei_05_data_shinken.png`
-  本編 **4 回**。初出 `20_route_satou_rei:130`（放課後、黒板の前） → ほか 3 回
+  本編 **4 回**。初出 `20_route_satou_rei:128`（放課後、黒板の前） → ほか 3 回
 - **⑥ 優しい目** ― `@chr rei=06` ／ `chr_rei_06_yasashii_me.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑦ 言葉を選ぶ顔** ― `@chr rei=07` ／ `chr_rei_07_kotoba_erabu.png`
-  本編 **1 回**。初出 `20_route_satou_rei:164`（零の中の変化）
+  本編 **1 回**。初出 `20_route_satou_rei:162`（零の中の変化）
 - **⑧ 目を潤ませる** ― `@chr rei=08` ／ `chr_rei_08_me_rumaseru.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 
@@ -276,15 +276,15 @@
 - **④ 急に真顔** ― `@chr ryoma=04` ／ `chr_ryoma_04_kinimo_majime.png`
   本編 **6 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 5 回
 - **⑤ しょんぼり** ― `@chr ryoma=05` ／ `chr_ryoma_05_shonbori.png`
-  本編 **1 回**。初出 `10_chapter1:163`（まだ聞けていない話がある気がする）
+  本編 **1 回**。初出 `10_chapter1:160`（まだ聞けていない話がある気がする）
 - **⑥ 泣き笑い** ― `@chr ryoma=06` ／ `chr_ryoma_06_nakiwarai.png`
-  本編 **4 回**。初出 `30_route_terachi_ryoma:99`（両馬の家、夕方） → ほか 3 回
+  本編 **4 回**。初出 `30_route_terachi_ryoma:97`（両馬の家、夕方） → ほか 3 回
 - **⑦ 真剣な決意顔** ― `@chr ryoma=07` ／ `chr_ryoma_07_shinken_ketsui.png`
-  本編 **4 回**。初出 `10_chapter1:152`（HUB ― ルート選択） → ほか 3 回
+  本編 **4 回**。初出 `10_chapter1:149`（HUB ― ルート選択） → ほか 3 回
 - **⑧ 照れ隠しで頭をかく** ― `@chr ryoma=08` ／ `chr_ryoma_08_terekakushi.png`
-  本編 **2 回**。初出 `30_route_terachi_ryoma:90`（両馬の家、夕方） → ほか 1 回
+  本編 **2 回**。初出 `30_route_terachi_ryoma:88`（両馬の家、夕方） → ほか 1 回
 - **⑨ 号泣** ― `@chr ryoma=09` ／ `chr_ryoma_09_goukyuu.png`
-  本編 **1 回**。初出 `30_route_terachi_ryoma:122`（祖父の口癖）
+  本編 **1 回**。初出 `30_route_terachi_ryoma:120`（祖父の口癖）
 
 ### `sakura` ― 櫻優（さくら・ゆう）
 
@@ -295,13 +295,13 @@
 - **① 通常** ― `@chr sakura=01` ／ `chr_sakura_01_tsuujou.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **② 真剣（研究者モード）** ― `@chr sakura=02` ／ `chr_sakura_02_kenkyuusha.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:35`（南棟三年教室）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
 - **③ 照れ** ― `@chr sakura=03` ／ `chr_sakura_03_tere.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **④ 動揺** ― `@chr sakura=04` ／ `chr_sakura_04_douyou.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑤ 笑顔** ― `@chr sakura=05` ／ `chr_sakura_05_egao.png`
-  本編 **1 回**。初出 `40_route_minamitou_meshino:68`（決意）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:65`（決意）
 - **⑥ 柔らかい表情** ― `@chr sakura=06` ／ `chr_sakura_06_yawarakai.png`
   本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
 
@@ -321,11 +321,11 @@
 - **④ 照れ隠しでそっぽを向く** ― `@chr satou=04` ／ `chr_satou_04_soppo.png`
   本編 **1 回**。初出 `20_route_satou_rei:19`（放課後、教室に残る砂糖）
 - **⑤ 真剣にカメラを構える顔** ― `@chr satou=05` ／ `chr_satou_05_camera.png`
-  本編 **2 回**。初出 `20_route_satou_rei:79`（砂糖のスマートフォン） → ほか 1 回
+  本編 **2 回**。初出 `20_route_satou_rei:77`（砂糖のスマートフォン） → ほか 1 回
 - **⑥ 微笑み（レア）** ― `@chr satou=06` ／ `chr_satou_06_hohoemi.png`
-  本編 **2 回**。初出 `20_route_satou_rei:100`（砂糖のスマートフォン） → ほか 1 回
+  本編 **2 回**。初出 `20_route_satou_rei:98`（砂糖のスマートフォン） → ほか 1 回
 - **⑦ 言葉に詰まる顔** ― `@chr satou=07` ／ `chr_satou_07_tsumaru.png`
-  本編 **2 回**。初出 `20_route_satou_rei:90`（砂糖のスマートフォン） → ほか 1 回
+  本編 **2 回**。初出 `20_route_satou_rei:88`（砂糖のスマートフォン） → ほか 1 回
 - **⑧ 目に光るものを堪える顔** ― `@chr satou=08` ／ `chr_satou_08_hikari_koraeru.png`
   本編 **1 回**。初出 `60_climax:116`（窓の外の五秒）
 
@@ -347,7 +347,7 @@
 - **⑤ 泣きそうなのを堪える** ― `@chr terachi=05` ／ `chr_terachi_05_nakisou_koraeru.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑥ マイク前の決意顔** ― `@chr terachi=06` ／ `chr_terachi_06_maiku_no_ketsui.png`
-  本編 **3 回**。初出 `30_route_terachi_ryoma:59`（三年分の紙） → ほか 2 回
+  本編 **3 回**。初出 `30_route_terachi_ryoma:57`（三年分の紙） → ほか 2 回
 - **⑦ 声を震わせながら読み上げる** ― `@chr terachi=07` ／ `chr_terachi_07_yomiage.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
 - **⑧ 涙** ― `@chr terachi=08` ／ `chr_terachi_08_namida.png`

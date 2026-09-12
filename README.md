@@ -12,13 +12,15 @@
 | アセット置き場 | `assets/`（bg/chr/cg/ui + `_buffer/`） | `game/assets/img/` |
 | 脚本形式 | 独自DSL（`data/script/*.txt`） | JSデータ（`game/js/script_*.js`） |
 | BGM | 手続き生成 24曲＋SE18種 | 手続き生成 24曲＋SE16種 |
-| 検証ツール | `tools/vncheck.mjs` ＋ `tools/smoke.mjs` | `tools/check_script.js` ＋ `tools/playthrough_test.js` ＋ `tools/save_test.js` |
+| 検証ツール | `tools/vncheck.mjs` ＋ `tools/smoke.mjs` | `tools/check_script.cjs` ＋ `tools/playthrough_test.cjs` ＋ `tools/save_test.cjs` |
 | 固有ドキュメント | `docs/SCRIPT_SPEC.md` ／ `docs/ASSET_MANIFEST.md` | `ASSET_MAP.md` |
 
 **共通事項**: `image1/2/3` の仮画像300枚（`white_XXX.png`）は、両実装それぞれが企画書§8の
 アセット一覧に従って別名へリネーム済みです（版Aは `assets/`、版Bは `game/assets/img/`、対応表は `ASSET_MAP.md`）。
 白紙プレースホルダーのままでも両版とも等高線背景・色調ティント等で舞台として機能し、
 **同名の実素材に上書きすればそのまま差し替わります**。
+ただし**UI画像20枚（ui01〜ui20）は2026-09-12に両版とも撤去**しました ―― 画面のUIは
+全てCSS/SVG描画で成立しており、PNGが誰からも参照されていなかったためです（経緯は `docs/UI_CG_2026-09-12.md`）。
 
 ---
 
@@ -39,8 +41,10 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 | 1〜9 / ←→ | 選択肢 |
 | Backspace | バックログ |
 | F1 / F2 | クイックセーブ／ロード（S・L で12スロット） |
-| G / T / R / Y | ギャラリー／✝本質✝辞典／エンドリスト／✝本質✝年鑑 |
 | C / I / H / Q / Esc | 設定／所持品／HUD／クイックメニュー／閉じる |
+
+おまけ系（ギャラリー／✝本質✝辞典／✝本質✝年鑑／ENDリスト）は**タイトル画面からのみ**開けます
+（2026-09-12 にプレイ中の導線を削除。プレイ中のシステムUIは セーブ／ロード／ログ／設定 だけに）。
 
 深リンク：`index.html#scene=d2` で特定シーンから起動できる（検証・確認用）。
 セーブ・周回データは `localStorage`（12スロット＋オート＋横断メタ：回収CG／エンド／年鑑カウンタ）。
@@ -115,7 +119,7 @@ tools/vncheck.mjs             … 静的検証＋オートプレイ（参照解�
 tools/smoke.mjs               … jsdom で実起動し、全シーン・全パネル・1周プレイを流す
 tools/rename_assets.py        … プレースホルダーの実名リネーム＋台帳生成
 docs/SCRIPT_SPEC.md           … DSL・フラグ仕様
-docs/ASSET_MANIFEST.md        … 201枠の一覧（用途・元ファイル・差分）
+docs/ASSET_MANIFEST.md        … 181枠の一覧（用途・元ファイル・差分。UI20枚は撤去済み）
 ```
 
 ---
@@ -169,7 +173,8 @@ save/load・キー操作まで流して実行時エラーを拾う（過去に `
 - **本編**: プロローグ → 第一章「差出人不明の写真」→ **HUB自由順6ルート**（A砂糖／B零／C寺地／D両馬／E南棟／F召野＋倉石）→ 収束章「地図を作る夜」→ クライマックス「窓の外に、ずっといた人」→ **エンディング14種**
 - **パラメータ**: 企画書§7どおり **心Point＋主要Flag8種**（選択肢33件。倉石茶化し選択3箇所 → COMEDY SECRET END 条件も再現）
   - TRUE（心24以上＋Flag6種以上）／GOOD9種（心18以上＋突出Flag）／NORMAL／BITTERSWEET（心11以下）／COMEDY SECRET／全回収後にタイトルへ出現する BONUS EXTRA
-- **エンジン**: セーブ12スロット＋クイック＋オートセーブ／黒字リプレイ方式ロード／バックログ／既読スキップ（Ctrl）／オートモード／ギャラリー52枚／**✝本質✝辞典**（用語自動収集）／ENDリスト／設定
+- **エンジン**: セーブ12スロット＋クイック＋オートセーブ／黒字リプレイ方式ロード／バックログ／既読スキップ（Ctrl）／オートモード／ギャラリー32枚（名場面18＋ED14）／**✝本質✝辞典**（用語自動収集）／ENDリスト／設定
+- **2026-09-12**: UI画像20枚を撤去（CSS/SVG描画で全代替）、CGは「印象的で感動的なシーンのみ」の32枚に整理。経緯は `docs/UI_CG_2026-09-12.md`
 - **演出**: 章タイトルカード、CG表示、掲示板・配信UIオーバーレイ、回想の褪色トーン、**「窓の外、五秒」演出**（クライマックスでは15秒に延伸）
 - **音**: 音源ファイル不使用。WebAudioリアルタイム合成で企画書§9の **BGM24曲＋SE16種** を内蔵
 - 原作のトーンを踏襲: 「は？」、フェイカツ投稿、**489の正体は最後まで明かさない**（§13 トーンガイド準拠）
@@ -202,20 +207,30 @@ game/
 │   ├── characters.js     キャラ定義＋✝本質✝辞典データ
 │   ├── assets_manifest.js 自動生成（tools/map_assets.py）
 │   └── script_0*_*.js    本編スクリプト（企画書§10〜§11を全台詞実装）
-└── assets/img/           リネーム済み画像300枚（201使用＋99予備）
+└── assets/img/           リネーム済み画像280枚（本編使用161＋降板CG予備20＋空き99。UI画像20枚は撤去）
 tools/
-├── map_assets.py         仮画像→アセット名リネーム（冪等・単一の情報源）
-├── check_script.js       整合性チェック（参照・遷移・Flagの静的検証）
-├── playthrough_test.js   jsdomで実プレイ（TRUE/BITTERSWEET/COMEDY SECRET到達を自動検証）
-└── save_test.js          セーブ/ロード復元・オートセーブ・BONUS解放の自動検証
-ASSET_MAP.md              仮画像300枚 ↔ アセット名の対応表（版B）
+├── map_assets.py         仮画像→アセット名リネーム（冪等・単一の情報源。UI撤去とCG降板も反映）
+├── check_script.cjs      整合性チェック（参照・遷移・Flagの静的検証）
+├── playthrough_test.cjs  jsdomで実プレイ（TRUE/BITTERSWEET/COMEDY SECRET到達を自動検証）
+└── save_test.cjs         セーブ/ロード復元・オートセーブ・BONUS解放の自動検証
+ASSET_MAP.md              仮画像300枚 ↔ アセット名の対応表（版B。UI20枚は撤去済みと表示）
 ```
 
 ## 検証（版B）
 
 ```bash
-node tools/check_script.js        # シナリオデータの静的検証（0エラー必須）
-node tools/playthrough_test.js    # 実プレイテスト3ルート（要: npm i jsdom）
+node tools/check_script.cjs       # シナリオデータの静的検証（0エラー必須）
+node tools/playthrough_test.cjs   # 実プレイテスト3ルート（要: npm i --no-save jsdom）
+node tools/save_test.cjs          # セーブ/ロード/BONUSテスト（要: jsdom）
+python3 tools/map_assets.py       # アセット割り当ての再生成（冪等）
+```
+
+実素材の差し替えは `ASSET_MAP.md` の対応表を見ながら `game/assets/img/` に**同名のファイル**を上書きするだけです。
+
+---
+
+**卒業しても、✝本質✝は終わらない。地面は、忘れない。** ――それだけで、十分だ。
+ough_test.js    # 実プレイテスト3ルート（要: npm i jsdom）
 node tools/save_test.js           # セーブ/ロード/BONUSテスト（要: jsdom）
 python3 tools/map_assets.py       # アセット割り当ての再生成（冪等）
 ```

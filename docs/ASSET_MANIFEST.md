@@ -8,6 +8,7 @@
   プレースホルダーでも画面が成立するよう背景・立ち絵は CSS/SVG で補完描画します。
 - 実素材に差し替えたら `data/assets.json` の該当行 `placeholder` を `false` にしてください。
   それだけでフォールバック描画が消え、PNGがそのまま画面に出ます。
+- **UI画像20枚（ui01〜ui20）は2026-09-12に撤去**しました。ロゴ・端末フレーム・所持品アイコン・選択肢・章カード・HUB・ENDロゴまで、すべてCSS/SVG描画で成立しているためです（詳細 `docs/UI_CG_2026-09-12.md`）。
 - 合成は**既定 `normal`**（2026-09-11 変更）。以前は全面 `multiply`（白＝透明）でしたが、
   `contain: paint` と組み合わさって実写素材がほぼ黒く潰えるため、立ち絵だけ選べる形にしました。
   白背景素材をそのまま置きたいときは CONFIG「画像合成」= multiply を（詳細 `docs/PERF_2026-09-11.md`）。
@@ -18,9 +19,9 @@
 |---|---|---|
 | 背景(BG) | 24 | 24 |
 | 立ち絵差分 | 113 | 105（第5章の表情リスト合計。企画書の計数是差 -8） |
-| 名場面CG | 38 | 38 |
+| 名場面CG | 38 | 38（うち20枚は `reserve` 降板 ―― 2026-09-11に11枚、2026-09-12に9枚。本編使用は18枚） |
 | ED専用CG | 14 | 14 |
-| UI／アイテム | 20 | 20 |
+| UI／アイテム | 20 | 0（2026-09-12 撤去。CSS/SVG描画で全代替） |
 | 未割当バッファ | 約90 | 99（`assets/_buffer/`） |
 
 ※ 企画書 8.6 は立ち絵差分を113枚・総計209枚としていますが、8.2 の内訳表と
@@ -213,26 +214,7 @@
 | 179 | `image3/white_179.png` | `assets/cg/cg_end_bittersweet.png` | BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う |
 | 180 | `image2/white_180.png` | `assets/cg/cg_end_comedy.png` | COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう |
 | 181 | `image1/white_181.png` | `assets/cg/cg_end_bonus.png` | BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット |
-| 182 | `image1/white_182.png` | `assets/ui/ui01_title_logo.png` | タイトルロゴ「まだ地図の途中で」 |
-| 183 | `image3/white_183.png` | `assets/ui/ui02_frame_line_chat.png` | LINEグループチャット画面フレーム |
-| 184 | `image1/white_184.png` | `assets/ui/ui03_frame_bbs_heikatsu.png` | 匿名掲示板（ヘイカツスレ）画面フレーム |
-| 185 | `image3/white_185.png` | `assets/ui/ui04_frame_juken_bbs.png` | 受験情報掲示板（フェイカツ書き込み）画面フレーム |
-| 186 | `image2/white_186.png` | `assets/ui/ui05_frame_honshitsu_live.png` | 本質配信・配信画面UI（コメント欄含む） |
-| 187 | `image2/white_187.png` | `assets/ui/ui06_icon_honshitsu_nenkan.png` | ✝本質✝年鑑・表紙アイコン |
-| 188 | `image2/white_188.png` | `assets/ui/ui07_icon_honshitsu_guide.png` | ✝本質✝入門ガイド・表紙アイコン |
-| 189 | `image2/white_189.png` | `assets/ui/ui08_icon_gakko_shinbun.png` | 古い学校新聞・紙面アイコン |
-| 190 | `image3/white_190.png` | `assets/ui/ui09_icon_ko_shashin.png` | 古写真アイコン（単体・所持品表示用） |
-| 191 | `image3/white_191.png` | `assets/ui/ui10_icon_chizutsutsu.png` | 地図筒アイコン |
-| 192 | `image2/white_192.png` | `assets/ui/ui11_icon_kami_magicpen.png` | 紙とマジックペン（寺地の配信道具）アイコン |
-| 193 | `image2/white_193.png` | `assets/ui/ui12_icon_omoide_chizu.png` | 「思い出の地形図」ミニアイコン |
-| 194 | `image1/white_194.png` | `assets/ui/ui13_frame_choice.png` | 選択肢ウィンドウ用フレーム |
-| 195 | `image2/white_195.png` | `assets/ui/ui14_frame_kokoro_gauge.png` | 心Pointゲージ用フレーム（内部管理UI） |
-| 196 | `image1/white_196.png` | `assets/ui/ui15_frame_chapter_title.png` | 章タイトル表示用の地形図柄フレーム |
-| 197 | `image3/white_197.png` | `assets/ui/ui16_bg_save_load.png` | セーブ／ロード画面用の地図柄背景装飾 |
-| 198 | `image3/white_198.png` | `assets/ui/ui17_bg_hub_map.png` | HUB（ルート選択）画面用のマップ風背景 |
-| 199 | `image1/white_199.png` | `assets/ui/ui18_frame_end_logo.png` | エンドロゴ共通フレーム（色違いで各EDに流用） |
-| 200 | `image2/white_200.png` | `assets/ui/ui19_icon_sotsugyou_shousho.png` | 卒業証書アイコン |
-| 201 | `image3/white_201.png` | `assets/ui/ui20_icon_corn_soup.png` | コーンスープ缶アイコン（小ネタ回収用） |
+| 182〜201 | ~~`assets/ui/ui01〜ui20`~~ | **2026-09-12 撤去** ―― UI画像20枚はエンジンのCSS/SVG描画で全代替のため、ファイル・台帳から外した |
 
 ### 未割当バッファ（表情差分・サブキャラ追加用 / 99枚）
 
