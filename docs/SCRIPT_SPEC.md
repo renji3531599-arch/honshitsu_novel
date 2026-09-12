@@ -92,7 +92,7 @@ NOTE 倉石が数えている
 | 指令 | 意味 |
 |---|---|
 | `@bg <bg stem or id>` | 背景差し替え（`bg_hokutou_kyoshitsu_asa` のようにファイル名stemで書ける） |
-| `@cg <cgNN> [kb]` / `@cg off` | イベントCG。`kb` でキービジュアル風に文字を下へ寄せる |
+| `@cg <cg名> [kb]` / `@cg off` | イベントCG。`@cg cg_chizutsutsu_kobore_shashin kb` のように**ファイル名stem（＝台帳ID）**で書く（bgと同じ形式。番号スロットは2026-09-12(3)に廃止） |
 | `@chr a=03,b=05` / `@chr -a` / `@chr clear` | 立ち絵スロット。数字は差分番号（`chr_<slug>_03_*` に対応） |
 | `@bgm <bgmNN> [fade=2.4]` / `@bgm off` | BGM（手続き生成のWebAudio） |
 | `@se <seNN>` | 効果音（同上） |

@@ -7,6 +7,7 @@
 - 脚本上の表示箇所: `data/script/*.txt`
 - 生成後の配置先: `assets/cg/`
 - 仕様: **1600×900 / 16:9 / PNGまたはJPEG / 全面不透明**
+- 2026-09-12(3): 本編CGの番号スロット（`cg02` 等）は廃止。bgと同じ「ID＝ファイル名」の実名（例: `cg_chizutsutsu_kobore_shashin`）に改名済み。
 
 2026-09-12時点で降板した旧CG（`cg01`、`cg03`〜`cg06`、`cg08`、`cg10`、`cg11`、`cg14`〜`cg18`、`cg21`、`cg24`、`cg25`、`cg32`、`cg36`〜`cg38`）は含めない。UI画像・立ち絵・背景の生成プロンプトも本書の対象外。
 
@@ -51,7 +52,7 @@ A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustratio
 photorealistic, 3D render, chibi, super-deformed, childish proportions, manga panel borders, comic speech bubbles, UI, game interface, subtitles, captions, logo, watermark, frame, border, random Japanese text, garbled lettering, unreadable text, text artifacts, extra characters, duplicate person, cloned face, wrong age, wrong school uniform, wrong tie color, inconsistent character design, extra arms, extra legs, extra fingers, missing fingers, malformed hands, fused hands, broken perspective, cropped head, cut-off hands, out of frame, awkward pose, plastic skin, harsh HDR, neon colors, excessive bloom, excessive lens flare, oversaturated colors, gore, violence, weapon, sexualized pose, fanservice
 ```
 
-> **`cg22`だけの注意**: 地図内の正確な日本語は生成後に組版する。生成時は、文字を入れる場所がわかる整ったキャプション枠と記号的な図形を作り、文字化けした文章は出さない。
+> **`cg_omoide_chikeizu_kansei`だけの注意**: 地図内の正確な日本語は生成後に組版する。生成時は、文字を入れる場所がわかる整ったキャプション枠と記号的な図形を作り、文字化けした文章は出さない。
 
 ---
 
@@ -59,24 +60,24 @@ photorealistic, 3D render, chibi, super-deformed, childish proportions, manga pa
 
 | ID | ファイル | 場面 | 背景 | Ken Burns |
 |---|---|---|---|---|
-| `cg02` | `cg_02_mie-katsuya_chizutsutsu.png` | 地図筒から古写真がこぼれる | BG08 | あり |
-| `cg07` | `cg_07_satou-mie_miteru_to_iu.png` | 砂糖が「見てた」と認める | BG03 | なし |
-| `cg09` | `cg_09_rei-ryoma-mie_daiji.png` | 零が「大事」と言う | BG09 | なし |
-| `cg12` | `cg_12_ryoma_butsudan_ushiro.png` | 両馬、祖父の仏壇の前 | BG19 | あり |
-| `cg13` | `cg_13_ryoma-mie_narabu_zaseki.png` | 祖父の口癖を語る二人 | BG19 | なし |
-| `cg19` | `cg_19_naitou_zutto_miteimasu.png` | 内藤が本質配信を見ていたと告げる | BG18 | あり |
-| `cg20` | `cg_20_all_yoru_no_chizu.png` | 全員で地図を作る夜 | BG04 | あり |
-| `cg22` | `cg_22_omoide_no_chizu_kansei.png` | 「思い出の地形図」完成図 | 作品アート | あり |
-| `cg23` | `cg_23_katsuya_yuugata_madobe.png` | 勝也、夕方の窓際に立つ | BG03 | あり |
-| `cg26` | `cg_26_katsuya_chii_shijima.png` | 五秒を超える沈黙 | BG03 | なし |
-| `cg27` | `cg_27_wakaki-inaba_hajimete_chizu.png` | 若き勝也と稲葉、初めての地形図 | BG21 | あり |
-| `cg28` | `cg_28_wakaki-katsuya_fukumu.png` | 若き勝也、生意気を言った日 | BG22 | あり |
-| `cg29` | `cg_29_katsuya_kuhou_silhouette.png` | 訃報を知った瞬間 | BG22 | なし |
-| `cg30` | `cg_30_katsuya_gojikan_no_houkoku.png` | 勝也、窓の外への報告を語る | BG03 | なし |
-| `cg31` | `cg_31_all-katsuya_sasuragasu.png` | 勝也が生徒たちを見渡す | BG03 | あり |
-| `cg33` | `cg_33_all-katsuya_hitorizutsu.png` | 一人ずつの言葉を受け取る | BG03 | あり |
-| `cg34` | `cg_34_katsuya_hareyaka.png` | 勝也、晴れやかな笑み | BG03 | あり |
-| `cg35` | `cg_35_all_sotsugyou_sakurafubu.png` | 卒業式と桜吹雪 | BG17 | あり |
+| `cg_chizutsutsu_kobore_shashin` | `cg_chizutsutsu_kobore_shashin.png` | 地図筒から古写真がこぼれる | BG08 | あり |
+| `cg_mado_ushiro_miteteta` | `cg_mado_ushiro_miteteta.png` | 砂糖が「見てた」と認める | BG03 | なし |
+| `cg_tsukue_kakomi_daiji` | `cg_tsukue_kakomi_daiji.png` | 零が「大事」と言う | BG09 | なし |
+| `cg_butsudan_seiza_sugata` | `cg_butsudan_seiza_sugata.png` | 両馬、祖父の仏壇の前 | BG19 | あり |
+| `cg_butsudan_narabu_futari` | `cg_butsudan_narabu_futari.png` | 祖父の口癖を語る二人 | BG19 | なし |
+| `cg_naitou_kao_age` | `cg_naitou_kao_age.png` | 内藤が本質配信を見ていたと告げる | BG18 | あり |
+| `cg_yoru_chizu_tsukuri` | `cg_yoru_chizu_tsukuri.png` | 全員で地図を作る夜 | BG04 | あり |
+| `cg_omoide_chikeizu_kansei` | `cg_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図 | 作品アート | あり |
+| `cg_yuugata_madobe_katsuya` | `cg_yuugata_madobe_katsuya.png` | 勝也、夕方の窓際に立つ | BG03 | あり |
+| `cg_nagai_chinmoku` | `cg_nagai_chinmoku.png` | 五秒を超える沈黙 | BG03 | なし |
+| `cg_yama_ue_hajimete_chizu` | `cg_yama_ue_hajimete_chizu.png` | 若き勝也と稲葉、初めての地形図 | BG21 | あり |
+| `cg_wakaki_utsumuki` | `cg_wakaki_utsumuki.png` | 若き勝也、生意気を言った日 | BG22 | あり |
+| `cg_kuhou_kageboushi` | `cg_kuhou_kageboushi.png` | 訃報を知った瞬間 | BG22 | なし |
+| `cg_mado_gawa_no_houkoku` | `cg_mado_gawa_no_houkoku.png` | 勝也、窓の外への報告を語る | BG03 | なし |
+| `cg_seito_wo_miwatasu` | `cg_seito_wo_miwatasu.png` | 勝也が生徒たちを見渡す | BG03 | あり |
+| `cg_hitorizutsu_no_kotoba` | `cg_hitorizutsu_no_kotoba.png` | 一人ずつの言葉を受け取る | BG03 | あり |
+| `cg_hareyaka_na_emi` | `cg_hareyaka_na_emi.png` | 勝也、晴れやかな笑み | BG03 | あり |
+| `cg_sotsugyou_sakurafubuki` | `cg_sotsugyou_sakurafubuki.png` | 卒業式と桜吹雪 | BG17 | あり |
 | `cg_end_true` | `cg_end_true.png` | TRUE END・数年後の教室 | BG24 | あり |
 | `cg_end_mie` | `cg_end_mie.png` | GOOD END・三重、教壇の練習 | BG23 | あり |
 | `cg_end_satou` | `cg_end_satou.png` | GOOD END・砂糖、フィールド | BG23 | あり |
@@ -92,7 +93,7 @@ photorealistic, 3D render, chibi, super-deformed, childish proportions, manga pa
 | `cg_end_comedy` | `cg_end_comedy.png` | COMEDY SECRET END | BG02 | あり |
 | `cg_end_bonus` | `cg_end_bonus.png` | BONUS EXTRA・数年後の同窓会 | BG11 | あり |
 
-> `cg30`、`cg31`、`cg33`、`cg34`は、実行される脚本の `@bg bg_hokutou_kyoshitsu_yuugata` に合わせてBG03（夕方の教室）とした。旧資料の一部にBG13と書かれた箇所があるが、プロンプトは脚本を正とする。
+> `cg_mado_gawa_no_houkoku`、`cg_seito_wo_miwatasu`、`cg_hitorizutsu_no_kotoba`、`cg_hareyaka_na_emi`は、実行される脚本の `@bg bg_hokutou_kyoshitsu_yuugata` に合わせてBG03（夕方の教室）とした。旧資料の一部にBG13と書かれた箇所があるが、プロンプトは脚本を正とする。
 
 ---
 
@@ -100,9 +101,9 @@ photorealistic, 3D render, chibi, super-deformed, childish proportions, manga pa
 
 ## 1. 差出人不明の写真
 
-### `cg02` — 三重／勝也、地図筒から古写真がこぼれる
+### `cg_chizutsutsu_kobore_shashin` — 三重／勝也、地図筒から古写真がこぼれる
 
-- **ファイル**: `assets/cg/cg_02_mie-katsuya_chizutsutsu.png`
+- **ファイル**: `assets/cg/cg_chizutsutsu_kobore_shashin.png`
 - **シーン**: `c004_hokanko` / 第一章
 - **Prompt**:
 
@@ -112,9 +113,9 @@ Inside a narrow map archive at a Japanese high school, shelves packed with dusty
 
 - **演出メモ**: 写真が画面の視線誘導の中心。勝也の驚きは大きくしすぎず、「知っているものを見られた」硬さで表現する。
 
-### `cg07` — 砂糖／三重、「見てた」と認める
+### `cg_mado_ushiro_miteteta` — 砂糖／三重、「見てた」と認める
 
-- **ファイル**: `assets/cg/cg_07_satou-mie_miteru_to_iu.png`
+- **ファイル**: `assets/cg/cg_mado_ushiro_miteteta.png`
 - **シーン**: `a2` / 砂糖編
 - **Prompt**:
 
@@ -126,9 +127,9 @@ A quiet late-afternoon North science classroom, orange sunset entering through t
 
 ## 2. 零編 — 面白いの向こう側
 
-### `cg09` — 零／両馬／三重、「大事だと思うから」
+### `cg_tsukue_kakomi_daiji` — 零／両馬／三重、「大事だと思うから」
 
-- **ファイル**: `assets/cg/cg_09_rei-ryoma-mie_daiji.png`
+- **ファイル**: `assets/cg/cg_tsukue_kakomi_daiji.png`
 - **シーン**: `b2` / 零編
 - **Prompt**:
 
@@ -140,9 +141,9 @@ A warm, quiet Japanese high-school library with tall bookshelves, a wooden table
 
 ## 3. 両馬編 — 祖父と✝本質✝
 
-### `cg12` — 両馬、祖父の仏壇の前
+### `cg_butsudan_seiza_sugata` — 両馬、祖父の仏壇の前
 
-- **ファイル**: `assets/cg/cg_12_ryoma_butsudan_ushiro.png`
+- **ファイル**: `assets/cg/cg_butsudan_seiza_sugata.png`
 - **シーン**: `d1` / 両馬編
 - **Prompt**:
 
@@ -152,9 +153,9 @@ A lived-in Japanese tatami room in the late afternoon, a family altar with an ol
 
 - **演出メモ**: 祖父の遺影は主張させすぎない。線香の煙、座る距離、生活感で「話せる場所」を見せる。
 
-### `cg13` — 両馬／三重、祖父の口癖を語る
+### `cg_butsudan_narabu_futari` — 両馬／三重、祖父の口癖を語る
 
-- **ファイル**: `assets/cg/cg_13_ryoma-mie_narabu_zaseki.png`
+- **ファイル**: `assets/cg/cg_butsudan_narabu_futari.png`
 - **シーン**: `d2` / 両馬編
 - **Prompt**:
 
@@ -166,9 +167,9 @@ The same Japanese family room and altar, now shown from a gentle side angle. Ryo
 
 ## 4. 南棟編 — 境界線の向こう側
 
-### `cg19` — 内藤、ずっと見ていた
+### `cg_naitou_kao_age` — 内藤、ずっと見ていた
 
-- **ファイル**: `assets/cg/cg_19_naitou_zutto_miteimasu.png`
+- **ファイル**: `assets/cg/cg_naitou_kao_age.png`
 - **シーン**: `e3` / 南棟編
 - **Prompt**:
 
@@ -180,9 +181,9 @@ A calm South-building integrated-classroom interior in soft afternoon light, nav
 
 ## 5. 地図を作る夜
 
-### `cg20` — 全員で地図を作る夜
+### `cg_yoru_chizu_tsukuri` — 全員で地図を作る夜
 
-- **ファイル**: `assets/cg/cg_20_all_yoru_no_chizu.png`
+- **ファイル**: `assets/cg/cg_yoru_chizu_tsukuri.png`
 - **シーン**: `g1` / 収束章
 - **Prompt**:
 
@@ -192,9 +193,9 @@ A wide overhead three-quarter view of an empty North science classroom late at n
 
 - **演出メモ**: 10〜12人程度の集合感を出すが、顔を全員正面に並べない。作業の違いが読める俯瞰構図にする。
 
-### `cg22` — 「思い出の地形図」完成図
+### `cg_omoide_chikeizu_kansei` — 「思い出の地形図」完成図
 
-- **ファイル**: `assets/cg/cg_22_omoide_no_chizu_kansei.png`
+- **ファイル**: `assets/cg/cg_omoide_chikeizu_kansei.png`
 - **シーン**: `g3` / 収束章
 - **Prompt**:
 
@@ -206,9 +207,9 @@ A full-frame top-down artwork of a handmade memory topographic map spread across
 
 ## 6. 窓の外に、ずっといた人
 
-### `cg23` — 勝也、夕方の窓際
+### `cg_yuugata_madobe_katsuya` — 勝也、夕方の窓際
 
-- **ファイル**: `assets/cg/cg_23_katsuya_yuugata_madobe.png`
+- **ファイル**: `assets/cg/cg_yuugata_madobe_katsuya.png`
 - **シーン**: `h1` / クライマックス
 - **Prompt**:
 
@@ -218,9 +219,9 @@ An empty North science classroom at deep late afternoon, rich vermilion and ambe
 
 - **演出メモ**: クライマックス直前なので、感情を説明しすぎない。後ろ姿と窓の光で「いつもの五秒」を象徴する。
 
-### `cg26` — 五秒を超える沈黙
+### `cg_nagai_chinmoku` — 五秒を超える沈黙
 
-- **ファイル**: `assets/cg/cg_26_katsuya_chii_shijima.png`
+- **ファイル**: `assets/cg/cg_nagai_chinmoku.png`
 - **シーン**: `h2` / クライマックス
 - **Prompt**:
 
@@ -230,9 +231,9 @@ The same sunset classroom, but now a medium close three-quarter portrait of adul
 
 - **演出メモ**: 15秒の沈黙を「表情の変化」で見せる静止画。泣く直前ではなく、言葉を受け取った顔にする。
 
-### `cg27` — 若き勝也と稲葉、はじめての地形図
+### `cg_yama_ue_hajimete_chizu` — 若き勝也と稲葉、はじめての地形図
 
-- **ファイル**: `assets/cg/cg_27_wakaki-inaba_hajimete_chizu.png`
+- **ファイル**: `assets/cg/cg_yama_ue_hajimete_chizu.png`
 - **シーン**: `h3` / クライマックス回想
 - **Prompt**:
 
@@ -242,9 +243,9 @@ A faded, sun-washed flashback on a mountain ridge, rendered with restrained sepi
 
 - **演出メモ**: 稲葉を「偉人」の肖像にしない。若い勝也が教わる側だったこと、二人の間に地図があることを優先する。
 
-### `cg28` — 若き勝也、生意気を言った日
+### `cg_wakaki_utsumuki` — 若き勝也、生意気を言った日
 
-- **ファイル**: `assets/cg/cg_28_wakaki-katsuya_fukumu.png`
+- **ファイル**: `assets/cg/cg_wakaki_utsumuki.png`
 - **シーン**: `h4` / クライマックス回想
 - **Prompt**:
 
@@ -254,9 +255,9 @@ A muted flashback at a university-era field research base camp, tents, geologica
 
 - **演出メモ**: 台詞を絵に書かない。若き勝也の未熟さと「次はあると思っていた」後悔を、俯いた姿勢と空白で表現する。
 
-### `cg29` — 訃報を知った瞬間
+### `cg_kuhou_kageboushi` — 訃報を知った瞬間
 
-- **ファイル**: `assets/cg/cg_29_katsuya_kuhou_silhouette.png`
+- **ファイル**: `assets/cg/cg_kuhou_kageboushi.png`
 - **シーン**: `h4` / クライマックス回想
 - **Prompt**:
 
@@ -266,9 +267,9 @@ A dark, respectful flashback at a rain-swollen mountain ravine near the old fiel
 
 - **演出メモ**: 訃報の説明図にしない。顔を隠し、沢と暗さだけで「次は来なかった」を受け止める。
 
-### `cg30` — 勝也、窓の外へ報告する
+### `cg_mado_gawa_no_houkoku` — 勝也、窓の外へ報告する
 
-- **ファイル**: `assets/cg/cg_30_katsuya_gojikan_no_houkoku.png`
+- **ファイル**: `assets/cg/cg_mado_gawa_no_houkoku.png`
 - **シーン**: `h5` / クライマックス
 - **Prompt**:
 
@@ -278,9 +279,9 @@ Back in the present, a late-afternoon North classroom with the distant mountains
 
 - **演出メモ**: 「泣かない＝平気ではない」の中間。涙をこぼす表情ではなく、声にしてしまった重さを目元と口元に置く。
 
-### `cg31` — 勝也が生徒たちを見渡す
+### `cg_seito_wo_miwatasu` — 勝也が生徒たちを見渡す
 
-- **ファイル**: `assets/cg/cg_31_all-katsuya_sasuragasu.png`
+- **ファイル**: `assets/cg/cg_seito_wo_miwatasu.png`
 - **シーン**: `h6` / クライマックス
 - **Prompt**:
 
@@ -290,9 +291,9 @@ A wide emotional ensemble shot inside the sunset North science classroom. Adult 
 
 - **演出メモ**: 全員集合でも「全員がカメラを見る」構図にしない。勝也の視線と、生徒側の受け止めを同時に読ませる。
 
-### `cg33` — 一人ずつの言葉を受け取る
+### `cg_hitorizutsu_no_kotoba` — 一人ずつの言葉を受け取る
 
-- **ファイル**: `assets/cg/cg_33_all-katsuya_hitorizutsu.png`
+- **ファイル**: `assets/cg/cg_hitorizutsu_no_kotoba.png`
 - **シーン**: `h7` / クライマックス
 - **Prompt**:
 
@@ -302,9 +303,9 @@ A quiet sunset classroom ensemble during a final reading. Terachi holds a stack 
 
 - **演出メモ**: 「四十人分」を literal に全員描く必要はない。画面内の代表的な反応で、見えない人数まで感じさせる。
 
-### `cg34` — 勝也、晴れやかな笑み
+### `cg_hareyaka_na_emi` — 勝也、晴れやかな笑み
 
-- **ファイル**: `assets/cg/cg_34_katsuya_hareyaka.png`
+- **ファイル**: `assets/cg/cg_hareyaka_na_emi.png`
 - **シーン**: `h8` / クライマックス
 - **Prompt**:
 
@@ -316,9 +317,9 @@ Adult geography teacher Katsuya in the late-afternoon classroom, a luminous medi
 
 ## 7. 卒業式
 
-### `cg35` — 全員集合、卒業式と桜吹雪
+### `cg_sotsugyou_sakurafubuki` — 全員集合、卒業式と桜吹雪
 
-- **ファイル**: `assets/cg/cg_35_all_sotsugyou_sakurafubu.png`
+- **ファイル**: `assets/cg/cg_sotsugyou_sakurafubuki.png`
 - **シーン**: `end0` / 共通エピローグ
 - **Prompt**:
 
@@ -537,7 +538,7 @@ A wide summer reunion at the shore of Suiko Lake several years after graduation.
 - [ ] キャラクターの顔・髪型・制服・ネクタイ色が既存CGと揃っている
 - [ ] UI、吹き出し、字幕、ロゴ、ウォーターマークを描いていない
 - [ ] 重要な顔・手・地図の要素が上下左右の端に寄りすぎていない（Ken Burns対応）
-- [ ] `cg22` の日本語ラベルを後処理で組版した
+- [ ] `cg_omoide_chikeizu_kansei` の日本語ラベルを後処理で組版した
 - [ ] `data/assets.json` の該当行を `"placeholder": false` に変更した
 - [ ] `sw.js` のキャッシュバージョンを更新した
 - [ ] `node tools/vncheck.mjs` を実行した

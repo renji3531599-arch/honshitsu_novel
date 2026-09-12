@@ -149,40 +149,40 @@
 | スロット | 元ファイル | 新ファイル名 | 内容 |
 |---|---|---|---|
 | cg01 | white_130.png | ―（降板・削除済み。再昇格時は `cg_01_mie_kyoshitsu_iriguchi.png` を新規配置） | 三重(単独)　教室の入口で勝也に呼び止められる |
-| cg02 | white_131.png | `cg_02_mie-katsuya_chizutsutsu.png`（未配置なら名前だけ） | 三重／勝也　地図筒から古写真がこぼれ落ちる瞬間 |
+| cg_chizutsutsu_kobore_shashin | white_131.png | `cg_chizutsutsu_kobore_shashin.png`（未配置なら名前だけ） | 三重／勝也　地図筒から古写真がこぼれ落ちる瞬間 |
 | cg03 | white_132.png | ―（降板・削除済み。再昇格時は `cg_03_mie_shashin_teme.png` を新規配置） | 三重(手元アップ)　写真の裏の万年筆の文字を読む |
 | cg04 | white_133.png | ―（降板・削除済み。再昇格時は `cg_04_katsuya_shashin_kaishuu.png` を新規配置） | 勝也(単独)　写真を静かに回収する |
 | cg05 | white_134.png | ―（降板・削除済み。再昇格時は `cg_05_mie-ryoma_rouka_yuuhi.png` を新規配置） | 三重／両馬　夕陽の差し込む誰もいない廊下 |
 | cg06 | white_135.png | ―（降板・削除済み。再昇格時は `cg_06_satou_shamado_sumafo.png` を新規配置） | 砂糖(単独)　三年分の車窓写真をスクロールする手元 |
-| cg07 | white_136.png | `cg_07_satou-mie_mado_ushiro.png`（未配置なら名前だけ） | 砂糖／三重　窓を背にした二人の構図 |
+| cg_mado_ushiro_miteteta | white_136.png | `cg_mado_ushiro_miteteta.png`（未配置なら名前だけ） | 砂糖／三重　窓を背にした二人の構図 |
 | cg08 | white_137.png | ―（降板・削除済み。再昇格時は `cg_08_rei_toshoshitsu_pc.png` を新規配置） | 零(単独)　三年分のデータを整理する横顔 |
-| cg09 | white_138.png | `cg_09_rei-ryoma-mie_tsukue_kakomu.png`（未配置なら名前だけ） | 零／両馬／三重　机を囲み「大事だと思うから」と零が |
+| cg_tsukue_kakomi_daiji | white_138.png | `cg_tsukue_kakomi_daiji.png`（未配置なら名前だけ） | 零／両馬／三重　机を囲み「大事だと思うから」と零が |
 | cg10 | white_139.png | ―（降板・削除済み。再昇格時は `cg_10_terachi_hikidashi_kamitabane.png` を新規配置） | 寺地(単独)　引き出しから三年分の紙束を取り出す |
 | cg11 | white_140.png | ―（降板・削除済み。再昇格時は `cg_11_terachi-ryoma-mie_unazuku.png` を新規配置） | 寺地／両馬／三重　「ありがとうの会にする」と頷き合う |
-| cg12 | white_141.png | `cg_12_ryoma_butsudan_ushiro.png`（未配置なら名前だけ） | 両馬(単独)　祖父の遺影の前で正座する後ろ姿 |
-| cg13 | white_142.png | `cg_13_ryoma-mie_butsudan_narabu.png`（未配置なら名前だけ） | 両馬／三重　仏壇の前で並んで座る |
+| cg_butsudan_seiza_sugata | white_141.png | `cg_butsudan_seiza_sugata.png`（未配置なら名前だけ） | 両馬(単独)　祖父の遺影の前で正座する後ろ姿 |
+| cg_butsudan_narabu_futari | white_142.png | `cg_butsudan_narabu_futari.png`（未配置なら名前だけ） | 両馬／三重　仏壇の前で並んで座る |
 | cg14 | white_143.png | ―（降板・削除済み。再昇格時は `cg_14_kuraishi_shoko_shinbun.png` を新規配置） | 倉石(単独)　古い学校新聞を読み言葉を失う |
 | cg15 | white_144.png | ―（降板・削除済み。再昇格時は `cg_15_kuraishi-ryoma-mie_houkoku.png` を新規配置） | 倉石／両馬／三重　調査の報告を受ける一同 |
 | cg16 | white_145.png | ―（降板・削除済み。再昇格時は `cg_16_meshino-futami_shokuinshitsu.png` を新規配置） | 召野／二見　職員室、窓越しの光 |
 | cg17 | white_146.png | ―（降板・削除済み。再昇格時は `cg_17_mie-mitsumine_sakura_namiki.png` を新規配置） | 三重／三峰　蕾の桜並木、国境をまたぐ二人 |
 | cg18 | white_147.png | ―（降板・削除済み。再昇格時は `cg_18_mie-minamitou_kyoshitsu.png` を新規配置） | 三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図 |
-| cg19 | white_148.png | `cg_19_naitou_kao_age.png`（未配置なら名前だけ） | 内藤(単独)　「本質配信、ずっと見てます」と顔を上げる |
-| cg20 | white_149.png | `cg_20_zenin_chizu_tukuru.png`（未配置なら名前だけ） | 全員集合　机を寄せ合い地図を作る俯瞰構図 |
+| cg_naitou_kao_age | white_148.png | `cg_naitou_kao_age.png`（未配置なら名前だけ） | 内藤(単独)　「本質配信、ずっと見てます」と顔を上げる |
+| cg_yoru_chizu_tsukuri | white_149.png | `cg_yoru_chizu_tsukuri.png`（未配置なら名前だけ） | 全員集合　机を寄せ合い地図を作る俯瞰構図 |
 | cg21 | white_150.png | ―（降板・削除済み。再昇格時は `cg_21_ryoma_temoto_kakikomu.png` を新規配置） | 両馬(手元アップ)　地図の隅に何かを書き足す |
-| cg22 | white_151.png | `cg_22_omoide_chikeizu_kansei.png`（未配置なら名前だけ） | 「思い出の地形図」完成図　画面いっぱいの作品アートワーク |
-| cg23 | white_152.png | `cg_23_katsuya_ushirosugata_yuugata.png`（未配置なら名前だけ） | 勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る |
+| cg_omoide_chikeizu_kansei | white_151.png | `cg_omoide_chikeizu_kansei.png`（未配置なら名前だけ） | 「思い出の地形図」完成図　画面いっぱいの作品アートワーク |
+| cg_yuugata_madobe_katsuya | white_152.png | `cg_yuugata_madobe_katsuya.png`（未配置なら名前だけ） | 勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る |
 | cg24 | white_153.png | ―（降板・削除済み。再昇格時は `cg_24_katsuya_chizu_watasu_zekkyu.png` を新規配置） | 勝也(正面)　地図を渡され絶句する瞬間 |
 | cg25 | white_154.png | ―（降板・削除済み。再昇格時は `cg_25_mie-katsuya_mediumshot.png` を新規配置） | 三重／勝也　「先生、聞いていいですか」二人の間合い |
-| cg26 | white_155.png | `cg_26_katsuya_nagai_chinmoku.png`（未配置なら名前だけ） | 勝也(単独)　いつもの5秒より長い沈黙 |
-| cg27 | white_156.png | `cg_27_wakaki-inaba_yama_ue.png`（未配置なら名前だけ） | 若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調) |
-| cg28 | white_157.png | `cg_28_wakaki_utsumuku.png`（未配置なら名前だけ） | 若き勝也(回想・単独)　生意気な口を利いた日、俯く |
-| cg29 | white_158.png | `cg_29_katsuya_fuhou_shiruetto.png`（未配置なら名前だけ） | 勝也(単独)　訃報を知った瞬間(シルエットのみ) |
-| cg30 | white_159.png | `cg_30_katsuya_genzai_kyoshitsu.png`（未配置なら名前だけ） | 勝也(単独)　「窓の外を見るたび、報告していた」と語る |
-| cg31 | white_160.png | `cg_31_zenin-katsuya_hiroi_kouzu.png`（未配置なら名前だけ） | 全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図 |
+| cg_nagai_chinmoku | white_155.png | `cg_nagai_chinmoku.png`（未配置なら名前だけ） | 勝也(単独)　いつもの5秒より長い沈黙 |
+| cg_yama_ue_hajimete_chizu | white_156.png | `cg_yama_ue_hajimete_chizu.png`（未配置なら名前だけ） | 若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調) |
+| cg_wakaki_utsumuki | white_157.png | `cg_wakaki_utsumuki.png`（未配置なら名前だけ） | 若き勝也(回想・単独)　生意気な口を利いた日、俯く |
+| cg_kuhou_kageboushi | white_158.png | `cg_kuhou_kageboushi.png`（未配置なら名前だけ） | 勝也(単独)　訃報を知った瞬間(シルエットのみ) |
+| cg_mado_gawa_no_houkoku | white_159.png | `cg_mado_gawa_no_houkoku.png`（未配置なら名前だけ） | 勝也(単独)　「窓の外を見るたび、報告していた」と語る |
+| cg_seito_wo_miwatasu | white_160.png | `cg_seito_wo_miwatasu.png`（未配置なら名前だけ） | 全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図 |
 | cg32 | white_161.png | ―（降板・削除済み。再昇格時は `cg_32_terachi_dokudoku_roudoku.png` を新規配置） | 寺地(単独・朗読)　スマホのライトに照らされて |
-| cg33 | white_162.png | `cg_33_zenin-katsuya_namida_koraeru.png`（未配置なら名前だけ） | 全員／勝也　一人ずつの一言、勝也が涙をこらえる |
-| cg34 | white_163.png | `cg_34_katsuya_hareyaka_emie.png`（未配置なら名前だけ） | 勝也(単独)　晴れやかな笑み(表情⑩解禁カット) |
-| cg35 | white_164.png | `cg_35_zenin_sotsugyoushiki_sakurafubuki.png`（未配置なら名前だけ） | 全員集合　卒業式・桜吹雪 |
+| cg_hitorizutsu_no_kotoba | white_162.png | `cg_hitorizutsu_no_kotoba.png`（未配置なら名前だけ） | 全員／勝也　一人ずつの一言、勝也が涙をこらえる |
+| cg_hareyaka_na_emi | white_163.png | `cg_hareyaka_na_emi.png`（未配置なら名前だけ） | 勝也(単独)　晴れやかな笑み(表情⑩解禁カット) |
+| cg_sotsugyou_sakurafubuki | white_164.png | `cg_sotsugyou_sakurafubuki.png`（未配置なら名前だけ） | 全員集合　卒業式・桜吹雪 |
 | cg36 | white_165.png | ―（降板・削除済み。再昇格時は `cg_36_katsuya_suunengo_kyoshitsu.png` を新規配置） | 勝也(単独)　数年後の教室、新しい1年生に同じ地図を |
 | cg37 | white_166.png | ―（降板・削除済み。再昇格時は `cg_37_mie-mitsumine_mankai_sakura.png` を新規配置） | 三重／三峰　満開の桜(南棟Flag高で挿入) |
 | cg38 | white_167.png | ―（降板・削除済み。再昇格時は `cg_38_ryoma_hakamairi.png` を新規配置） | 両馬(単独)　墓参り(両馬編で使用) |

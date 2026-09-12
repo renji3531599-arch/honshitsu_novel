@@ -422,7 +422,7 @@ try {
 /* 13) CG 拡大表示とリサイズ */
 mark('13: CG 拡大表示とリサイズ */');
 try {
-  const a = vn.assets.byId['cg22'] || vn.assets.list.find(x => x.cat === 'cg');
+  const a = vn.assets.byId['cg_omoide_chikeizu_kansei'] || vn.assets.list.find(x => x.cat === 'cg');
   shell.showArt(a, true);
   await tick();
   shell.close();

@@ -202,6 +202,10 @@ CHR = [
 ]
 
 # ---------------------------------------------------------- CG 名場面 (38) ---
+# ※ 2026-09-12(3): 本編で現役の18枚はその後、番号スロットを廃止して
+#    bgと同じ「ID＝ファイル名」の実名（例: cg_02_mie-katsuya_chizutsutsu → cg_chizutsutsu_kobore_shashin）
+#    に改名済み。現行の名前は data/assets.json（正本）と docs/CG_GUIDE.md を参照のこと。
+#    下表の旧名は white_NNN との対応の記録としてそのまま残している。
 CG_MAIN = [
     ("cg01", "cg_01_mie_kyoushitsu_yobidome", "三重（単独）／BG01・朝。入口で勝也に呼び止められる横顔。"),
     ("cg02", "cg_02_mie-katsuya_chizutsutsu", "三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。"),

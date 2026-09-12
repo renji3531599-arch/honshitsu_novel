@@ -55,7 +55,7 @@
 @jump e3
 
 #scene e3 | 決意
-@cg cg19 kb
+@cg cg_naitou_kao_age kb
 @chr naitou=05
 内藤：意味は、わからないままでいいと思ってます。わからないまま、ちゃんと届いてるものってあるので。
 三重：……お前、いいこと言うな。

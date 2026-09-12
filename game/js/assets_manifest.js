@@ -837,93 +837,93 @@ window.ASSET_MANIFEST = {
     }
   },
   "cg": {
-    "cg02": {
-      "file": "cg_02_mie-katsuya_chizutsutsu.png",
+    "cg_chizutsutsu_kobore_shashin": {
+      "file": "cg_chizutsutsu_kobore_shashin.png",
       "desc": "三重／勝也　地図筒から古写真がこぼれ落ちる瞬間",
       "slot": 131
     },
-    "cg07": {
-      "file": "cg_07_satou-mie_mado_ushiro.png",
+    "cg_mado_ushiro_miteteta": {
+      "file": "cg_mado_ushiro_miteteta.png",
       "desc": "砂糖／三重　窓を背にした二人の構図",
       "slot": 136
     },
-    "cg09": {
-      "file": "cg_09_rei-ryoma-mie_tsukue_kakomu.png",
+    "cg_tsukue_kakomi_daiji": {
+      "file": "cg_tsukue_kakomi_daiji.png",
       "desc": "零／両馬／三重　机を囲み「大事だと思うから」と零が",
       "slot": 138
     },
-    "cg12": {
-      "file": "cg_12_ryoma_butsudan_ushiro.png",
+    "cg_butsudan_seiza_sugata": {
+      "file": "cg_butsudan_seiza_sugata.png",
       "desc": "両馬(単独)　祖父の遺影の前で正座する後ろ姿",
       "slot": 141
     },
-    "cg13": {
-      "file": "cg_13_ryoma-mie_butsudan_narabu.png",
+    "cg_butsudan_narabu_futari": {
+      "file": "cg_butsudan_narabu_futari.png",
       "desc": "両馬／三重　仏壇の前で並んで座る",
       "slot": 142
     },
-    "cg19": {
-      "file": "cg_19_naitou_kao_age.png",
+    "cg_naitou_kao_age": {
+      "file": "cg_naitou_kao_age.png",
       "desc": "内藤(単独)　「本質配信、ずっと見てます」と顔を上げる",
       "slot": 148
     },
-    "cg20": {
-      "file": "cg_20_zenin_chizu_tukuru.png",
+    "cg_yoru_chizu_tsukuri": {
+      "file": "cg_yoru_chizu_tsukuri.png",
       "desc": "全員集合　机を寄せ合い地図を作る俯瞰構図",
       "slot": 149
     },
-    "cg22": {
-      "file": "cg_22_omoide_chikeizu_kansei.png",
+    "cg_omoide_chikeizu_kansei": {
+      "file": "cg_omoide_chikeizu_kansei.png",
       "desc": "「思い出の地形図」完成図　画面いっぱいの作品アートワーク",
       "slot": 151
     },
-    "cg23": {
-      "file": "cg_23_katsuya_ushirosugata_yuugata.png",
+    "cg_yuugata_madobe_katsuya": {
+      "file": "cg_yuugata_madobe_katsuya.png",
       "desc": "勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る",
       "slot": 152
     },
-    "cg26": {
-      "file": "cg_26_katsuya_nagai_chinmoku.png",
+    "cg_nagai_chinmoku": {
+      "file": "cg_nagai_chinmoku.png",
       "desc": "勝也(単独)　いつもの5秒より長い沈黙",
       "slot": 155
     },
-    "cg27": {
-      "file": "cg_27_wakaki-inaba_yama_ue.png",
+    "cg_yama_ue_hajimete_chizu": {
+      "file": "cg_yama_ue_hajimete_chizu.png",
       "desc": "若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調)",
       "slot": 156
     },
-    "cg28": {
-      "file": "cg_28_wakaki_utsumuku.png",
+    "cg_wakaki_utsumuki": {
+      "file": "cg_wakaki_utsumuki.png",
       "desc": "若き勝也(回想・単独)　生意気な口を利いた日、俯く",
       "slot": 157
     },
-    "cg29": {
-      "file": "cg_29_katsuya_fuhou_shiruetto.png",
+    "cg_kuhou_kageboushi": {
+      "file": "cg_kuhou_kageboushi.png",
       "desc": "勝也(単独)　訃報を知った瞬間(シルエットのみ)",
       "slot": 158
     },
-    "cg30": {
-      "file": "cg_30_katsuya_genzai_kyoshitsu.png",
+    "cg_mado_gawa_no_houkoku": {
+      "file": "cg_mado_gawa_no_houkoku.png",
       "desc": "勝也(単独)　「窓の外を見るたび、報告していた」と語る",
       "slot": 159
     },
-    "cg31": {
-      "file": "cg_31_zenin-katsuya_hiroi_kouzu.png",
+    "cg_seito_wo_miwatasu": {
+      "file": "cg_seito_wo_miwatasu.png",
       "desc": "全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図",
       "slot": 160
     },
-    "cg33": {
-      "file": "cg_33_zenin-katsuya_namida_koraeru.png",
+    "cg_hitorizutsu_no_kotoba": {
+      "file": "cg_hitorizutsu_no_kotoba.png",
       "desc": "全員／勝也　一人ずつの一言、勝也が涙をこらえる",
       "slot": 162
     },
-    "cg34": {
-      "file": "cg_34_katsuya_hareyaka_emie.png",
+    "cg_hareyaka_na_emi": {
+      "file": "cg_hareyaka_na_emi.png",
       "desc": "勝也(単独)　晴れやかな笑み(表情⑩解禁カット)",
       "slot": 163
     },
-    "cg35": {
-      "file": "cg_35_zenin_sotsugyoushiki_sakurafubuki.png",
+    "cg_sotsugyou_sakurafubuki": {
+      "file": "cg_sotsugyou_sakurafubuki.png",
       "desc": "全員集合　卒業式・桜吹雪",
       "slot": 164
     }

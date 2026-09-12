@@ -86,7 +86,7 @@
   - 砂糖編 ― 窓の外の続き / シーン `a1`「放課後、教室に残る砂糖」 ― `20_route_satou_rei.txt:10`
   - 砂糖編 ― 窓の外の続き / シーン `a1_hara`「気を遣った方」 ― `20_route_satou_rei.txt:39`
   - …ほか 11 箇所
-- **この背景まわりのCG**: `cg07` / `cg23` / `cg26` / `cg30` / `cg31` / `cg33` / `cg34` / `cg_end_normal` / `cg_end_bittersweet`
+- **この背景まわりのCG**: `cg_mado_ushiro_miteteta` / `cg_yuugata_madobe_katsuya` / `cg_nagai_chinmoku` / `cg_mado_gawa_no_houkoku` / `cg_seito_wo_miwatasu` / `cg_hitorizutsu_no_kotoba` / `cg_hareyaka_na_emi` / `cg_end_normal` / `cg_end_bittersweet`
 
 ### `BG04` ― 北棟三年B組教室・夜（サプライズ準備）
 
@@ -102,7 +102,7 @@
   - 地図を作る夜 / シーン `g2_suu`「三日の重み」 ― `50_converge.txt:74`
   - 地図を作る夜 / シーン `g2_eb`「当日の設計」 ― `50_converge.txt:88`
   - …ほか 3 箇所
-- **この背景まわりのCG**: `cg20` / `cg22` / `cg_end_terachi`
+- **この背景まわりのCG**: `cg_yoru_chizu_tsukuri` / `cg_omoide_chikeizu_kansei` / `cg_end_terachi`
 
 ### `BG05` ― 北棟廊下
 
@@ -142,7 +142,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
   - 差出人不明の写真 / シーン `c004_hokanko`「地図保管庫」 ― `10_chapter1.txt:10`
-- **この背景まわりのCG**: `cg02`
+- **この背景まわりのCG**: `cg_chizutsutsu_kobore_shashin`
 
 ### `BG09` ― 図書室
 
@@ -153,7 +153,7 @@
 - **使用回数**: 本編 2 箇所
   - 零編 ― 面白いの向こう側 / シーン `b2`「零の中の変化」 ― `20_route_satou_rei.txt:158`
   - 地面は、忘れない。 / シーン `end_good_rei`「GOOD END 零「面白いを仕事にする」」 ― `70_endings.txt:126`
-- **この背景まわりのCG**: `cg09` / `cg_end_rei`
+- **この背景まわりのCG**: `cg_tsukue_kakomi_daiji` / `cg_end_rei`
 
 ### `BG10` ― 図書室奥の書庫（埃っぽい）
 
@@ -234,7 +234,7 @@
 - **使用回数**: 本編 2 箇所
   - 三度目の春、まだ来ない / シーン `prologue_001`「タイトル ― 桜、まだ蕾」 ― `00_prologue.txt:10`
   - 地面は、忘れない。 / シーン `end0`「卒業式（共通）」 ― `70_endings.txt:10`
-- **この背景まわりのCG**: `cg35`
+- **この背景まわりのCG**: `cg_sotsugyou_sakurafubuki`
 - **エンジン側の参照**: `js/shell.js:56`
 
 ### `BG18` ― 南棟三年教室
@@ -247,7 +247,7 @@
   - 南棟編 ― 境界線の向こう側 / シーン `e2`「南棟三年教室」 ― `40_route_minamitou_meshino.txt:28`
   - 南棟編 ― 境界線の向こう側 / シーン `e2_jikashi`「茶化した場合」 ― `40_route_minamitou_meshino.txt:44`
   - 地面は、忘れない。 / シーン `end_good_meshino`「GOOD END 召野「言葉を届ける」」 ― `70_endings.txt:190`
-- **この背景まわりのCG**: `cg19` / `cg_end_meshino`
+- **この背景まわりのCG**: `cg_naitou_kao_age` / `cg_end_meshino`
 
 ### `BG19` ― 両馬の家・祖父の遺影がある部屋
 
@@ -258,7 +258,7 @@
 - **使用回数**: 本編 2 箇所
   - 両馬編 ― 祖父と✝本質✝ / シーン `d1`「両馬の家、夕方」 ― `30_route_terachi_ryoma.txt:82`
   - 地面は、忘れない。 / シーン `end_good_ryoma`「GOOD END 両馬「✝本質✝、その後」」 ― `70_endings.txt:154`
-- **この背景まわりのCG**: `cg12` / `cg13` / `cg_end_ryoma`
+- **この背景まわりのCG**: `cg_butsudan_seiza_sugata` / `cg_butsudan_narabu_futari` / `cg_end_ryoma`
 
 ### `BG20` ― 回想・ハワイの溶岩台地
 
@@ -277,7 +277,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
   - 窓の外に、ずっといた人 / シーン `h3`「回想：はじめての地形図」 ― `60_climax.txt:60`
-- **この背景まわりのCG**: `cg27`
+- **この背景まわりのCG**: `cg_yama_ue_hajimete_chizu`
 
 ### `BG22` ― 回想・大学時代の野外調査ベースキャンプ
 
@@ -287,7 +287,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
   - 窓の外に、ずっといた人 / シーン `h4`「回想：最後の日」 ― `60_climax.txt:76`
-- **この背景まわりのCG**: `cg28` / `cg29`
+- **この背景まわりのCG**: `cg_wakaki_utsumuki` / `cg_kuhou_kageboushi`
 
 ### `BG23` ― エピローグ・卒業後の春、もぬけの殻の教室
 

@@ -7,10 +7,12 @@
    出力:
      assets/README.md          … 総合（早見・共通仕様・差し替え手順）
      assets/bg/README.md       … 背景 25
-     assets/cg/README.md       … CG 52
+     assets/cg/README.md       … CG 32
      assets/chr/README.md      … 立ち絵 105（キャラごとにまとめる）
      docs/CG_GUIDE.md          … CG 全32枚（名場面18＋ED14）を「物語順」にまとめたガイド
    手編集せず、台帳を直して `node tools/gen_asset_md.mjs` で再生成。
+   ※ 2026-09-12(3): 本編CGの番号スロット（cg02等）は廃止。bgと同じ「ID＝ファイル名
+     （拡張子なし）」の実名に統一（例: cg_chizutsutsu_kobore_shashin）。
    ========================================================================== */
 import fs from 'fs';
 import path from 'path';
@@ -407,8 +409,8 @@ ${quickTable(order, (a) => {
 
 | 書き方 | 結果 |
 |---|---|
-| \`@cg cg07\` | 0.42秒で一度下げてから 0.75秒でフェードイン（\`.lay-cg.dip\`）。同一idの再指定は何もしない |
-| \`@cg cg07 kb\` | 同上＋ Ken Burns 26秒（1.02→1.12） |
+| \`@cg cg_mado_ushiro_miteteta\` | 0.42秒で一度下げてから 0.75秒でフェードイン（\`.lay-cg.dip\`）。同一idの再指定は何もしない |
+| \`@cg cg_mado_ushiro_miteteta kb\` | 同上＋ Ken Burns 26秒（1.02→1.12） |
 | \`@cg off\` | 0.75秒で下げて立ち絵を返す（\`stage-mode=cg\` を外す） |
 | 背景切り替え | \`@bg\` は 2枚スラブのクロスディゾルブ（既定1.15秒・CONFIGで変更可） |
 `;
