@@ -730,7 +730,7 @@ export class Shell {
       const s = el('div', 'sect');
       s.appendChild(el('h3', null, `回収 ${this.cgSeen(m)} / ${list.length} 枚`));
       s.appendChild(grid);
-      s.appendChild(el('p', 'hint', '回収したCGはクリックで拡大鑑賞できます（等倍／1.6×／2.4×）。cg02（写真がこぼれる瞬間）と cg22（完成した地形図）は、とくに拡大向きの一枚です。'));
+      s.appendChild(el('p', 'hint', '回収したCGはクリックで拡大鑑賞できます（等倍／1.6×／2.4×）。cg_chizutsutsu_kobore_shashin（写真がこぼれる瞬間）と cg_omoide_chikeizu_kansei（完成した地形図）は、とくに拡大向きの一枚です。'));
       body.appendChild(s);
     } else if (tab === 'chr') {
       const sect = el('div', 'sect');

@@ -1295,9 +1295,9 @@
    "placeholder": true
   },
   {
-   "id": "cg02",
+   "id": "cg_chizutsutsu_kobore_shashin",
    "cat": "cg",
-   "file": "assets/cg/cg_02_mie-katsuya_chizutsutsu.png",
+   "file": "assets/cg/cg_chizutsutsu_kobore_shashin.png",
    "label": "三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。",
    "desc": "三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。",
    "meta": "scene",
@@ -1305,9 +1305,9 @@
    "placeholder": true
   },
   {
-   "id": "cg07",
+   "id": "cg_mado_ushiro_miteteta",
    "cat": "cg",
-   "file": "assets/cg/cg_07_satou-mie_miteru_to_iu.png",
+   "file": "assets/cg/cg_mado_ushiro_miteteta.png",
    "label": "砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。",
    "desc": "砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。",
    "meta": "scene",
@@ -1315,9 +1315,9 @@
    "placeholder": true
   },
   {
-   "id": "cg09",
+   "id": "cg_tsukue_kakomi_daiji",
    "cat": "cg",
-   "file": "assets/cg/cg_09_rei-ryoma-mie_daiji.png",
+   "file": "assets/cg/cg_tsukue_kakomi_daiji.png",
    "label": "零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。",
    "desc": "零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。",
    "meta": "scene",
@@ -1325,9 +1325,9 @@
    "placeholder": true
   },
   {
-   "id": "cg12",
+   "id": "cg_butsudan_seiza_sugata",
    "cat": "cg",
-   "file": "assets/cg/cg_12_ryoma_butsudan_ushiro.png",
+   "file": "assets/cg/cg_butsudan_seiza_sugata.png",
    "label": "両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。",
    "desc": "両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。",
    "meta": "scene",
@@ -1335,9 +1335,9 @@
    "placeholder": true
   },
   {
-   "id": "cg13",
+   "id": "cg_butsudan_narabu_futari",
    "cat": "cg",
-   "file": "assets/cg/cg_13_ryoma-mie_narabu_zaseki.png",
+   "file": "assets/cg/cg_butsudan_narabu_futari.png",
    "label": "両馬／三重／BG19。祖父の口癖を話す生活感のある並席。",
    "desc": "両馬／三重／BG19。祖父の口癖を話す生活感のある並席。",
    "meta": "scene",
@@ -1345,9 +1345,9 @@
    "placeholder": true
   },
   {
-   "id": "cg19",
+   "id": "cg_naitou_kao_age",
    "cat": "cg",
-   "file": "assets/cg/cg_19_naitou_zutto_miteimasu.png",
+   "file": "assets/cg/cg_naitou_kao_age.png",
    "label": "内藤（単独）／BG18。伏し目から顔を上げる一瞬。",
    "desc": "内藤（単独）／BG18。伏し目から顔を上げる一瞬。",
    "meta": "scene",
@@ -1355,9 +1355,9 @@
    "placeholder": true
   },
   {
-   "id": "cg20",
+   "id": "cg_yoru_chizu_tsukuri",
    "cat": "cg",
-   "file": "assets/cg/cg_20_all_yoru_no_chizu.png",
+   "file": "assets/cg/cg_yoru_chizu_tsukuri.png",
    "label": "全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。",
    "desc": "全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。",
    "meta": "scene",
@@ -1365,9 +1365,9 @@
    "placeholder": true
   },
   {
-   "id": "cg22",
+   "id": "cg_omoide_chikeizu_kansei",
    "cat": "cg",
-   "file": "assets/cg/cg_22_omoide_no_chizu_kansei.png",
+   "file": "assets/cg/cg_omoide_chikeizu_kansei.png",
    "label": "「思い出の地形図」完成図。画面いっぱいの作品アート。",
    "desc": "「思い出の地形図」完成図。画面いっぱいの作品アート。",
    "meta": "scene",
@@ -1375,9 +1375,9 @@
    "placeholder": true
   },
   {
-   "id": "cg23",
+   "id": "cg_yuugata_madobe_katsuya",
    "cat": "cg",
-   "file": "assets/cg/cg_23_katsuya_yuugata_madobe.png",
+   "file": "assets/cg/cg_yuugata_madobe_katsuya.png",
    "label": "勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。",
    "desc": "勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。",
    "meta": "scene",
@@ -1385,9 +1385,9 @@
    "placeholder": true
   },
   {
-   "id": "cg26",
+   "id": "cg_nagai_chinmoku",
    "cat": "cg",
-   "file": "assets/cg/cg_26_katsuya_chii_shijima.png",
+   "file": "assets/cg/cg_nagai_chinmoku.png",
    "label": "勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。",
    "desc": "勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。",
    "meta": "scene",
@@ -1395,9 +1395,9 @@
    "placeholder": true
   },
   {
-   "id": "cg27",
+   "id": "cg_yama_ue_hajimete_chizu",
    "cat": "cg",
-   "file": "assets/cg/cg_27_wakaki-inaba_hajimete_chizu.png",
+   "file": "assets/cg/cg_yama_ue_hajimete_chizu.png",
    "label": "若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。",
    "desc": "若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。",
    "meta": "scene",
@@ -1405,9 +1405,9 @@
    "placeholder": true
   },
   {
-   "id": "cg28",
+   "id": "cg_wakaki_utsumuki",
    "cat": "cg",
-   "file": "assets/cg/cg_28_wakaki-katsuya_fukumu.png",
+   "file": "assets/cg/cg_wakaki_utsumuki.png",
    "label": "若き勝也（回想・単独）／BG22。生意気を言った日、俯く。",
    "desc": "若き勝也（回想・単独）／BG22。生意気を言った日、俯く。",
    "meta": "scene",
@@ -1415,9 +1415,9 @@
    "placeholder": true
   },
   {
-   "id": "cg29",
+   "id": "cg_kuhou_kageboushi",
    "cat": "cg",
-   "file": "assets/cg/cg_29_katsuya_kuhou_silhouette.png",
+   "file": "assets/cg/cg_kuhou_kageboushi.png",
    "label": "勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。",
    "desc": "勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。",
    "meta": "scene",
@@ -1425,9 +1425,9 @@
    "placeholder": true
   },
   {
-   "id": "cg30",
+   "id": "cg_mado_gawa_no_houkoku",
    "cat": "cg",
-   "file": "assets/cg/cg_30_katsuya_gojikan_no_houkoku.png",
+   "file": "assets/cg/cg_mado_gawa_no_houkoku.png",
    "label": "勝也（単独）／BG13。「窓の外を見るたび、報告していた」。",
    "desc": "勝也（単独）／BG13。「窓の外を見るたび、報告していた」。",
    "meta": "scene",
@@ -1435,9 +1435,9 @@
    "placeholder": true
   },
   {
-   "id": "cg31",
+   "id": "cg_seito_wo_miwatasu",
    "cat": "cg",
-   "file": "assets/cg/cg_31_all-katsuya_sasuragasu.png",
+   "file": "assets/cg/cg_seito_wo_miwatasu.png",
    "label": "全員集合／勝也／BG13。生徒たちを見渡す広い構図。",
    "desc": "全員集合／勝也／BG13。生徒たちを見渡す広い構図。",
    "meta": "scene",
@@ -1445,9 +1445,9 @@
    "placeholder": true
   },
   {
-   "id": "cg33",
+   "id": "cg_hitorizutsu_no_kotoba",
    "cat": "cg",
-   "file": "assets/cg/cg_33_all-katsuya_hitorizutsu.png",
+   "file": "assets/cg/cg_hitorizutsu_no_kotoba.png",
    "label": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
    "desc": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
    "meta": "scene",
@@ -1455,9 +1455,9 @@
    "placeholder": true
   },
   {
-   "id": "cg34",
+   "id": "cg_hareyaka_na_emi",
    "cat": "cg",
-   "file": "assets/cg/cg_34_katsuya_hareyaka.png",
+   "file": "assets/cg/cg_hareyaka_na_emi.png",
    "label": "勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。",
    "desc": "勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。",
    "meta": "scene",
@@ -1465,9 +1465,9 @@
    "placeholder": true
   },
   {
-   "id": "cg35",
+   "id": "cg_sotsugyou_sakurafubuki",
    "cat": "cg",
-   "file": "assets/cg/cg_35_all_sotsugyou_sakurafubu.png",
+   "file": "assets/cg/cg_sotsugyou_sakurafubuki.png",
    "label": "全員集合／BG17。卒業式、桜吹雪。",
    "desc": "全員集合／BG17。卒業式、桜吹雪。",
    "meta": "scene",

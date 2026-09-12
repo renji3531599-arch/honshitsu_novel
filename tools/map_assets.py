@@ -15,6 +15,9 @@ image1/image2/image3 の white_XXX.png (1〜300) を、シナリオ本編(scenar
 　cg/chr はマニフェストに名前だけ残しており、同名の実素材を置けばゲームに反映される）
 1〜300 を振る。企画書の立ち絵計上113本に対し表の実列挙は105本のため、
 残りは予備スロット spare_XXX とする(企画書§8.6「約90枚分のバッファ」に相当)。
+2026-09-12(3): 現役の本編CG 18枚は番号スロット(cg02等)を廃止し、bgと同じ
+「ID＝ファイル名」の実名(例: cg_chizutsutsu_kobore_shashin)へ改名。版Aと同名に統一。
+降板20枚の旧コードは履歴(white_NNNとの対応)としてそのまま残す。
 """
 import os, re, shutil, json
 
@@ -126,40 +129,40 @@ SPRITES = [
 
 CG = [
     ("cg01", "cg_01_mie_kyoshitsu_iriguchi",       "三重(単独)　教室の入口で勝也に呼び止められる"),
-    ("cg02", "cg_02_mie-katsuya_chizutsutsu",      "三重／勝也　地図筒から古写真がこぼれ落ちる瞬間"),
+    ("cg_chizutsutsu_kobore_shashin", "cg_chizutsutsu_kobore_shashin",      "三重／勝也　地図筒から古写真がこぼれ落ちる瞬間"),
     ("cg03", "cg_03_mie_shashin_teme",             "三重(手元アップ)　写真の裏の万年筆の文字を読む"),
     ("cg04", "cg_04_katsuya_shashin_kaishuu",      "勝也(単独)　写真を静かに回収する"),
     ("cg05", "cg_05_mie-ryoma_rouka_yuuhi",        "三重／両馬　夕陽の差し込む誰もいない廊下"),
     ("cg06", "cg_06_satou_shamado_sumafo",         "砂糖(単独)　三年分の車窓写真をスクロールする手元"),
-    ("cg07", "cg_07_satou-mie_mado_ushiro",        "砂糖／三重　窓を背にした二人の構図"),
+    ("cg_mado_ushiro_miteteta", "cg_mado_ushiro_miteteta",        "砂糖／三重　窓を背にした二人の構図"),
     ("cg08", "cg_08_rei_toshoshitsu_pc",           "零(単独)　三年分のデータを整理する横顔"),
-    ("cg09", "cg_09_rei-ryoma-mie_tsukue_kakomu",  "零／両馬／三重　机を囲み「大事だと思うから」と零が"),
+    ("cg_tsukue_kakomi_daiji", "cg_tsukue_kakomi_daiji",  "零／両馬／三重　机を囲み「大事だと思うから」と零が"),
     ("cg10", "cg_10_terachi_hikidashi_kamitabane", "寺地(単独)　引き出しから三年分の紙束を取り出す"),
     ("cg11", "cg_11_terachi-ryoma-mie_unazuku",    "寺地／両馬／三重　「ありがとうの会にする」と頷き合う"),
-    ("cg12", "cg_12_ryoma_butsudan_ushiro",        "両馬(単独)　祖父の遺影の前で正座する後ろ姿"),
-    ("cg13", "cg_13_ryoma-mie_butsudan_narabu",    "両馬／三重　仏壇の前で並んで座る"),
+    ("cg_butsudan_seiza_sugata", "cg_butsudan_seiza_sugata",        "両馬(単独)　祖父の遺影の前で正座する後ろ姿"),
+    ("cg_butsudan_narabu_futari", "cg_butsudan_narabu_futari",    "両馬／三重　仏壇の前で並んで座る"),
     ("cg14", "cg_14_kuraishi_shoko_shinbun",       "倉石(単独)　古い学校新聞を読み言葉を失う"),
     ("cg15", "cg_15_kuraishi-ryoma-mie_houkoku",   "倉石／両馬／三重　調査の報告を受ける一同"),
     ("cg16", "cg_16_meshino-futami_shokuinshitsu", "召野／二見　職員室、窓越しの光"),
     ("cg17", "cg_17_mie-mitsumine_sakura_namiki",  "三重／三峰　蕾の桜並木、国境をまたぐ二人"),
     ("cg18", "cg_18_mie-minamitou_kyoshitsu",      "三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図"),
-    ("cg19", "cg_19_naitou_kao_age",               "内藤(単独)　「本質配信、ずっと見てます」と顔を上げる"),
-    ("cg20", "cg_20_zenin_chizu_tukuru",           "全員集合　机を寄せ合い地図を作る俯瞰構図"),
+    ("cg_naitou_kao_age", "cg_naitou_kao_age",               "内藤(単独)　「本質配信、ずっと見てます」と顔を上げる"),
+    ("cg_yoru_chizu_tsukuri", "cg_yoru_chizu_tsukuri",           "全員集合　机を寄せ合い地図を作る俯瞰構図"),
     ("cg21", "cg_21_ryoma_temoto_kakikomu",        "両馬(手元アップ)　地図の隅に何かを書き足す"),
-    ("cg22", "cg_22_omoide_chikeizu_kansei",       "「思い出の地形図」完成図　画面いっぱいの作品アートワーク"),
-    ("cg23", "cg_23_katsuya_ushirosugata_yuugata", "勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る"),
+    ("cg_omoide_chikeizu_kansei", "cg_omoide_chikeizu_kansei",       "「思い出の地形図」完成図　画面いっぱいの作品アートワーク"),
+    ("cg_yuugata_madobe_katsuya", "cg_yuugata_madobe_katsuya", "勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る"),
     ("cg24", "cg_24_katsuya_chizu_watasu_zekkyu",  "勝也(正面)　地図を渡され絶句する瞬間"),
     ("cg25", "cg_25_mie-katsuya_mediumshot",       "三重／勝也　「先生、聞いていいですか」二人の間合い"),
-    ("cg26", "cg_26_katsuya_nagai_chinmoku",       "勝也(単独)　いつもの5秒より長い沈黙"),
-    ("cg27", "cg_27_wakaki-inaba_yama_ue",         "若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調)"),
-    ("cg28", "cg_28_wakaki_utsumuku",              "若き勝也(回想・単独)　生意気な口を利いた日、俯く"),
-    ("cg29", "cg_29_katsuya_fuhou_shiruetto",      "勝也(単独)　訃報を知った瞬間(シルエットのみ)"),
-    ("cg30", "cg_30_katsuya_genzai_kyoshitsu",     "勝也(単独)　「窓の外を見るたび、報告していた」と語る"),
-    ("cg31", "cg_31_zenin-katsuya_hiroi_kouzu",    "全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図"),
+    ("cg_nagai_chinmoku", "cg_nagai_chinmoku",       "勝也(単独)　いつもの5秒より長い沈黙"),
+    ("cg_yama_ue_hajimete_chizu", "cg_yama_ue_hajimete_chizu",         "若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調)"),
+    ("cg_wakaki_utsumuki", "cg_wakaki_utsumuki",              "若き勝也(回想・単独)　生意気な口を利いた日、俯く"),
+    ("cg_kuhou_kageboushi", "cg_kuhou_kageboushi",      "勝也(単独)　訃報を知った瞬間(シルエットのみ)"),
+    ("cg_mado_gawa_no_houkoku", "cg_mado_gawa_no_houkoku",     "勝也(単独)　「窓の外を見るたび、報告していた」と語る"),
+    ("cg_seito_wo_miwatasu", "cg_seito_wo_miwatasu",    "全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図"),
     ("cg32", "cg_32_terachi_dokudoku_roudoku",     "寺地(単独・朗読)　スマホのライトに照らされて"),
-    ("cg33", "cg_33_zenin-katsuya_namida_koraeru", "全員／勝也　一人ずつの一言、勝也が涙をこらえる"),
-    ("cg34", "cg_34_katsuya_hareyaka_emie",        "勝也(単独)　晴れやかな笑み(表情⑩解禁カット)"),
-    ("cg35", "cg_35_zenin_sotsugyoushiki_sakurafubuki", "全員集合　卒業式・桜吹雪"),
+    ("cg_hitorizutsu_no_kotoba", "cg_hitorizutsu_no_kotoba", "全員／勝也　一人ずつの一言、勝也が涙をこらえる"),
+    ("cg_hareyaka_na_emi", "cg_hareyaka_na_emi",        "勝也(単独)　晴れやかな笑み(表情⑩解禁カット)"),
+    ("cg_sotsugyou_sakurafubuki", "cg_sotsugyou_sakurafubuki", "全員集合　卒業式・桜吹雪"),
     ("cg36", "cg_36_katsuya_suunengo_kyoshitsu",   "勝也(単独)　数年後の教室、新しい1年生に同じ地図を"),
     ("cg37", "cg_37_mie-mitsumine_mankai_sakura",  "三重／三峰　満開の桜(南棟Flag高で挿入)"),
     ("cg38", "cg_38_ryoma_hakamairi",              "両馬(単独)　墓参り(両馬編で使用)"),

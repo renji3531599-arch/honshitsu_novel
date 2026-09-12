@@ -202,7 +202,7 @@ e3: {
   data: [
     ["chapter", "南棟編", "境界の上を渡る人間"],
     ["bg", "BG18", { tint: "day" }],
-    ["cg", "cg19", { tint: "day", caption: "伏し目がちから、顔を上げる一瞬" }],
+    ["cg", "cg_naitou_kao_age", { tint: "day", caption: "伏し目がちから、顔を上げる一瞬" }],
     ["chr", "naitou", 5, "C"],
     ["say", "naitou", "意味は、わからないままでいいと思ってます。わからないまま、ちゃんと届いてるものってあるので"],
     ["chr", "mie", 3, "L"],

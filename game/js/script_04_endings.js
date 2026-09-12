@@ -16,7 +16,7 @@ end0: {
     ["bg", "BG17", { tint: "morning", zoom: true }],
     ["bgm", "bgm17"],
     ["se", "se_sakura"],
-    ["cg", "cg35", { tint: "morning", caption: "卒業式 ― 二つのネクタイが同じ並木道を通る" }],
+    ["cg", "cg_sotsugyou_sakurafubuki", { tint: "morning", caption: "卒業式 ― 二つのネクタイが同じ並木道を通る" }],
     ["nar", "翌日、卒業式。桜はまだ五分咲きだったが、それで十分だった。北棟と南棟、二つのネクタイが同じ並木道を通る。理数科三年B組の四十人が、最後にもう一度、あの教室に集まった。"],
     ["cgoff"],
     ["chr", "mie", 9, "L"],
