@@ -43,7 +43,7 @@ const sceneIds = Object.keys(SCENES);
 console.log(`scenes: ${sceneIds.length}`);
 console.log(`tips: ${Object.keys(TIPS).length}`);
 console.log(`chars: ${Object.keys(CHARS).length}`);
-console.log(`assets: bg=${Object.keys(MAN.bg).length} chr=${Object.values(MAN.chr).reduce((a, c) => a + c.exprs.length, 0)} cg=${Object.keys(MAN.cg).length}(予備${Object.values(MAN.cg).filter(c=>c.reserve).length}) ed=${Object.keys(MAN.ed_cg).length} spare=${Object.keys(MAN.spare).length}`);
+console.log(`assets: bg=${Object.keys(MAN.bg).length} chr=${Object.values(MAN.chr).reduce((a, c) => a + c.exprs.length, 0)} cg=${Object.keys(MAN.cg).length} ed=${Object.keys(MAN.ed_cg).length}`); // 2026-09-12: 予備(reserve)・spareは廃止（白紙削除・UI撤去済み）
 
 const edges = []; // [from, to]
 let totalCmds = 0, totalText = 0, totalSay = 0;

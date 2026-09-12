@@ -106,7 +106,9 @@ function showCG(id, opts = {}) {
   if (!f) return;
   layer.innerHTML = "";
   const img = document.createElement("div");
-  img.style.cssText = `position:absolute;inset:0;background-image:url('${f}');background-size:cover;background-position:center;`;
+  // background-color:#fff はフォールバック（2026-09-12: 白紙CGプレースホルダを削除したため、
+  // 実ファイルが無いときは白面×色調ティントという従来の見た目をこれで保つ。実画像があれば cover で全面に乗る）
+  img.style.cssText = `position:absolute;inset:0;background-image:url('${f}');background-color:#fff;background-size:cover;background-position:center;`;
   const tint = document.createElement("div");
   tint.className = "bg-tint tint-" + (opts.tint || "day");
   tint.style.position = "absolute";

@@ -1,7 +1,7 @@
 # CHR — 立ち絵（105差分／16キャラ）
 
 `assets/chr/` の立ち絵差分。キャラごとに**どの表情が本編で何回出るか**を1枚ずつ書く。
-現在は白紙プレースホルダで、画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。
+実ファイルは未配置（白紙プレースホルダは2026-09-12に削除）。画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。
 
 > 生成: `node tools/gen_asset_md.mjs`（2026-09-12）／総数 105 ファイル／正本は台帳 `data/assets.json`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
@@ -42,7 +42,7 @@
 
 - **書き方**: `@chr futami=01`〜`@chr futami=05`（差分 5 枚・`@chr futami all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 二見玲子／色 `#b9a2cc`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 5 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
 
 - **① 通常** ― `@chr futami=01` ／ `chr_futami_01_tsuujou.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:88`（職員室前）
@@ -59,7 +59,7 @@
 
 - **書き方**: `@chr inaba=01`〜`@chr inaba=02`（差分 2 枚・`@chr inaba all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 稲葉悌二／色 `#c0a888`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 2 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 2 枚（白紙削除済み）
 
 - **① 古写真の中の柔らかい笑み** ― `@chr inaba=01` ／ `chr_inaba_01_shashin_no_waraui.png`
   本編 **1 回**。初出 `60_climax:66`（回想：はじめての地形図）
@@ -70,7 +70,7 @@
 
 - **書き方**: `@chr izaki=01`〜`@chr izaki=06`（差分 6 枚・`@chr izaki all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 伊崎／色 `#dcbd92`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
 
 - **① 通常** ― `@chr izaki=01` ／ `chr_izaki_01_tsuujou.png`
   本編 **1 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み）
@@ -89,7 +89,7 @@
 
 - **書き方**: `@chr izumi=01`〜`@chr izumi=06`（差分 6 枚・`@chr izumi all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 伊豆見／色 `#e0cba2`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
 
 - **① 通常** ― `@chr izumi=01` ／ `chr_izumi_01_tsuujou.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
@@ -108,7 +108,7 @@
 
 - **書き方**: `@chr katsuya=01`〜`@chr katsuya=10`（差分 10 枚・`@chr katsuya all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 塀勝也／色 `#cbb27c`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 10 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 10 枚（白紙削除済み）
 
 - **① 通常（穏やか）** ― `@chr katsuya=01` ／ `chr_katsuya_01_tsuujou.png`
   本編 **2 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 1 回
@@ -135,7 +135,7 @@
 
 - **書き方**: `@chr kuraishi=01`〜`@chr kuraishi=07`（差分 7 枚・`@chr kuraishi all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 倉石暁／色 `#d6d46e`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 7 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 7 枚（白紙削除済み）
 
 - **① 通常（熱狂）** ― `@chr kuraishi=01` ／ `chr_kuraishi_01_kekkyou.png`
   本編 **4 回**。初出 `00_prologue:81`（二月、北棟三年B組・昼休み） → ほか 3 回
@@ -156,7 +156,7 @@
 
 - **書き方**: `@chr meshino=01`〜`@chr meshino=06`（差分 6 枚・`@chr meshino all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 召野カイト／色 `#e2a8bc`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
 
 - **① 通常** ― `@chr meshino=01` ／ `chr_meshino_01_tsuujou.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:113`（二見の後押し）
@@ -175,7 +175,7 @@
 
 - **書き方**: `@chr mie=01`〜`@chr mie=10`（差分 10 枚・`@chr mie all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 三重県臣／色 `#7fa9d8`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 10 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 10 枚（白紙削除済み）
 
 - **① 通常（冷笑・半目）** ― `@chr mie=01` ／ `chr_mie_01_reishou.png`
   本編 **19 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 18 回
@@ -202,7 +202,7 @@
 
 - **書き方**: `@chr mitsumine=01`〜`@chr mitsumine=06`（差分 6 枚・`@chr mitsumine all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 三峰瑠衣／色 `#e2b79e`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
 
 - **① 通常** ― `@chr mitsumine=01` ／ `chr_mitsumine_01_tsuujou.png`
   本編 **2 回**。初出 `40_route_minamitou_meshino:15`（桜並木、まだ蕾） → ほか 1 回
@@ -221,7 +221,7 @@
 
 - **書き方**: `@chr naitou=01`〜`@chr naitou=06`（差分 6 枚・`@chr naitou all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 内藤蘭／色 `#b6d8c6`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
 
 - **① 通常** ― `@chr naitou=01` ／ `chr_naitou_01_tsuujou.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
@@ -240,7 +240,7 @@
 
 - **書き方**: `@chr rei=01`〜`@chr rei=08`（差分 8 枚・`@chr rei all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 数理零／色 `#d3d9e8`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 8 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
 - **その人が主役のルート**: B「零編」 ― 面白いの向こう側（開始シーン `b1`）
 
 - **① 通常（涼しい顔）** ― `@chr rei=01` ／ `chr_rei_01_suzushii.png`
@@ -264,7 +264,7 @@
 
 - **書き方**: `@chr ryoma=01`〜`@chr ryoma=09`（差分 9 枚・`@chr ryoma all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 両馬二郎／色 `#e2853f`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 9 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 9 枚（白紙削除済み）
 - **その人が主役のルート**: D「両馬編」 ― 祖父と✝本質✝（開始シーン `d1`）
 
 - **① 通常** ― `@chr ryoma=01` ／ `chr_ryoma_01_tsuujou.png`
@@ -290,7 +290,7 @@
 
 - **書き方**: `@chr sakura=01`〜`@chr sakura=06`（差分 6 枚・`@chr sakura all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 櫻優／色 `#a8c8e0`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 6 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
 
 - **① 通常** ― `@chr sakura=01` ／ `chr_sakura_01_tsuujou.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る
@@ -309,7 +309,7 @@
 
 - **書き方**: `@chr satou=01`〜`@chr satou=08`（差分 8 枚・`@chr satou all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 砂糖東洋／色 `#7fd0c8`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 8 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
 - **その人が主役のルート**: A「砂糖編」 ― 窓の外の続き（開始シーン `a1`）
 
 - **① 通常（ゲーム画面凝視）** ― `@chr satou=01` ／ `chr_satou_01_game_shuuchuu.png`
@@ -333,7 +333,7 @@
 
 - **書き方**: `@chr terachi=01`〜`@chr terachi=08`（差分 8 枚・`@chr terachi all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 寺地星／色 `#9ec98f`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 8 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
 - **その人が主役のルート**: C「寺地編」 ― 最後の朗読、まだ早いけど（開始シーン `c1`）
 
 - **① 通常（眠そう・淡々）** ― `@chr terachi=01` ／ `chr_terachi_01_nemusou.png`
@@ -357,7 +357,7 @@
 
 - **書き方**: `@chr wakaki-katsuya=01`〜`@chr wakaki-katsuya=02`（差分 2 枚・`@chr wakaki-katsuya all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 若き日の勝也／色 `#c0a888`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 白紙 2 枚・実画像 0 枚（各 現 400×300・810B）
+- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 2 枚（白紙削除済み）
 
 - **① 笑っている** ― `@chr wakaki-katsuya=01` ／ `chr_wakaki-katsuya_01_waratteiru.png`
   本編で **未使用**（この番号を呼んでいる行がない）。素材は用意済みなので、脚本に1行足せばそのまま出る

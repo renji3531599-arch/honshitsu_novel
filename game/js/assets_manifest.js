@@ -1,5 +1,6 @@
 // 自動生成: tools/map_assets.py によるアセットマニフェスト
-// 実画像 game/assets/img/ 。詳細対応表は ASSET_MAP.md を参照。
+// 実画像は game/assets/img/（2026-09-12時点で背景24枚のみ。他は台帳のみで実ファイル未配置）。
+// 詳細対応表は ASSET_MAP.md を参照。
 window.ASSET_MANIFEST = {
   "bg": {
     "BG01": {
@@ -836,68 +837,20 @@ window.ASSET_MANIFEST = {
     }
   },
   "cg": {
-    "cg01": {
-      "file": "cg_01_mie_kyoshitsu_iriguchi.png",
-      "desc": "三重(単独)　教室の入口で勝也に呼び止められる",
-      "slot": 130,
-      "reserve": true
-    },
     "cg02": {
       "file": "cg_02_mie-katsuya_chizutsutsu.png",
       "desc": "三重／勝也　地図筒から古写真がこぼれ落ちる瞬間",
       "slot": 131
-    },
-    "cg03": {
-      "file": "cg_03_mie_shashin_teme.png",
-      "desc": "三重(手元アップ)　写真の裏の万年筆の文字を読む",
-      "slot": 132,
-      "reserve": true
-    },
-    "cg04": {
-      "file": "cg_04_katsuya_shashin_kaishuu.png",
-      "desc": "勝也(単独)　写真を静かに回収する",
-      "slot": 133,
-      "reserve": true
-    },
-    "cg05": {
-      "file": "cg_05_mie-ryoma_rouka_yuuhi.png",
-      "desc": "三重／両馬　夕陽の差し込む誰もいない廊下",
-      "slot": 134,
-      "reserve": true
-    },
-    "cg06": {
-      "file": "cg_06_satou_shamado_sumafo.png",
-      "desc": "砂糖(単独)　三年分の車窓写真をスクロールする手元",
-      "slot": 135,
-      "reserve": true
     },
     "cg07": {
       "file": "cg_07_satou-mie_mado_ushiro.png",
       "desc": "砂糖／三重　窓を背にした二人の構図",
       "slot": 136
     },
-    "cg08": {
-      "file": "cg_08_rei_toshoshitsu_pc.png",
-      "desc": "零(単独)　三年分のデータを整理する横顔",
-      "slot": 137,
-      "reserve": true
-    },
     "cg09": {
       "file": "cg_09_rei-ryoma-mie_tsukue_kakomu.png",
       "desc": "零／両馬／三重　机を囲み「大事だと思うから」と零が",
       "slot": 138
-    },
-    "cg10": {
-      "file": "cg_10_terachi_hikidashi_kamitabane.png",
-      "desc": "寺地(単独)　引き出しから三年分の紙束を取り出す",
-      "slot": 139,
-      "reserve": true
-    },
-    "cg11": {
-      "file": "cg_11_terachi-ryoma-mie_unazuku.png",
-      "desc": "寺地／両馬／三重　「ありがとうの会にする」と頷き合う",
-      "slot": 140,
-      "reserve": true
     },
     "cg12": {
       "file": "cg_12_ryoma_butsudan_ushiro.png",
@@ -909,36 +862,6 @@ window.ASSET_MANIFEST = {
       "desc": "両馬／三重　仏壇の前で並んで座る",
       "slot": 142
     },
-    "cg14": {
-      "file": "cg_14_kuraishi_shoko_shinbun.png",
-      "desc": "倉石(単独)　古い学校新聞を読み言葉を失う",
-      "slot": 143,
-      "reserve": true
-    },
-    "cg15": {
-      "file": "cg_15_kuraishi-ryoma-mie_houkoku.png",
-      "desc": "倉石／両馬／三重　調査の報告を受ける一同",
-      "slot": 144,
-      "reserve": true
-    },
-    "cg16": {
-      "file": "cg_16_meshino-futami_shokuinshitsu.png",
-      "desc": "召野／二見　職員室、窓越しの光",
-      "slot": 145,
-      "reserve": true
-    },
-    "cg17": {
-      "file": "cg_17_mie-mitsumine_sakura_namiki.png",
-      "desc": "三重／三峰　蕾の桜並木、国境をまたぐ二人",
-      "slot": 146,
-      "reserve": true
-    },
-    "cg18": {
-      "file": "cg_18_mie-minamitou_kyoshitsu.png",
-      "desc": "三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図",
-      "slot": 147,
-      "reserve": true
-    },
     "cg19": {
       "file": "cg_19_naitou_kao_age.png",
       "desc": "内藤(単独)　「本質配信、ずっと見てます」と顔を上げる",
@@ -949,12 +872,6 @@ window.ASSET_MANIFEST = {
       "desc": "全員集合　机を寄せ合い地図を作る俯瞰構図",
       "slot": 149
     },
-    "cg21": {
-      "file": "cg_21_ryoma_temoto_kakikomu.png",
-      "desc": "両馬(手元アップ)　地図の隅に何かを書き足す",
-      "slot": 150,
-      "reserve": true
-    },
     "cg22": {
       "file": "cg_22_omoide_chikeizu_kansei.png",
       "desc": "「思い出の地形図」完成図　画面いっぱいの作品アートワーク",
@@ -964,18 +881,6 @@ window.ASSET_MANIFEST = {
       "file": "cg_23_katsuya_ushirosugata_yuugata.png",
       "desc": "勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る",
       "slot": 152
-    },
-    "cg24": {
-      "file": "cg_24_katsuya_chizu_watasu_zekkyu.png",
-      "desc": "勝也(正面)　地図を渡され絶句する瞬間",
-      "slot": 153,
-      "reserve": true
-    },
-    "cg25": {
-      "file": "cg_25_mie-katsuya_mediumshot.png",
-      "desc": "三重／勝也　「先生、聞いていいですか」二人の間合い",
-      "slot": 154,
-      "reserve": true
     },
     "cg26": {
       "file": "cg_26_katsuya_nagai_chinmoku.png",
@@ -1007,12 +912,6 @@ window.ASSET_MANIFEST = {
       "desc": "全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図",
       "slot": 160
     },
-    "cg32": {
-      "file": "cg_32_terachi_dokudoku_roudoku.png",
-      "desc": "寺地(単独・朗読)　スマホのライトに照らされて",
-      "slot": 161,
-      "reserve": true
-    },
     "cg33": {
       "file": "cg_33_zenin-katsuya_namida_koraeru.png",
       "desc": "全員／勝也　一人ずつの一言、勝也が涙をこらえる",
@@ -1027,24 +926,6 @@ window.ASSET_MANIFEST = {
       "file": "cg_35_zenin_sotsugyoushiki_sakurafubuki.png",
       "desc": "全員集合　卒業式・桜吹雪",
       "slot": 164
-    },
-    "cg36": {
-      "file": "cg_36_katsuya_suunengo_kyoshitsu.png",
-      "desc": "勝也(単独)　数年後の教室、新しい1年生に同じ地図を",
-      "slot": 165,
-      "reserve": true
-    },
-    "cg37": {
-      "file": "cg_37_mie-mitsumine_mankai_sakura.png",
-      "desc": "三重／三峰　満開の桜(南棟Flag高で挿入)",
-      "slot": 166,
-      "reserve": true
-    },
-    "cg38": {
-      "file": "cg_38_ryoma_hakamairi.png",
-      "desc": "両馬(単独)　墓参り(両馬編で使用)",
-      "slot": 167,
-      "reserve": true
     }
   },
   "ed_cg": {
@@ -1117,404 +998,6 @@ window.ASSET_MANIFEST = {
       "file": "cg_end_bonus.png",
       "desc": "BONUS EXTRA　数年後・翠湖のほとりの同窓会(全員＋勝也)",
       "slot": 181
-    }
-  },
-  "spare": {
-    "spare_202": {
-      "file": "spare_202.png",
-      "slot": 202
-    },
-    "spare_203": {
-      "file": "spare_203.png",
-      "slot": 203
-    },
-    "spare_204": {
-      "file": "spare_204.png",
-      "slot": 204
-    },
-    "spare_205": {
-      "file": "spare_205.png",
-      "slot": 205
-    },
-    "spare_206": {
-      "file": "spare_206.png",
-      "slot": 206
-    },
-    "spare_207": {
-      "file": "spare_207.png",
-      "slot": 207
-    },
-    "spare_208": {
-      "file": "spare_208.png",
-      "slot": 208
-    },
-    "spare_209": {
-      "file": "spare_209.png",
-      "slot": 209
-    },
-    "spare_210": {
-      "file": "spare_210.png",
-      "slot": 210
-    },
-    "spare_211": {
-      "file": "spare_211.png",
-      "slot": 211
-    },
-    "spare_212": {
-      "file": "spare_212.png",
-      "slot": 212
-    },
-    "spare_213": {
-      "file": "spare_213.png",
-      "slot": 213
-    },
-    "spare_214": {
-      "file": "spare_214.png",
-      "slot": 214
-    },
-    "spare_215": {
-      "file": "spare_215.png",
-      "slot": 215
-    },
-    "spare_216": {
-      "file": "spare_216.png",
-      "slot": 216
-    },
-    "spare_217": {
-      "file": "spare_217.png",
-      "slot": 217
-    },
-    "spare_218": {
-      "file": "spare_218.png",
-      "slot": 218
-    },
-    "spare_219": {
-      "file": "spare_219.png",
-      "slot": 219
-    },
-    "spare_220": {
-      "file": "spare_220.png",
-      "slot": 220
-    },
-    "spare_221": {
-      "file": "spare_221.png",
-      "slot": 221
-    },
-    "spare_222": {
-      "file": "spare_222.png",
-      "slot": 222
-    },
-    "spare_223": {
-      "file": "spare_223.png",
-      "slot": 223
-    },
-    "spare_224": {
-      "file": "spare_224.png",
-      "slot": 224
-    },
-    "spare_225": {
-      "file": "spare_225.png",
-      "slot": 225
-    },
-    "spare_226": {
-      "file": "spare_226.png",
-      "slot": 226
-    },
-    "spare_227": {
-      "file": "spare_227.png",
-      "slot": 227
-    },
-    "spare_228": {
-      "file": "spare_228.png",
-      "slot": 228
-    },
-    "spare_229": {
-      "file": "spare_229.png",
-      "slot": 229
-    },
-    "spare_230": {
-      "file": "spare_230.png",
-      "slot": 230
-    },
-    "spare_231": {
-      "file": "spare_231.png",
-      "slot": 231
-    },
-    "spare_232": {
-      "file": "spare_232.png",
-      "slot": 232
-    },
-    "spare_233": {
-      "file": "spare_233.png",
-      "slot": 233
-    },
-    "spare_234": {
-      "file": "spare_234.png",
-      "slot": 234
-    },
-    "spare_235": {
-      "file": "spare_235.png",
-      "slot": 235
-    },
-    "spare_236": {
-      "file": "spare_236.png",
-      "slot": 236
-    },
-    "spare_237": {
-      "file": "spare_237.png",
-      "slot": 237
-    },
-    "spare_238": {
-      "file": "spare_238.png",
-      "slot": 238
-    },
-    "spare_239": {
-      "file": "spare_239.png",
-      "slot": 239
-    },
-    "spare_240": {
-      "file": "spare_240.png",
-      "slot": 240
-    },
-    "spare_241": {
-      "file": "spare_241.png",
-      "slot": 241
-    },
-    "spare_242": {
-      "file": "spare_242.png",
-      "slot": 242
-    },
-    "spare_243": {
-      "file": "spare_243.png",
-      "slot": 243
-    },
-    "spare_244": {
-      "file": "spare_244.png",
-      "slot": 244
-    },
-    "spare_245": {
-      "file": "spare_245.png",
-      "slot": 245
-    },
-    "spare_246": {
-      "file": "spare_246.png",
-      "slot": 246
-    },
-    "spare_247": {
-      "file": "spare_247.png",
-      "slot": 247
-    },
-    "spare_248": {
-      "file": "spare_248.png",
-      "slot": 248
-    },
-    "spare_249": {
-      "file": "spare_249.png",
-      "slot": 249
-    },
-    "spare_250": {
-      "file": "spare_250.png",
-      "slot": 250
-    },
-    "spare_251": {
-      "file": "spare_251.png",
-      "slot": 251
-    },
-    "spare_252": {
-      "file": "spare_252.png",
-      "slot": 252
-    },
-    "spare_253": {
-      "file": "spare_253.png",
-      "slot": 253
-    },
-    "spare_254": {
-      "file": "spare_254.png",
-      "slot": 254
-    },
-    "spare_255": {
-      "file": "spare_255.png",
-      "slot": 255
-    },
-    "spare_256": {
-      "file": "spare_256.png",
-      "slot": 256
-    },
-    "spare_257": {
-      "file": "spare_257.png",
-      "slot": 257
-    },
-    "spare_258": {
-      "file": "spare_258.png",
-      "slot": 258
-    },
-    "spare_259": {
-      "file": "spare_259.png",
-      "slot": 259
-    },
-    "spare_260": {
-      "file": "spare_260.png",
-      "slot": 260
-    },
-    "spare_261": {
-      "file": "spare_261.png",
-      "slot": 261
-    },
-    "spare_262": {
-      "file": "spare_262.png",
-      "slot": 262
-    },
-    "spare_263": {
-      "file": "spare_263.png",
-      "slot": 263
-    },
-    "spare_264": {
-      "file": "spare_264.png",
-      "slot": 264
-    },
-    "spare_265": {
-      "file": "spare_265.png",
-      "slot": 265
-    },
-    "spare_266": {
-      "file": "spare_266.png",
-      "slot": 266
-    },
-    "spare_267": {
-      "file": "spare_267.png",
-      "slot": 267
-    },
-    "spare_268": {
-      "file": "spare_268.png",
-      "slot": 268
-    },
-    "spare_269": {
-      "file": "spare_269.png",
-      "slot": 269
-    },
-    "spare_270": {
-      "file": "spare_270.png",
-      "slot": 270
-    },
-    "spare_271": {
-      "file": "spare_271.png",
-      "slot": 271
-    },
-    "spare_272": {
-      "file": "spare_272.png",
-      "slot": 272
-    },
-    "spare_273": {
-      "file": "spare_273.png",
-      "slot": 273
-    },
-    "spare_274": {
-      "file": "spare_274.png",
-      "slot": 274
-    },
-    "spare_275": {
-      "file": "spare_275.png",
-      "slot": 275
-    },
-    "spare_276": {
-      "file": "spare_276.png",
-      "slot": 276
-    },
-    "spare_277": {
-      "file": "spare_277.png",
-      "slot": 277
-    },
-    "spare_278": {
-      "file": "spare_278.png",
-      "slot": 278
-    },
-    "spare_279": {
-      "file": "spare_279.png",
-      "slot": 279
-    },
-    "spare_280": {
-      "file": "spare_280.png",
-      "slot": 280
-    },
-    "spare_281": {
-      "file": "spare_281.png",
-      "slot": 281
-    },
-    "spare_282": {
-      "file": "spare_282.png",
-      "slot": 282
-    },
-    "spare_283": {
-      "file": "spare_283.png",
-      "slot": 283
-    },
-    "spare_284": {
-      "file": "spare_284.png",
-      "slot": 284
-    },
-    "spare_285": {
-      "file": "spare_285.png",
-      "slot": 285
-    },
-    "spare_286": {
-      "file": "spare_286.png",
-      "slot": 286
-    },
-    "spare_287": {
-      "file": "spare_287.png",
-      "slot": 287
-    },
-    "spare_288": {
-      "file": "spare_288.png",
-      "slot": 288
-    },
-    "spare_289": {
-      "file": "spare_289.png",
-      "slot": 289
-    },
-    "spare_290": {
-      "file": "spare_290.png",
-      "slot": 290
-    },
-    "spare_291": {
-      "file": "spare_291.png",
-      "slot": 291
-    },
-    "spare_292": {
-      "file": "spare_292.png",
-      "slot": 292
-    },
-    "spare_293": {
-      "file": "spare_293.png",
-      "slot": 293
-    },
-    "spare_294": {
-      "file": "spare_294.png",
-      "slot": 294
-    },
-    "spare_295": {
-      "file": "spare_295.png",
-      "slot": 295
-    },
-    "spare_296": {
-      "file": "spare_296.png",
-      "slot": 296
-    },
-    "spare_297": {
-      "file": "spare_297.png",
-      "slot": 297
-    },
-    "spare_298": {
-      "file": "spare_298.png",
-      "slot": 298
-    },
-    "spare_299": {
-      "file": "spare_299.png",
-      "slot": 299
-    },
-    "spare_300": {
-      "file": "spare_300.png",
-      "slot": 300
     }
   }
 };

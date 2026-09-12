@@ -4,9 +4,15 @@
 `image1/ image2/ image3/` に置かれていた仮画像 `white_NNN.png`（400×300・白）を
 正式なスロット名へリネーム・配置した対応表です。
 
-- 画像の**中身は仮のまま**です（白い画像）。エンジン側は差し替え前提で、
-  プレースホルダーでも画面が成立するよう背景・立ち絵は CSS/SVG で補完描画します。
-- 実素材に差し替えたら `data/assets.json` の該当行 `placeholder` を `false` にしてください。
+> **2026-09-12 現在の実ファイル**: 背景25枚（`assets/bg/`）だけが実画像として存在します。
+> UI画像20枚は撤去、白紙プレースホルダ（CG 52・立ち絵 105・`_buffer` 99 の計256枚）は
+> **全削除済み**。この表は「どの white_NNN がどのスロット名だったか」の記録として残しています。
+> CG・立ち絵の実素材は、下表の「差し替え先」の名前で新規配置すれば
+> `data/assets.json` の該当行 `placeholder` を `false` にした瞬間から本編に乗ります。
+
+- 白紙実ファイルは2026-09-12に全削除しました。CG・立ち絵は**台帳に名前だけ**の状態で、
+  エンジン側は背景・立ち絵とも CSS/SVG の補完描画で画面を成立させています。
+- 実素材を置いたら `data/assets.json` の該当行 `placeholder` を `false` にしてください。
   それだけでフォールバック描画が消え、PNGがそのまま画面に出ます。
 - **UI画像20枚（ui01〜ui20）は2026-09-12に撤去**しました。ロゴ・端末フレーム・所持品アイコン・選択肢・章カード・HUB・ENDロゴまで、すべてCSS/SVG描画で成立しているためです（詳細 `docs/UI_CG_2026-09-12.md`）。
 - 合成は**既定 `normal`**（2026-09-11 変更）。以前は全面 `multiply`（白＝透明）でしたが、
@@ -19,10 +25,11 @@
 |---|---|---|
 | 背景(BG) | 24 | 24 |
 | 立ち絵差分 | 113 | 105（第5章の表情リスト合計。企画書の計数是差 -8） |
-| 名場面CG | 38 | 38（うち20枚は `reserve` 降板 ―― 2026-09-11に11枚、2026-09-12に9枚。本編使用は18枚） |
+| 名場面CG | 38 | 18（2026-09-11に11枚、2026-09-12に9枚＋旧予備11枚を降板削除。台帳・実ファイルとも現行18枚） |
 | ED専用CG | 14 | 14 |
 | UI／アイテム | 20 | 0（2026-09-12 撤去。CSS/SVG描画で全代替） |
-| 未割当バッファ | 約90 | 99（`assets/_buffer/`） |
+| 立ち絵差分（実ファイル） | 105 | 0（白紙削除済み。台帳にスロットのみ） |
+| 未割当バッファ | 約90 | 0（2026-09-12 に `_buffer` ごと削除） |
 
 ※ 企画書 8.6 は立ち絵差分を113枚・総計209枚としていますが、8.2 の内訳表と
    第5章の表情リストは 105枚 / 201枚になります。表情リスト側を正として 105枚分を確保しました。
@@ -218,102 +225,5 @@
 
 ### 未割当バッファ（表情差分・サブキャラ追加用 / 99枚）
 
-- `assets/_buffer/white_202.png`（元 `image1/white_202.png`）
-- `assets/_buffer/white_203.png`（元 `image2/white_203.png`）
-- `assets/_buffer/white_204.png`（元 `image3/white_204.png`）
-- `assets/_buffer/white_205.png`（元 `image2/white_205.png`）
-- `assets/_buffer/white_206.png`（元 `image2/white_206.png`）
-- `assets/_buffer/white_207.png`（元 `image1/white_207.png`）
-- `assets/_buffer/white_208.png`（元 `image2/white_208.png`）
-- `assets/_buffer/white_209.png`（元 `image2/white_209.png`）
-- `assets/_buffer/white_210.png`（元 `image2/white_210.png`）
-- `assets/_buffer/white_211.png`（元 `image3/white_211.png`）
-- `assets/_buffer/white_212.png`（元 `image2/white_212.png`）
-- `assets/_buffer/white_213.png`（元 `image1/white_213.png`）
-- `assets/_buffer/white_214.png`（元 `image3/white_214.png`）
-- `assets/_buffer/white_215.png`（元 `image3/white_215.png`）
-- `assets/_buffer/white_216.png`（元 `image2/white_216.png`）
-- `assets/_buffer/white_217.png`（元 `image2/white_217.png`）
-- `assets/_buffer/white_218.png`（元 `image2/white_218.png`）
-- `assets/_buffer/white_219.png`（元 `image3/white_219.png`）
-- `assets/_buffer/white_220.png`（元 `image2/white_220.png`）
-- `assets/_buffer/white_221.png`（元 `image2/white_221.png`）
-- `assets/_buffer/white_222.png`（元 `image1/white_222.png`）
-- `assets/_buffer/white_223.png`（元 `image2/white_223.png`）
-- `assets/_buffer/white_224.png`（元 `image2/white_224.png`）
-- `assets/_buffer/white_225.png`（元 `image3/white_225.png`）
-- `assets/_buffer/white_226.png`（元 `image2/white_226.png`）
-- `assets/_buffer/white_227.png`（元 `image2/white_227.png`）
-- `assets/_buffer/white_228.png`（元 `image1/white_228.png`）
-- `assets/_buffer/white_229.png`（元 `image3/white_229.png`）
-- `assets/_buffer/white_230.png`（元 `image2/white_230.png`）
-- `assets/_buffer/white_231.png`（元 `image2/white_231.png`）
-- `assets/_buffer/white_232.png`（元 `image3/white_232.png`）
-- `assets/_buffer/white_233.png`（元 `image1/white_233.png`）
-- `assets/_buffer/white_234.png`（元 `image3/white_234.png`）
-- `assets/_buffer/white_235.png`（元 `image2/white_235.png`）
-- `assets/_buffer/white_236.png`（元 `image1/white_236.png`）
-- `assets/_buffer/white_237.png`（元 `image2/white_237.png`）
-- `assets/_buffer/white_238.png`（元 `image2/white_238.png`）
-- `assets/_buffer/white_239.png`（元 `image2/white_239.png`）
-- `assets/_buffer/white_240.png`（元 `image2/white_240.png`）
-- `assets/_buffer/white_241.png`（元 `image3/white_241.png`）
-- `assets/_buffer/white_242.png`（元 `image2/white_242.png`）
-- `assets/_buffer/white_243.png`（元 `image3/white_243.png`）
-- `assets/_buffer/white_244.png`（元 `image2/white_244.png`）
-- `assets/_buffer/white_245.png`（元 `image3/white_245.png`）
-- `assets/_buffer/white_246.png`（元 `image1/white_246.png`）
-- `assets/_buffer/white_247.png`（元 `image2/white_247.png`）
-- `assets/_buffer/white_248.png`（元 `image1/white_248.png`）
-- `assets/_buffer/white_249.png`（元 `image1/white_249.png`）
-- `assets/_buffer/white_250.png`（元 `image2/white_250.png`）
-- `assets/_buffer/white_251.png`（元 `image1/white_251.png`）
-- `assets/_buffer/white_252.png`（元 `image3/white_252.png`）
-- `assets/_buffer/white_253.png`（元 `image2/white_253.png`）
-- `assets/_buffer/white_254.png`（元 `image1/white_254.png`）
-- `assets/_buffer/white_255.png`（元 `image2/white_255.png`）
-- `assets/_buffer/white_256.png`（元 `image2/white_256.png`）
-- `assets/_buffer/white_257.png`（元 `image1/white_257.png`）
-- `assets/_buffer/white_258.png`（元 `image1/white_258.png`）
-- `assets/_buffer/white_259.png`（元 `image1/white_259.png`）
-- `assets/_buffer/white_260.png`（元 `image3/white_260.png`）
-- `assets/_buffer/white_261.png`（元 `image3/white_261.png`）
-- `assets/_buffer/white_262.png`（元 `image2/white_262.png`）
-- `assets/_buffer/white_263.png`（元 `image1/white_263.png`）
-- `assets/_buffer/white_264.png`（元 `image3/white_264.png`）
-- `assets/_buffer/white_265.png`（元 `image3/white_265.png`）
-- `assets/_buffer/white_266.png`（元 `image3/white_266.png`）
-- `assets/_buffer/white_267.png`（元 `image3/white_267.png`）
-- `assets/_buffer/white_268.png`（元 `image2/white_268.png`）
-- `assets/_buffer/white_269.png`（元 `image3/white_269.png`）
-- `assets/_buffer/white_270.png`（元 `image3/white_270.png`）
-- `assets/_buffer/white_271.png`（元 `image1/white_271.png`）
-- `assets/_buffer/white_272.png`（元 `image2/white_272.png`）
-- `assets/_buffer/white_273.png`（元 `image3/white_273.png`）
-- `assets/_buffer/white_274.png`（元 `image3/white_274.png`）
-- `assets/_buffer/white_275.png`（元 `image1/white_275.png`）
-- `assets/_buffer/white_276.png`（元 `image2/white_276.png`）
-- `assets/_buffer/white_277.png`（元 `image2/white_277.png`）
-- `assets/_buffer/white_278.png`（元 `image2/white_278.png`）
-- `assets/_buffer/white_279.png`（元 `image3/white_279.png`）
-- `assets/_buffer/white_280.png`（元 `image2/white_280.png`）
-- `assets/_buffer/white_281.png`（元 `image2/white_281.png`）
-- `assets/_buffer/white_282.png`（元 `image2/white_282.png`）
-- `assets/_buffer/white_283.png`（元 `image1/white_283.png`）
-- `assets/_buffer/white_284.png`（元 `image1/white_284.png`）
-- `assets/_buffer/white_285.png`（元 `image3/white_285.png`）
-- `assets/_buffer/white_286.png`（元 `image1/white_286.png`）
-- `assets/_buffer/white_287.png`（元 `image3/white_287.png`）
-- `assets/_buffer/white_288.png`（元 `image3/white_288.png`）
-- `assets/_buffer/white_289.png`（元 `image3/white_289.png`）
-- `assets/_buffer/white_290.png`（元 `image3/white_290.png`）
-- `assets/_buffer/white_291.png`（元 `image2/white_291.png`）
-- `assets/_buffer/white_292.png`（元 `image2/white_292.png`）
-- `assets/_buffer/white_293.png`（元 `image1/white_293.png`）
-- `assets/_buffer/white_294.png`（元 `image3/white_294.png`）
-- `assets/_buffer/white_295.png`（元 `image3/white_295.png`）
-- `assets/_buffer/white_296.png`（元 `image1/white_296.png`）
-- `assets/_buffer/white_297.png`（元 `image2/white_297.png`）
-- `assets/_buffer/white_298.png`（元 `image1/white_298.png`）
-- `assets/_buffer/white_299.png`（元 `image3/white_299.png`）
-- `assets/_buffer/white_300.png`（元 `image2/white_300.png`）
+2026-09-12 に `assets/_buffer/` ごと削除しました（`white_202.png` 〜 `white_300.png` の99枚。
+すべて白紙で、エンジンは誰も参照していませんでした）。

@@ -67,7 +67,9 @@ function loadImage(src, timeout = 20000) {
     im.decoding = "async";
     const to = setTimeout(() => resolve(false), timeout);
     im.onload = () => { clearTimeout(to); im.decode ? im.decode().then(() => resolve(true), () => resolve(true)) : resolve(true); };
-    im.onerror = () => { clearTimeout(to); console.warn("[preload] 読込失敗:", src); resolve(false); };
+    // 2026-09-12: 白紙プレースホルダ削除後、cg/chr は実ファイルが無い（台帳に名前だけ）。
+    // 失敗は想定内なので静かにスキップ（まとめ報告は preloadAll で1行だけ出す）。
+    im.onerror = () => { clearTimeout(to); resolve(false); };
     im.src = src;
   });
 }
@@ -77,17 +79,22 @@ async function preloadAll() {
   const total = files.length;
   const txt = document.querySelector("#loading .ld-text");
   let done = 0;
+  let failed = 0;
   const setMsg = () => { if (txt) txt.textContent = `地図を広げています…… ${done}/${total}`; };
   setMsg();
   const queue = files.slice();
   const worker = async () => {
     while (queue.length) {
-      await loadImage(queue.shift());
+      const ok = await loadImage(queue.shift());
+      if (!ok) failed++;
       done++; setMsg();
     }
   };
   await Promise.all(Array.from({ length: Math.min(6, total || 1) }, worker));
-  if (txt) txt.textContent = "準備完了";
+  // 2026-09-12: cg/chr は台帳に名前だけ登録し実ファイルを削除してあるので、
+  // 読込失敗は想定内（背景24枚だけが実画像）。1行にまとめて報告する。
+  if (failed && txt) txt.textContent = `準備完了（背景 ${total - failed}/${total} を先読み。CG・立ち絵は未配置）`;
+  else if (txt) txt.textContent = "準備完了";
 }
 
 /* ローディング解除（全画像の読み込み完了後） */

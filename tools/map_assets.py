@@ -10,7 +10,9 @@ image1/image2/image3 の white_XXX.png (1〜300) を、シナリオ本編(scenar
 
 単一の情報源: 下の ASSET_ORDER。
 スロット番号はシナリオ§8の並び順(背景→立ち絵→イベントCG→ED CG→UI)で
-（UI画像は2026-09-12に撤去。CSS/SVG描画で全代替のためファイル・マニフェストから外した）
+（UI画像は2026-09-12に撤去。CSS/SVG描画で全代替のためファイル・マニフェストから外した。
+　同日、白紙プレースホルダ実ファイル cg/chr/spare 計256枚も削除 ―― 背景24枚だけが実画像。
+　cg/chr はマニフェストに名前だけ残しており、同名の実素材を置けばゲームに反映される）
 1〜300 を振る。企画書の立ち絵計上113本に対し表の実列挙は105本のため、
 残りは予備スロット spare_XXX とする(企画書§8.6「約90枚分のバッファ」に相当)。
 """
@@ -229,11 +231,12 @@ missing = [n for n in range(1, 301) if n not in srcs]
 os.makedirs(IMG_OUT, exist_ok=True)
 
 # ---------------------------------------------------------------- 割り当て
-manifest = {"bg": {}, "chr": {}, "cg": {}, "ed_cg": {}, "spare": {}}
+manifest = {"bg": {}, "chr": {}, "cg": {}, "ed_cg": {}}
 lines = ["# アセット対応表 (ASSET_MAP)", "",
          "シナリオ『まだ地図の途中で　〜✝本質✝特別編〜』§8のアセット一覧に従い、",
          "仮画像 `white_001.png`〜`white_300.png` をリネームして配置した対応表。",
-         "実画像は `game/assets/img/` 以下。同名の実素材を置き換えればそのままゲームに反映される。",
+         "2026-09-12: 白紙実ファイルは全削除。実画像は背景24枚のみ（他は台帳・スロット記録のみ）。",
+         "実素材は対応表の新ファイル名で `game/assets/img/` に新規配置すればゲームに反映される。",
          ""]
 
 lines += ["## 背景 (BG) ― スロット 001〜024", "", "| スロット | 元ファイル | 新ファイル名 | 内容 |", "|---|---|---|---|"]
@@ -272,25 +275,27 @@ for key, jp, exprs in SPRITES:
     chr_manifest[key] = {"name": jp, "exprs": []}
     for num, romaji, label in exprs:
         fname = f"chr_{key}_{num:02d}_{romaji}"
-        n, dst = take(fname)
+        n, dst = take(fname, keep_missing=True)
         chr_manifest[key]["exprs"].append({"no": num, "file": fname + ".png", "label": label, "slot": n})
         lines.append(f"| | white_{n:03d}.png | `{fname}.png` | {jp}・表情{num}({label}) |")
 
 lines += ["", "## 専用イベントCG (名場面)", "", "| スロット | 元ファイル | 新ファイル名 | 内容 |", "|---|---|---|---|"]
 cg_manifest = {}
 for code, fname, desc in CG:
-    n, dst = take(fname, keep_missing=(code in RETIRED_CG))
+    n, dst = take(fname, keep_missing=True)
     if code in RETIRED_CG:
-        cg_manifest[code] = {"file": fname + ".png", "desc": desc, "slot": n, "reserve": True}
-        lines.append(f"| {code} | white_{n:03d}.png | `{fname}.png`（**予備**＝本編未使用・ギャラリー外） | {desc} |")
+        # 2026-09-12: 降板CGはマニフェストから外し、実ファイル（白紙）も削除する
+        if dst:
+            os.remove(dst)
+        lines.append(f"| {code} | white_{n:03d}.png | ―（降板・削除済み。再昇格時は `{fname}.png` を新規配置） | {desc} |")
         continue
     cg_manifest[code] = {"file": fname + ".png", "desc": desc, "slot": n}
-    lines.append(f"| {code} | white_{n:03d}.png | `{fname}.png` | {desc} |")
+    lines.append(f"| {code} | white_{n:03d}.png | `{fname}.png`（未配置なら名前だけ） | {desc} |")
 
 lines += ["", "## エンディング専用CG", "", "| スロット | 元ファイル | 新ファイル名 | 内容 |", "|---|---|---|---|"]
 ed_manifest = {}
 for code, desc in ED_CG:
-    n, dst = take(code)
+    n, dst = take(code, keep_missing=True)
     ed_manifest[code] = {"file": code + ".png", "desc": desc, "slot": n}
     lines.append(f"| {code} | white_{n:03d}.png | `{code}.png` | {desc} |")
 
@@ -304,18 +309,20 @@ for code, fname, desc in UI_RETIRED:
         os.remove(dst)
     lines.append(f"| {code} | white_{n:03d}.png | ―（撤去・削除済み） | {desc} |")
 
-# 予備スロット
+# 予備スロット（2026-09-12: 白紙実ファイルは全削除。スロット番号の記録だけ進める）
 spare_start = slot
-lines += ["", "## 予備スロット", "", "| スロット | 元ファイル | 新ファイル名 |", "|---|---|---|"]
+lines += ["", "## 予備スロット（削除済み）", "", "| スロット | 元ファイル | 新ファイル名 |", "|---|---|---|"]
 while slot <= 300:
     fname = f"spare_{slot:03d}"
-    n, dst = take(fname)
-    manifest["spare"][fname] = {"file": fname + ".png", "slot": n}
-    lines.append(f"| {fname.upper()} | white_{n:03d}.png | `{fname}.png` |")
+    n, dst = take(fname, keep_missing=True)
+    if dst:
+        os.remove(dst)
+    lines.append(f"| {fname.upper()} | white_{n:03d}.png | ―（削除済み） |")
 
 lines += ["", "---", "",
-          f"- 合計: 300スロット (背景24 / 立ち絵{sum(len(e) for _,_,e in SPRITES)} / 名場面CG {len(CG)}＝本編18・予備20 / ED用CG {len(ED_CG)} / UI 20＝撤去済み / 予備 {301-spare_start})",
-          "- 2026-09-12: UI画像20枚を撤去（CSS/SVG描画で全代替）。名場面CGのうち非ピーク20枚を reserve 降板（ファイルは残す）。",
+          f"- 合計: 300スロット (背景24＝実画像 / 立ち絵{sum(len(e) for _,_,e in SPRITES)}＝台帳のみ / 名場面CG {len(CG)}＝台帳18・降板削除20 / ED用CG {len(ED_CG)}＝台帳のみ / UI 20＝撤去 / 予備 {301-spare_start}＝削除済み)",
+          "- 2026-09-12: UI画像20枚を撤去（CSS/SVG描画で全代替）。名場面CGのうち非ピーク20枚を降板のうえ削除。",
+          "- 2026-09-12(2): 白紙プレースホルダ実ファイル（cg/chr/spare 計256枚）を全削除。背景24枚だけが実画像。",
           "- 企画書§8.2では立ち絵113本と計上されているが、第5章の表情リストを実列挙すると105本のため、",
           "  差分8本は予備スロット(追加表情用バッファ)として確保している(§8.6「約90枚分のバッファ」の一部)。",
           "- 元 `image1/`, `image2/`, `image3/` フォルダはリネーム後に撤去。"]
@@ -325,11 +332,11 @@ with open(os.path.join(ROOT, "ASSET_MAP.md"), "w", encoding="utf-8") as f:
     f.write("\n".join(lines) + "\n")
 
 manifest_full = {
-    "bg": manifest["bg"], "chr": chr_manifest, "cg": cg_manifest,
-    "ed_cg": ed_manifest, "spare": manifest["spare"],
+    "bg": manifest["bg"], "chr": chr_manifest, "cg": cg_manifest, "ed_cg": ed_manifest,
 }
 js = ("// 自動生成: tools/map_assets.py によるアセットマニフェスト\n"
-      "// 実画像 game/assets/img/ 。詳細対応表は ASSET_MAP.md を参照。\n"
+      "// 実画像は game/assets/img/（2026-09-12時点で背景24枚のみ。他は台帳のみで実ファイル未配置）。\n"
+      "// 詳細対応表は ASSET_MAP.md を参照。\n"
       "window.ASSET_MANIFEST = " + json.dumps(manifest_full, ensure_ascii=False, indent=2) + ";\n")
 with open(os.path.join(ROOT, "game", "js", "assets_manifest.js"), "w", encoding="utf-8") as f:
     f.write(js)
@@ -340,4 +347,4 @@ for folder in ("image1", "image2", "image3"):
     if os.path.isdir(d) and not os.listdir(d):
         os.rmdir(d)
 
-print(f"OK: {slot-1} files mapped (named: {spare_start-1}, spare: {301-spare_start})")
+print(f"OK: {slot-1} slots documented (実画像: {sum(1 for _ in manifest['bg'])} bg / 白紙実ファイルは削除済み)")
