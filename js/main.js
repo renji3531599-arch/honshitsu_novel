@@ -245,7 +245,9 @@ function readyGate({ dom, game, shell, audio }) {
 
 /* ---------------------------------------------------------------- 入力 -- */
 function bindInput({ dom, game, shell, store, audio }) {
-  const menuKeys = { s: 'save', l: 'load', c: 'config', g: 'gallery', t: 'tips', r: 'endlist', y: 'almanac' };
+  // プレイ中に開けるパネルは最小限。おまけ系（ギャラリー/辞典/エンドリスト/年鑑）はタイトルからのみ（2026-09-12）
+  const menuKeys = { s: 'save', l: 'load', c: 'config' };
+  const titleKeys = { ...menuKeys, g: 'gallery', t: 'tips', r: 'endlist', y: 'almanac' };
   let hudOn = true;
   addEventListener('keydown', (e) => {
     if (!window.__vnReady) return;   // 起動ゲート通過前はゲーム入力を受けない
@@ -311,8 +313,7 @@ function bindInput({ dom, game, shell, store, audio }) {
   function openQuick() {
     const items = [
       ['続きから / BACKLOG', 'log'], ['保存 / SAVE', 'save'], ['読込 / LOAD', 'load'],
-      ['設定 / CONFIG', 'config'], ['ギャラリー / GALLERY', 'gallery'], ['エンドリスト / END LIST', 'endlist'],
-      ['✝本質✝辞典 / TIPS', 'tips'], ['✝本質✝年鑑 / ALMANAC', 'almanac'],
+      ['設定 / CONFIG', 'config'],
     ];
     dom.qmList.innerHTML = '';
     items.forEach(([t, k]) => {

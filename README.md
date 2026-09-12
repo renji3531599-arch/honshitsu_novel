@@ -9,16 +9,19 @@
 | | 版A（ルート直下） | 版B（`game/` 以下） |
 |---|---|---|
 | 入口 | `index.html`（リポジトリ直下） | `game/index.html` |
-| アセット置き場 | `assets/`（bg/chr/cg/ui + `_buffer/`） | `game/assets/img/` |
+| アセット置き場 | `assets/`（bg/chr/cg） | `game/assets/img/` |
 | 脚本形式 | 独自DSL（`data/script/*.txt`） | JSデータ（`game/js/script_*.js`） |
 | BGM | 手続き生成 24曲＋SE18種 | 手続き生成 24曲＋SE16種 |
-| 検証ツール | `tools/vncheck.mjs` ＋ `tools/smoke.mjs` | `tools/check_script.js` ＋ `tools/playthrough_test.js` ＋ `tools/save_test.js` |
+| 検証ツール | `tools/vncheck.mjs` ＋ `tools/smoke.mjs` | `tools/check_script.cjs` ＋ `tools/playthrough_test.cjs` ＋ `tools/save_test.cjs` |
 | 固有ドキュメント | `docs/SCRIPT_SPEC.md` ／ `docs/ASSET_MANIFEST.md` | `ASSET_MAP.md` |
 
-**共通事項**: `image1/2/3` の仮画像300枚（`white_XXX.png`）は、両実装それぞれが企画書§8の
-アセット一覧に従って別名へリネーム済みです（版Aは `assets/`、版Bは `game/assets/img/`、対応表は `ASSET_MAP.md`）。
-白紙プレースホルダーのままでも両版とも等高線背景・色調ティント等で舞台として機能し、
-**同名の実素材に上書きすればそのまま差し替わります**。
+**共通事項**: **背景は両版とも実画像を収録済み**（版A 25枚／版B 24枚）。
+立ち絵・CGの白紙プレースホルダ（`white_XXX.png` 改め計512枚）は **2026-09-12 に全削除**しました ――
+名前とスロットは台帳（版A `data/assets.json`／版B `ASSET_MAP.md`・`game/js/assets_manifest.js`）に
+残してあるので、**実素材は台帳の `file` 名で新規配置するだけで差し替わります**。
+未配置のあいだは両版とも等高線背景・シルエット立ち絵等の手続き生成で舞台として成立します。
+同じ日に **UI画像20枚（ui01〜ui20）も両版とも撤去**しました（画面UIは全てCSS/SVG描画のため）。
+経緯は `docs/UI_CG_2026-09-12.md`。
 
 ---
 
@@ -39,8 +42,10 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 | 1〜9 / ←→ | 選択肢 |
 | Backspace | バックログ |
 | F1 / F2 | クイックセーブ／ロード（S・L で12スロット） |
-| G / T / R / Y | ギャラリー／✝本質✝辞典／エンドリスト／✝本質✝年鑑 |
 | C / I / H / Q / Esc | 設定／所持品／HUD／クイックメニュー／閉じる |
+
+おまけ系（ギャラリー／✝本質✝辞典／✝本質✝年鑑／ENDリスト）は**タイトル画面からのみ**開けます
+（2026-09-12 にプレイ中の導線を削除。プレイ中のシステムUIは セーブ／ロード／ログ／設定 だけに）。
 
 深リンク：`index.html#scene=d2` で特定シーンから起動できる（検証・確認用）。
 セーブ・周回データは `localStorage`（12スロット＋オート＋横断メタ：回収CG／エンド／年鑑カウンタ）。
@@ -64,7 +69,8 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 
 ## 3. 画像について（重要）
 
-`assets/` の 300 枚は**すべて白紙プレースホルダー**で、**名前だけ本編に合わせてある**。
+`assets/` には**背景25枚の実画像**だけが入っている。立ち絵105・CG32は**名前だけ台帳に登録**してあり、
+実ファイルは未配置（白紙プレースホルダ256枚は2026-09-12に削除。未配置でも支障なく動く）。
 エンジン側の作法：
 
 * 白紙プレースホルダのあいだは `js/visual.js` がその場手続き生成したSVG（等高線背景／シルエット立ち絵）を
@@ -74,7 +80,7 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
   立ち絵に掛かる。背景・CGは常に `normal`（全面レイヤに multiply を掛けると、実写素材が
   親の黒 `#0c0a08` と掛け算されて**ほぼ黒く潰れて見えた**ため。2026-09-11 に修正）。
   白背景JPEGをそのまま置きたいときは CONFIG の「画像合成」を multiply にすれば救済される。
-* 差し替えは同名上書き＋台帳の `"placeholder": false` だけ。それで補完SVGが消えて実画像が出る。
+* 差し替えは台帳の `file` 名で新規配置＋`"placeholder": false` だけ。それで補完SVGが消えて実画像が出る。
   透明PNGが正解だが、白背景素材でも合成モードで追従する。
 * 起動は**優先プリロード方式**：`false` の行でも「これから読む数シーンぶん（既定5シーン分）」だけを
   `TOUCH TO START` 前に読み、残りはタイトル表示後に手が空いたときへ回す（`AssetDB.warmRest`）。
@@ -82,16 +88,16 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
   （タイトルキービジュアル、夕方の教室）は最初から実画像で収録済み。
 * 本編中の背景切替は**2枚スラブのクロスディゾルブ**（既定1.15秒、CONFIGで 1.85秒／即時）。
   CG差し替えは「完全に下げてから上げる」ので、半透明のまま絵が入れ替わって見えない。
-* 作ったのに本編で出していないCGは `"reserve": true` を付けるとギャラリーと回収枚数から外れる
-  （2026-09-11 に11枚を降板。経緯と基準は `docs/PERF_2026-09-11.md` §CG）。
+* 本編で出さないCGは2026-09-11に11枚降板（`reserve` 化）→ **2026-09-12 に台帳・実ファイルとも削除**。
+  CGは「印象的で感動的なシーンにだけ置く」基準で32枚（18＋ED14）に整理した（基準・経緯は `docs/CG_GUIDE.md` 冒頭）。
 * 素材IDは脚本内で `bg_hokutou_kyoshitsu_asa`（=ファイル名stem）でも `BG01` でも書ける。
 * **1素材ずつの解説**（どのシーンで何回出るか／未使用差分／Ken Burns 有無／降板理由）は自动生成：
-  `assets/README.md`（総）／ `assets/bg|cg|chr|ui/README.md` ／ **`docs/CG_GUIDE.md`（CG全52枚を物語順に）**。
+  `assets/README.md`（総）／ `assets/bg|cg|chr/README.md` ／ **`docs/CG_GUIDE.md`（CG全32枚を物語順に）**。
   台帳か脚本を直したら `node tools/gen_asset_md.mjs` で再生成。
-* 差し替え後は **`sw.js` の `CACHE`（現在 `honshitsu-v2`）を必ず上げる**。CacheFirst で画像を返すため、
-  上げると旧キャッシュ（白紙PNG）を配信し続けて「差し替わってないように見える」ことがある。
+* 差し替え後は **`sw.js` の `CACHE`（現在 `honshitsu-v5`）を必ず上げる**。CacheFirst で画像を返すため、
+  上げると旧キャッシュ（削除前の白紙PNG）を配信し続けて「削除されていないように見える」ことがある。
   ※ 脚本 `data/script/*.txt` は NetworkFirst に変えた（直したのに反映されない問題の防止）。
-* 使わなかった予備 99 枚は `assets/_buffer/` に退避済み（一覧は `docs/ASSET_MANIFEST.md`）。
+* 予備99枚（`_buffer`）は2026-09-12に実ファイルごと削除。スロット番号の記録だけ `docs/ASSET_MANIFEST.md` に残す。
 * リネーム作業自体は `python3 tools/rename_assets.py` で再実行可能（台帳とmanifestも同時に更新）。
 
 ---
@@ -113,9 +119,9 @@ data/assets.json              … アセット台帳
 data/script/*.txt + index.txt  … 本編（独自DSL／仕様は docs/SCRIPT_SPEC.md）
 tools/vncheck.mjs             … 静的検証＋オートプレイ（参照解決・END到達・素材カバレッジ）
 tools/smoke.mjs               … jsdom で実起動し、全シーン・全パネル・1周プレイを流す
-tools/rename_assets.py        … プレースホルダーの実名リネーム＋台帳生成
+tools/rename_assets.py        … プレースホルダーの実名リネーム＋台帳生成（再実行には元 white_NNN.png が必要）
 docs/SCRIPT_SPEC.md           … DSL・フラグ仕様
-docs/ASSET_MANIFEST.md        … 201枠の一覧（用途・元ファイル・差分）
+docs/ASSET_MANIFEST.md        … 162枠の一覧（bg25/chr105/cg32。UI・予備バッファは削除済み）
 ```
 
 ---
@@ -155,7 +161,7 @@ save/load・キー操作まで流して実行時エラーを拾う（過去に `
 ## 6. 制約・割り切り
 
 * 音声は同梱せず手続き生成（企画書の BGM01〜24 相当を `THEMES` に全曲実装、`@bgm` の参照は24/24を本編で使用中）。
-* 画像は白紙。CG の構図・拡大表示（`cg02` と `cg22`）分の作り込みだけエンジン側に入れてある。
+* 背景は実画像25枚。立ち絵・CGは未配置で、構図・拡大表示（`cg02` と `cg22`）分の作り込みだけエンジン側に入れてある。
 * 心Point は非表示が作法なので、HUD には出さない（エンドカードで初めて明かされる）。
 * 脚本の行数配分は喜劇8:感情2。感情ピームの直前直後に必ずツッコミを1発置く（企画書 14章のメモ）。
 
@@ -169,7 +175,8 @@ save/load・キー操作まで流して実行時エラーを拾う（過去に `
 - **本編**: プロローグ → 第一章「差出人不明の写真」→ **HUB自由順6ルート**（A砂糖／B零／C寺地／D両馬／E南棟／F召野＋倉石）→ 収束章「地図を作る夜」→ クライマックス「窓の外に、ずっといた人」→ **エンディング14種**
 - **パラメータ**: 企画書§7どおり **心Point＋主要Flag8種**（選択肢33件。倉石茶化し選択3箇所 → COMEDY SECRET END 条件も再現）
   - TRUE（心24以上＋Flag6種以上）／GOOD9種（心18以上＋突出Flag）／NORMAL／BITTERSWEET（心11以下）／COMEDY SECRET／全回収後にタイトルへ出現する BONUS EXTRA
-- **エンジン**: セーブ12スロット＋クイック＋オートセーブ／黒字リプレイ方式ロード／バックログ／既読スキップ（Ctrl）／オートモード／ギャラリー52枚／**✝本質✝辞典**（用語自動収集）／ENDリスト／設定
+- **エンジン**: セーブ12スロット＋クイック＋オートセーブ／黒字リプレイ方式ロード／バックログ／既読スキップ（Ctrl）／オートモード／ギャラリー32枚（名場面18＋ED14）／**✝本質✝辞典**（用語自動収集）／ENDリスト／設定
+- **2026-09-12**: UI画像20枚を撤去（CSS/SVG描画で全代替）、CGは「印象的で感動的なシーンのみ」の32枚に整理、白紙プレースホルダ256枚を削除（背景24枚だけが実画像）。経緯は `docs/UI_CG_2026-09-12.md`
 - **演出**: 章タイトルカード、CG表示、掲示板・配信UIオーバーレイ、回想の褪色トーン、**「窓の外、五秒」演出**（クライマックスでは15秒に延伸）
 - **音**: 音源ファイル不使用。WebAudioリアルタイム合成で企画書§9の **BGM24曲＋SE16種** を内蔵
 - 原作のトーンを踏襲: 「は？」、フェイカツ投稿、**489の正体は最後まで明かさない**（§13 トーンガイド準拠）
@@ -202,25 +209,25 @@ game/
 │   ├── characters.js     キャラ定義＋✝本質✝辞典データ
 │   ├── assets_manifest.js 自動生成（tools/map_assets.py）
 │   └── script_0*_*.js    本編スクリプト（企画書§10〜§11を全台詞実装）
-└── assets/img/           リネーム済み画像300枚（201使用＋99予備）
+└── assets/img/           背景の実画像24枚のみ（白紙プレースホルダ256枚は2026-09-12削除。他は台帳のみ）
 tools/
-├── map_assets.py         仮画像→アセット名リネーム（冪等・単一の情報源）
-├── check_script.js       整合性チェック（参照・遷移・Flagの静的検証）
-├── playthrough_test.js   jsdomで実プレイ（TRUE/BITTERSWEET/COMEDY SECRET到達を自動検証）
-└── save_test.js          セーブ/ロード復元・オートセーブ・BONUS解放の自動検証
-ASSET_MAP.md              仮画像300枚 ↔ アセット名の対応表（版B）
+├── map_assets.py         仮画像→アセット名リネーム（冪等・単一の情報源。UI撤去とCG降板も反映）
+├── check_script.cjs      整合性チェック（参照・遷移・Flagの静的検証）
+├── playthrough_test.cjs  jsdomで実プレイ（TRUE/BITTERSWEET/COMEDY SECRET到達を自動検証）
+└── save_test.cjs         セーブ/ロード復元・オートセーブ・BONUS解放の自動検証
+ASSET_MAP.md              アセット名・スロットの対応表（版B。実ファイルは背景24枚のみ、白紙/UI/予備は削除済みと表示）
 ```
 
 ## 検証（版B）
 
 ```bash
-node tools/check_script.js        # シナリオデータの静的検証（0エラー必須）
-node tools/playthrough_test.js    # 実プレイテスト3ルート（要: npm i jsdom）
-node tools/save_test.js           # セーブ/ロード/BONUSテスト（要: jsdom）
+node tools/check_script.cjs       # シナリオデータの静的検証（0エラー必須）
+node tools/playthrough_test.cjs   # 実プレイテスト3ルート（要: npm i --no-save jsdom）
+node tools/save_test.cjs          # セーブ/ロード/BONUSテスト（要: jsdom）
 python3 tools/map_assets.py       # アセット割り当ての再生成（冪等）
 ```
 
-実素材の差し替えは `ASSET_MAP.md` の対応表を見ながら `game/assets/img/` に**同名のファイル**を上書きするだけです。
+実素材の差し替えは `ASSET_MAP.md` の対応表を見ながら `game/assets/img/` に**対応するファイル名で新規配置**するだけです（現状は背景24枚のみ実在）。
 
 ---
 

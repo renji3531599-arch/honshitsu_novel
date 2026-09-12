@@ -2,7 +2,8 @@
 
 シナリオ『まだ地図の途中で　〜✝本質✝特別編〜』§8のアセット一覧に従い、
 仮画像 `white_001.png`〜`white_300.png` をリネームして配置した対応表。
-実画像は `game/assets/img/` 以下。同名の実素材を置き換えればそのままゲームに反映される。
+2026-09-12: 白紙実ファイルは全削除。実画像は背景24枚のみ（他は台帳・スロット記録のみ）。
+実素材は対応表の新ファイル名で `game/assets/img/` に新規配置すればゲームに反映される。
 
 ## 背景 (BG) ― スロット 001〜024
 
@@ -147,44 +148,44 @@
 
 | スロット | 元ファイル | 新ファイル名 | 内容 |
 |---|---|---|---|
-| cg01 | white_130.png | `cg_01_mie_kyoshitsu_iriguchi.png` | 三重(単独)　教室の入口で勝也に呼び止められる |
-| cg02 | white_131.png | `cg_02_mie-katsuya_chizutsutsu.png` | 三重／勝也　地図筒から古写真がこぼれ落ちる瞬間 |
-| cg03 | white_132.png | `cg_03_mie_shashin_teme.png` | 三重(手元アップ)　写真の裏の万年筆の文字を読む |
-| cg04 | white_133.png | `cg_04_katsuya_shashin_kaishuu.png` | 勝也(単独)　写真を静かに回収する |
-| cg05 | white_134.png | `cg_05_mie-ryoma_rouka_yuuhi.png` | 三重／両馬　夕陽の差し込む誰もいない廊下 |
-| cg06 | white_135.png | `cg_06_satou_shamado_sumafo.png` | 砂糖(単独)　三年分の車窓写真をスクロールする手元 |
-| cg07 | white_136.png | `cg_07_satou-mie_mado_ushiro.png` | 砂糖／三重　窓を背にした二人の構図 |
-| cg08 | white_137.png | `cg_08_rei_toshoshitsu_pc.png` | 零(単独)　三年分のデータを整理する横顔 |
-| cg09 | white_138.png | `cg_09_rei-ryoma-mie_tsukue_kakomu.png` | 零／両馬／三重　机を囲み「大事だと思うから」と零が |
-| cg10 | white_139.png | `cg_10_terachi_hikidashi_kamitabane.png` | 寺地(単独)　引き出しから三年分の紙束を取り出す |
-| cg11 | white_140.png | `cg_11_terachi-ryoma-mie_unazuku.png` | 寺地／両馬／三重　「ありがとうの会にする」と頷き合う |
-| cg12 | white_141.png | `cg_12_ryoma_butsudan_ushiro.png` | 両馬(単独)　祖父の遺影の前で正座する後ろ姿 |
-| cg13 | white_142.png | `cg_13_ryoma-mie_butsudan_narabu.png` | 両馬／三重　仏壇の前で並んで座る |
-| cg14 | white_143.png | `cg_14_kuraishi_shoko_shinbun.png` | 倉石(単独)　古い学校新聞を読み言葉を失う |
-| cg15 | white_144.png | `cg_15_kuraishi-ryoma-mie_houkoku.png` | 倉石／両馬／三重　調査の報告を受ける一同 |
-| cg16 | white_145.png | `cg_16_meshino-futami_shokuinshitsu.png` | 召野／二見　職員室、窓越しの光 |
-| cg17 | white_146.png | `cg_17_mie-mitsumine_sakura_namiki.png` | 三重／三峰　蕾の桜並木、国境をまたぐ二人 |
-| cg18 | white_147.png | `cg_18_mie-minamitou_kyoshitsu.png` | 三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図 |
-| cg19 | white_148.png | `cg_19_naitou_kao_age.png` | 内藤(単独)　「本質配信、ずっと見てます」と顔を上げる |
-| cg20 | white_149.png | `cg_20_zenin_chizu_tukuru.png` | 全員集合　机を寄せ合い地図を作る俯瞰構図 |
-| cg21 | white_150.png | `cg_21_ryoma_temoto_kakikomu.png` | 両馬(手元アップ)　地図の隅に何かを書き足す |
-| cg22 | white_151.png | `cg_22_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図　画面いっぱいの作品アートワーク |
-| cg23 | white_152.png | `cg_23_katsuya_ushirosugata_yuugata.png` | 勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る |
-| cg24 | white_153.png | `cg_24_katsuya_chizu_watasu_zekkyu.png` | 勝也(正面)　地図を渡され絶句する瞬間 |
-| cg25 | white_154.png | `cg_25_mie-katsuya_mediumshot.png` | 三重／勝也　「先生、聞いていいですか」二人の間合い |
-| cg26 | white_155.png | `cg_26_katsuya_nagai_chinmoku.png` | 勝也(単独)　いつもの5秒より長い沈黙 |
-| cg27 | white_156.png | `cg_27_wakaki-inaba_yama_ue.png` | 若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調) |
-| cg28 | white_157.png | `cg_28_wakaki_utsumuku.png` | 若き勝也(回想・単独)　生意気な口を利いた日、俯く |
-| cg29 | white_158.png | `cg_29_katsuya_fuhou_shiruetto.png` | 勝也(単独)　訃報を知った瞬間(シルエットのみ) |
-| cg30 | white_159.png | `cg_30_katsuya_genzai_kyoshitsu.png` | 勝也(単独)　「窓の外を見るたび、報告していた」と語る |
-| cg31 | white_160.png | `cg_31_zenin-katsuya_hiroi_kouzu.png` | 全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図 |
-| cg32 | white_161.png | `cg_32_terachi_dokudoku_roudoku.png` | 寺地(単独・朗読)　スマホのライトに照らされて |
-| cg33 | white_162.png | `cg_33_zenin-katsuya_namida_koraeru.png` | 全員／勝也　一人ずつの一言、勝也が涙をこらえる |
-| cg34 | white_163.png | `cg_34_katsuya_hareyaka_emie.png` | 勝也(単独)　晴れやかな笑み(表情⑩解禁カット) |
-| cg35 | white_164.png | `cg_35_zenin_sotsugyoushiki_sakurafubuki.png` | 全員集合　卒業式・桜吹雪 |
-| cg36 | white_165.png | `cg_36_katsuya_suunengo_kyoshitsu.png` | 勝也(単独)　数年後の教室、新しい1年生に同じ地図を |
-| cg37 | white_166.png | `cg_37_mie-mitsumine_mankai_sakura.png` | 三重／三峰　満開の桜(南棟Flag高で挿入) |
-| cg38 | white_167.png | `cg_38_ryoma_hakamairi.png` | 両馬(単独)　墓参り(両馬編で使用) |
+| cg01 | white_130.png | ―（降板・削除済み。再昇格時は `cg_01_mie_kyoshitsu_iriguchi.png` を新規配置） | 三重(単独)　教室の入口で勝也に呼び止められる |
+| cg02 | white_131.png | `cg_02_mie-katsuya_chizutsutsu.png`（未配置なら名前だけ） | 三重／勝也　地図筒から古写真がこぼれ落ちる瞬間 |
+| cg03 | white_132.png | ―（降板・削除済み。再昇格時は `cg_03_mie_shashin_teme.png` を新規配置） | 三重(手元アップ)　写真の裏の万年筆の文字を読む |
+| cg04 | white_133.png | ―（降板・削除済み。再昇格時は `cg_04_katsuya_shashin_kaishuu.png` を新規配置） | 勝也(単独)　写真を静かに回収する |
+| cg05 | white_134.png | ―（降板・削除済み。再昇格時は `cg_05_mie-ryoma_rouka_yuuhi.png` を新規配置） | 三重／両馬　夕陽の差し込む誰もいない廊下 |
+| cg06 | white_135.png | ―（降板・削除済み。再昇格時は `cg_06_satou_shamado_sumafo.png` を新規配置） | 砂糖(単独)　三年分の車窓写真をスクロールする手元 |
+| cg07 | white_136.png | `cg_07_satou-mie_mado_ushiro.png`（未配置なら名前だけ） | 砂糖／三重　窓を背にした二人の構図 |
+| cg08 | white_137.png | ―（降板・削除済み。再昇格時は `cg_08_rei_toshoshitsu_pc.png` を新規配置） | 零(単独)　三年分のデータを整理する横顔 |
+| cg09 | white_138.png | `cg_09_rei-ryoma-mie_tsukue_kakomu.png`（未配置なら名前だけ） | 零／両馬／三重　机を囲み「大事だと思うから」と零が |
+| cg10 | white_139.png | ―（降板・削除済み。再昇格時は `cg_10_terachi_hikidashi_kamitabane.png` を新規配置） | 寺地(単独)　引き出しから三年分の紙束を取り出す |
+| cg11 | white_140.png | ―（降板・削除済み。再昇格時は `cg_11_terachi-ryoma-mie_unazuku.png` を新規配置） | 寺地／両馬／三重　「ありがとうの会にする」と頷き合う |
+| cg12 | white_141.png | `cg_12_ryoma_butsudan_ushiro.png`（未配置なら名前だけ） | 両馬(単独)　祖父の遺影の前で正座する後ろ姿 |
+| cg13 | white_142.png | `cg_13_ryoma-mie_butsudan_narabu.png`（未配置なら名前だけ） | 両馬／三重　仏壇の前で並んで座る |
+| cg14 | white_143.png | ―（降板・削除済み。再昇格時は `cg_14_kuraishi_shoko_shinbun.png` を新規配置） | 倉石(単独)　古い学校新聞を読み言葉を失う |
+| cg15 | white_144.png | ―（降板・削除済み。再昇格時は `cg_15_kuraishi-ryoma-mie_houkoku.png` を新規配置） | 倉石／両馬／三重　調査の報告を受ける一同 |
+| cg16 | white_145.png | ―（降板・削除済み。再昇格時は `cg_16_meshino-futami_shokuinshitsu.png` を新規配置） | 召野／二見　職員室、窓越しの光 |
+| cg17 | white_146.png | ―（降板・削除済み。再昇格時は `cg_17_mie-mitsumine_sakura_namiki.png` を新規配置） | 三重／三峰　蕾の桜並木、国境をまたぐ二人 |
+| cg18 | white_147.png | ―（降板・削除済み。再昇格時は `cg_18_mie-minamitou_kyoshitsu.png` を新規配置） | 三重／三峰／櫻／内藤　南棟教室、えんじネクタイが浮く構図 |
+| cg19 | white_148.png | `cg_19_naitou_kao_age.png`（未配置なら名前だけ） | 内藤(単独)　「本質配信、ずっと見てます」と顔を上げる |
+| cg20 | white_149.png | `cg_20_zenin_chizu_tukuru.png`（未配置なら名前だけ） | 全員集合　机を寄せ合い地図を作る俯瞰構図 |
+| cg21 | white_150.png | ―（降板・削除済み。再昇格時は `cg_21_ryoma_temoto_kakikomu.png` を新規配置） | 両馬(手元アップ)　地図の隅に何かを書き足す |
+| cg22 | white_151.png | `cg_22_omoide_chikeizu_kansei.png`（未配置なら名前だけ） | 「思い出の地形図」完成図　画面いっぱいの作品アートワーク |
+| cg23 | white_152.png | `cg_23_katsuya_ushirosugata_yuugata.png`（未配置なら名前だけ） | 勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る |
+| cg24 | white_153.png | ―（降板・削除済み。再昇格時は `cg_24_katsuya_chizu_watasu_zekkyu.png` を新規配置） | 勝也(正面)　地図を渡され絶句する瞬間 |
+| cg25 | white_154.png | ―（降板・削除済み。再昇格時は `cg_25_mie-katsuya_mediumshot.png` を新規配置） | 三重／勝也　「先生、聞いていいですか」二人の間合い |
+| cg26 | white_155.png | `cg_26_katsuya_nagai_chinmoku.png`（未配置なら名前だけ） | 勝也(単独)　いつもの5秒より長い沈黙 |
+| cg27 | white_156.png | `cg_27_wakaki-inaba_yama_ue.png`（未配置なら名前だけ） | 若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調) |
+| cg28 | white_157.png | `cg_28_wakaki_utsumuku.png`（未配置なら名前だけ） | 若き勝也(回想・単独)　生意気な口を利いた日、俯く |
+| cg29 | white_158.png | `cg_29_katsuya_fuhou_shiruetto.png`（未配置なら名前だけ） | 勝也(単独)　訃報を知った瞬間(シルエットのみ) |
+| cg30 | white_159.png | `cg_30_katsuya_genzai_kyoshitsu.png`（未配置なら名前だけ） | 勝也(単独)　「窓の外を見るたび、報告していた」と語る |
+| cg31 | white_160.png | `cg_31_zenin-katsuya_hiroi_kouzu.png`（未配置なら名前だけ） | 全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図 |
+| cg32 | white_161.png | ―（降板・削除済み。再昇格時は `cg_32_terachi_dokudoku_roudoku.png` を新規配置） | 寺地(単独・朗読)　スマホのライトに照らされて |
+| cg33 | white_162.png | `cg_33_zenin-katsuya_namida_koraeru.png`（未配置なら名前だけ） | 全員／勝也　一人ずつの一言、勝也が涙をこらえる |
+| cg34 | white_163.png | `cg_34_katsuya_hareyaka_emie.png`（未配置なら名前だけ） | 勝也(単独)　晴れやかな笑み(表情⑩解禁カット) |
+| cg35 | white_164.png | `cg_35_zenin_sotsugyoushiki_sakurafubuki.png`（未配置なら名前だけ） | 全員集合　卒業式・桜吹雪 |
+| cg36 | white_165.png | ―（降板・削除済み。再昇格時は `cg_36_katsuya_suunengo_kyoshitsu.png` を新規配置） | 勝也(単独)　数年後の教室、新しい1年生に同じ地図を |
+| cg37 | white_166.png | ―（降板・削除済み。再昇格時は `cg_37_mie-mitsumine_mankai_sakura.png` を新規配置） | 三重／三峰　満開の桜(南棟Flag高で挿入) |
+| cg38 | white_167.png | ―（降板・削除済み。再昇格時は `cg_38_ryoma_hakamairi.png` を新規配置） | 両馬(単独)　墓参り(両馬編で使用) |
 
 ## エンディング専用CG
 
@@ -205,138 +206,143 @@
 | cg_end_comedy | white_180.png | `cg_end_comedy.png` | COMEDY SECRET END　勝也が「……本質かもな」 |
 | cg_end_bonus | white_181.png | `cg_end_bonus.png` | BONUS EXTRA　数年後・翠湖のほとりの同窓会(全員＋勝也) |
 
-## UI／アイテム
+## UI／アイテム（2026-09-12 撤去）
+
+UI画像20枚はエンジンのCSS/SVG描画で全代替のため、実ファイルごと削除した。
+（スロット番号の履歴だけ残す）
 
 | スロット | 元ファイル | 新ファイル名 | 内容 |
 |---|---|---|---|
-| ui01 | white_182.png | `ui01_title_logo.png` | タイトルロゴ「まだ地図の途中で」 |
-| ui02 | white_183.png | `ui02_line_frame.png` | LINEグループチャット画面フレーム |
-| ui03 | white_184.png | `ui03_bbs_heikatsu.png` | 匿名掲示板(ヘイカツスレ)画面フレーム |
-| ui04 | white_185.png | `ui04_bbs_juken.png` | 受験情報掲示板(フェイカツ書き込み)画面フレーム |
-| ui05 | white_186.png | `ui05_haishin_ui.png` | 本質配信・配信画面UI |
-| ui06 | white_187.png | `ui06_nenkan_icon.png` | ✝本質✝年鑑・表紙アイコン |
-| ui07 | white_188.png | `ui07_nyumon_icon.png` | ✝本質✝入門ガイド・表紙アイコン |
-| ui08 | white_189.png | `ui08_shinbun_icon.png` | 古い学校新聞・紙面アイコン |
-| ui09 | white_190.png | `ui09_kojashin_icon.png` | 古写真アイコン |
-| ui10 | white_191.png | `ui10_chizutsutsu_icon.png` | 地図筒アイコン |
-| ui11 | white_192.png | `ui11_kami_magic_icon.png` | 紙とマジックペン(配信道具)アイコン |
-| ui12 | white_193.png | `ui12_omoide_chizu_icon.png` | 「思い出の地形図」ミニアイコン |
-| ui13 | white_194.png | `ui13_sentakushi_frame.png` | 選択肢ウィンドウ用フレーム |
-| ui14 | white_195.png | `ui14_heart_frame.png` | 心Pointゲージ用フレーム |
-| ui15 | white_196.png | `ui15_chapter_frame.png` | 章タイトル表示用の地形図柄フレーム |
-| ui16 | white_197.png | `ui16_saveload_bg.png` | セーブ／ロード画面用の地図柄背景装飾 |
-| ui17 | white_198.png | `ui17_hub_map.png` | HUB(ルート選択)画面用マップ風背景 |
-| ui18 | white_199.png | `ui18_end_logo_frame.png` | エンドロゴ共通フレーム |
-| ui19 | white_200.png | `ui19_sotsugyou_syosho.png` | 卒業証書アイコン |
-| ui20 | white_201.png | `ui20_cornsoup_can.png` | コーンスープ缶アイコン |
+| ui01 | white_182.png | ―（撤去・削除済み） | タイトルロゴ「まだ地図の途中で」 |
+| ui02 | white_183.png | ―（撤去・削除済み） | LINEグループチャット画面フレーム |
+| ui03 | white_184.png | ―（撤去・削除済み） | 匿名掲示板(ヘイカツスレ)画面フレーム |
+| ui04 | white_185.png | ―（撤去・削除済み） | 受験情報掲示板(フェイカツ書き込み)画面フレーム |
+| ui05 | white_186.png | ―（撤去・削除済み） | 本質配信・配信画面UI |
+| ui06 | white_187.png | ―（撤去・削除済み） | ✝本質✝年鑑・表紙アイコン |
+| ui07 | white_188.png | ―（撤去・削除済み） | ✝本質✝入門ガイド・表紙アイコン |
+| ui08 | white_189.png | ―（撤去・削除済み） | 古い学校新聞・紙面アイコン |
+| ui09 | white_190.png | ―（撤去・削除済み） | 古写真アイコン |
+| ui10 | white_191.png | ―（撤去・削除済み） | 地図筒アイコン |
+| ui11 | white_192.png | ―（撤去・削除済み） | 紙とマジックペン(配信道具)アイコン |
+| ui12 | white_193.png | ―（撤去・削除済み） | 「思い出の地形図」ミニアイコン |
+| ui13 | white_194.png | ―（撤去・削除済み） | 選択肢ウィンドウ用フレーム |
+| ui14 | white_195.png | ―（撤去・削除済み） | 心Pointゲージ用フレーム |
+| ui15 | white_196.png | ―（撤去・削除済み） | 章タイトル表示用の地形図柄フレーム |
+| ui16 | white_197.png | ―（撤去・削除済み） | セーブ／ロード画面用の地図柄背景装飾 |
+| ui17 | white_198.png | ―（撤去・削除済み） | HUB(ルート選択)画面用マップ風背景 |
+| ui18 | white_199.png | ―（撤去・削除済み） | エンドロゴ共通フレーム |
+| ui19 | white_200.png | ―（撤去・削除済み） | 卒業証書アイコン |
+| ui20 | white_201.png | ―（撤去・削除済み） | コーンスープ缶アイコン |
 
-## 予備スロット
+## 予備スロット（削除済み）
 
 | スロット | 元ファイル | 新ファイル名 |
 |---|---|---|
-| SPARE_202 | white_202.png | `spare_202.png` |
-| SPARE_203 | white_203.png | `spare_203.png` |
-| SPARE_204 | white_204.png | `spare_204.png` |
-| SPARE_205 | white_205.png | `spare_205.png` |
-| SPARE_206 | white_206.png | `spare_206.png` |
-| SPARE_207 | white_207.png | `spare_207.png` |
-| SPARE_208 | white_208.png | `spare_208.png` |
-| SPARE_209 | white_209.png | `spare_209.png` |
-| SPARE_210 | white_210.png | `spare_210.png` |
-| SPARE_211 | white_211.png | `spare_211.png` |
-| SPARE_212 | white_212.png | `spare_212.png` |
-| SPARE_213 | white_213.png | `spare_213.png` |
-| SPARE_214 | white_214.png | `spare_214.png` |
-| SPARE_215 | white_215.png | `spare_215.png` |
-| SPARE_216 | white_216.png | `spare_216.png` |
-| SPARE_217 | white_217.png | `spare_217.png` |
-| SPARE_218 | white_218.png | `spare_218.png` |
-| SPARE_219 | white_219.png | `spare_219.png` |
-| SPARE_220 | white_220.png | `spare_220.png` |
-| SPARE_221 | white_221.png | `spare_221.png` |
-| SPARE_222 | white_222.png | `spare_222.png` |
-| SPARE_223 | white_223.png | `spare_223.png` |
-| SPARE_224 | white_224.png | `spare_224.png` |
-| SPARE_225 | white_225.png | `spare_225.png` |
-| SPARE_226 | white_226.png | `spare_226.png` |
-| SPARE_227 | white_227.png | `spare_227.png` |
-| SPARE_228 | white_228.png | `spare_228.png` |
-| SPARE_229 | white_229.png | `spare_229.png` |
-| SPARE_230 | white_230.png | `spare_230.png` |
-| SPARE_231 | white_231.png | `spare_231.png` |
-| SPARE_232 | white_232.png | `spare_232.png` |
-| SPARE_233 | white_233.png | `spare_233.png` |
-| SPARE_234 | white_234.png | `spare_234.png` |
-| SPARE_235 | white_235.png | `spare_235.png` |
-| SPARE_236 | white_236.png | `spare_236.png` |
-| SPARE_237 | white_237.png | `spare_237.png` |
-| SPARE_238 | white_238.png | `spare_238.png` |
-| SPARE_239 | white_239.png | `spare_239.png` |
-| SPARE_240 | white_240.png | `spare_240.png` |
-| SPARE_241 | white_241.png | `spare_241.png` |
-| SPARE_242 | white_242.png | `spare_242.png` |
-| SPARE_243 | white_243.png | `spare_243.png` |
-| SPARE_244 | white_244.png | `spare_244.png` |
-| SPARE_245 | white_245.png | `spare_245.png` |
-| SPARE_246 | white_246.png | `spare_246.png` |
-| SPARE_247 | white_247.png | `spare_247.png` |
-| SPARE_248 | white_248.png | `spare_248.png` |
-| SPARE_249 | white_249.png | `spare_249.png` |
-| SPARE_250 | white_250.png | `spare_250.png` |
-| SPARE_251 | white_251.png | `spare_251.png` |
-| SPARE_252 | white_252.png | `spare_252.png` |
-| SPARE_253 | white_253.png | `spare_253.png` |
-| SPARE_254 | white_254.png | `spare_254.png` |
-| SPARE_255 | white_255.png | `spare_255.png` |
-| SPARE_256 | white_256.png | `spare_256.png` |
-| SPARE_257 | white_257.png | `spare_257.png` |
-| SPARE_258 | white_258.png | `spare_258.png` |
-| SPARE_259 | white_259.png | `spare_259.png` |
-| SPARE_260 | white_260.png | `spare_260.png` |
-| SPARE_261 | white_261.png | `spare_261.png` |
-| SPARE_262 | white_262.png | `spare_262.png` |
-| SPARE_263 | white_263.png | `spare_263.png` |
-| SPARE_264 | white_264.png | `spare_264.png` |
-| SPARE_265 | white_265.png | `spare_265.png` |
-| SPARE_266 | white_266.png | `spare_266.png` |
-| SPARE_267 | white_267.png | `spare_267.png` |
-| SPARE_268 | white_268.png | `spare_268.png` |
-| SPARE_269 | white_269.png | `spare_269.png` |
-| SPARE_270 | white_270.png | `spare_270.png` |
-| SPARE_271 | white_271.png | `spare_271.png` |
-| SPARE_272 | white_272.png | `spare_272.png` |
-| SPARE_273 | white_273.png | `spare_273.png` |
-| SPARE_274 | white_274.png | `spare_274.png` |
-| SPARE_275 | white_275.png | `spare_275.png` |
-| SPARE_276 | white_276.png | `spare_276.png` |
-| SPARE_277 | white_277.png | `spare_277.png` |
-| SPARE_278 | white_278.png | `spare_278.png` |
-| SPARE_279 | white_279.png | `spare_279.png` |
-| SPARE_280 | white_280.png | `spare_280.png` |
-| SPARE_281 | white_281.png | `spare_281.png` |
-| SPARE_282 | white_282.png | `spare_282.png` |
-| SPARE_283 | white_283.png | `spare_283.png` |
-| SPARE_284 | white_284.png | `spare_284.png` |
-| SPARE_285 | white_285.png | `spare_285.png` |
-| SPARE_286 | white_286.png | `spare_286.png` |
-| SPARE_287 | white_287.png | `spare_287.png` |
-| SPARE_288 | white_288.png | `spare_288.png` |
-| SPARE_289 | white_289.png | `spare_289.png` |
-| SPARE_290 | white_290.png | `spare_290.png` |
-| SPARE_291 | white_291.png | `spare_291.png` |
-| SPARE_292 | white_292.png | `spare_292.png` |
-| SPARE_293 | white_293.png | `spare_293.png` |
-| SPARE_294 | white_294.png | `spare_294.png` |
-| SPARE_295 | white_295.png | `spare_295.png` |
-| SPARE_296 | white_296.png | `spare_296.png` |
-| SPARE_297 | white_297.png | `spare_297.png` |
-| SPARE_298 | white_298.png | `spare_298.png` |
-| SPARE_299 | white_299.png | `spare_299.png` |
-| SPARE_300 | white_300.png | `spare_300.png` |
+| SPARE_202 | white_202.png | ―（削除済み） |
+| SPARE_203 | white_203.png | ―（削除済み） |
+| SPARE_204 | white_204.png | ―（削除済み） |
+| SPARE_205 | white_205.png | ―（削除済み） |
+| SPARE_206 | white_206.png | ―（削除済み） |
+| SPARE_207 | white_207.png | ―（削除済み） |
+| SPARE_208 | white_208.png | ―（削除済み） |
+| SPARE_209 | white_209.png | ―（削除済み） |
+| SPARE_210 | white_210.png | ―（削除済み） |
+| SPARE_211 | white_211.png | ―（削除済み） |
+| SPARE_212 | white_212.png | ―（削除済み） |
+| SPARE_213 | white_213.png | ―（削除済み） |
+| SPARE_214 | white_214.png | ―（削除済み） |
+| SPARE_215 | white_215.png | ―（削除済み） |
+| SPARE_216 | white_216.png | ―（削除済み） |
+| SPARE_217 | white_217.png | ―（削除済み） |
+| SPARE_218 | white_218.png | ―（削除済み） |
+| SPARE_219 | white_219.png | ―（削除済み） |
+| SPARE_220 | white_220.png | ―（削除済み） |
+| SPARE_221 | white_221.png | ―（削除済み） |
+| SPARE_222 | white_222.png | ―（削除済み） |
+| SPARE_223 | white_223.png | ―（削除済み） |
+| SPARE_224 | white_224.png | ―（削除済み） |
+| SPARE_225 | white_225.png | ―（削除済み） |
+| SPARE_226 | white_226.png | ―（削除済み） |
+| SPARE_227 | white_227.png | ―（削除済み） |
+| SPARE_228 | white_228.png | ―（削除済み） |
+| SPARE_229 | white_229.png | ―（削除済み） |
+| SPARE_230 | white_230.png | ―（削除済み） |
+| SPARE_231 | white_231.png | ―（削除済み） |
+| SPARE_232 | white_232.png | ―（削除済み） |
+| SPARE_233 | white_233.png | ―（削除済み） |
+| SPARE_234 | white_234.png | ―（削除済み） |
+| SPARE_235 | white_235.png | ―（削除済み） |
+| SPARE_236 | white_236.png | ―（削除済み） |
+| SPARE_237 | white_237.png | ―（削除済み） |
+| SPARE_238 | white_238.png | ―（削除済み） |
+| SPARE_239 | white_239.png | ―（削除済み） |
+| SPARE_240 | white_240.png | ―（削除済み） |
+| SPARE_241 | white_241.png | ―（削除済み） |
+| SPARE_242 | white_242.png | ―（削除済み） |
+| SPARE_243 | white_243.png | ―（削除済み） |
+| SPARE_244 | white_244.png | ―（削除済み） |
+| SPARE_245 | white_245.png | ―（削除済み） |
+| SPARE_246 | white_246.png | ―（削除済み） |
+| SPARE_247 | white_247.png | ―（削除済み） |
+| SPARE_248 | white_248.png | ―（削除済み） |
+| SPARE_249 | white_249.png | ―（削除済み） |
+| SPARE_250 | white_250.png | ―（削除済み） |
+| SPARE_251 | white_251.png | ―（削除済み） |
+| SPARE_252 | white_252.png | ―（削除済み） |
+| SPARE_253 | white_253.png | ―（削除済み） |
+| SPARE_254 | white_254.png | ―（削除済み） |
+| SPARE_255 | white_255.png | ―（削除済み） |
+| SPARE_256 | white_256.png | ―（削除済み） |
+| SPARE_257 | white_257.png | ―（削除済み） |
+| SPARE_258 | white_258.png | ―（削除済み） |
+| SPARE_259 | white_259.png | ―（削除済み） |
+| SPARE_260 | white_260.png | ―（削除済み） |
+| SPARE_261 | white_261.png | ―（削除済み） |
+| SPARE_262 | white_262.png | ―（削除済み） |
+| SPARE_263 | white_263.png | ―（削除済み） |
+| SPARE_264 | white_264.png | ―（削除済み） |
+| SPARE_265 | white_265.png | ―（削除済み） |
+| SPARE_266 | white_266.png | ―（削除済み） |
+| SPARE_267 | white_267.png | ―（削除済み） |
+| SPARE_268 | white_268.png | ―（削除済み） |
+| SPARE_269 | white_269.png | ―（削除済み） |
+| SPARE_270 | white_270.png | ―（削除済み） |
+| SPARE_271 | white_271.png | ―（削除済み） |
+| SPARE_272 | white_272.png | ―（削除済み） |
+| SPARE_273 | white_273.png | ―（削除済み） |
+| SPARE_274 | white_274.png | ―（削除済み） |
+| SPARE_275 | white_275.png | ―（削除済み） |
+| SPARE_276 | white_276.png | ―（削除済み） |
+| SPARE_277 | white_277.png | ―（削除済み） |
+| SPARE_278 | white_278.png | ―（削除済み） |
+| SPARE_279 | white_279.png | ―（削除済み） |
+| SPARE_280 | white_280.png | ―（削除済み） |
+| SPARE_281 | white_281.png | ―（削除済み） |
+| SPARE_282 | white_282.png | ―（削除済み） |
+| SPARE_283 | white_283.png | ―（削除済み） |
+| SPARE_284 | white_284.png | ―（削除済み） |
+| SPARE_285 | white_285.png | ―（削除済み） |
+| SPARE_286 | white_286.png | ―（削除済み） |
+| SPARE_287 | white_287.png | ―（削除済み） |
+| SPARE_288 | white_288.png | ―（削除済み） |
+| SPARE_289 | white_289.png | ―（削除済み） |
+| SPARE_290 | white_290.png | ―（削除済み） |
+| SPARE_291 | white_291.png | ―（削除済み） |
+| SPARE_292 | white_292.png | ―（削除済み） |
+| SPARE_293 | white_293.png | ―（削除済み） |
+| SPARE_294 | white_294.png | ―（削除済み） |
+| SPARE_295 | white_295.png | ―（削除済み） |
+| SPARE_296 | white_296.png | ―（削除済み） |
+| SPARE_297 | white_297.png | ―（削除済み） |
+| SPARE_298 | white_298.png | ―（削除済み） |
+| SPARE_299 | white_299.png | ―（削除済み） |
+| SPARE_300 | white_300.png | ―（削除済み） |
 
 ---
 
-- 合計: 300スロット (背景24 / 立ち絵105 / 名場面CG 38 / ED用CG 14 / UI 20 / 予備 99)
+- 合計: 300スロット (背景24＝実画像 / 立ち絵105＝台帳のみ / 名場面CG 38＝台帳18・降板削除20 / ED用CG 14＝台帳のみ / UI 20＝撤去 / 予備 99＝削除済み)
+- 2026-09-12: UI画像20枚を撤去（CSS/SVG描画で全代替）。名場面CGのうち非ピーク20枚を降板のうえ削除。
+- 2026-09-12(2): 白紙プレースホルダ実ファイル（cg/chr/spare 計256枚）を全削除。背景24枚だけが実画像。
 - 企画書§8.2では立ち絵113本と計上されているが、第5章の表情リストを実列挙すると105本のため、
   差分8本は予備スロット(追加表情用バッファ)として確保している(§8.6「約90枚分のバッファ」の一部)。
 - 元 `image1/`, `image2/`, `image3/` フォルダはリネーム後に撤去。

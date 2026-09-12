@@ -1,7 +1,7 @@
 /* sw.js — 最小オフライン対応。初回はネットワーク優先、2回目からCacheFirst
    ※ 実素材・脚本を差し替えたら CACHE のバージョンを上げる（上げるまで旧キャッシュを返す）。
-      honshitsu-v3: 2026-09-11 の軽量化＋CG整理を、前回の CacheFirst に閉じ込めないため。 */
-const CACHE = 'honshitsu-v3';
+      honshitsu-v5: 2026-09-12(2) 白紙プレースホルダ256枚削除に伴う旧キャッシュ払い落とし。 */
+const CACHE = 'honshitsu-v5';
 const CORE = [
   './',
   './index.html',

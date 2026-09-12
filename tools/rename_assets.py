@@ -6,11 +6,15 @@ rename_assets.py ―― 仮画像(white_NNN.png)を企画書第8章のアセッ�
 対象: image1/ image2/ image3/ に置かれた 400x300 の白いプレースホルダー計300枚。
       中身は仮で構わないという前提で、「名前だけ」正式スロット名へ変更する。
 
+※ 2026-09-12: 白紙プレースホルダの実ファイル（cg/chr/_buffer 計256枚）は削除済み。
+      UI画像20枚も撤去済み（CSS/SVG描画で全代替）。このスクリプトは歴史的経緯の記録であり、
+      再実行には元の white_NNN.png が必要（現在は存在しない）。現行の台帳は data/assets.json。
+
 出力:
   assets/bg/   …… 背景 24枚
   assets/chr/  …… 立ち絵差分 105枚（第5章の表情リスト準拠）
   assets/cg/   …… 専用イベントCG 38枚 + ED専用 14枚 = 52枚
-  assets/ui/   …… UI/アイテム 20枚
+  （UI/アイテム画像20枚は 2026-09-12 撤去 ―― 全てCSS/SVG描画で代替済みのため）
   assets/_buffer/ …… 未割当の余り（増分区バッファ。企画書の90枚分余裕に相当）
   data/assets.json …… エンジンが読むアセット台帳（元ファイル名・用途・説明・プレースホルダ判定）
   docs/ASSET_MANIFEST.md …… 人が読む対応表
@@ -256,29 +260,11 @@ CG_END = [
     ("cg_end_bonus", "cg_end_bonus", "BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット"),
 ]
 
-# ------------------------------------------------------------ UI (20) --------
-UI = [
-    ("ui01", "ui01_title_logo", "タイトルロゴ「まだ地図の途中で」"),
-    ("ui02", "ui02_frame_line_chat", "LINEグループチャット画面フレーム"),
-    ("ui03", "ui03_frame_bbs_heikatsu", "匿名掲示板（ヘイカツスレ）画面フレーム"),
-    ("ui04", "ui04_frame_juken_bbs", "受験情報掲示板（フェイカツ書き込み）画面フレーム"),
-    ("ui05", "ui05_frame_honshitsu_live", "本質配信・配信画面UI（コメント欄含む）"),
-    ("ui06", "ui06_icon_honshitsu_nenkan", "✝本質✝年鑑・表紙アイコン"),
-    ("ui07", "ui07_icon_honshitsu_guide", "✝本質✝入門ガイド・表紙アイコン"),
-    ("ui08", "ui08_icon_gakko_shinbun", "古い学校新聞・紙面アイコン"),
-    ("ui09", "ui09_icon_ko_shashin", "古写真アイコン（単体・所持品表示用）"),
-    ("ui10", "ui10_icon_chizutsutsu", "地図筒アイコン"),
-    ("ui11", "ui11_icon_kami_magicpen", "紙とマジックペン（寺地の配信道具）アイコン"),
-    ("ui12", "ui12_icon_omoide_chizu", "「思い出の地形図」ミニアイコン"),
-    ("ui13", "ui13_frame_choice", "選択肢ウィンドウ用フレーム"),
-    ("ui14", "ui14_frame_kokoro_gauge", "心Pointゲージ用フレーム（内部管理UI）"),
-    ("ui15", "ui15_frame_chapter_title", "章タイトル表示用の地形図柄フレーム"),
-    ("ui16", "ui16_bg_save_load", "セーブ／ロード画面用の地図柄背景装飾"),
-    ("ui17", "ui17_bg_hub_map", "HUB（ルート選択）画面用のマップ風背景"),
-    ("ui18", "ui18_frame_end_logo", "エンドロゴ共通フレーム（色違いで各EDに流用）"),
-    ("ui19", "ui19_icon_sotsugyou_shousho", "卒業証書アイコン"),
-    ("ui20", "ui20_icon_corn_soup", "コーンスープ缶アイコン（小ネタ回収用）"),
-]
+# ------------------------------------------------------------ UI (撤去) ------
+# UI画像（ui01〜ui20）は 2026-09-12 に撤去。
+# 企画書§8.5のUI/アイテム画像は、エンジン側のCSS/SVG描画（端末フレーム・所持品アイコン・
+# 選択肢・章カード・HUB・ENDロゴ等）で全て代替できているため、実ファイル・台帳・manifestから外した。
+UI = []
 
 
 def collect_source_files():
@@ -309,8 +295,6 @@ def build_slots():
         slots.append(("cg", cid, name + ".png", desc, desc, "scene"))
     for cid, name, desc in CG_END:
         slots.append(("cg", cid, name + ".png", desc, desc, "ending"))
-    for uid, name, desc in UI:
-        slots.append(("ui", uid, name + ".png", desc, desc, "ui"))
     return slots
 
 
@@ -404,9 +388,9 @@ def main():
         "|---|---|---|",
         "| 背景(BG) | 24 | %d |" % len(BG),
         "| 立ち絵差分 | 113 | %d（第5章の表情リスト合計。企画書の計数是差 -8） |" % sum(len(e) for _, _, e in CHR),
-        "| 名場面CG | 38 | %d |" % len(CG_MAIN),
+        "| 名場面CG | 38 | %d（うち20枚は 2026-09-12 にreserve降板 ―― 本編使用は18枚） |" % len(CG_MAIN),
         "| ED専用CG | 14 | %d |" % len(CG_END),
-        "| UI／アイテム | 20 | %d |" % len(UI),
+        "| UI／アイテム | 20 | 0（2026-09-12 撤去。CSS/SVG描画で代替） |",
         "| 未割当バッファ | 約90 | %d（`assets/_buffer/`） |" % len(buffer_files),
         "",
         "※ 企画書 8.6 は立ち絵差分を113枚・総計209枚としていますが、8.2 の内訳表と",

@@ -250,12 +250,9 @@
 <script src="js/engine.js"></script>
 <script src="js/main.js"></script>
 <script>
-  // タイトルロゴのプレート (ui01) とタイトル背景の初期化
+  // タイトル画面表示 (エンジン初期化後)
+  // ※ ロゴプレート (旧ui01) はUI画像撤去（2026-09-12）に伴い、CSSの淡いプレート描画に置き換えた
   window.addEventListener("DOMContentLoaded", () => {
-    const MAN = window.ASSET_MANIFEST;
-    const plate = document.getElementById("title-logo-plate");
-    plate.style.backgroundImage = `url('assets/img/${MAN.ui.ui01.file}')`;
-    // タイトル画面表示 (エンジン初期化後)
     setTimeout(() => { try { window.__engine.showTitle(); } catch(e) {} }, 300);
   });
 </script>
