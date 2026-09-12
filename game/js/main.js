@@ -49,12 +49,54 @@ setInterval(() => {
   try { window.__engine && window.__engine.updateDebug(); } catch (e) {}
 }, 1000);
 
-/* ローディング解除 */
+/* 全画像プリロード（2026-09-12: ゲーム開始前に画像を全部読み込む方式へ変更） */
+function allImageFiles() {
+  const MAN = window.ASSET_MANIFEST || {};
+  const out = [];
+  const push = f => { if (f) out.push("assets/img/" + f); };
+  Object.values(MAN.bg || {}).forEach(v => push(v.file));
+  Object.values(MAN.cg || {}).forEach(v => push(v.file));
+  Object.values(MAN.ed_cg || {}).forEach(v => push(v.file));
+  Object.values(MAN.ui || {}).forEach(v => push(v.file));
+  Object.values(MAN.chr || {}).forEach(c => (c.exprs || []).forEach(e => push(e.file)));
+  return Array.from(new Set(out));
+}
+
+function loadImage(src, timeout = 20000) {
+  return new Promise(resolve => {
+    const im = new Image();
+    im.decoding = "async";
+    const to = setTimeout(() => resolve(false), timeout);
+    im.onload = () => { clearTimeout(to); im.decode ? im.decode().then(() => resolve(true), () => resolve(true)) : resolve(true); };
+    im.onerror = () => { clearTimeout(to); console.warn("[preload] 読込失敗:", src); resolve(false); };
+    im.src = src;
+  });
+}
+
+async function preloadAll() {
+  const files = allImageFiles();
+  const total = files.length;
+  const txt = document.querySelector("#loading .ld-text");
+  let done = 0;
+  const setMsg = () => { if (txt) txt.textContent = `地図を広げています…… ${done}/${total}`; };
+  setMsg();
+  const queue = files.slice();
+  const worker = async () => {
+    while (queue.length) {
+      await loadImage(queue.shift());
+      done++; setMsg();
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(6, total || 1) }, worker));
+  if (txt) txt.textContent = "準備完了";
+}
+
+/* ローディング解除（全画像の読み込み完了後） */
 window.addEventListener("load", () => {
-  setTimeout(() => {
+  preloadAll().catch(e => console.warn("[preload]", e)).then(() => {
     const ld = $("loading");
     if (ld) { ld.style.transition = "opacity .8s"; ld.style.opacity = "0"; setTimeout(() => ld.remove(), 850); }
-  }, 400);
+  });
 });
 
 })();

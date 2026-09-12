@@ -158,15 +158,17 @@ async function boot() {
     warmUp(assets);
 
     setProgress(68, '画像を読み込んでいます…');
-    // 起動時に読むのは「これから始まる数シーン」だけ。全201枚を待たない。
-    const seen = new Set();
-    const first = assets.priorityList(data, 5, def);
-    first.forEach(a => seen.add(a.id));
+    // 起動時に実画像を「全部」読み切る（2026-09-12: 背景差し替えに合わせて一括プリロードへ変更）。
+    // 先に本編冒頭で使う分を並べ替えて読むので、体感の待ちも自然な順序になる。
+    const priority = assets.priorityList(data, 5, def);
+    const pset = new Set(priority.map(a => a.id));
+    const all = priority.concat(assets.realList().filter(a => !pset.has(a.id)));
+    const seen = new Set(all.map(a => a.id));
     await assets.preload((done, total) => {
       if (!total) { setProgress(88, '画像の準備ができました'); return; }
       setProgress(68 + done / total * 20, `画像を読み込んでいます… ${done}/${total}`);
-    }, first);
-    // 残りはタイトル表示之后、手が空いたときに少しずつ（差し替え素材が増えても起動は一定）
+    }, all);
+    // 念のため取りこぼし（後から台帳に増えた分）だけ後読み
     assets.warmRest(seen).catch(() => {});
 
     setProgress(91, '活字を揃えています…');
