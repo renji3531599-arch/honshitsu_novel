@@ -1,7 +1,7 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。",
  "engine_limit": 300,
- "assigned": 162,
+ "assigned": 135,
  "buffer": 0,
  "assets": [
   {
@@ -285,16 +285,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_katsuya_05_me_fuseru",
-   "cat": "chr",
-   "file": "assets/chr/chr_katsuya_05_me_fuseru.png",
-   "label": "塀勝也 目を伏せる",
-   "desc": "立ち絵差分 塀勝也／目を伏せる",
-   "meta": "katsuya",
-   "source": "image1/white_029.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_katsuya_06_kataki_muten",
    "cat": "chr",
    "file": "assets/chr/chr_katsuya_06_kataki_muten.png",
@@ -362,16 +352,6 @@
    "desc": "立ち絵差分 両馬二郎／ニヤリ",
    "meta": "ryoma",
    "source": "image1/white_036.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_ryoma_03_zenryoku",
-   "cat": "chr",
-   "file": "assets/chr/chr_ryoma_03_zenryoku.png",
-   "label": "両馬二郎 全力",
-   "desc": "立ち絵差分 両馬二郎／全力",
-   "meta": "ryoma",
-   "source": "image3/white_037.png",
    "placeholder": true
   },
   {
@@ -475,16 +455,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_mie_05_tere",
-   "cat": "chr",
-   "file": "assets/chr/chr_mie_05_tere.png",
-   "label": "三重県臣 照れ",
-   "desc": "立ち絵差分 三重県臣／照れ",
-   "meta": "mie",
-   "source": "image2/white_048.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_mie_06_iraduki_shinken",
    "cat": "chr",
    "file": "assets/chr/chr_mie_06_iraduki_shinken.png",
@@ -502,16 +472,6 @@
    "desc": "立ち絵差分 三重県臣／本気の真剣",
    "meta": "mie",
    "source": "image3/white_050.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_mie_08_namida_kamu",
-   "cat": "chr",
-   "file": "assets/chr/chr_mie_08_namida_kamu.png",
-   "label": "三重県臣 涙をこらえて唇を噛む",
-   "desc": "立ち絵差分 三重県臣／涙をこらえて唇を噛む",
-   "meta": "mie",
-   "source": "image3/white_051.png",
    "placeholder": true
   },
   {
@@ -575,16 +535,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_terachi_05_nakisou_koraeru",
-   "cat": "chr",
-   "file": "assets/chr/chr_terachi_05_nakisou_koraeru.png",
-   "label": "寺地星 泣きそうなのを堪える",
-   "desc": "立ち絵差分 寺地星／泣きそうなのを堪える",
-   "meta": "terachi",
-   "source": "image3/white_058.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_terachi_06_maiku_no_ketsui",
    "cat": "chr",
    "file": "assets/chr/chr_terachi_06_maiku_no_ketsui.png",
@@ -592,16 +542,6 @@
    "desc": "立ち絵差分 寺地星／マイク前の決意顔",
    "meta": "terachi",
    "source": "image3/white_059.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_terachi_07_yomiage",
-   "cat": "chr",
-   "file": "assets/chr/chr_terachi_07_yomiage.png",
-   "label": "寺地星 声を震わせながら読み上げる",
-   "desc": "立ち絵差分 寺地星／声を震わせながら読み上げる",
-   "meta": "terachi",
-   "source": "image3/white_060.png",
    "placeholder": true
   },
   {
@@ -715,16 +655,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_rei_03_kangaechuu",
-   "cat": "chr",
-   "file": "assets/chr/chr_rei_03_kangaechuu.png",
-   "label": "数理零 考え中（顎に手）",
-   "desc": "立ち絵差分 数理零／考え中（顎に手）",
-   "meta": "rei",
-   "source": "image1/white_072.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_rei_04_odoroki",
    "cat": "chr",
    "file": "assets/chr/chr_rei_04_odoroki.png",
@@ -745,16 +675,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_rei_06_yasashii_me",
-   "cat": "chr",
-   "file": "assets/chr/chr_rei_06_yasashii_me.png",
-   "label": "数理零 優しい目",
-   "desc": "立ち絵差分 数理零／優しい目",
-   "meta": "rei",
-   "source": "image1/white_075.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_rei_07_kotoba_erabu",
    "cat": "chr",
    "file": "assets/chr/chr_rei_07_kotoba_erabu.png",
@@ -762,16 +682,6 @@
    "desc": "立ち絵差分 数理零／言葉を選ぶ顔",
    "meta": "rei",
    "source": "image1/white_076.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_rei_08_me_rumaseru",
-   "cat": "chr",
-   "file": "assets/chr/chr_rei_08_me_rumaseru.png",
-   "label": "数理零 目を潤ませる",
-   "desc": "立ち絵差分 数理零／目を潤ませる",
-   "meta": "rei",
-   "source": "image2/white_077.png",
    "placeholder": true
   },
   {
@@ -795,16 +705,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_izaki_03_komari",
-   "cat": "chr",
-   "file": "assets/chr/chr_izaki_03_komari.png",
-   "label": "伊崎 困り顔",
-   "desc": "立ち絵差分 伊崎／困り顔",
-   "meta": "izaki",
-   "source": "image1/white_080.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_izaki_04_shikiri",
    "cat": "chr",
    "file": "assets/chr/chr_izaki_04_shikiri.png",
@@ -815,16 +715,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_izaki_05_odoroki",
-   "cat": "chr",
-   "file": "assets/chr/chr_izaki_05_odoroki.png",
-   "label": "伊崎 驚き",
-   "desc": "立ち絵差分 伊崎／驚き",
-   "meta": "izaki",
-   "source": "image2/white_082.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_izaki_06_shimiemi",
    "cat": "chr",
    "file": "assets/chr/chr_izaki_06_shimiemi.png",
@@ -832,16 +722,6 @@
    "desc": "立ち絵差分 伊崎／しみじみとした微笑み",
    "meta": "izaki",
    "source": "image1/white_083.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_izumi_01_tsuujou",
-   "cat": "chr",
-   "file": "assets/chr/chr_izumi_01_tsuujou.png",
-   "label": "伊豆見 通常",
-   "desc": "立ち絵差分 伊豆見／通常",
-   "meta": "izumi",
-   "source": "image2/white_084.png",
    "placeholder": true
   },
   {
@@ -875,16 +755,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_izumi_05_tere",
-   "cat": "chr",
-   "file": "assets/chr/chr_izumi_05_tere.png",
-   "label": "伊豆見 照れ",
-   "desc": "立ち絵差分 伊豆見／照れ",
-   "meta": "izumi",
-   "source": "image1/white_088.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_izumi_06_hokorashige",
    "cat": "chr",
    "file": "assets/chr/chr_izumi_06_hokorashige.png",
@@ -902,26 +772,6 @@
    "desc": "立ち絵差分 召野カイト／通常",
    "meta": "meshino",
    "source": "image3/white_090.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_meshino_02_kimegao",
-   "cat": "chr",
-   "file": "assets/chr/chr_meshino_02_kimegao.png",
-   "label": "召野カイト 決め顔",
-   "desc": "立ち絵差分 召野カイト／決め顔",
-   "meta": "meshino",
-   "source": "image2/white_091.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_meshino_03_tere",
-   "cat": "chr",
-   "file": "assets/chr/chr_meshino_03_tere.png",
-   "label": "召野カイト 照れ",
-   "desc": "立ち絵差分 召野カイト／照れ",
-   "meta": "meshino",
-   "source": "image2/white_092.png",
    "placeholder": true
   },
   {
@@ -985,16 +835,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_kuraishi_04_shonbori",
-   "cat": "chr",
-   "file": "assets/chr/chr_kuraishi_04_shonbori.png",
-   "label": "倉石暁 しょんぼり",
-   "desc": "立ち絵差分 倉石暁／しょんぼり",
-   "meta": "kuraishi",
-   "source": "image3/white_099.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_kuraishi_05_hokorashige",
    "cat": "chr",
    "file": "assets/chr/chr_kuraishi_05_hokorashige.png",
@@ -1015,16 +855,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_kuraishi_07_namidagumu",
-   "cat": "chr",
-   "file": "assets/chr/chr_kuraishi_07_namidagumu.png",
-   "label": "倉石暁 涙ぐむ",
-   "desc": "立ち絵差分 倉石暁／涙ぐむ",
-   "meta": "kuraishi",
-   "source": "image1/white_102.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_futami_01_tsuujou",
    "cat": "chr",
    "file": "assets/chr/chr_futami_01_tsuujou.png",
@@ -1032,16 +862,6 @@
    "desc": "立ち絵差分 二見玲子／通常",
    "meta": "futami",
    "source": "image1/white_103.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_futami_02_hohoemi",
-   "cat": "chr",
-   "file": "assets/chr/chr_futami_02_hohoemi.png",
-   "label": "二見玲子 微笑",
-   "desc": "立ち絵差分 二見玲子／微笑",
-   "meta": "futami",
-   "source": "image3/white_104.png",
    "placeholder": true
   },
   {
@@ -1075,16 +895,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_sakura_01_tsuujou",
-   "cat": "chr",
-   "file": "assets/chr/chr_sakura_01_tsuujou.png",
-   "label": "櫻優 通常",
-   "desc": "立ち絵差分 櫻優／通常",
-   "meta": "sakura",
-   "source": "image3/white_108.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_sakura_02_kenkyuusha",
    "cat": "chr",
    "file": "assets/chr/chr_sakura_02_kenkyuusha.png",
@@ -1092,26 +902,6 @@
    "desc": "立ち絵差分 櫻優／真剣（研究者モード）",
    "meta": "sakura",
    "source": "image3/white_109.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_sakura_03_tere",
-   "cat": "chr",
-   "file": "assets/chr/chr_sakura_03_tere.png",
-   "label": "櫻優 照れ",
-   "desc": "立ち絵差分 櫻優／照れ",
-   "meta": "sakura",
-   "source": "image1/white_110.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_sakura_04_douyou",
-   "cat": "chr",
-   "file": "assets/chr/chr_sakura_04_douyou.png",
-   "label": "櫻優 動揺",
-   "desc": "立ち絵差分 櫻優／動揺",
-   "meta": "sakura",
-   "source": "image1/white_111.png",
    "placeholder": true
   },
   {
@@ -1165,26 +955,6 @@
    "placeholder": true
   },
   {
-   "id": "chr_mitsumine_04_akire",
-   "cat": "chr",
-   "file": "assets/chr/chr_mitsumine_04_akire.png",
-   "label": "三峰瑠衣 呆れ",
-   "desc": "立ち絵差分 三峰瑠衣／呆れ",
-   "meta": "mitsumine",
-   "source": "image2/white_117.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_mitsumine_05_yasashii",
-   "cat": "chr",
-   "file": "assets/chr/chr_mitsumine_05_yasashii.png",
-   "label": "三峰瑠衣 優しい顔",
-   "desc": "立ち絵差分 三峰瑠衣／優しい顔",
-   "meta": "mitsumine",
-   "source": "image1/white_118.png",
-   "placeholder": true
-  },
-  {
    "id": "chr_mitsumine_06_ha",
    "cat": "chr",
    "file": "assets/chr/chr_mitsumine_06_ha.png",
@@ -1212,16 +982,6 @@
    "desc": "立ち絵差分 内藤蘭／微笑",
    "meta": "naitou",
    "source": "image2/white_121.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_naitou_03_dokusho",
-   "cat": "chr",
-   "file": "assets/chr/chr_naitou_03_dokusho.png",
-   "label": "内藤蘭 読書中（伏し目）",
-   "desc": "立ち絵差分 内藤蘭／読書中（伏し目）",
-   "meta": "naitou",
-   "source": "image3/white_122.png",
    "placeholder": true
   },
   {
@@ -1262,36 +1022,6 @@
    "desc": "立ち絵差分 稲葉悌二（回想専用）／古写真の中の柔らかい笑み",
    "meta": "inaba",
    "source": "image1/white_126.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_inaba_02_yama_sasu",
-   "cat": "chr",
-   "file": "assets/chr/chr_inaba_02_yama_sasu.png",
-   "label": "稲葉悌二（回想専用） 山を指差す横顔",
-   "desc": "立ち絵差分 稲葉悌二（回想専用）／山を指差す横顔",
-   "meta": "inaba",
-   "source": "image1/white_127.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_wakaki-katsuya_01_waratteiru",
-   "cat": "chr",
-   "file": "assets/chr/chr_wakaki-katsuya_01_waratteiru.png",
-   "label": "若き日の塀勝也（回想専用） 笑っている",
-   "desc": "立ち絵差分 若き日の塀勝也（回想専用）／笑っている",
-   "meta": "wakaki-katsuya",
-   "source": "image2/white_128.png",
-   "placeholder": true
-  },
-  {
-   "id": "chr_wakaki-katsuya_02_bousen",
-   "cat": "chr",
-   "file": "assets/chr/chr_wakaki-katsuya_02_bousen.png",
-   "label": "若き日の塀勝也（回想専用） 呆然としている",
-   "desc": "立ち絵差分 若き日の塀勝也（回想専用）／呆然としている",
-   "meta": "wakaki-katsuya",
-   "source": "image3/white_129.png",
    "placeholder": true
   },
   {

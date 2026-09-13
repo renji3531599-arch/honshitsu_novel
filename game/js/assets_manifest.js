@@ -125,351 +125,43 @@ window.ASSET_MANIFEST = {
     }
   },
   "chr": {
-    "katsuya": {
-      "name": "塀勝也",
+    "futami": {
+      "name": "二見玲子",
       "exprs": [
         {
           "no": 1,
-          "file": "chr_katsuya_01_tsujou.png",
-          "label": "通常(穏やか)",
-          "slot": 25
-        },
-        {
-          "no": 2,
-          "file": "chr_katsuya_02_bishou.png",
-          "label": "微笑",
-          "slot": 26
-        },
-        {
-          "no": 3,
-          "file": "chr_katsuya_03_tooi_me.png",
-          "label": "遠い目",
-          "slot": 27
-        },
-        {
-          "no": 4,
-          "file": "chr_katsuya_04_odoroki.png",
-          "label": "驚き",
-          "slot": 28
-        },
-        {
-          "no": 5,
-          "file": "chr_katsuya_05_me_wo_fuseru.png",
-          "label": "目を伏せる",
-          "slot": 29
-        },
-        {
-          "no": 6,
-          "file": "chr_katsuya_06_katai_muhyoujou.png",
-          "label": "硬い無表情",
-          "slot": 30
-        },
-        {
-          "no": 7,
-          "file": "chr_katsuya_07_kaisou_me_hosomeru.png",
-          "label": "回想・目を細める",
-          "slot": 31
-        },
-        {
-          "no": 8,
-          "file": "chr_katsuya_08_namida_koraeru.png",
-          "label": "涙をこらえる",
-          "slot": 32
-        },
-        {
-          "no": 9,
-          "file": "chr_katsuya_09_naku.png",
-          "label": "泣く",
-          "slot": 33
-        },
-        {
-          "no": 10,
-          "file": "chr_katsuya_10_hareyaka_emie.png",
-          "label": "晴れやかな笑み",
-          "slot": 34
-        }
-      ]
-    },
-    "ryoma": {
-      "name": "両馬二郎",
-      "exprs": [
-        {
-          "no": 1,
-          "file": "chr_ryoma_01_tsujou.png",
+          "file": "chr_futami_01_tsuujou.png",
           "label": "通常",
-          "slot": 35
-        },
-        {
-          "no": 2,
-          "file": "chr_ryoma_02_niyari.png",
-          "label": "ニヤリ",
-          "slot": 36
+          "slot": 103
         },
         {
           "no": 3,
-          "file": "chr_ryoma_03_zenryoku.png",
-          "label": "全力",
-          "slot": 37
+          "file": "chr_futami_03_shinpai.png",
+          "label": "心配顔",
+          "slot": 105
         },
         {
           "no": 4,
-          "file": "chr_ryoma_04_kyuu_magao.png",
-          "label": "急に真顔",
-          "slot": 38
+          "file": "chr_futami_04_itazura.png",
+          "label": "いたずらっぽい笑み",
+          "slot": 106
         },
         {
           "no": 5,
-          "file": "chr_ryoma_05_shonbori.png",
-          "label": "しょんぼり",
-          "slot": 39
-        },
-        {
-          "no": 6,
-          "file": "chr_ryoma_06_nakiwarai.png",
-          "label": "泣き笑い",
-          "slot": 40
-        },
-        {
-          "no": 7,
-          "file": "chr_ryoma_07_ketsui_gao.png",
-          "label": "真剣な決意顔",
-          "slot": 41
-        },
-        {
-          "no": 8,
-          "file": "chr_ryoma_08_terekakushi.png",
-          "label": "照れ隠しで頭をかく",
-          "slot": 42
-        },
-        {
-          "no": 9,
-          "file": "chr_ryoma_09_goukyuu.png",
-          "label": "号泣",
-          "slot": 43
+          "file": "chr_futami_05_yokogao.png",
+          "label": "しんみりした横顔",
+          "slot": 107
         }
       ]
     },
-    "mie": {
-      "name": "三重県臣",
+    "inaba": {
+      "name": "稲葉悌二(回想)",
       "exprs": [
         {
           "no": 1,
-          "file": "chr_mie_01_tsujou_reshou.png",
-          "label": "通常(冷笑・半目)",
-          "slot": 44
-        },
-        {
-          "no": 2,
-          "file": "chr_mie_02_ha.png",
-          "label": "「は？」",
-          "slot": 45
-        },
-        {
-          "no": 3,
-          "file": "chr_mie_03_douryou.png",
-          "label": "動揺",
-          "slot": 46
-        },
-        {
-          "no": 4,
-          "file": "chr_mie_04_kimaguse_chinmoku.png",
-          "label": "気まずい沈黙顔",
-          "slot": 47
-        },
-        {
-          "no": 5,
-          "file": "chr_mie_05_tere.png",
-          "label": "照れ",
-          "slot": 48
-        },
-        {
-          "no": 6,
-          "file": "chr_mie_06_iradachi_shinken.png",
-          "label": "苛立ち混じりの真剣顔",
-          "slot": 49
-        },
-        {
-          "no": 7,
-          "file": "chr_mie_07_honki_shinken.png",
-          "label": "本気の真剣顔",
-          "slot": 50
-        },
-        {
-          "no": 8,
-          "file": "chr_mie_08_kuchibiru_kamu.png",
-          "label": "涙をこらえて唇を噛む",
-          "slot": 51
-        },
-        {
-          "no": 9,
-          "file": "chr_mie_09_sunao_hohoemi.png",
-          "label": "初めての素直な微笑み",
-          "slot": 52
-        },
-        {
-          "no": 10,
-          "file": "chr_mie_10_nakigao.png",
-          "label": "泣き顔",
-          "slot": 53
-        }
-      ]
-    },
-    "terachi": {
-      "name": "寺地星",
-      "exprs": [
-        {
-          "no": 1,
-          "file": "chr_terachi_01_tsujou.png",
-          "label": "通常",
-          "slot": 54
-        },
-        {
-          "no": 2,
-          "file": "chr_terachi_02_konwaku_gata.png",
-          "label": "困惑して固まる",
-          "slot": 55
-        },
-        {
-          "no": 3,
-          "file": "chr_terachi_03_haishin_shinken.png",
-          "label": "真剣な配信者の顔",
-          "slot": 56
-        },
-        {
-          "no": 4,
-          "file": "chr_terachi_04_ureshii.png",
-          "label": "嬉しい",
-          "slot": 57
-        },
-        {
-          "no": 5,
-          "file": "chr_terachi_05_nakisou_taeru.png",
-          "label": "泣きそうなのを堪える",
-          "slot": 58
-        },
-        {
-          "no": 6,
-          "file": "chr_terachi_06_maiku_ketsui.png",
-          "label": "マイク前の決意顔",
-          "slot": 59
-        },
-        {
-          "no": 7,
-          "file": "chr_terachi_07_furue_yomiage.png",
-          "label": "声を震わせながら読み上げる",
-          "slot": 60
-        },
-        {
-          "no": 8,
-          "file": "chr_terachi_08_namida.png",
-          "label": "涙",
-          "slot": 61
-        }
-      ]
-    },
-    "satou": {
-      "name": "砂糖東洋",
-      "exprs": [
-        {
-          "no": 1,
-          "file": "chr_satou_01_tsujou_geemu.png",
-          "label": "通常(ゲーム画面凝視)",
-          "slot": 62
-        },
-        {
-          "no": 2,
-          "file": "chr_satou_02_muhyoujou.png",
-          "label": "無表情(素)",
-          "slot": 63
-        },
-        {
-          "no": 3,
-          "file": "chr_satou_03_odoroki.png",
-          "label": "驚き",
-          "slot": 64
-        },
-        {
-          "no": 4,
-          "file": "chr_satou_04_tere_soppo.png",
-          "label": "照れ隠しでそっぽ",
-          "slot": 65
-        },
-        {
-          "no": 5,
-          "file": "chr_satou_05_kamera_shinken.png",
-          "label": "真剣にカメラを構える",
-          "slot": 66
-        },
-        {
-          "no": 6,
-          "file": "chr_satou_06_hohoemi.png",
-          "label": "微笑み",
-          "slot": 67
-        },
-        {
-          "no": 7,
-          "file": "chr_satou_07_kotoba_tsumaru.png",
-          "label": "言葉に詰まる",
-          "slot": 68
-        },
-        {
-          "no": 8,
-          "file": "chr_satou_08_me_hikari_taeru.png",
-          "label": "目に光るものを堪える",
-          "slot": 69
-        }
-      ]
-    },
-    "rei": {
-      "name": "数理零",
-      "exprs": [
-        {
-          "no": 1,
-          "file": "chr_rei_01_tsujou.png",
-          "label": "通常",
-          "slot": 70
-        },
-        {
-          "no": 2,
-          "file": "chr_rei_02_hohoemi.png",
-          "label": "微笑",
-          "slot": 71
-        },
-        {
-          "no": 3,
-          "file": "chr_rei_03_kangae_chuu.png",
-          "label": "考え中",
-          "slot": 72
-        },
-        {
-          "no": 4,
-          "file": "chr_rei_04_odoroki.png",
-          "label": "驚き",
-          "slot": 73
-        },
-        {
-          "no": 5,
-          "file": "chr_rei_05_shinken.png",
-          "label": "真剣",
-          "slot": 74
-        },
-        {
-          "no": 6,
-          "file": "chr_rei_06_yasashii_me.png",
-          "label": "優しい目",
-          "slot": 75
-        },
-        {
-          "no": 7,
-          "file": "chr_rei_07_kotoba_erabu.png",
-          "label": "言葉を選ぶ",
-          "slot": 76
-        },
-        {
-          "no": 8,
-          "file": "chr_rei_08_me_urumu.png",
-          "label": "目を潤ませる",
-          "slot": 77
+          "file": "chr_inaba_01_shashin_no_waraui.png",
+          "label": "古写真の中の柔らかい笑み",
+          "slot": 126
         }
       ]
     },
@@ -478,7 +170,7 @@ window.ASSET_MANIFEST = {
       "exprs": [
         {
           "no": 1,
-          "file": "chr_izaki_01_tsujou.png",
+          "file": "chr_izaki_01_tsuujou.png",
           "label": "通常",
           "slot": 78
         },
@@ -489,26 +181,14 @@ window.ASSET_MANIFEST = {
           "slot": 79
         },
         {
-          "no": 3,
-          "file": "chr_izaki_03_komari.png",
-          "label": "困り顔",
-          "slot": 80
-        },
-        {
           "no": 4,
-          "file": "chr_izaki_04_shikiri_gao.png",
-          "label": "真剣(仕切る顔)",
+          "file": "chr_izaki_04_shikiri.png",
+          "label": "真剣（仕切る顔）",
           "slot": 81
         },
         {
-          "no": 5,
-          "file": "chr_izaki_05_odoroki.png",
-          "label": "驚き",
-          "slot": 82
-        },
-        {
           "no": 6,
-          "file": "chr_izaki_06_shimijimi.png",
+          "file": "chr_izaki_06_shimiemi.png",
           "label": "しみじみとした微笑み",
           "slot": 83
         }
@@ -517,12 +197,6 @@ window.ASSET_MANIFEST = {
     "izumi": {
       "name": "伊豆見",
       "exprs": [
-        {
-          "no": 1,
-          "file": "chr_izumi_01_tsujou.png",
-          "label": "通常",
-          "slot": 84
-        },
         {
           "no": 2,
           "file": "chr_izumi_02_egao.png",
@@ -542,16 +216,104 @@ window.ASSET_MANIFEST = {
           "slot": 87
         },
         {
-          "no": 5,
-          "file": "chr_izumi_05_tere.png",
-          "label": "照れ",
-          "slot": 88
-        },
-        {
           "no": 6,
           "file": "chr_izumi_06_hokorashige.png",
           "label": "誇らしげ",
           "slot": 89
+        }
+      ]
+    },
+    "katsuya": {
+      "name": "塀勝也",
+      "exprs": [
+        {
+          "no": 1,
+          "file": "chr_katsuya_01_tsuujou.png",
+          "label": "通常（穏やか）",
+          "slot": 25
+        },
+        {
+          "no": 2,
+          "file": "chr_katsuya_02_hohoemi.png",
+          "label": "微笑",
+          "slot": 26
+        },
+        {
+          "no": 3,
+          "file": "chr_katsuya_03_tooi_me.png",
+          "label": "遠い目",
+          "slot": 27
+        },
+        {
+          "no": 4,
+          "file": "chr_katsuya_04_odoroki.png",
+          "label": "驚き",
+          "slot": 28
+        },
+        {
+          "no": 6,
+          "file": "chr_katsuya_06_kataki_muten.png",
+          "label": "硬い無表情",
+          "slot": 30
+        },
+        {
+          "no": 7,
+          "file": "chr_katsuya_07_kaisou_me_soseru.png",
+          "label": "回想・目を細める",
+          "slot": 31
+        },
+        {
+          "no": 8,
+          "file": "chr_katsuya_08_namida_koraeru.png",
+          "label": "涙をこらえる",
+          "slot": 32
+        },
+        {
+          "no": 9,
+          "file": "chr_katsuya_09_naku.png",
+          "label": "泣く",
+          "slot": 33
+        },
+        {
+          "no": 10,
+          "file": "chr_katsuya_10_hareyaka_emmi.png",
+          "label": "晴れやかな笑み",
+          "slot": 34
+        }
+      ]
+    },
+    "kuraishi": {
+      "name": "倉石暁",
+      "exprs": [
+        {
+          "no": 1,
+          "file": "chr_kuraishi_01_kekkyou.png",
+          "label": "通常（熱狂）",
+          "slot": 96
+        },
+        {
+          "no": 2,
+          "file": "chr_kuraishi_02_kanshou.png",
+          "label": "感激",
+          "slot": 97
+        },
+        {
+          "no": 3,
+          "file": "chr_kuraishi_03_chousa_shinken.png",
+          "label": "真剣（調査中）",
+          "slot": 98
+        },
+        {
+          "no": 5,
+          "file": "chr_kuraishi_05_hokorashige.png",
+          "label": "誇らしげ",
+          "slot": 100
+        },
+        {
+          "no": 6,
+          "file": "chr_kuraishi_06_kotoba_usinau.png",
+          "label": "言葉を失う顔",
+          "slot": 101
         }
       ]
     },
@@ -560,21 +322,9 @@ window.ASSET_MANIFEST = {
       "exprs": [
         {
           "no": 1,
-          "file": "chr_meshino_01_tsujou.png",
+          "file": "chr_meshino_01_tsuujou.png",
           "label": "通常",
           "slot": 90
-        },
-        {
-          "no": 2,
-          "file": "chr_meshino_02_kimegao.png",
-          "label": "決め顔",
-          "slot": 91
-        },
-        {
-          "no": 3,
-          "file": "chr_meshino_03_tere.png",
-          "label": "照れ",
-          "slot": 92
         },
         {
           "no": 4,
@@ -596,126 +346,56 @@ window.ASSET_MANIFEST = {
         }
       ]
     },
-    "kuraishi": {
-      "name": "倉石暁",
+    "mie": {
+      "name": "三重県臣",
       "exprs": [
         {
           "no": 1,
-          "file": "chr_kuraishi_01_neikyou.png",
-          "label": "通常(熱狂)",
-          "slot": 96
+          "file": "chr_mie_01_reishou.png",
+          "label": "通常（冷笑・半目）",
+          "slot": 44
         },
         {
           "no": 2,
-          "file": "chr_kuraishi_02_kangeki.png",
-          "label": "感激",
-          "slot": 97
+          "file": "chr_mie_02_ha.png",
+          "label": "「は？」",
+          "slot": 45
         },
         {
           "no": 3,
-          "file": "chr_kuraishi_03_chousa_shinken.png",
-          "label": "真剣(調査中)",
-          "slot": 98
+          "file": "chr_mie_03_douyou.png",
+          "label": "動揺",
+          "slot": 46
         },
         {
           "no": 4,
-          "file": "chr_kuraishi_04_shonbori.png",
-          "label": "しょんぼり",
-          "slot": 99
-        },
-        {
-          "no": 5,
-          "file": "chr_kuraishi_05_hokorashige.png",
-          "label": "誇らしげ",
-          "slot": 100
+          "file": "chr_mie_04_chimatsu.png",
+          "label": "気まずい沈黙",
+          "slot": 47
         },
         {
           "no": 6,
-          "file": "chr_kuraishi_06_kotoba_ushinau.png",
-          "label": "言葉を失う",
-          "slot": 101
+          "file": "chr_mie_06_iraduki_shinken.png",
+          "label": "苛立ち混じりの真剣",
+          "slot": 49
         },
         {
           "no": 7,
-          "file": "chr_kuraishi_07_namida_gumu.png",
-          "label": "涙ぐむ",
-          "slot": 102
-        }
-      ]
-    },
-    "futami": {
-      "name": "二見玲子",
-      "exprs": [
-        {
-          "no": 1,
-          "file": "chr_futami_01_tsujou.png",
-          "label": "通常",
-          "slot": 103
+          "file": "chr_mie_07_honki_shinken.png",
+          "label": "本気の真剣",
+          "slot": 50
         },
         {
-          "no": 2,
-          "file": "chr_futami_02_hohoemi.png",
-          "label": "微笑",
-          "slot": 104
+          "no": 9,
+          "file": "chr_mie_09_sunao_hohoemi.png",
+          "label": "初めての素直な微笑み",
+          "slot": 52
         },
         {
-          "no": 3,
-          "file": "chr_futami_03_shinpai.png",
-          "label": "心配顔",
-          "slot": 105
-        },
-        {
-          "no": 4,
-          "file": "chr_futami_04_itazura_emie.png",
-          "label": "いたずらっぽい笑み",
-          "slot": 106
-        },
-        {
-          "no": 5,
-          "file": "chr_futami_05_shinmiri_yokogao.png",
-          "label": "しんみりした横顔",
-          "slot": 107
-        }
-      ]
-    },
-    "sakura": {
-      "name": "櫻優",
-      "exprs": [
-        {
-          "no": 1,
-          "file": "chr_sakura_01_tsujou.png",
-          "label": "通常",
-          "slot": 108
-        },
-        {
-          "no": 2,
-          "file": "chr_sakura_02_kenkyuu_shinken.png",
-          "label": "真剣(研究者モード)",
-          "slot": 109
-        },
-        {
-          "no": 3,
-          "file": "chr_sakura_03_tere.png",
-          "label": "照れ",
-          "slot": 110
-        },
-        {
-          "no": 4,
-          "file": "chr_sakura_04_douryou.png",
-          "label": "動揺",
-          "slot": 111
-        },
-        {
-          "no": 5,
-          "file": "chr_sakura_05_egao.png",
-          "label": "笑顔",
-          "slot": 112
-        },
-        {
-          "no": 6,
-          "file": "chr_sakura_06_yawarakai.png",
-          "label": "柔らかい表情",
-          "slot": 113
+          "no": 10,
+          "file": "chr_mie_10_nakigao.png",
+          "label": "泣き顔",
+          "slot": 53
         }
       ]
     },
@@ -724,7 +404,7 @@ window.ASSET_MANIFEST = {
       "exprs": [
         {
           "no": 1,
-          "file": "chr_mitsumine_01_tsujou.png",
+          "file": "chr_mitsumine_01_tsuujou.png",
           "label": "通常",
           "slot": 114
         },
@@ -741,21 +421,9 @@ window.ASSET_MANIFEST = {
           "slot": 116
         },
         {
-          "no": 4,
-          "file": "chr_mitsumine_04_akire.png",
-          "label": "呆れ",
-          "slot": 117
-        },
-        {
-          "no": 5,
-          "file": "chr_mitsumine_05_yasashii.png",
-          "label": "優しい顔",
-          "slot": 118
-        },
-        {
           "no": 6,
-          "file": "chr_mitsumine_06_ha_hamo.png",
-          "label": "「は？」(ハモり専用)",
+          "file": "chr_mitsumine_06_ha.png",
+          "label": "「は？」（ハモリ専用）",
           "slot": 119
         }
       ]
@@ -765,7 +433,7 @@ window.ASSET_MANIFEST = {
       "exprs": [
         {
           "no": 1,
-          "file": "chr_naitou_01_tsujou.png",
+          "file": "chr_naitou_01_tsuujou.png",
           "label": "通常",
           "slot": 120
         },
@@ -774,12 +442,6 @@ window.ASSET_MANIFEST = {
           "file": "chr_naitou_02_hohoemi.png",
           "label": "微笑",
           "slot": 121
-        },
-        {
-          "no": 3,
-          "file": "chr_naitou_03_dokusho.png",
-          "label": "読書中",
-          "slot": 122
         },
         {
           "no": 4,
@@ -795,46 +457,217 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 6,
-          "file": "chr_naitou_06_sukoshi_waru.png",
+          "file": "chr_naitou_06_sukoshi_warau.png",
           "label": "少し笑う",
           "slot": 125
         }
       ]
     },
-    "inaba": {
-      "name": "稲葉悌二(回想)",
+    "rei": {
+      "name": "数理零",
       "exprs": [
         {
           "no": 1,
-          "file": "chr_inaba_01_shashin_emie.png",
-          "label": "古写真の中の柔らかい笑み",
-          "slot": 126
+          "file": "chr_rei_01_suzushii.png",
+          "label": "通常（涼しい顔）",
+          "slot": 70
         },
         {
           "no": 2,
-          "file": "chr_inaba_02_yama_yokogao.png",
-          "label": "山を指差す横顔",
-          "slot": 127
+          "file": "chr_rei_02_hohoemi.png",
+          "label": "微笑",
+          "slot": 71
+        },
+        {
+          "no": 4,
+          "file": "chr_rei_04_odoroki.png",
+          "label": "驚き",
+          "slot": 73
+        },
+        {
+          "no": 5,
+          "file": "chr_rei_05_data_shinken.png",
+          "label": "真剣（データと向き合う）",
+          "slot": 74
+        },
+        {
+          "no": 7,
+          "file": "chr_rei_07_kotoba_erabu.png",
+          "label": "言葉を選ぶ顔",
+          "slot": 76
         }
       ]
     },
-    "wakaki": {
-      "name": "若き日の塀勝也(回想)",
+    "ryoma": {
+      "name": "両馬二郎",
       "exprs": [
         {
           "no": 1,
-          "file": "chr_wakaki_01_seifuku_warau.png",
-          "label": "学生服・笑っている",
-          "slot": 128
+          "file": "chr_ryoma_01_tsuujou.png",
+          "label": "通常",
+          "slot": 35
         },
         {
           "no": 2,
-          "file": "chr_wakaki_02_chousa_bouzen.png",
-          "label": "調査服・呆然",
-          "slot": 129
+          "file": "chr_ryoma_02_niyari.png",
+          "label": "ニヤリ",
+          "slot": 36
+        },
+        {
+          "no": 4,
+          "file": "chr_ryoma_04_kinimo_majime.png",
+          "label": "急に真顔",
+          "slot": 38
+        },
+        {
+          "no": 5,
+          "file": "chr_ryoma_05_shonbori.png",
+          "label": "しょんぼり",
+          "slot": 39
+        },
+        {
+          "no": 6,
+          "file": "chr_ryoma_06_nakiwarai.png",
+          "label": "泣き笑い",
+          "slot": 40
+        },
+        {
+          "no": 7,
+          "file": "chr_ryoma_07_shinken_ketsui.png",
+          "label": "真剣な決意顔",
+          "slot": 41
+        },
+        {
+          "no": 8,
+          "file": "chr_ryoma_08_terekakushi.png",
+          "label": "照れ隠しで頭をかく",
+          "slot": 42
+        },
+        {
+          "no": 9,
+          "file": "chr_ryoma_09_goukyuu.png",
+          "label": "号泣",
+          "slot": 43
         }
       ]
-    }
+    },
+    "sakura": {
+      "name": "櫻優",
+      "exprs": [
+        {
+          "no": 2,
+          "file": "chr_sakura_02_kenkyuusha.png",
+          "label": "真剣（研究者モード）",
+          "slot": 109
+        },
+        {
+          "no": 5,
+          "file": "chr_sakura_05_egao.png",
+          "label": "笑顔",
+          "slot": 112
+        },
+        {
+          "no": 6,
+          "file": "chr_sakura_06_yawarakai.png",
+          "label": "柔らかい表情",
+          "slot": 113
+        }
+      ]
+    },
+    "satou": {
+      "name": "砂糖東洋",
+      "exprs": [
+        {
+          "no": 1,
+          "file": "chr_satou_01_game_shuuchuu.png",
+          "label": "通常（ゲーム画面凝視）",
+          "slot": 62
+        },
+        {
+          "no": 2,
+          "file": "chr_satou_02_muten.png",
+          "label": "無表情（素）",
+          "slot": 63
+        },
+        {
+          "no": 3,
+          "file": "chr_satou_03_kao_ageta.png",
+          "label": "驚き（画面から顔を上げる）",
+          "slot": 64
+        },
+        {
+          "no": 4,
+          "file": "chr_satou_04_soppo.png",
+          "label": "照れ隠しでそっぽを向く",
+          "slot": 65
+        },
+        {
+          "no": 5,
+          "file": "chr_satou_05_camera.png",
+          "label": "真剣にカメラを構える顔",
+          "slot": 66
+        },
+        {
+          "no": 6,
+          "file": "chr_satou_06_hohoemi.png",
+          "label": "微笑み（レア）",
+          "slot": 67
+        },
+        {
+          "no": 7,
+          "file": "chr_satou_07_tsumaru.png",
+          "label": "言葉に詰まる顔",
+          "slot": 68
+        },
+        {
+          "no": 8,
+          "file": "chr_satou_08_hikari_koraeru.png",
+          "label": "目に光るものを堪える顔",
+          "slot": 69
+        }
+      ]
+    },
+    "terachi": {
+      "name": "寺地星",
+      "exprs": [
+        {
+          "no": 1,
+          "file": "chr_terachi_01_nemusou.png",
+          "label": "通常（眠そう・淡々）",
+          "slot": 54
+        },
+        {
+          "no": 2,
+          "file": "chr_terachi_02_komatte_kataaru.png",
+          "label": "困惑して固まる",
+          "slot": 55
+        },
+        {
+          "no": 3,
+          "file": "chr_terachi_03_hansya_shinken.png",
+          "label": "真剣な配信者の顔",
+          "slot": 56
+        },
+        {
+          "no": 4,
+          "file": "chr_terachi_04_ureshii.png",
+          "label": "嬉しい",
+          "slot": 57
+        },
+        {
+          "no": 6,
+          "file": "chr_terachi_06_maiku_no_ketsui.png",
+          "label": "マイク前の決意顔",
+          "slot": 59
+        },
+        {
+          "no": 8,
+          "file": "chr_terachi_08_namida.png",
+          "label": "涙",
+          "slot": 61
+        }
+      ]
+    },
   },
   "cg": {
     "cg_chizutsutsu_kobore_shashin": {
