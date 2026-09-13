@@ -1,5 +1,5 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。残り27差分はシルエット補完のまま。sw.js CACHE → v8。",
  "engine_limit": 300,
  "assigned": 135,
  "buffer": 0,
@@ -252,7 +252,7 @@
    "desc": "立ち絵差分 塀勝也／通常（穏やか）",
    "meta": "katsuya",
    "source": "image3/white_025.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_02_hohoemi",
@@ -262,7 +262,7 @@
    "desc": "立ち絵差分 塀勝也／微笑",
    "meta": "katsuya",
    "source": "image1/white_026.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_03_tooi_me",
@@ -272,7 +272,7 @@
    "desc": "立ち絵差分 塀勝也／遠い目",
    "meta": "katsuya",
    "source": "image3/white_027.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_04_odoroki",
@@ -282,7 +282,7 @@
    "desc": "立ち絵差分 塀勝也／驚き",
    "meta": "katsuya",
    "source": "image1/white_028.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_06_katai_muhyoujou",
@@ -292,7 +292,7 @@
    "desc": "立ち絵差分 塀勝也／硬い無表情",
    "meta": "katsuya",
    "source": "image2/white_030.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_07_kaisou_me_hosomeru",
@@ -302,7 +302,7 @@
    "desc": "立ち絵差分 塀勝也／回想・目を細める",
    "meta": "katsuya",
    "source": "image1/white_031.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_08_namida_koraeru",
@@ -312,7 +312,7 @@
    "desc": "立ち絵差分 塀勝也／涙をこらえる",
    "meta": "katsuya",
    "source": "image1/white_032.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_09_naku",
@@ -322,7 +322,7 @@
    "desc": "立ち絵差分 塀勝也／泣く",
    "meta": "katsuya",
    "source": "image3/white_033.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_katsuya_10_hareyaka_emi",
@@ -332,7 +332,7 @@
    "desc": "立ち絵差分 塀勝也／晴れやかな笑み",
    "meta": "katsuya",
    "source": "image1/white_034.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_01_tsuujou",
@@ -342,7 +342,7 @@
    "desc": "立ち絵差分 両馬二郎／通常",
    "meta": "ryoma",
    "source": "image3/white_035.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_02_niyari",
@@ -352,7 +352,7 @@
    "desc": "立ち絵差分 両馬二郎／ニヤリ",
    "meta": "ryoma",
    "source": "image1/white_036.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_04_kyuu_magao",
@@ -362,7 +362,7 @@
    "desc": "立ち絵差分 両馬二郎／急に真顔",
    "meta": "ryoma",
    "source": "image1/white_038.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_05_shonbori",
@@ -372,7 +372,7 @@
    "desc": "立ち絵差分 両馬二郎／しょんぼり",
    "meta": "ryoma",
    "source": "image2/white_039.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_06_nakiwarai",
@@ -382,7 +382,7 @@
    "desc": "立ち絵差分 両馬二郎／泣き笑い",
    "meta": "ryoma",
    "source": "image1/white_040.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_07_shinken_ketsui",
@@ -392,7 +392,7 @@
    "desc": "立ち絵差分 両馬二郎／真剣な決意顔",
    "meta": "ryoma",
    "source": "image3/white_041.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_08_terekakushi",
@@ -402,7 +402,7 @@
    "desc": "立ち絵差分 両馬二郎／照れ隠しで頭をかく",
    "meta": "ryoma",
    "source": "image3/white_042.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_ryoma_09_goukyuu",
@@ -412,7 +412,7 @@
    "desc": "立ち絵差分 両馬二郎／号泣",
    "meta": "ryoma",
    "source": "image3/white_043.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_01_reishou",
@@ -422,7 +422,7 @@
    "desc": "立ち絵差分 三重県臣／通常（冷笑・半目）",
    "meta": "mie",
    "source": "image1/white_044.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_02_ha",
@@ -432,7 +432,7 @@
    "desc": "立ち絵差分 三重県臣／「は？」",
    "meta": "mie",
    "source": "image3/white_045.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_03_douyou",
@@ -442,7 +442,7 @@
    "desc": "立ち絵差分 三重県臣／動揺",
    "meta": "mie",
    "source": "image1/white_046.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_04_kimazui_chinmoku",
@@ -452,7 +452,7 @@
    "desc": "立ち絵差分 三重県臣／気まずい沈黙",
    "meta": "mie",
    "source": "image1/white_047.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_06_iradachi_shinken",
@@ -462,7 +462,7 @@
    "desc": "立ち絵差分 三重県臣／苛立ち混じりの真剣",
    "meta": "mie",
    "source": "image1/white_049.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_07_honki_shinken",
@@ -472,7 +472,7 @@
    "desc": "立ち絵差分 三重県臣／本気の真剣",
    "meta": "mie",
    "source": "image3/white_050.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_09_sunao_hohoemi",
@@ -482,7 +482,7 @@
    "desc": "立ち絵差分 三重県臣／初めての素直な微笑み",
    "meta": "mie",
    "source": "image1/white_052.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mie_10_nakigao",
@@ -492,7 +492,7 @@
    "desc": "立ち絵差分 三重県臣／泣き顔",
    "meta": "mie",
    "source": "image1/white_053.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_terachi_01_nemusou",
@@ -502,7 +502,7 @@
    "desc": "立ち絵差分 寺地星／通常（眠そう・淡々）",
    "meta": "terachi",
    "source": "image1/white_054.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_terachi_02_konwaku_katamaru",
@@ -512,7 +512,7 @@
    "desc": "立ち絵差分 寺地星／困惑して固まる",
    "meta": "terachi",
    "source": "image3/white_055.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_terachi_03_haishin_shinken",
@@ -522,7 +522,7 @@
    "desc": "立ち絵差分 寺地星／真剣な配信者の顔",
    "meta": "terachi",
    "source": "image2/white_056.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_terachi_04_ureshii",
@@ -532,7 +532,7 @@
    "desc": "立ち絵差分 寺地星／嬉しい",
    "meta": "terachi",
    "source": "image1/white_057.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_terachi_06_maiku_no_ketsui",
@@ -542,7 +542,7 @@
    "desc": "立ち絵差分 寺地星／マイク前の決意顔",
    "meta": "terachi",
    "source": "image3/white_059.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_terachi_08_namida",
@@ -552,7 +552,7 @@
    "desc": "立ち絵差分 寺地星／涙",
    "meta": "terachi",
    "source": "image3/white_061.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_01_game_gyoushi",
@@ -562,7 +562,7 @@
    "desc": "立ち絵差分 砂糖東洋／通常（ゲーム画面凝視）",
    "meta": "satou",
    "source": "image1/white_062.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_02_muhyoujou",
@@ -572,7 +572,7 @@
    "desc": "立ち絵差分 砂糖東洋／無表情（素）",
    "meta": "satou",
    "source": "image1/white_063.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_03_kao_ageta",
@@ -582,7 +582,7 @@
    "desc": "立ち絵差分 砂糖東洋／驚き（画面から顔を上げる）",
    "meta": "satou",
    "source": "image3/white_064.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_04_soppo",
@@ -592,7 +592,7 @@
    "desc": "立ち絵差分 砂糖東洋／照れ隠しでそっぽを向く",
    "meta": "satou",
    "source": "image2/white_065.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_05_camera",
@@ -602,7 +602,7 @@
    "desc": "立ち絵差分 砂糖東洋／真剣にカメラを構える顔",
    "meta": "satou",
    "source": "image3/white_066.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_06_hohoemi",
@@ -612,7 +612,7 @@
    "desc": "立ち絵差分 砂糖東洋／微笑み（レア）",
    "meta": "satou",
    "source": "image2/white_067.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_07_tsumaru",
@@ -622,7 +622,7 @@
    "desc": "立ち絵差分 砂糖東洋／言葉に詰まる顔",
    "meta": "satou",
    "source": "image3/white_068.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_satou_08_me_hikari_koraeru",
@@ -632,7 +632,7 @@
    "desc": "立ち絵差分 砂糖東洋／目に光るものを堪える顔",
    "meta": "satou",
    "source": "image3/white_069.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_rei_01_suzushii",
@@ -902,7 +902,7 @@
    "desc": "立ち絵差分 櫻優／真剣（研究者モード）",
    "meta": "sakura",
    "source": "image3/white_109.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_sakura_05_egao",
@@ -912,7 +912,7 @@
    "desc": "立ち絵差分 櫻優／笑顔",
    "meta": "sakura",
    "source": "image1/white_112.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_sakura_06_yawarakai",
@@ -922,7 +922,7 @@
    "desc": "立ち絵差分 櫻優／柔らかい表情",
    "meta": "sakura",
    "source": "image1/white_113.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mitsumine_01_tsuujou",
@@ -932,7 +932,7 @@
    "desc": "立ち絵差分 三峰瑠衣／通常",
    "meta": "mitsumine",
    "source": "image3/white_114.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mitsumine_02_tsukkomi",
@@ -942,7 +942,7 @@
    "desc": "立ち絵差分 三峰瑠衣／ツッコミ顔",
    "meta": "mitsumine",
    "source": "image1/white_115.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mitsumine_03_egao",
@@ -952,7 +952,7 @@
    "desc": "立ち絵差分 三峰瑠衣／笑顔",
    "meta": "mitsumine",
    "source": "image3/white_116.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_mitsumine_06_ha",
@@ -962,7 +962,7 @@
    "desc": "立ち絵差分 三峰瑠衣／「は？」（ハモリ専用）",
    "meta": "mitsumine",
    "source": "image2/white_119.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_naitou_01_tsuujou",
@@ -972,7 +972,7 @@
    "desc": "立ち絵差分 内藤蘭／通常",
    "meta": "naitou",
    "source": "image2/white_120.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_naitou_02_hohoemi",
@@ -982,7 +982,7 @@
    "desc": "立ち絵差分 内藤蘭／微笑",
    "meta": "naitou",
    "source": "image2/white_121.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_naitou_04_odoroki",
@@ -992,7 +992,7 @@
    "desc": "立ち絵差分 内藤蘭／驚き",
    "meta": "naitou",
    "source": "image2/white_123.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_naitou_05_yasashii_me",
@@ -1002,7 +1002,7 @@
    "desc": "立ち絵差分 内藤蘭／優しい目",
    "meta": "naitou",
    "source": "image3/white_124.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_naitou_06_sukoshi_warau",
@@ -1012,7 +1012,7 @@
    "desc": "立ち絵差分 内藤蘭／少し笑う",
    "meta": "naitou",
    "source": "image2/white_125.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_inaba_01_furushashin_hohoemi",
