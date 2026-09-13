@@ -30,6 +30,7 @@ export class Shell {
   constructor(opt) {
     Object.assign(this, opt);   // game, dom, store, audio, stage, data, def
     this.choiceSel = -1;
+    this._choiceHideTimer = 0;
     this._hubCb = null;
     this._trapOff = null;
     this._lastFocus = null;
@@ -322,6 +323,7 @@ export class Shell {
 
   /* --------------------------------------------------------------- 選択肢 -- */
   showChoices(prompt, opts, cb) {
+    clearTimeout(this._choiceHideTimer);
     const wrap = this.dom.choices;
     this._choiceCb = cb;
     this.dom.choicePrompt.textContent = prompt || '';
@@ -338,6 +340,9 @@ export class Shell {
       this.dom.choiceList.appendChild(b);
     });
     wrap.classList.remove('hidden');
+    wrap.style.opacity = '';
+    wrap.style.transition = '';
+    this.dom.choicePrompt.style.transition = '';
     // 2フレーム待ってから in を付与すると transition / keyframe が確実に走る
     requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('in')));
     this.paintChoices();
@@ -374,7 +379,8 @@ export class Shell {
     w.classList.remove('in');
     w.style.transition = 'opacity .32s var(--ease-soft)';
     w.style.opacity = '0';
-    setTimeout(() => { w.classList.add('hidden'); w.style.opacity = ''; w.style.transition = ''; this.dom.choicePrompt.style.transition=''; }, 340);
+    clearTimeout(this._choiceHideTimer);
+    this._choiceHideTimer = setTimeout(() => { w.classList.add('hidden'); w.style.opacity = ''; w.style.transition = ''; this.dom.choicePrompt.style.transition=''; }, 340);
   }
 
   /* ------------------------------------------------------------- 端末風 --- */
