@@ -105,7 +105,7 @@ img{display:block;max-width:100%}
 
 /* -------------------------------------------------------------- 立ち絵 ----- */
 .lay-chr{z-index:3}
-.chr{position:absolute;bottom:0;height:calc(var(--u)*640);width:calc(var(--u)*420);
+.chr{position:absolute;bottom:0;height:88%;max-height:calc(var(--u)*560);width:calc(var(--u)*420);
   transition:opacity .42s ease,transform .55s var(--ease-out),filter .5s;
   opacity:0;transform:translateY(calc(var(--u)*14)) scale(.985);filter:brightness(1)}
 .chr.in{opacity:1;transform:translateY(0) scale(1)}
@@ -1563,3 +1563,23 @@ button, a{ -webkit-tap-highlight-color: transparent; }
 .lay-cg.dip.on{ animation:none }
 /* ギャラリー／セーブ画面の縮略図は静的SVGになった（旧: 1コマ毎にノイズ再生成） */
 .slots .thumb svg,.cg-cell .im svg{ pointer-events:none }
+
+/* ==========================================================================
+   FIX 2026-09 — 立ち絵は頭を切らない（足が切れる方が自然）、可能なら切らない
+   - 高さは 88% / max 560*u に抑え、ステージ（56.25vw）内に完全収納
+   - JS側でも height:88% max-height:560*u を付与しているが、CSSでも最終保証
+   - object-position は bottom ではなく top寄せで頭を優先、切れるなら足側
+   ========================================================================== */
+.chr{
+  height:88% !important;
+  max-height:calc(var(--u)*560) !important;
+  bottom:0 !important;
+}
+.chr img, .chr .sil svg{
+  object-position:top center !important;
+  /* preserveAspectRatio が xMidYMax でも、コンテナが小さい時は上側を優先して見せる */
+}
+.lay-chr{ overflow:visible; }
+@media (max-aspect-ratio:1/1){
+  .chr{ height:72% !important; max-height:calc(var(--u)*560) !important; }
+}
