@@ -125,7 +125,7 @@
 @jump f3
 
 #scene f3 | 図書室、書庫
-@bg bg_toshokan_shozoko
+@bg bg_toshoshitsu_oku_shoko
 @bgm bgm12 fade=1.6
 @part dust
 ナ：一方、倉石は図書室の奥の書庫で、埃をかぶった学校新聞の縮刷版を漁っていた。

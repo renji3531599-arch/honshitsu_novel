@@ -72,7 +72,7 @@ photorealistic, 3D render, chibi, super-deformed, childish proportions, manga pa
 | `cg_nagai_chinmoku` | `cg_nagai_chinmoku.png` | 五秒を超える沈黙 | BG03 | なし |
 | `cg_yama_ue_hajimete_chizu` | `cg_yama_ue_hajimete_chizu.png` | 若き勝也と稲葉、初めての地形図 | BG21 | あり |
 | `cg_wakaki_utsumuki` | `cg_wakaki_utsumuki.png` | 若き勝也、生意気を言った日 | BG22 | あり |
-| `cg_kuhou_kageboushi` | `cg_kuhou_kageboushi.png` | 訃報を知った瞬間 | BG22 | なし |
+| `cg_fuhou_kageboushi` | `cg_fuhou_kageboushi.png` | 訃報を知った瞬間 | BG22 | なし |
 | `cg_mado_gawa_no_houkoku` | `cg_mado_gawa_no_houkoku.png` | 勝也、窓の外への報告を語る | BG03 | なし |
 | `cg_seito_wo_miwatasu` | `cg_seito_wo_miwatasu.png` | 勝也が生徒たちを見渡す | BG03 | あり |
 | `cg_hitorizutsu_no_kotoba` | `cg_hitorizutsu_no_kotoba.png` | 一人ずつの言葉を受け取る | BG03 | あり |
@@ -255,9 +255,9 @@ A muted flashback at a university-era field research base camp, tents, geologica
 
 - **演出メモ**: 台詞を絵に書かない。若き勝也の未熟さと「次はあると思っていた」後悔を、俯いた姿勢と空白で表現する。
 
-### `cg_kuhou_kageboushi` — 訃報を知った瞬間
+### `cg_fuhou_kageboushi` — 訃報を知った瞬間
 
-- **ファイル**: `assets/cg/cg_kuhou_kageboushi.png`
+- **ファイル**: `assets/cg/cg_fuhou_kageboushi.png`
 - **シーン**: `h4` / クライマックス回想
 - **Prompt**:
 

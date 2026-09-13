@@ -13,12 +13,15 @@
 | 脚本形式 | 独自DSL（`data/script/*.txt`） | JSデータ（`game/js/script_*.js`） |
 | BGM | 手続き生成 24曲＋SE18種 | 手続き生成 24曲＋SE16種 |
 | 検証ツール | `tools/vncheck.mjs` ＋ `tools/smoke.mjs` | `tools/check_script.cjs` ＋ `tools/playthrough_test.cjs` ＋ `tools/save_test.cjs` |
-| 固有ドキュメント | `docs/SCRIPT_SPEC.md` ／ `docs/ASSET_MANIFEST.md` | `ASSET_MAP.md` |
+| 固有ドキュメント | `docs/SCRIPT_SPEC.md` ／ `docs/ART_SPEC.md` ／ `docs/ASSET_MANIFEST.md` | `ASSET_MAP.md` |
 
 **共通事項**: **背景は両版とも実画像を収録済み**（版A 25枚／版B 24枚）。
 立ち絵・CGの白紙プレースホルダ（`white_XXX.png` 改め計512枚）は **2026-09-12 に全削除**しました ――
 名前とスロットは台帳（版A `data/assets.json`／版B `ASSET_MAP.md`・`game/js/assets_manifest.js`）に
-残してあるので、**実素材は台帳の `file` 名で新規配置するだけで差し替わります**。
+残してあるので、**実素材は「台帳ID + 拡張子」のファイル名で新規配置し、版A では台帳の `placeholder` を
+`false` にすると差し替わります**（版B はファイルを置くだけ）。
+寸法・セーフエリア・形式は **`docs/ART_SPEC.md`**、立ち絵78枚のファイル名一覧は **`docs/CHR_REPLACE_LIST.md`**。
+まとめてやるなら `node tools/sync_placeholder.mjs --bump`（台帳反映＋`sw.js` の CACHE 上げ）。
 未配置のあいだは両版とも等高線背景・シルエット立ち絵等の手続き生成で舞台として成立します。
 同じ日に **UI画像20枚（ui01〜ui20）も両版とも撤去**しました（画面UIは全てCSS/SVG描画のため）。
 経緯は `docs/UI_CG_2026-09-12.md`。
@@ -91,12 +94,13 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 * 本編で出さないCGは2026-09-11に11枚降板（`reserve` 化）→ **2026-09-12 に台帳・実ファイルとも削除**。
   CGは「印象的で感動的なシーンにだけ置く」基準で32枚（18＋ED14）に整理した（基準・経緯は `docs/CG_GUIDE.md` 冒頭）。
 * 素材IDは脚本内で `bg_hokutou_kyoshitsu_asa`（=ファイル名stem）でも `BG01` でも書ける。
-* **1素材ずつの解説**（どのシーンで何回出るか／未使用差分／Ken Burns 有無／降板理由）は自动生成：
+* **1素材ずつの解説**（どのシーンで何回出るか／未使用差分／Ken Burns 有無／降板理由）は自動生成：
   `assets/README.md`（総）／ `assets/bg|cg|chr/README.md` ／ **`docs/CG_GUIDE.md`（CG全32枚を物語順に）**。
   生成用のコピーペースト可能な英語プロンプトは **`docs/CG_PROMPTS.md`** にまとめてある。
   台帳か脚本を直したら `node tools/gen_asset_md.mjs` で再生成。
-* 差し替え後は **`sw.js` の `CACHE`（現在 `honshitsu-v5`）を必ず上げる**。CacheFirst で画像を返すため、
-  上げると旧キャッシュ（削除前の白紙PNG）を配信し続けて「削除されていないように見える」ことがある。
+* 差し替え後は **`sw.js` の `CACHE`（現在 `honshitsu-v6`）を必ず上げる**。CacheFirst で画像を返すため、
+  上げないと旧キャッシュを配信し続けて「差し替わっていないように見える」ことがある。
+  ※ `node tools/sync_placeholder.mjs --bump` で台帳の `placeholder` 反映と CACHE 上げをまとめて自動でやれる。
   ※ 脚本 `data/script/*.txt` は NetworkFirst に変えた（直したのに反映されない問題の防止）。
 * 予備99枚（`_buffer`）は2026-09-12に実ファイルごと削除。スロット番号の記録だけ `docs/ASSET_MANIFEST.md` に残す。
 * リネーム作業自体は `python3 tools/rename_assets.py` で再実行可能（台帳とmanifestも同時に更新）。
@@ -121,8 +125,12 @@ data/script/*.txt + index.txt  … 本編（独自DSL／仕様は docs/SCRIPT_SP
 tools/vncheck.mjs             … 静的検証＋オートプレイ（参照解決・END到達・素材カバレッジ）
 tools/smoke.mjs               … jsdom で実起動し、全シーン・全パネル・1周プレイを流す
 tools/rename_assets.py        … プレースホルダーの実名リネーム＋台帳生成（再実行には元 white_NNN.png が必要）
+tools/gen_asset_md.mjs        … 素材README・CG_GUIDE・CHR_REPLACE_LIST の自動生成（台帳と脚本から）
+tools/sync_placeholder.mjs    … 実素材と台帳の同期（placeholder 反映・寸法/透過/容量チェック・CACHE上げ）
 docs/SCRIPT_SPEC.md           … DSL・フラグ仕様
-docs/ASSET_MANIFEST.md        … 162枠の一覧（bg25/chr105/cg32。UI・予備バッファは削除済み）
+docs/ART_SPEC.md              … 画像入稿仕様書（推奨寸法・セーフエリア・形式・命名規則）
+docs/CHR_REPLACE_LIST.md      … 立ち絵78枚の差し替え一覧（自動生成）
+docs/ASSET_MANIFEST.md        … スロット一覧＋命名の履歴（旧名→新名・削除済み枠・2026-09-13 の命名修正21件）
 ```
 
 ---
@@ -208,11 +216,11 @@ game/
 │   ├── engine.js         エンジン本体（スクリプト実行・セーブ・UI）
 │   ├── audio.js          WebAudio合成 BGM24曲＋SE
 │   ├── characters.js     キャラ定義＋✝本質✝辞典データ
-│   ├── assets_manifest.js 自動生成（tools/map_assets.py）
+│   ├── assets_manifest.js 自動生成（tools/map_assets.py。※現在は data/assets.json と同じ新名に手動同期済み）
 │   └── script_0*_*.js    本編スクリプト（企画書§10〜§11を全台詞実装）
 └── assets/img/           背景の実画像24枚のみ（白紙プレースホルダ256枚は2026-09-12削除。他は台帳のみ）
 tools/
-├── map_assets.py         仮画像→アセット名リネーム（冪等・単一の情報源。UI撤去とCG降板も反映）
+├── map_assets.py         仮画像→アセット名リネーム（**2026-09-13 凍結・--force 必須**。実行すると整理前に戻る）
 ├── check_script.cjs      整合性チェック（参照・遷移・Flagの静的検証）
 ├── playthrough_test.cjs  jsdomで実プレイ（TRUE/BITTERSWEET/COMEDY SECRET到達を自動検証）
 └── save_test.cjs         セーブ/ロード復元・オートセーブ・BONUS解放の自動検証
@@ -225,10 +233,14 @@ ASSET_MAP.md              アセット名・スロットの対応表（版B。�
 node tools/check_script.cjs       # シナリオデータの静的検証（0エラー必須）
 node tools/playthrough_test.cjs   # 実プレイテスト3ルート（要: npm i --no-save jsdom）
 node tools/save_test.cjs          # セーブ/ロード/BONUSテスト（要: jsdom）
-python3 tools/map_assets.py       # アセット割り当ての再生成（冪等）
 ```
 
-実素材の差し替えは `ASSET_MAP.md` の対応表を見ながら `game/assets/img/` に**対応するファイル名で新規配置**するだけです（現状は背景24枚のみ実在）。
+`python3 tools/map_assets.py` は **2026-09-13 に凍結**しました（ASSET_ORDER が整理前の状態を一部保持しているため、
+実行すると `ASSET_MAP.md` と `game/js/assets_manifest.js` が 09-13 整理前に戻ります）。再生成する場合のみ `--force`。
+
+実素材の差し替えは **版A と同じファイル名**（＝台帳ID + 拡張子。例 `chr_katsuya_01_tsuujou.png`）を
+`game/assets/img/` に置くだけです（版B に `placeholder` 相当のフラグは無く、ファイルがあれば出ます）。
+名前の対応表は `ASSET_MAP.md`（版B）／ `docs/CHR_REPLACE_LIST.md`・`docs/ART_SPEC.md`（版A・共通）。
 
 ---
 

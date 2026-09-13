@@ -4,7 +4,11 @@
 仮画像 `white_001.png`〜`white_300.png` をリネームして配置した対応表。
 2026-09-12: 白紙実ファイルは全削除。実画像は背景24枚のみ（他は台帳・スロット記録のみ）。
 2026-09-13: 未使用立ち絵27枚を完全削除。残り78差分に整理。旧名→新名を統一（`data/assets.json`基準）。
-実素材は対応表の新ファイル名で `game/assets/img/` に新規配置すればゲームに反映される。
+2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語）。旧名→新名は `docs/ASSET_MANIFEST.md`「命名修正」。
+実素材は対応表のファイル名で `game/assets/img/` に新規配置すればゲームに反映される（版A `assets/` も**同じ名前**）。
+
+> ※ 本ファイルの生成スクリプト `tools/map_assets.py` は 2026-09-13 に凍結（`--force` 必須）。
+> 正本は台帳 `data/assets.json`、版A 側ドキュメントは `node tools/gen_asset_md.mjs` で生成すること。
 
 ## 背景 (BG) ― スロット 001〜024
 
@@ -19,7 +23,7 @@
 | BG07 | white_007.png | `bg_jimushitsu.png` | 職員室 |
 | BG08 | white_008.png | `bg_chizu_hokanko.png` | 地図保管庫 |
 | BG09 | white_009.png | `bg_toshoshitsu.png` | 図書室 |
-| BG10 | white_010.png | `bg_toshokan_shozoko.png` | 図書室奥の書庫（埃っぽい） |
+| BG10 | white_010.png | `bg_toshoshitsu_oku_shoko.png` | 図書室奥の書庫（埃っぽい） |
 | BG11 | white_011.png | `bg_suiko_hotori.png` | 翠湖のほとり |
 | BG12 | white_012.png | `bg_koutei_bunkasai_junbi.png` | 文化祭/謝恩会準備中の校庭 |
 | BG13 | white_013.png | `bg_taiikukan.png` | 体育館（謝恩会当日） |
@@ -29,9 +33,9 @@
 | BG17 | white_017.png | `bg_sotsugyoushiki_kaijou.png` | 卒業式会場 |
 | BG18 | white_018.png | `bg_minamitou_kyoshitsu.png` | 南棟三年教室 |
 | BG19 | white_019.png | `bg_ryoma_ie_butsudan.png` | 両馬の家・祖父の遺影がある部屋 |
-| BG20 | white_020.png | `bg_hawaii_youganchi_kaisou.png` | 回想・ハワイの溶岩台地 |
-| BG21 | white_021.png | `bg_yama_gensho_kaisou.png` | 回想・稲葉と勝也がいた山（褪色調） |
-| BG22 | white_022.png | `bg_daigaku_yakou_kaisou.png` | 回想・大学時代の野外調査ベースキャンプ |
+| BG20 | white_020.png | `bg_hawaii_yougan_daichi_kaisou.png` | 回想・ハワイの溶岩台地 |
+| BG21 | white_021.png | `bg_yama_kaisou.png` | 回想・稲葉と勝也がいた山（褪色調） |
+| BG22 | white_022.png | `bg_daigaku_camp_kaisou.png` | 回想・大学時代の野外調査ベースキャンプ |
 | BG23 | white_023.png | `bg_kyoshitsu_haru_sotsugyougo.png` | エピローグ・卒業後の春、もぬけの殻の教室 |
 | BG24 | white_024.png | `bg_kyoshitsu_suunengo.png` | TRUE END後日談・数年後の同じ教室 |
 
@@ -43,14 +47,14 @@
 |  | white_026.png | `chr_katsuya_02_hohoemi.png` | 塀勝也 微笑 |
 |  | white_027.png | `chr_katsuya_03_tooi_me.png` | 塀勝也 遠い目 |
 |  | white_028.png | `chr_katsuya_04_odoroki.png` | 塀勝也 驚き |
-|  | white_030.png | `chr_katsuya_06_kataki_muten.png` | 塀勝也 硬い無表情 |
-|  | white_031.png | `chr_katsuya_07_kaisou_me_soseru.png` | 塀勝也 回想・目を細める |
+|  | white_030.png | `chr_katsuya_06_katai_muhyoujou.png` | 塀勝也 硬い無表情 |
+|  | white_031.png | `chr_katsuya_07_kaisou_me_hosomeru.png` | 塀勝也 回想・目を細める |
 |  | white_032.png | `chr_katsuya_08_namida_koraeru.png` | 塀勝也 涙をこらえる |
 |  | white_033.png | `chr_katsuya_09_naku.png` | 塀勝也 泣く |
-|  | white_034.png | `chr_katsuya_10_hareyaka_emmi.png` | 塀勝也 晴れやかな笑み |
+|  | white_034.png | `chr_katsuya_10_hareyaka_emi.png` | 塀勝也 晴れやかな笑み |
 |  | white_035.png | `chr_ryoma_01_tsuujou.png` | 両馬二郎 通常 |
 |  | white_036.png | `chr_ryoma_02_niyari.png` | 両馬二郎 ニヤリ |
-|  | white_038.png | `chr_ryoma_04_kinimo_majime.png` | 両馬二郎 急に真顔 |
+|  | white_038.png | `chr_ryoma_04_kyuu_magao.png` | 両馬二郎 急に真顔 |
 |  | white_039.png | `chr_ryoma_05_shonbori.png` | 両馬二郎 しょんぼり |
 |  | white_040.png | `chr_ryoma_06_nakiwarai.png` | 両馬二郎 泣き笑い |
 |  | white_041.png | `chr_ryoma_07_shinken_ketsui.png` | 両馬二郎 真剣な決意顔 |
@@ -59,25 +63,25 @@
 |  | white_044.png | `chr_mie_01_reishou.png` | 三重県臣 通常（冷笑・半目） |
 |  | white_045.png | `chr_mie_02_ha.png` | 三重県臣 「は？」 |
 |  | white_046.png | `chr_mie_03_douyou.png` | 三重県臣 動揺 |
-|  | white_047.png | `chr_mie_04_chimatsu.png` | 三重県臣 気まずい沈黙 |
-|  | white_049.png | `chr_mie_06_iraduki_shinken.png` | 三重県臣 苛立ち混じりの真剣 |
+|  | white_047.png | `chr_mie_04_kimazui_chinmoku.png` | 三重県臣 気まずい沈黙 |
+|  | white_049.png | `chr_mie_06_iradachi_shinken.png` | 三重県臣 苛立ち混じりの真剣 |
 |  | white_050.png | `chr_mie_07_honki_shinken.png` | 三重県臣 本気の真剣 |
 |  | white_052.png | `chr_mie_09_sunao_hohoemi.png` | 三重県臣 初めての素直な微笑み |
 |  | white_053.png | `chr_mie_10_nakigao.png` | 三重県臣 泣き顔 |
 |  | white_054.png | `chr_terachi_01_nemusou.png` | 寺地星 通常（眠そう・淡々） |
-|  | white_055.png | `chr_terachi_02_komatte_kataaru.png` | 寺地星 困惑して固まる |
-|  | white_056.png | `chr_terachi_03_hansya_shinken.png` | 寺地星 真剣な配信者の顔 |
+|  | white_055.png | `chr_terachi_02_konwaku_katamaru.png` | 寺地星 困惑して固まる |
+|  | white_056.png | `chr_terachi_03_haishin_shinken.png` | 寺地星 真剣な配信者の顔 |
 |  | white_057.png | `chr_terachi_04_ureshii.png` | 寺地星 嬉しい |
 |  | white_059.png | `chr_terachi_06_maiku_no_ketsui.png` | 寺地星 マイク前の決意顔 |
 |  | white_061.png | `chr_terachi_08_namida.png` | 寺地星 涙 |
-|  | white_062.png | `chr_satou_01_game_shuuchuu.png` | 砂糖東洋 通常（ゲーム画面凝視） |
-|  | white_063.png | `chr_satou_02_muten.png` | 砂糖東洋 無表情（素） |
+|  | white_062.png | `chr_satou_01_game_gyoushi.png` | 砂糖東洋 通常（ゲーム画面凝視） |
+|  | white_063.png | `chr_satou_02_muhyoujou.png` | 砂糖東洋 無表情（素） |
 |  | white_064.png | `chr_satou_03_kao_ageta.png` | 砂糖東洋 驚き（画面から顔を上げる） |
 |  | white_065.png | `chr_satou_04_soppo.png` | 砂糖東洋 照れ隠しでそっぽを向く |
 |  | white_066.png | `chr_satou_05_camera.png` | 砂糖東洋 真剣にカメラを構える顔 |
 |  | white_067.png | `chr_satou_06_hohoemi.png` | 砂糖東洋 微笑み（レア） |
 |  | white_068.png | `chr_satou_07_tsumaru.png` | 砂糖東洋 言葉に詰まる顔 |
-|  | white_069.png | `chr_satou_08_hikari_koraeru.png` | 砂糖東洋 目に光るものを堪える顔 |
+|  | white_069.png | `chr_satou_08_me_hikari_koraeru.png` | 砂糖東洋 目に光るものを堪える顔 |
 |  | white_070.png | `chr_rei_01_suzushii.png` | 数理零 通常（涼しい顔） |
 |  | white_071.png | `chr_rei_02_hohoemi.png` | 数理零 微笑 |
 |  | white_073.png | `chr_rei_04_odoroki.png` | 数理零 驚き |
@@ -86,7 +90,7 @@
 |  | white_078.png | `chr_izaki_01_tsuujou.png` | 伊崎 通常 |
 |  | white_079.png | `chr_izaki_02_egao.png` | 伊崎 笑顔 |
 |  | white_081.png | `chr_izaki_04_shikiri.png` | 伊崎 真剣（仕切る顔） |
-|  | white_083.png | `chr_izaki_06_shimiemi.png` | 伊崎 しみじみとした微笑み |
+|  | white_083.png | `chr_izaki_06_shimijimi_hohoemi.png` | 伊崎 しみじみとした微笑み |
 |  | white_085.png | `chr_izumi_02_egao.png` | 伊豆見 笑顔 |
 |  | white_086.png | `chr_izumi_03_kinchou.png` | 伊豆見 緊張 |
 |  | white_087.png | `chr_izumi_04_ketsui.png` | 伊豆見 決意 |
@@ -95,11 +99,11 @@
 |  | white_093.png | `chr_meshino_04_shinken.png` | 召野カイト 真剣 |
 |  | white_094.png | `chr_meshino_05_eigo_doya.png` | 召野カイト 英語ドヤ顔 |
 |  | white_095.png | `chr_meshino_06_shinmiri.png` | 召野カイト しんみり |
-|  | white_096.png | `chr_kuraishi_01_kekkyou.png` | 倉石暁 通常（熱狂） |
-|  | white_097.png | `chr_kuraishi_02_kanshou.png` | 倉石暁 感激 |
+|  | white_096.png | `chr_kuraishi_01_nekkyou.png` | 倉石暁 通常（熱狂） |
+|  | white_097.png | `chr_kuraishi_02_kangeki.png` | 倉石暁 感激 |
 |  | white_098.png | `chr_kuraishi_03_chousa_shinken.png` | 倉石暁 真剣（調査中） |
 |  | white_100.png | `chr_kuraishi_05_hokorashige.png` | 倉石暁 誇らしげ |
-|  | white_101.png | `chr_kuraishi_06_kotoba_usinau.png` | 倉石暁 言葉を失う顔 |
+|  | white_101.png | `chr_kuraishi_06_kotoba_ushinau.png` | 倉石暁 言葉を失う顔 |
 |  | white_103.png | `chr_futami_01_tsuujou.png` | 二見玲子 通常 |
 |  | white_105.png | `chr_futami_03_shinpai.png` | 二見玲子 心配顔 |
 |  | white_106.png | `chr_futami_04_itazura.png` | 二見玲子 いたずらっぽい笑み |
@@ -116,7 +120,7 @@
 |  | white_123.png | `chr_naitou_04_odoroki.png` | 内藤蘭 驚き |
 |  | white_124.png | `chr_naitou_05_yasashii_me.png` | 内藤蘭 優しい目 |
 |  | white_125.png | `chr_naitou_06_sukoshi_warau.png` | 内藤蘭 少し笑う |
-|  | white_126.png | `chr_inaba_01_shashin_no_waraui.png` | 稲葉悌二（回想専用） 古写真の中の柔らかい笑み |
+|  | white_126.png | `chr_inaba_01_furushashin_hohoemi.png` | 稲葉悌二（回想専用） 古写真の中の柔らかい笑み |
 
 ### 削除済み未使用立ち絵27枚（2026-09-13完全削除）
 
@@ -166,7 +170,7 @@
 |  | white_155.png | `cg_nagai_chinmoku.png` | 勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。 |
 |  | white_156.png | `cg_yama_ue_hajimete_chizu.png` | 若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。 |
 |  | white_157.png | `cg_wakaki_utsumuki.png` | 若き勝也（回想・単独）／BG22。生意気を言った日、俯く。 |
-|  | white_158.png | `cg_kuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 |
+|  | white_158.png | `cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 |
 |  | white_159.png | `cg_mado_gawa_no_houkoku.png` | 勝也（単独）／BG13。「窓の外を見るたび、報告していた」。 |
 |  | white_160.png | `cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG13。生徒たちを見渡す広い構図。 |
 |  | white_162.png | `cg_hitorizutsu_no_kotoba.png` | 全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。 |

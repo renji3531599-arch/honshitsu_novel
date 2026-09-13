@@ -324,7 +324,7 @@ export function backdropSVG(asset) {
       g += `<path d="M0 740 H1600" stroke="${mood.ink}" stroke-opacity=".4" stroke-width="2"/>`;
       break;
     }
-    case 'hawaii': case 'yama': case 'yakou': {
+    case 'hawaii': case 'yama': case 'camp': {
       const harsh = kind === 'hawaii';
       g += `<rect width="${W}" height="${H}" fill="url(#sky)"/>`;
       g += harsh
@@ -335,7 +335,7 @@ export function backdropSVG(asset) {
         : hills(rand, 520, 250, mood.ink, .34) + hills(rand, 620, 160, mood.ink, .22) + hills(rand, 740, 90, mood.ink, .16);
       g += contourField(rand, 10, kind === 'yama' ? 420 : 620, 210, '#fff', .09);
       g += `<circle cx="${harsh ? 1290 : 1180}" cy="150" r="${harsh ? 62 : 46}" fill="#fff" fill-opacity="${harsh ? .7 : .4}"/>`;
-      if (kind === 'yakou') g += `<g fill="${mood.ink}" fill-opacity=".5" stroke="#fff" stroke-opacity=".25">
+      if (kind === 'camp') g += `<g fill="${mood.ink}" fill-opacity=".5" stroke="#fff" stroke-opacity=".25">
         <path d="M300 820 l120 -190 l120 190 z"/><path d="M620 830 l100 -160 l100 160 z"/></g>
         <g stroke="#fff" stroke-opacity=".35"><line x1="540" y1="630" x2="760" y2="670"/><line x1="720" y1="670" x2="900" y2="800"/></g>`;
       break;

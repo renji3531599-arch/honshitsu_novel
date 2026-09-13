@@ -57,7 +57,7 @@
 
 #scene h3 | 回想：はじめての地形図
 @tone flashback
-@bg bg_yama_gensho_kaisou
+@bg bg_yama_kaisou
 @cg cg_yama_ue_hajimete_chizu kb
 @bgm bgm14 fade=2.4
 勝也：俺も、この学校の理数科出身だ。お前らの先輩にあたる。
@@ -73,7 +73,7 @@
 @jump h4
 
 #scene h4 | 回想：最後の日
-@bg bg_daigaku_yakou_kaisou
+@bg bg_daigaku_camp_kaisou
 @cg cg_wakaki_utsumuki kb
 ナ：記憶の中の声が、少しだけ震える。
 若き勝也（回想の声）：先生の生き方、正直、俺にはちょっと向いてないと思います。ずっと山ばっかり見てて、それで食っていけるんですか。
@@ -81,7 +81,7 @@
 勝也：それだけ言って、俺はその日、先生からの誘い――次の沢の調査、一緒に来ないかっていう誘いを、忙しいからって断った。次はある、と思ってた。
 @cg off
 @fx fadeblack
-@cg cg_kuhou_kageboushi
+@cg cg_fuhou_kageboushi
 @se se09
 ナ：画面が一段と暗くなる。
 ナ：梅雨の沢。増水。

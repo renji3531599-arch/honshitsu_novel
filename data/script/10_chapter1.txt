@@ -82,7 +82,7 @@
 - ③ 誰にも言わず、そっとしておく | go=c005c_matsu | sub=そっとしておける人間なら、ここで立ち止まっていない | heart-1 | pick=mie_silence
 
 #scene c005b_sotto | 一人で抱える
-@bg bg_toshokan_shozoko
+@bg bg_toshoshitsu_oku_shoko
 @bgm bgm04
 ナ：翌日、三重は一人で図書室の奥の書庫に入った。
 ナ：桐葉高校のOB検索。職員紹介。地学部の活動記録。何も出てこない。

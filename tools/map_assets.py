@@ -18,8 +18,21 @@ image1/image2/image3 の white_XXX.png (1〜300) を、シナリオ本編(scenar
 2026-09-12(3): 現役の本編CG 18枚は番号スロット(cg02等)を廃止し、bgと同じ
 「ID＝ファイル名」の実名(例: cg_chizutsutsu_kobore_shashin)へ改名。版Aと同名に統一。
 降板20枚の旧コードは履歴(white_NNNとの対応)としてそのまま残す。
+
+【2026-09-13 凍結】このスクリプトの ASSET_ORDER は 2026-09-13 の整理
+（未使用立ち絵27枚の削除・命名修正21件）より前の状態を一部保持しているため、
+**そのまま実行すると ASSET_MAP.md と game/js/assets_manifest.js が整理前に戻ります**。
+事故防止のため --force 無しでは終了するようにしてあります。
+現行の正本は台帳 data/assets.json、版A 側ドキュメントは `node tools/gen_asset_md.mjs`。
+版B の名前を直すときは、この ASSET_ORDER と data/assets.json の**両方**を直すこと。
 """
-import os, re, shutil, json
+import os, re, shutil, json, sys
+
+if "--force" not in sys.argv:
+    sys.exit("tools/map_assets.py は 2026-09-13 に凍結されました（実行すると ASSET_MAP.md / "
+             "game/js/assets_manifest.js が整理前の状態に戻ります）。\n"
+             "本当に再生成するなら  python3 tools/map_assets.py --force  をどうぞ。\n"
+             "版A のドキュメント生成は  node tools/gen_asset_md.mjs  を使ってください。")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_OUT = os.path.join(ROOT, "game", "assets", "img")
@@ -35,7 +48,7 @@ BG = [
     ("BG07", "bg_jimushitsu",                  "職員室"),
     ("BG08", "bg_chizu_hokanko",               "地図保管庫"),
     ("BG09", "bg_toshoshitsu",                 "図書室"),
-    ("BG10", "bg_toshokan_shozoko",            "図書室奥の書庫"),
+    ("BG10", "bg_toshoshitsu_oku_shoko",            "図書室奥の書庫"),
     ("BG11", "bg_suiko_hotori",                "翠湖のほとり"),
     ("BG12", "bg_koutei_bunkasai_junbi",       "文化祭/謝恩会準備中の校庭"),
     ("BG13", "bg_taiikukan",                   "体育館"),
@@ -45,9 +58,9 @@ BG = [
     ("BG17", "bg_sotsugyoushiki_kaijou",       "卒業式会場"),
     ("BG18", "bg_minamitou_kyoshitsu",         "南棟三年教室"),
     ("BG19", "bg_ryoma_ie_butsudan",           "両馬の家・仏壇のある部屋"),
-    ("BG20", "bg_hawaii_youganchi_kaisou",     "回想・ハワイの溶岩台地"),
-    ("BG21", "bg_yama_gensho_kaisou",          "回想・稲葉と勝也がいた山"),
-    ("BG22", "bg_daigaku_yakou_kaisou",        "回想・大学時代の野外調査ベースキャンプ"),
+    ("BG20", "bg_hawaii_yougan_daichi_kaisou",     "回想・ハワイの溶岩台地"),
+    ("BG21", "bg_yama_kaisou",          "回想・稲葉と勝也がいた山"),
+    ("BG22", "bg_daigaku_camp_kaisou",        "回想・大学時代の野外調査ベースキャンプ"),
     ("BG23", "bg_kyoshitsu_haru_sotsugyougo",  "卒業後の春・もぬけの殻の教室"),
     ("BG24", "bg_kyoshitsu_suunengo",          "TRUE END後日談・数年後の同じ教室"),
 ]
@@ -60,16 +73,16 @@ SPRITES = [
         (2, "hohoemi", "微笑"),
         (3, "tooi_me", "遠い目"),
         (4, "odoroki", "驚き"),
-        (6, "kataki_muten", "硬い無表情"),
-        (7, "kaisou_me_soseru", "回想・目を細める"),
+        (6, "katai_muhyoujou", "硬い無表情"),
+        (7, "kaisou_me_hosomeru", "回想・目を細める"),
         (8, "namida_koraeru", "涙をこらえる"),
         (9, "naku", "泣く"),
-        (10, "hareyaka_emmi", "晴れやかな笑み"),
+        (10, "hareyaka_emi", "晴れやかな笑み"),
     ]),
     ("ryoma", "両馬二郎", [
         (1, "tsuujou", "通常"),
         (2, "niyari", "ニヤリ"),
-        (4, "kinimo_majime", "急に真顔"),
+        (4, "kyuu_magao", "急に真顔"),
         (5, "shonbori", "しょんぼり"),
         (6, "nakiwarai", "泣き笑い"),
         (7, "shinken_ketsui", "真剣な決意顔"),
@@ -80,29 +93,29 @@ SPRITES = [
         (1, "reishou", "通常（冷笑・半目）"),
         (2, "ha", "「は？」"),
         (3, "douyou", "動揺"),
-        (4, "chimatsu", "気まずい沈黙"),
-        (6, "iraduki_shinken", "苛立ち混じりの真剣"),
+        (4, "kimazui_chinmoku", "気まずい沈黙"),
+        (6, "iradachi_shinken", "苛立ち混じりの真剣"),
         (7, "honki_shinken", "本気の真剣"),
         (9, "sunao_hohoemi", "初めての素直な微笑み"),
         (10, "nakigao", "泣き顔"),
     ]),
     ("terachi", "寺地星", [
         (1, "nemusou", "通常（眠そう・淡々）"),
-        (2, "komatte_kataaru", "困惑して固まる"),
-        (3, "hansya_shinken", "真剣な配信者の顔"),
+        (2, "konwaku_katamaru", "困惑して固まる"),
+        (3, "haishin_shinken", "真剣な配信者の顔"),
         (4, "ureshii", "嬉しい"),
         (6, "maiku_no_ketsui", "マイク前の決意顔"),
         (8, "namida", "涙"),
     ]),
     ("satou", "砂糖東洋", [
-        (1, "game_shuuchuu", "通常（ゲーム画面凝視）"),
-        (2, "muten", "無表情（素）"),
+        (1, "game_gyoushi", "通常（ゲーム画面凝視）"),
+        (2, "muhyoujou", "無表情（素）"),
         (3, "kao_ageta", "驚き（画面から顔を上げる）"),
         (4, "soppo", "照れ隠しでそっぽを向く"),
         (5, "camera", "真剣にカメラを構える顔"),
         (6, "hohoemi", "微笑み（レア）"),
         (7, "tsumaru", "言葉に詰まる顔"),
-        (8, "hikari_koraeru", "目に光るものを堪える顔"),
+        (8, "me_hikari_koraeru", "目に光るものを堪える顔"),
     ]),
     ("rei", "数理零", [
         (1, "suzushii", "通常（涼しい顔）"),
@@ -115,7 +128,7 @@ SPRITES = [
         (1, "tsuujou", "通常"),
         (2, "egao", "笑顔"),
         (4, "shikiri", "真剣（仕切る顔）"),
-        (6, "shimiemi", "しみじみとした微笑み"),
+        (6, "shimijimi_hohoemi", "しみじみとした微笑み"),
     ]),
     ("izumi", "伊豆見", [
         (2, "egao", "笑顔"),
@@ -130,11 +143,11 @@ SPRITES = [
         (6, "shinmiri", "しんみり"),
     ]),
     ("kuraishi", "倉石暁", [
-        (1, "kekkyou", "通常（熱狂）"),
-        (2, "kanshou", "感激"),
+        (1, "nekkyou", "通常（熱狂）"),
+        (2, "kangeki", "感激"),
         (3, "chousa_shinken", "真剣（調査中）"),
         (5, "hokorashige", "誇らしげ"),
-        (6, "kotoba_usinau", "言葉を失う顔"),
+        (6, "kotoba_ushinau", "言葉を失う顔"),
     ]),
     ("futami", "二見玲子", [
         (1, "tsuujou", "通常"),
@@ -161,7 +174,7 @@ SPRITES = [
         (6, "sukoshi_warau", "少し笑う"),
     ]),
     ("inaba", "稲葉悌二(回想専用)", [
-        (1, "shashin_no_waraui", "古写真の中の柔らかい笑み"),
+        (1, "furushashin_hohoemi", "古写真の中の柔らかい笑み"),
     ]),
 ]
 
@@ -194,7 +207,7 @@ CG = [
     ("cg_nagai_chinmoku", "cg_nagai_chinmoku",       "勝也(単独)　いつもの5秒より長い沈黙"),
     ("cg_yama_ue_hajimete_chizu", "cg_yama_ue_hajimete_chizu",         "若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調)"),
     ("cg_wakaki_utsumuki", "cg_wakaki_utsumuki",              "若き勝也(回想・単独)　生意気な口を利いた日、俯く"),
-    ("cg_kuhou_kageboushi", "cg_kuhou_kageboushi",      "勝也(単独)　訃報を知った瞬間(シルエットのみ)"),
+    ("cg_fuhou_kageboushi", "cg_fuhou_kageboushi",      "勝也(単独)　訃報を知った瞬間(シルエットのみ)"),
     ("cg_mado_gawa_no_houkoku", "cg_mado_gawa_no_houkoku",     "勝也(単独)　「窓の外を見るたび、報告していた」と語る"),
     ("cg_seito_wo_miwatasu", "cg_seito_wo_miwatasu",    "全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図"),
     ("cg32", "cg_32_terachi_dokudoku_roudoku",     "寺地(単独・朗読)　スマホのライトに照らされて"),

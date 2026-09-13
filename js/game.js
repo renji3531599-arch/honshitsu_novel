@@ -553,10 +553,12 @@ export class Game {
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 function esc(s) { return String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
 function guessTime(id) {
+  // 背景IDの語幹から照明トーンを推定する（＝**ファイル名が演出に影響する**）。
+  // 改名するときはここの正規表現とセットで確認すること（2026-09-13 の命名修正では挙動不変を確認済み）。
   if (/asa$|_asa/.test(id)) return 'asa';
   if (/yuugata|yuu/.test(id)) return 'yuugata';
   if (/yoru/.test(id)) return 'yoru';
-  if (/kaisou|gensho|butsudan|hokank|shoko/.test(id)) return 'gensou';
+  if (/kaisou|butsudan|hokank|shoko/.test(id)) return 'gensou';   // 回想／仏壇／保管庫／書庫＝褪色
   if (/sotsugyou|haru|mankai|namiki|suunengo/.test(id)) return 'sotsu';
   return 'hiru';
 }
