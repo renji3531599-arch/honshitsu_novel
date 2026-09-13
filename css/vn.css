@@ -104,8 +104,9 @@ img{display:block;max-width:100%}
 #stage[data-light="off"] .lightshaft{opacity:0}
 
 /* -------------------------------------------------------------- 立ち絵 ----- */
-.lay-chr{z-index:3}
-.chr{position:absolute;bottom:0;height:88%;max-height:calc(var(--u)*560);width:calc(var(--u)*420);
+/* 足は画面下端ぎりぎり〜わずかに切れる。頭は切らない（bottom 基準 + object-position:bottom） */
+.lay-chr{z-index:3; overflow:hidden}
+.chr{position:absolute;bottom:calc(var(--u)*-18);height:102%;max-height:none;width:calc(var(--u)*420);
   transition:opacity .42s ease,transform .55s var(--ease-out),filter .5s;
   opacity:0;transform:translateY(calc(var(--u)*14)) scale(.985);filter:brightness(1)}
 .chr.in{opacity:1;transform:translateY(0) scale(1)}
@@ -113,8 +114,8 @@ img{display:block;max-width:100%}
 .chr.dim{filter:brightness(.72) saturate(.6) contrast(.95)}
 .chr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center}
 .chr .sil{position:absolute;inset:0;width:100%;height:100%}
-.chr .sil svg{position:absolute;inset:0;width:100%;height:100%}
-.chr .rim{position:absolute;left:50%;bottom:calc(var(--u)*6);transform:translateX(-50%);
+.chr .sil svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center}
+.chr .rim{position:absolute;left:50%;bottom:calc(var(--u)*22);transform:translateX(-50%);
   width:calc(var(--u)*250);height:calc(var(--u)*10);border-radius:50%;
   background:radial-gradient(closest-side,color-mix(in srgb,var(--sp) 45%,transparent),transparent);
   filter:blur(calc(var(--u)*2))}
@@ -1565,21 +1566,25 @@ button, a{ -webkit-tap-highlight-color: transparent; }
 .slots .thumb svg,.cg-cell .im svg{ pointer-events:none }
 
 /* ==========================================================================
-   FIX 2026-09 — 立ち絵は頭を切らない（足が切れる方が自然）、可能なら切らない
-   - 高さは 88% / max 560*u に抑え、ステージ（56.25vw）内に完全収納
-   - JS側でも height:88% max-height:560*u を付与しているが、CSSでも最終保証
-   - object-position は bottom ではなく top寄せで頭を優先、切れるなら足側
+   FIX 2026-09 — 立ち絵：足は下端ぎりぎり〜少し切れ、頭は切らない
+   - bottom をわずかにマイナスして足先だけフレーム外へ
+   - 高さはステージをわずかに超える 102%（縦持ちは 92%）
+   - object-position:bottom で足元基準。縮尺は contain で頭を守る
    ========================================================================== */
 .chr{
-  height:88% !important;
-  max-height:calc(var(--u)*560) !important;
-  bottom:0 !important;
+  height:102% !important;
+  max-height:none !important;
+  bottom:calc(var(--u)*-18) !important;
 }
 .chr img, .chr .sil svg{
-  object-position:top center !important;
-  /* preserveAspectRatio が xMidYMax でも、コンテナが小さい時は上側を優先して見せる */
+  object-fit:contain !important;
+  object-position:bottom center !important;
 }
-.lay-chr{ overflow:visible; }
+.lay-chr{ overflow:hidden; }
 @media (max-aspect-ratio:1/1){
-  .chr{ height:72% !important; max-height:calc(var(--u)*560) !important; }
+  .chr{
+    height:92% !important;
+    max-height:none !important;
+    bottom:calc(var(--u)*-10) !important;
+  }
 }

@@ -533,6 +533,11 @@ export class Shell {
     conf[2]();
   }
   close() {
+    // エンディング画面を ✕/Esc で閉じたらタイトルへ（ボタン経由の遷移は _endLeave で抑止）
+    const endingBareClose = this.dom.ovBody && this.dom.ovBody.dataset.kind === 'end'
+      && this.game && this.game._mode === 'end'
+      && !this._endLeave;
+    this._endLeave = false;
     this.dom.overlay.classList.add('hidden');
     this.dom.overlay.setAttribute('aria-hidden','true');
     try { if(this._trapOff){ this._trapOff(); this._trapOff=null; } } catch(_){}
@@ -554,6 +559,9 @@ export class Shell {
       }
     } catch(_){}
     if (this._pendingEnd) { const f = this._pendingEnd; this._pendingEnd = null; f(); }
+    if (endingBareClose) {
+      try { this.game.toTitle(); } catch (_) {}
+    }
   }
   hideMenus() { this.close(); this.hideChoices(); this.dom.hub.classList.remove('on'); this.dom.screenWrap.classList.remove('on'); }
 
@@ -1030,6 +1038,7 @@ ${ends}
     this.hideMenus();
     const e = this.def.endings[id] || { label: title || id, tier: 'ENDING', color: '#cbb27c', cg: null, cond: '' };
     this._pendingEnd = null;
+    this._endLeave = false;
     this.open('end', { id, e, j, title });
   }
   paneEnd(arg) {
@@ -1045,6 +1054,8 @@ ${ends}
       .replace(/^(?:TRUE END|GOOD END|NORMAL END|BITTERSWEET END|COMEDY SECRET END|BONUS EXTRA)\s*[^「]*?(?=「)/, '')
       .replace(/^「(.*)」$/, '$1');
     this.dom.ovTitle.textContent = '「' + big + '」';
+    // フッターで「閉じる＝タイトルへ」を明示
+    this.dom.ovFoot.innerHTML = `<span>✕ / Esc / 閉じる → タイトルへ</span><span>${esc(e.tier || 'ENDING')}</span>`;
     const sect = el('div', 'endcard');
     const flagsRows = (this.def.flags || []).map(f => `
       <div class="g"><span style="width:6em">${esc(f.label)}</span><span class="bar"><i style="width:${Math.min(100, (this.game.state.flags[f.key] || 0) * 25)}%"></i></span><span style="width:2.4em;text-align:right">${this.game.state.flags[f.key] || 0}</span></div>`).join('');
@@ -1064,11 +1075,14 @@ ${ends}
       <div class="note">到達条件：${esc(e.cond)}<br>${bonusReady ? '★ BONUS EXTRA「また、この教室で」がタイトル画面に解禁されました。' : `BONUS EXTRA 解禁まであと ${allBut.filter(k => !m.endings[k]).length} 種`}</div>
       <div class="btnrow" style="justify-content:flex-start"></div>`;
     const btns = right.querySelector('.btnrow');
+    // エンディング内の意図的な遷移では close() の「タイトルへ戻る」を抑止する
+    const leaveEnd = (fn) => { this._endLeave = true; this.close(); fn && fn(); };
     const mk = (label, fn) => { const b = el('button', null, label); b.addEventListener('click', () => { this.audio.se('se_click'); fn(); }); btns.appendChild(b); };
-    mk('この続きを読む（バックログ）', () => { this.close(); this.open('log'); });
-    mk('もう一度、この学期を', () => { this.close(); this.cinematicStart('prologue_001', 'prologue'); });
-    mk('タイトルへ', () => { this.close(); this.game.toTitle(); });
-    if (bonusReady) mk('★ BONUS EXTRA を読む', () => { this.close(); this.cinematicStart('end_bonus', 'end'); });
+    mk('この続きを読む（バックログ）', () => { leaveEnd(() => this.open('log')); });
+    mk('もう一度、この学期を', () => { leaveEnd(() => this.cinematicStart('prologue_001', 'prologue')); });
+    mk('タイトルへ', () => { leaveEnd(() => this.game.toTitle()); });
+    mk('閉じる', () => { this.close(); });  // ✕ と同じ：タイトルへ
+    if (bonusReady) mk('★ BONUS EXTRA を読む', () => { leaveEnd(() => this.cinematicStart('end_bonus', 'end')); });
     sect.appendChild(left); sect.appendChild(right);
     body.appendChild(sect);
     if (cg) metaUnlockCg(this.store, cg.id);

@@ -872,8 +872,10 @@ export class Stage {
         el.style.setProperty('--chr-base', String(baseScale));
         el.style.left = `calc(${pos}% - var(--u)*210)`;
         el.style.width = `calc(var(--u)*420)`;
-        el.style.height = `88%`;
-        el.style.maxHeight = `calc(var(--u)*560)`;
+        // 足は下端ぎりぎり〜少し切れ、頭は切らない（css/vn.css と同期）
+        el.style.height = `102%`;
+        el.style.maxHeight = `none`;
+        el.style.bottom = `calc(var(--u)*-18)`;
         void el.offsetWidth;                     // entrance を必ず再生させる
         el.classList.remove('out');
         el.classList.add('in');
