@@ -95,25 +95,25 @@
 
 - **書き方**: `@chr katsuya=01`〜`@chr katsuya=10`（差分 9 枚・`@chr katsuya all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 塀勝也／色 `#cbb27c`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 9 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 9 枚・未配置 0 枚（白紙削除済み）（各 現 1015×1550・913KB）
 
-- **① 通常（穏やか）** ― `@chr katsuya=01` ／ `chr_katsuya_01_tsuujou.png`
+- **① 通常（穏やか）** ― `@chr katsuya=01` ／ `chr_katsuya_01_tsuujou.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 1 回
-- **② 微笑** ― `@chr katsuya=02` ／ `chr_katsuya_02_hohoemi.png`
+- **② 微笑** ― `@chr katsuya=02` ／ `chr_katsuya_02_hohoemi.png`　※ ● 実画像が乗っている
   本編 **6 回**。初出 `60_climax:36`（卒業式前日、放課後の教室） → ほか 5 回
-- **③ 遠い目** ― `@chr katsuya=03` ／ `chr_katsuya_03_tooi_me.png`
+- **③ 遠い目** ― `@chr katsuya=03` ／ `chr_katsuya_03_tooi_me.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `00_prologue:54`（三年間ダイジェスト（共通・スキップ可））
-- **④ 驚き** ― `@chr katsuya=04` ／ `chr_katsuya_04_odoroki.png`
+- **④ 驚き** ― `@chr katsuya=04` ／ `chr_katsuya_04_odoroki.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `10_chapter1:30`（地図保管庫） → ほか 2 回
-- **⑥ 硬い無表情** ― `@chr katsuya=06` ／ `chr_katsuya_06_katai_muhyoujou.png`
+- **⑥ 硬い無表情** ― `@chr katsuya=06` ／ `chr_katsuya_06_katai_muhyoujou.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `10_chapter1:42`（地図保管庫） → ほか 2 回
-- **⑦ 回想・目を細める** ― `@chr katsuya=07` ／ `chr_katsuya_07_kaisou_me_hosomeru.png`
+- **⑦ 回想・目を細める** ― `@chr katsuya=07` ／ `chr_katsuya_07_kaisou_me_hosomeru.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `60_climax:124`（気づき） → ほか 1 回
-- **⑧ 涙をこらえる** ― `@chr katsuya=08` ／ `chr_katsuya_08_namida_koraeru.png`
+- **⑧ 涙をこらえる** ― `@chr katsuya=08` ／ `chr_katsuya_08_namida_koraeru.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `60_climax:96`（回想：最後の日） → ほか 2 回
-- **⑨ 泣く** ― `@chr katsuya=09` ／ `chr_katsuya_09_naku.png`
+- **⑨ 泣く** ― `@chr katsuya=09` ／ `chr_katsuya_09_naku.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `60_climax:92`（回想：最後の日）
-- **⑩ 晴れやかな笑み** ― `@chr katsuya=10` ／ `chr_katsuya_10_hareyaka_emi.png`
+- **⑩ 晴れやかな笑み** ― `@chr katsuya=10` ／ `chr_katsuya_10_hareyaka_emi.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `60_climax:176`（締めの言葉） → ほか 1 回
 
 ### `kuraishi` ― 倉石暁（くらいし・あきら）
@@ -152,55 +152,55 @@
 
 - **書き方**: `@chr mie=01`〜`@chr mie=10`（差分 8 枚・`@chr mie all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 三重県臣／色 `#7fa9d8`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 8 枚・未配置 0 枚（白紙削除済み）（各 現 1024×1536・779KB）
 
-- **① 通常（冷笑・半目）** ― `@chr mie=01` ／ `chr_mie_01_reishou.png`
+- **① 通常（冷笑・半目）** ― `@chr mie=01` ／ `chr_mie_01_reishou.png`　※ ● 実画像が乗っている
   本編 **19 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 18 回
-- **② 「は？」** ― `@chr mie=02` ／ `chr_mie_02_ha.png`
+- **② 「は？」** ― `@chr mie=02` ／ `chr_mie_02_ha.png`　※ ● 実画像が乗っている
   本編 **4 回**。初出 `00_prologue:74`（二月、北棟三年B組・昼休み） → ほか 3 回
-- **③ 動揺** ― `@chr mie=03` ／ `chr_mie_03_douyou.png`
+- **③ 動揺** ― `@chr mie=03` ／ `chr_mie_03_douyou.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `20_route_satou_rei:169`（零の中の変化）
-- **④ 気まずい沈黙** ― `@chr mie=04` ／ `chr_mie_04_kimazui_chinmoku.png`
+- **④ 気まずい沈黙** ― `@chr mie=04` ／ `chr_mie_04_kimazui_chinmoku.png`　※ ● 実画像が乗っている
   本編 **8 回**。初出 `10_chapter1:67`（放課後、屋上へ続く階段の踊り場） → ほか 7 回
-- **⑥ 苛立ち混じりの真剣** ― `@chr mie=06` ／ `chr_mie_06_iradachi_shinken.png`
+- **⑥ 苛立ち混じりの真剣** ― `@chr mie=06` ／ `chr_mie_06_iradachi_shinken.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `10_chapter1:74`（放課後、屋上へ続く階段の踊り場） → ほか 1 回
-- **⑦ 本気の真剣** ― `@chr mie=07` ／ `chr_mie_07_honki_shinken.png`
+- **⑦ 本気の真剣** ― `@chr mie=07` ／ `chr_mie_07_honki_shinken.png`　※ ● 実画像が乗っている
   本編 **7 回**。初出 `10_chapter1:149`（HUB ― ルート選択） → ほか 6 回
-- **⑨ 初めての素直な微笑み** ― `@chr mie=09` ／ `chr_mie_09_sunao_hohoemi.png`
+- **⑨ 初めての素直な微笑み** ― `@chr mie=09` ／ `chr_mie_09_sunao_hohoemi.png`　※ ● 実画像が乗っている
   本編 **5 回**。初出 `10_chapter1:137`（選択後共通 ―― 夕方の廊下） → ほか 4 回
-- **⑩ 泣き顔** ― `@chr mie=10` ／ `chr_mie_10_nakigao.png`
+- **⑩ 泣き顔** ― `@chr mie=10` ／ `chr_mie_10_nakigao.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `60_climax:131`（気づき）
 
 ### `mitsumine` ― 三峰瑠衣（みつみね・るい）
 
 - **書き方**: `@chr mitsumine=01`〜`@chr mitsumine=06`（差分 4 枚・`@chr mitsumine all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 三峰瑠衣／色 `#e2b79e`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 4 枚・未配置 0 枚（白紙削除済み）（各 現 1024×1536・725KB）
 
-- **① 通常** ― `@chr mitsumine=01` ／ `chr_mitsumine_01_tsuujou.png`
+- **① 通常** ― `@chr mitsumine=01` ／ `chr_mitsumine_01_tsuujou.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `40_route_minamitou_meshino:15`（桜並木、まだ蕾） → ほか 1 回
-- **② ツッコミ顔** ― `@chr mitsumine=02` ／ `chr_mitsumine_02_tsukkomi.png`
+- **② ツッコミ顔** ― `@chr mitsumine=02` ／ `chr_mitsumine_02_tsukkomi.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:19`（桜並木、まだ蕾）
-- **③ 笑顔** ― `@chr mitsumine=03` ／ `chr_mitsumine_03_egao.png`
+- **③ 笑顔** ― `@chr mitsumine=03` ／ `chr_mitsumine_03_egao.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `40_route_minamitou_meshino:63`（決意） → ほか 1 回
-- **⑥ 「は？」（ハモリ専用）** ― `@chr mitsumine=06` ／ `chr_mitsumine_06_ha.png`
+- **⑥ 「は？」（ハモリ専用）** ― `@chr mitsumine=06` ／ `chr_mitsumine_06_ha.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:97`（（おまけ）ハモり）
 
 ### `naitou` ― 内藤蘭（ないとう・らん）
 
 - **書き方**: `@chr naitou=01`〜`@chr naitou=06`（差分 5 枚・`@chr naitou all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 内藤蘭／色 `#b6d8c6`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 5 枚・未配置 0 枚（白紙削除済み）（各 現 1024×1536・766KB）
 
-- **① 通常** ― `@chr naitou=01` ／ `chr_naitou_01_tsuujou.png`
+- **① 通常** ― `@chr naitou=01` ／ `chr_naitou_01_tsuujou.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
-- **② 微笑** ― `@chr naitou=02` ／ `chr_naitou_02_hohoemi.png`
+- **② 微笑** ― `@chr naitou=02` ／ `chr_naitou_02_hohoemi.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:36`（南棟三年教室）
-- **④ 驚き** ― `@chr naitou=04` ／ `chr_naitou_04_odoroki.png`
+- **④ 驚き** ― `@chr naitou=04` ／ `chr_naitou_04_odoroki.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:46`（茶化した場合）
-- **⑤ 優しい目** ― `@chr naitou=05` ／ `chr_naitou_05_yasashii_me.png`
+- **⑤ 優しい目** ― `@chr naitou=05` ／ `chr_naitou_05_yasashii_me.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:59`（決意）
-- **⑥ 少し笑う** ― `@chr naitou=06` ／ `chr_naitou_06_sukoshi_warau.png`
+- **⑥ 少し笑う** ― `@chr naitou=06` ／ `chr_naitou_06_sukoshi_warau.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
 
 ### `rei` ― 数理零（すうり・れい）
@@ -225,81 +225,81 @@
 
 - **書き方**: `@chr ryoma=01`〜`@chr ryoma=09`（差分 8 枚・`@chr ryoma all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 両馬二郎／色 `#e2853f`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 8 枚・未配置 0 枚（白紙削除済み）（各 現 1024×1536・791KB）
 - **その人が主役のルート**: D「両馬編」 ― 祖父と✝本質✝（開始シーン `d1`）
 
-- **① 通常** ― `@chr ryoma=01` ／ `chr_ryoma_01_tsuujou.png`
+- **① 通常** ― `@chr ryoma=01` ／ `chr_ryoma_01_tsuujou.png`　※ ● 実画像が乗っている
   本編 **4 回**。初出 `00_prologue:81`（二月、北棟三年B組・昼休み） → ほか 3 回
-- **② ニヤリ** ― `@chr ryoma=02` ／ `chr_ryoma_02_niyari.png`
+- **② ニヤリ** ― `@chr ryoma=02` ／ `chr_ryoma_02_niyari.png`　※ ● 実画像が乗っている
   本編 **5 回**。初出 `00_prologue:74`（二月、北棟三年B組・昼休み） → ほか 4 回
-- **④ 急に真顔** ― `@chr ryoma=04` ／ `chr_ryoma_04_kyuu_magao.png`
+- **④ 急に真顔** ― `@chr ryoma=04` ／ `chr_ryoma_04_kyuu_magao.png`　※ ● 実画像が乗っている
   本編 **6 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 5 回
-- **⑤ しょんぼり** ― `@chr ryoma=05` ／ `chr_ryoma_05_shonbori.png`
+- **⑤ しょんぼり** ― `@chr ryoma=05` ／ `chr_ryoma_05_shonbori.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `10_chapter1:160`（まだ聞けていない話がある気がする）
-- **⑥ 泣き笑い** ― `@chr ryoma=06` ／ `chr_ryoma_06_nakiwarai.png`
+- **⑥ 泣き笑い** ― `@chr ryoma=06` ／ `chr_ryoma_06_nakiwarai.png`　※ ● 実画像が乗っている
   本編 **4 回**。初出 `30_route_terachi_ryoma:97`（両馬の家、夕方） → ほか 3 回
-- **⑦ 真剣な決意顔** ― `@chr ryoma=07` ／ `chr_ryoma_07_shinken_ketsui.png`
+- **⑦ 真剣な決意顔** ― `@chr ryoma=07` ／ `chr_ryoma_07_shinken_ketsui.png`　※ ● 実画像が乗っている
   本編 **4 回**。初出 `10_chapter1:149`（HUB ― ルート選択） → ほか 3 回
-- **⑧ 照れ隠しで頭をかく** ― `@chr ryoma=08` ／ `chr_ryoma_08_terekakushi.png`
+- **⑧ 照れ隠しで頭をかく** ― `@chr ryoma=08` ／ `chr_ryoma_08_terekakushi.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `30_route_terachi_ryoma:88`（両馬の家、夕方） → ほか 1 回
-- **⑨ 号泣** ― `@chr ryoma=09` ／ `chr_ryoma_09_goukyuu.png`
+- **⑨ 号泣** ― `@chr ryoma=09` ／ `chr_ryoma_09_goukyuu.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `30_route_terachi_ryoma:120`（祖父の口癖）
 
 ### `sakura` ― 櫻優（さくら・ゆう）
 
 - **書き方**: `@chr sakura=01`〜`@chr sakura=06`（差分 3 枚・`@chr sakura all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 櫻優／色 `#a8c8e0`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 3 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 3 枚・未配置 0 枚（白紙削除済み）（各 現 1054×1492・750KB）
 
-- **② 真剣（研究者モード）** ― `@chr sakura=02` ／ `chr_sakura_02_kenkyuusha.png`
+- **② 真剣（研究者モード）** ― `@chr sakura=02` ／ `chr_sakura_02_kenkyuusha.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
-- **⑤ 笑顔** ― `@chr sakura=05` ／ `chr_sakura_05_egao.png`
+- **⑤ 笑顔** ― `@chr sakura=05` ／ `chr_sakura_05_egao.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:65`（決意）
-- **⑥ 柔らかい表情** ― `@chr sakura=06` ／ `chr_sakura_06_yawarakai.png`
+- **⑥ 柔らかい表情** ― `@chr sakura=06` ／ `chr_sakura_06_yawarakai.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
 
 ### `satou` ― 砂糖東洋（さとう・とうよう）
 
 - **書き方**: `@chr satou=01`〜`@chr satou=08`（差分 8 枚・`@chr satou all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 砂糖東洋／色 `#7fd0c8`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 8 枚・未配置 0 枚（白紙削除済み）（各 現 1054×1492・689KB）
 - **その人が主役のルート**: A「砂糖編」 ― 窓の外の続き（開始シーン `a1`）
 
-- **① 通常（ゲーム画面凝視）** ― `@chr satou=01` ／ `chr_satou_01_game_gyoushi.png`
+- **① 通常（ゲーム画面凝視）** ― `@chr satou=01` ／ `chr_satou_01_game_gyoushi.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み） → ほか 2 回
-- **② 無表情（素）** ― `@chr satou=02` ／ `chr_satou_02_muhyoujou.png`
+- **② 無表情（素）** ― `@chr satou=02` ／ `chr_satou_02_muhyoujou.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `20_route_satou_rei:25`（放課後、教室に残る砂糖） → ほか 2 回
-- **③ 驚き（画面から顔を上げる）** ― `@chr satou=03` ／ `chr_satou_03_kao_ageta.png`
+- **③ 驚き（画面から顔を上げる）** ― `@chr satou=03` ／ `chr_satou_03_kao_ageta.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `20_route_satou_rei:53`（正面から頼んだ方）
-- **④ 照れ隠しでそっぽを向く** ― `@chr satou=04` ／ `chr_satou_04_soppo.png`
+- **④ 照れ隠しでそっぽを向く** ― `@chr satou=04` ／ `chr_satou_04_soppo.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `20_route_satou_rei:19`（放課後、教室に残る砂糖）
-- **⑤ 真剣にカメラを構える顔** ― `@chr satou=05` ／ `chr_satou_05_camera.png`
+- **⑤ 真剣にカメラを構える顔** ― `@chr satou=05` ／ `chr_satou_05_camera.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `20_route_satou_rei:77`（砂糖のスマートフォン） → ほか 1 回
-- **⑥ 微笑み（レア）** ― `@chr satou=06` ／ `chr_satou_06_hohoemi.png`
+- **⑥ 微笑み（レア）** ― `@chr satou=06` ／ `chr_satou_06_hohoemi.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `20_route_satou_rei:98`（砂糖のスマートフォン） → ほか 1 回
-- **⑦ 言葉に詰まる顔** ― `@chr satou=07` ／ `chr_satou_07_tsumaru.png`
+- **⑦ 言葉に詰まる顔** ― `@chr satou=07` ／ `chr_satou_07_tsumaru.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `20_route_satou_rei:88`（砂糖のスマートフォン） → ほか 1 回
-- **⑧ 目に光るものを堪える顔** ― `@chr satou=08` ／ `chr_satou_08_me_hikari_koraeru.png`
+- **⑧ 目に光るものを堪える顔** ― `@chr satou=08` ／ `chr_satou_08_me_hikari_koraeru.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `60_climax:116`（窓の外の五秒）
 
 ### `terachi` ― 寺地星（てらち・せい）
 
 - **書き方**: `@chr terachi=01`〜`@chr terachi=08`（差分 6 枚・`@chr terachi all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 寺地星／色 `#9ec98f`
-- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 6 枚・未配置 0 枚（白紙削除済み）（各 現 1054×1492・768KB）
 - **その人が主役のルート**: C「寺地編」 ― 最後の朗読、まだ早いけど（開始シーン `c1`）
 
-- **① 通常（眠そう・淡々）** ― `@chr terachi=01` ／ `chr_terachi_01_nemusou.png`
+- **① 通常（眠そう・淡々）** ― `@chr terachi=01` ／ `chr_terachi_01_nemusou.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `30_route_terachi_ryoma:12`（放課後、誰もいない教室） → ほか 1 回
-- **② 困惑して固まる** ― `@chr terachi=02` ／ `chr_terachi_02_konwaku_katamaru.png`
+- **② 困惑して固まる** ― `@chr terachi=02` ／ `chr_terachi_02_konwaku_katamaru.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `30_route_terachi_ryoma:32`（正面から頼んだ方）
-- **③ 真剣な配信者の顔** ― `@chr terachi=03` ／ `chr_terachi_03_haishin_shinken.png`
+- **③ 真剣な配信者の顔** ― `@chr terachi=03` ／ `chr_terachi_03_haishin_shinken.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `30_route_terachi_ryoma:17`（放課後、誰もいない教室）
-- **④ 嬉しい** ― `@chr terachi=04` ／ `chr_terachi_04_ureshii.png`
+- **④ 嬉しい** ― `@chr terachi=04` ／ `chr_terachi_04_ureshii.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:145`（GOOD END 寺地「配信は続く」）
-- **⑥ マイク前の決意顔** ― `@chr terachi=06` ／ `chr_terachi_06_maiku_no_ketsui.png`
+- **⑥ マイク前の決意顔** ― `@chr terachi=06` ／ `chr_terachi_06_maiku_no_ketsui.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `30_route_terachi_ryoma:57`（三年分の紙） → ほか 2 回
-- **⑧ 涙** ― `@chr terachi=08` ／ `chr_terachi_08_namida.png`
+- **⑧ 涙** ― `@chr terachi=08` ／ `chr_terachi_08_namida.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `60_climax:168`（最後の朗読）
 
 ## 差し替え手順（立ち絵共通）
@@ -310,7 +310,7 @@
 2. 台帳の `placeholder` を `false` に → シルエット補完（`figureSVG`）が消えて実画像になる
    （**1と2はセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れる）
    ― まとめてやるなら `node tools/sync_placeholder.mjs`（実在ファイルを検出して自動で `false` にする）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v7`）を上げる（`--bump` で自動）
+3. `sw.js` の `CACHE`（現在 `honshitsu-v8`）を上げる（`--bump` で自動）
 4. 白背景のまま置きたいときだけ CONFIG「画像合成」= multiply（ `#stage[data-blend="multiply"] .chr img` にだけ掛かる）
 5. `node tools/sync_placeholder.mjs --check` で寸法・透過・容量・台帳のズレを確認 → `npm test`
 
