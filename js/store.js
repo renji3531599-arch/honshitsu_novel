@@ -15,6 +15,13 @@ const K_META = 'honshitsu.meta.v2';
 const K_META_OLD = 'honshitsu.meta.v1';
 const K_CONF = 'honshitsu.config.v1';
 
+/** アセットIDの改名履歴（旧id → 新id）。回収記録（meta.cg）はこれで引き継ぐ。
+ *  2026-09-13 の命名監査: 訃報は fuhou（kuhou は誤り）。全件は docs/ASSET_MANIFEST.md「命名修正」。
+ *  立ち絵は meta.chr[slug] = [表情番号] で持つので、chr の改名はセーブに影響しない。 */
+export const ID_RENAME = {
+  cg_kuhou_kageboushi: 'cg_fuhou_kageboushi',
+};
+
 export const DEFAULT_CONFIG = {
   textSpeed: 1.1,       // 0.25〜4
   autoDelay: 1500,      // 文读完待機 ms
@@ -69,6 +76,10 @@ export class Store {
     }
     // 新規キーの初期化
     if (!Array.isArray(this.meta.cg)) this.meta.cg = [];
+    // 改名されたアセットIDの回収記録を引き継ぐ（2026-09-13 の命名修正）
+    if (this.meta.cg.some(id => ID_RENAME[id])) {
+      this.meta.cg = [...new Set(this.meta.cg.map(id => ID_RENAME[id] || id))];
+    }
     if (!this.meta.chr || typeof this.meta.chr !== 'object') this.meta.chr = {};
     if (!Array.isArray(this.meta.tips)) this.meta.tips = [];
     if (!this.meta.almanac || typeof this.meta.almanac !== 'object') this.meta.almanac = {};

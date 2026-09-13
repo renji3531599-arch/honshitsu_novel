@@ -49,7 +49,7 @@ window.ASSET_MANIFEST = {
       "slot": 9
     },
     "BG10": {
-      "file": "bg_toshokan_shozoko.png",
+      "file": "bg_toshoshitsu_oku_shoko.png",
       "desc": "図書室奥の書庫",
       "slot": 10
     },
@@ -99,17 +99,17 @@ window.ASSET_MANIFEST = {
       "slot": 19
     },
     "BG20": {
-      "file": "bg_hawaii_youganchi_kaisou.png",
+      "file": "bg_hawaii_yougan_daichi_kaisou.png",
       "desc": "回想・ハワイの溶岩台地",
       "slot": 20
     },
     "BG21": {
-      "file": "bg_yama_gensho_kaisou.png",
+      "file": "bg_yama_kaisou.png",
       "desc": "回想・稲葉と勝也がいた山",
       "slot": 21
     },
     "BG22": {
-      "file": "bg_daigaku_yakou_kaisou.png",
+      "file": "bg_daigaku_camp_kaisou.png",
       "desc": "回想・大学時代の野外調査ベースキャンプ",
       "slot": 22
     },
@@ -159,7 +159,7 @@ window.ASSET_MANIFEST = {
       "exprs": [
         {
           "no": 1,
-          "file": "chr_inaba_01_shashin_no_waraui.png",
+          "file": "chr_inaba_01_furushashin_hohoemi.png",
           "label": "古写真の中の柔らかい笑み",
           "slot": 126
         }
@@ -188,7 +188,7 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 6,
-          "file": "chr_izaki_06_shimiemi.png",
+          "file": "chr_izaki_06_shimijimi_hohoemi.png",
           "label": "しみじみとした微笑み",
           "slot": 83
         }
@@ -252,13 +252,13 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 6,
-          "file": "chr_katsuya_06_kataki_muten.png",
+          "file": "chr_katsuya_06_katai_muhyoujou.png",
           "label": "硬い無表情",
           "slot": 30
         },
         {
           "no": 7,
-          "file": "chr_katsuya_07_kaisou_me_soseru.png",
+          "file": "chr_katsuya_07_kaisou_me_hosomeru.png",
           "label": "回想・目を細める",
           "slot": 31
         },
@@ -276,7 +276,7 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 10,
-          "file": "chr_katsuya_10_hareyaka_emmi.png",
+          "file": "chr_katsuya_10_hareyaka_emi.png",
           "label": "晴れやかな笑み",
           "slot": 34
         }
@@ -287,13 +287,13 @@ window.ASSET_MANIFEST = {
       "exprs": [
         {
           "no": 1,
-          "file": "chr_kuraishi_01_kekkyou.png",
+          "file": "chr_kuraishi_01_nekkyou.png",
           "label": "通常（熱狂）",
           "slot": 96
         },
         {
           "no": 2,
-          "file": "chr_kuraishi_02_kanshou.png",
+          "file": "chr_kuraishi_02_kangeki.png",
           "label": "感激",
           "slot": 97
         },
@@ -311,7 +311,7 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 6,
-          "file": "chr_kuraishi_06_kotoba_usinau.png",
+          "file": "chr_kuraishi_06_kotoba_ushinau.png",
           "label": "言葉を失う顔",
           "slot": 101
         }
@@ -369,13 +369,13 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 4,
-          "file": "chr_mie_04_chimatsu.png",
+          "file": "chr_mie_04_kimazui_chinmoku.png",
           "label": "気まずい沈黙",
           "slot": 47
         },
         {
           "no": 6,
-          "file": "chr_mie_06_iraduki_shinken.png",
+          "file": "chr_mie_06_iradachi_shinken.png",
           "label": "苛立ち混じりの真剣",
           "slot": 49
         },
@@ -515,7 +515,7 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 4,
-          "file": "chr_ryoma_04_kinimo_majime.png",
+          "file": "chr_ryoma_04_kyuu_magao.png",
           "label": "急に真顔",
           "slot": 38
         },
@@ -579,13 +579,13 @@ window.ASSET_MANIFEST = {
       "exprs": [
         {
           "no": 1,
-          "file": "chr_satou_01_game_shuuchuu.png",
+          "file": "chr_satou_01_game_gyoushi.png",
           "label": "通常（ゲーム画面凝視）",
           "slot": 62
         },
         {
           "no": 2,
-          "file": "chr_satou_02_muten.png",
+          "file": "chr_satou_02_muhyoujou.png",
           "label": "無表情（素）",
           "slot": 63
         },
@@ -621,7 +621,7 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 8,
-          "file": "chr_satou_08_hikari_koraeru.png",
+          "file": "chr_satou_08_me_hikari_koraeru.png",
           "label": "目に光るものを堪える顔",
           "slot": 69
         }
@@ -638,13 +638,13 @@ window.ASSET_MANIFEST = {
         },
         {
           "no": 2,
-          "file": "chr_terachi_02_komatte_kataaru.png",
+          "file": "chr_terachi_02_konwaku_katamaru.png",
           "label": "困惑して固まる",
           "slot": 55
         },
         {
           "no": 3,
-          "file": "chr_terachi_03_hansya_shinken.png",
+          "file": "chr_terachi_03_haishin_shinken.png",
           "label": "真剣な配信者の顔",
           "slot": 56
         },
@@ -730,8 +730,8 @@ window.ASSET_MANIFEST = {
       "desc": "若き勝也(回想・単独)　生意気な口を利いた日、俯く",
       "slot": 157
     },
-    "cg_kuhou_kageboushi": {
-      "file": "cg_kuhou_kageboushi.png",
+    "cg_fuhou_kageboushi": {
+      "file": "cg_fuhou_kageboushi.png",
       "desc": "勝也(単独)　訃報を知った瞬間(シルエットのみ)",
       "slot": 158
     },

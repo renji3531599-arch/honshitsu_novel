@@ -7,6 +7,10 @@
     "check": "node tools/vncheck.mjs",
     "smoke": "node tools/smoke.mjs",
     "test": "npm run check && npm run smoke",
+    "assets:sync": "node tools/sync_placeholder.mjs",
+    "assets:check": "node tools/sync_placeholder.mjs --check",
+    "assets:bump": "node tools/sync_placeholder.mjs --bump",
+    "docs": "node tools/gen_asset_md.mjs",
     "serve": "python3 -m http.server 8000"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。",
  "engine_limit": 300,
  "assigned": 135,
  "buffer": 0,
@@ -97,7 +97,7 @@
   {
    "id": "BG10",
    "cat": "bg",
-   "file": "assets/bg/bg_toshokan_shozoko.png",
+   "file": "assets/bg/bg_toshoshitsu_oku_shoko.png",
    "label": "図書室奥の書庫（埃っぽい）",
    "desc": "図書室奥の書庫（埃っぽい）",
    "meta": "shoko",
@@ -197,7 +197,7 @@
   {
    "id": "BG20",
    "cat": "bg",
-   "file": "assets/bg/bg_hawaii_youganchi_kaisou.png",
+   "file": "assets/bg/bg_hawaii_yougan_daichi_kaisou.png",
    "label": "回想・ハワイの溶岩台地",
    "desc": "回想・ハワイの溶岩台地",
    "meta": "hawaii",
@@ -207,7 +207,7 @@
   {
    "id": "BG21",
    "cat": "bg",
-   "file": "assets/bg/bg_yama_gensho_kaisou.png",
+   "file": "assets/bg/bg_yama_kaisou.png",
    "label": "回想・稲葉と勝也がいた山（褪色調）",
    "desc": "回想・稲葉と勝也がいた山（褪色調）",
    "meta": "yama",
@@ -217,10 +217,10 @@
   {
    "id": "BG22",
    "cat": "bg",
-   "file": "assets/bg/bg_daigaku_yakou_kaisou.png",
+   "file": "assets/bg/bg_daigaku_camp_kaisou.png",
    "label": "回想・大学時代の野外調査ベースキャンプ",
    "desc": "回想・大学時代の野外調査ベースキャンプ",
-   "meta": "yakou",
+   "meta": "camp",
    "source": "image2/white_022.png",
    "placeholder": false
   },
@@ -285,9 +285,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_katsuya_06_kataki_muten",
+   "id": "chr_katsuya_06_katai_muhyoujou",
    "cat": "chr",
-   "file": "assets/chr/chr_katsuya_06_kataki_muten.png",
+   "file": "assets/chr/chr_katsuya_06_katai_muhyoujou.png",
    "label": "塀勝也 硬い無表情",
    "desc": "立ち絵差分 塀勝也／硬い無表情",
    "meta": "katsuya",
@@ -295,9 +295,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_katsuya_07_kaisou_me_soseru",
+   "id": "chr_katsuya_07_kaisou_me_hosomeru",
    "cat": "chr",
-   "file": "assets/chr/chr_katsuya_07_kaisou_me_soseru.png",
+   "file": "assets/chr/chr_katsuya_07_kaisou_me_hosomeru.png",
    "label": "塀勝也 回想・目を細める",
    "desc": "立ち絵差分 塀勝也／回想・目を細める",
    "meta": "katsuya",
@@ -325,9 +325,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_katsuya_10_hareyaka_emmi",
+   "id": "chr_katsuya_10_hareyaka_emi",
    "cat": "chr",
-   "file": "assets/chr/chr_katsuya_10_hareyaka_emmi.png",
+   "file": "assets/chr/chr_katsuya_10_hareyaka_emi.png",
    "label": "塀勝也 晴れやかな笑み",
    "desc": "立ち絵差分 塀勝也／晴れやかな笑み",
    "meta": "katsuya",
@@ -355,9 +355,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_ryoma_04_kinimo_majime",
+   "id": "chr_ryoma_04_kyuu_magao",
    "cat": "chr",
-   "file": "assets/chr/chr_ryoma_04_kinimo_majime.png",
+   "file": "assets/chr/chr_ryoma_04_kyuu_magao.png",
    "label": "両馬二郎 急に真顔",
    "desc": "立ち絵差分 両馬二郎／急に真顔",
    "meta": "ryoma",
@@ -445,9 +445,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_mie_04_chimatsu",
+   "id": "chr_mie_04_kimazui_chinmoku",
    "cat": "chr",
-   "file": "assets/chr/chr_mie_04_chimatsu.png",
+   "file": "assets/chr/chr_mie_04_kimazui_chinmoku.png",
    "label": "三重県臣 気まずい沈黙",
    "desc": "立ち絵差分 三重県臣／気まずい沈黙",
    "meta": "mie",
@@ -455,9 +455,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_mie_06_iraduki_shinken",
+   "id": "chr_mie_06_iradachi_shinken",
    "cat": "chr",
-   "file": "assets/chr/chr_mie_06_iraduki_shinken.png",
+   "file": "assets/chr/chr_mie_06_iradachi_shinken.png",
    "label": "三重県臣 苛立ち混じりの真剣",
    "desc": "立ち絵差分 三重県臣／苛立ち混じりの真剣",
    "meta": "mie",
@@ -505,9 +505,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_terachi_02_komatte_kataaru",
+   "id": "chr_terachi_02_konwaku_katamaru",
    "cat": "chr",
-   "file": "assets/chr/chr_terachi_02_komatte_kataaru.png",
+   "file": "assets/chr/chr_terachi_02_konwaku_katamaru.png",
    "label": "寺地星 困惑して固まる",
    "desc": "立ち絵差分 寺地星／困惑して固まる",
    "meta": "terachi",
@@ -515,9 +515,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_terachi_03_hansya_shinken",
+   "id": "chr_terachi_03_haishin_shinken",
    "cat": "chr",
-   "file": "assets/chr/chr_terachi_03_hansya_shinken.png",
+   "file": "assets/chr/chr_terachi_03_haishin_shinken.png",
    "label": "寺地星 真剣な配信者の顔",
    "desc": "立ち絵差分 寺地星／真剣な配信者の顔",
    "meta": "terachi",
@@ -555,9 +555,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_satou_01_game_shuuchuu",
+   "id": "chr_satou_01_game_gyoushi",
    "cat": "chr",
-   "file": "assets/chr/chr_satou_01_game_shuuchuu.png",
+   "file": "assets/chr/chr_satou_01_game_gyoushi.png",
    "label": "砂糖東洋 通常（ゲーム画面凝視）",
    "desc": "立ち絵差分 砂糖東洋／通常（ゲーム画面凝視）",
    "meta": "satou",
@@ -565,9 +565,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_satou_02_muten",
+   "id": "chr_satou_02_muhyoujou",
    "cat": "chr",
-   "file": "assets/chr/chr_satou_02_muten.png",
+   "file": "assets/chr/chr_satou_02_muhyoujou.png",
    "label": "砂糖東洋 無表情（素）",
    "desc": "立ち絵差分 砂糖東洋／無表情（素）",
    "meta": "satou",
@@ -625,9 +625,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_satou_08_hikari_koraeru",
+   "id": "chr_satou_08_me_hikari_koraeru",
    "cat": "chr",
-   "file": "assets/chr/chr_satou_08_hikari_koraeru.png",
+   "file": "assets/chr/chr_satou_08_me_hikari_koraeru.png",
    "label": "砂糖東洋 目に光るものを堪える顔",
    "desc": "立ち絵差分 砂糖東洋／目に光るものを堪える顔",
    "meta": "satou",
@@ -715,9 +715,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_izaki_06_shimiemi",
+   "id": "chr_izaki_06_shimijimi_hohoemi",
    "cat": "chr",
-   "file": "assets/chr/chr_izaki_06_shimiemi.png",
+   "file": "assets/chr/chr_izaki_06_shimijimi_hohoemi.png",
    "label": "伊崎 しみじみとした微笑み",
    "desc": "立ち絵差分 伊崎／しみじみとした微笑み",
    "meta": "izaki",
@@ -805,9 +805,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_kuraishi_01_kekkyou",
+   "id": "chr_kuraishi_01_nekkyou",
    "cat": "chr",
-   "file": "assets/chr/chr_kuraishi_01_kekkyou.png",
+   "file": "assets/chr/chr_kuraishi_01_nekkyou.png",
    "label": "倉石暁 通常（熱狂）",
    "desc": "立ち絵差分 倉石暁／通常（熱狂）",
    "meta": "kuraishi",
@@ -815,9 +815,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_kuraishi_02_kanshou",
+   "id": "chr_kuraishi_02_kangeki",
    "cat": "chr",
-   "file": "assets/chr/chr_kuraishi_02_kanshou.png",
+   "file": "assets/chr/chr_kuraishi_02_kangeki.png",
    "label": "倉石暁 感激",
    "desc": "立ち絵差分 倉石暁／感激",
    "meta": "kuraishi",
@@ -845,9 +845,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_kuraishi_06_kotoba_usinau",
+   "id": "chr_kuraishi_06_kotoba_ushinau",
    "cat": "chr",
-   "file": "assets/chr/chr_kuraishi_06_kotoba_usinau.png",
+   "file": "assets/chr/chr_kuraishi_06_kotoba_ushinau.png",
    "label": "倉石暁 言葉を失う顔",
    "desc": "立ち絵差分 倉石暁／言葉を失う顔",
    "meta": "kuraishi",
@@ -1015,9 +1015,9 @@
    "placeholder": true
   },
   {
-   "id": "chr_inaba_01_shashin_no_waraui",
+   "id": "chr_inaba_01_furushashin_hohoemi",
    "cat": "chr",
-   "file": "assets/chr/chr_inaba_01_shashin_no_waraui.png",
+   "file": "assets/chr/chr_inaba_01_furushashin_hohoemi.png",
    "label": "稲葉悌二（回想専用） 古写真の中の柔らかい笑み",
    "desc": "立ち絵差分 稲葉悌二（回想専用）／古写真の中の柔らかい笑み",
    "meta": "inaba",
@@ -1145,9 +1145,9 @@
    "placeholder": true
   },
   {
-   "id": "cg_kuhou_kageboushi",
+   "id": "cg_fuhou_kageboushi",
    "cat": "cg",
-   "file": "assets/cg/cg_kuhou_kageboushi.png",
+   "file": "assets/cg/cg_fuhou_kageboushi.png",
    "label": "勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。",
    "desc": "勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。",
    "meta": "scene",

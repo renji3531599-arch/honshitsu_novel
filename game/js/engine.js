@@ -27,6 +27,18 @@ function loadGlobal() {
 }
 function saveGlobal() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(GL)); } catch (e) {} }
 
+/* 2026-09-13 の命名監査で CG id が1件変わった（訃報 kuhou → fuhou）。
+   旧セーブの回収記録（GL.cg）を新idへ引き継ぐ。版A側の同等処理は js/store.js の ID_RENAME。 */
+const CG_RENAME = { cg_kuhou_kageboushi: "cg_fuhou_kageboushi" };
+(function migrateGlobalIds() {
+  let touched = false;
+  Object.keys(GL.cg || {}).forEach(function (old) {
+    const neo = CG_RENAME[old];
+    if (neo && neo !== old) { if (!GL.cg[neo]) GL.cg[neo] = GL.cg[old]; delete GL.cg[old]; touched = true; }
+  });
+  if (touched) saveGlobal();
+})();
+
 /* ---------------- ゲーム状態 ---------------- */
 const G = {
   sceneId: null, idx: 0,
@@ -64,7 +76,9 @@ function seSafe(id) { try { window.AudioSys.playSE(id); } catch (e) {} }
 function bgFile(id) { const b = MAN.bg[id]; return b ? "assets/img/" + b.file : null; }
 function chrFile(who, expr) {
   const c = MAN.chr[who]; if (!c) return null;
-  const e = c.exprs[Math.max(0, expr - 1)] || c.exprs[0];
+  // 表情番号は連番ではない（2026-09-13 に未使用27枚を削除して欠番ができた）。
+  // 配列の位置ではなく `no` で引く ―― 位置で引くと別の表情の絵が出る（例: katsuya 6 → 配列[5] は no=7）
+  const e = c.exprs.find(x => x.no === expr) || c.exprs[0];
   return "assets/img/" + e.file;
 }
 function cgFile(id) {

@@ -167,11 +167,25 @@ const MOOD_LABEL = {
   akari: '灯り（室内灯・光 ON）', sepia: 'セピア（回想）', gensou: '幻想（褪色・暖）',
   sotsu: '卒業式（白熱・光 ON）',
 };
+/* 表示幾何（CSS/JS から実測した値。入稿仕様の正本は docs/ART_SPEC.md）
+   #viewport{aspect-ratio:16/9}（css/vn.css:58-61）／--u = 幅/1000（js/visual.js:630-636） */
+const GEOM = {
+  stage: { w: 1000, h: 562.5 },                       // 舞台（単位 u）＝16:9
+  stagePx: { w: 1600, h: 900 },                       // 1600px幅の窓での実寸
+  chrBox: { w: 420, h: 640 },                         // css/vn.css:108 .chr
+  chrBoxPx: { w: 672, h: 1024 },                      // ↑の実寸
+  chrCrop: (640 - 562.5) / 640,                       // 枠の上 77.5u＝12.1% は #viewport の外
+  txtCoverU: 197,                                     // テキスト窓＋ツールバーの高さ（#textwrap bottom 26u + #textbox 142u + ツールバー）
+  txtCover: 197 / 562.5,                              // ↑は舞台の高さの 35%
+  kbMax: 1.11,                                        // css/vn.css:134 Ken Burns の終端 scale
+};
+const CACHE_NOW = (rd('sw.js').match(/const CACHE = '([^']+)'/) || [])[1] || '(不明)';
 const RECOMMEND = {
-  bg: '1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面',
-  cg: '1600×900（16:9）／PNG か JPEG／全面差し込み（透過は使わない）',
-  chr: '840×1280 以上／透過PNG／下揃え（`object-position: bottom center`）',
-  ui: 'ロゴ 1200×480・枠 1280×720・アイコン 256〜512 正方形／透過PNG',
+  bg: '1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）',
+  cg: '1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける',
+  chr: '840×1280（21:32）・透過／全身を切りたくなければ 840×1120（3:4）。最低 672×1024',
+  chrShort: '840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4）',
+  ui: 'ロゴ 1200×480・枠 1280×720・アイコン 256〜512 正方形／透過PNG（※UI画像は2026-09-12に全撤去済み＝CSS/SVG描画）',
 };
 const whereStr = (u) => {
   const sc = u.scene ? `シーン \`${u.scene.id}\`「${u.scene.title}」` : 'シーン外';
@@ -399,11 +413,26 @@ ${quickTable(order, (a) => {
 
 ## 差し替え手順（CG共通）
 
-1. \`assets/cg/\` に**台帳の \`file\` 名で新規配置**（推奨 1600×900／16:9、PNG or JPEG。元の白紙ファイルは2026-09-12に削除済み）
-2. \`data/assets.json\` のその行の \`"placeholder": true\` → \`false\` にする
-3. \`sw.js\` の \`CACHE\`（現在 \`honshitsu-v5\`）を上げる ← **忘れると削除前の白紙PNGを返し続ける**
+1. **ファイル名は「台帳ID + 拡張子」**（例 \`cg_chizutsutsu_kobore_shashin.png\`）。それを \`assets/cg/\` に新規配置
+   ― 台帳（\`data/assets.json\`）の \`id\` と \`file\` のファイル名部分は全行一致済み。別の名前だと解決されません
+2. \`data/assets.json\` のその行の \`"placeholder": true\` → \`false\`
+   ― **1と2は必ずセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れます
+   （まとめてやるなら \`node tools/sync_placeholder.mjs\` が実在ファイルを検出して自動で倒します）
+3. \`sw.js\` の \`CACHE\`（現在 \`${CACHE_NOW}\`）を上げる ← **忘れると古いキャッシュを返し続ける**
+   （\`node tools/sync_placeholder.mjs --bump\` で自動）
 4. 差し替えた瞬間、エンジン側は \`backdropSVG\`／合成の重い方を自動で切る（\`#stage[data-art="real"]\`）
-   ― \`object-fit: cover\` で全画面。Ken Burns は \`@cg id kb\` の付与側で決まる
+5. \`node tools/sync_placeholder.mjs --check\` ＋ \`npm test\`（vncheck / smoke）で崩れを確認
+
+### 入稿寸法（実測ベース ― 詳細は \`docs/ART_SPEC.md\`）
+
+| 項目 | 値 | 根拠 |
+|---|---|---|
+| 推奨 | **${RECOMMEND.cg}** | 舞台は常に16:9（\`#viewport{aspect-ratio:16/9}\`） |
+| 最低 | 1600×900 | \`--u = 幅/1000\` → 1600px幅の窓で等倍 |
+| 描画 | \`object-fit: cover\` 全画面 | \`css/vn.css:131\`。16:9 以外だと端が切れる |
+| Ken Burns | 最大 **${GEOM.kbMax}倍**（26秒） | \`css/vn.css:134\`。\`@cg id kb\` を付けた箇所だけ（本編 ${[...usage.cg.values()].flat().filter(u => u.kb).length} / ${[...usage.cg.values()].flat().length} 箇所）→ 四周 5〜6% は捨てて中央に重要物を |
+| 隠れる範囲 | **下 ${(GEOM.txtCover * 100).toFixed(0)}%** はテキスト窓＋ツールバー | \`#textwrap{bottom:26u}\` + \`#textbox\` 142u + ツールバー（半透明＋blur なので完全には消えないが読みにくい） |
+| 立ち絵 | CG中は**強制非表示** | \`#stage[stage-mode="cg"] .chr{opacity:0!important}\` → キャラはCGの中に描き込む |
 
 ### 演出のしかた（脚本DSL）
 
@@ -447,10 +476,21 @@ ${quickTable(list, (a) => {
 ${list.map(a => blockBg(a)).join('\n')}
 ## 差し替え手順（BG共通）
 
-1. \`assets/bg/\` に同名上書き（1600×900／16:9）
-2. 台帳の \`placeholder\` を \`false\` に → SVG補完が外れて実画像になる
-3. \`sw.js\` の \`CACHE\` を上げる
+1. **ファイル名は「台帳ID + 拡張子」**（例 \`bg_okujou.png\`）。それを \`assets/bg/\` に上書き／新規配置
+2. 台帳の \`placeholder\` を \`false\` に → SVG補完（\`backdropSVG\`）が外れて実画像になる
+   （背景25枚は**既に全て \`placeholder: false\`**＝上書きするだけで反映されます）
+3. \`sw.js\` の \`CACHE\`（現在 \`${CACHE_NOW}\`）を上げる
 4. 白背景素材のまま使いたいときだけ CONFIG「画像合成」= multiply（**既定は normal**。multiply は \`#stage[data-blend="multiply"]\` を付けたときだけ立ち絵に掛かる）
+5. \`node tools/sync_placeholder.mjs --check\` で寸法・容量・台帳のズレを確認
+
+### 入稿寸法（実測ベース ― 詳細は \`docs/ART_SPEC.md\`）
+
+| 項目 | 値 | 根拠 |
+|---|---|---|
+| 推奨 | **${RECOMMEND.bg}** | 舞台は常に16:9（\`#viewport{aspect-ratio:16/9}\`） |
+| 収録済みの実測 | 1672×940〜941 PNG・1.7〜3.1MB/枚（24枚で約53MB） | \`assets/bg/\` を実測 |
+| 描画 | \`object-fit: cover\` 全画面＋ \`bgSettle\`（1.016→1.0） | \`css/vn.css:74,89-92\` → 1600×900 ちょうどでも僅かに拡大される |
+| 隠れる範囲 | 下 ${(GEOM.txtCover * 100).toFixed(0)}% はテキスト窓、左右に立ち絵（枠幅 ${GEOM.chrBox.w}u） | 主役の被写体は中央〜やや上に |
 
 ### \`@bg\` の書き方
 
@@ -511,7 +551,7 @@ ${[...byChar.entries()].map(([slug, arr]) => {
     L.push(`- **書き方**: \`@chr ${slug}=01\`〜\`@chr ${slug}=${maxExpr}\`（差分 ${arr.length} 枚・\`@chr ${slug} all\` は非対応、\`@chr clear\` で全員下げる）`);
     if (sp) L.push(`- **名前ボックス**: ${sp.name}／色 \`${sp.color}\``);
     const real0 = arr.find(x => !x.placeholder);
-    L.push(`- **差し替え推奨（このキャラ共通）**: ${RECOMMEND.chr} ／ 現在 実画像 ${arr.filter(x => !x.placeholder).length} 枚・未配置 ${arr.filter(x => x.placeholder).length} 枚（白紙削除済み）${real0 ? `（各 ${dimStr(imgInfo(real0.file))}）` : ''}`);
+    L.push(`- **差し替え推奨（このキャラ共通）**: ${RECOMMEND.chrShort} ／ 現在 実画像 ${arr.filter(x => !x.placeholder).length} 枚・未配置 ${arr.filter(x => x.placeholder).length} 枚（白紙削除済み）${real0 ? `（各 ${dimStr(imgInfo(real0.file))}）` : ''}`);
     if (route) L.push(`- **その人が主役のルート**: ${route.no}「${route.title}」${route.sub ? ' ― ' + route.sub : ''}（開始シーン \`${route.scene}\`）`);
     L.push('');
     L.push(arr.map(a => blockChr(a)).join('\n'));
@@ -520,10 +560,28 @@ ${[...byChar.entries()].map(([slug, arr]) => {
   }).join('\n')}
 ## 差し替え手順（立ち絵共通）
 
-1. \`assets/chr/\` に**同名・透過PNG**で上書き（840×1280 推奨／下揃え）
+1. **ファイル名は「台帳ID + 拡張子」**（例 \`chr_katsuya_01_tsuujou.png\`）。それを \`assets/chr/\` に新規配置
+   ― 台帳の \`id\` と \`file\` のファイル名部分は ${list.length} 行すべて一致済み。一覧は \`docs/CHR_REPLACE_LIST.md\`
+   ― 旧名（\`chr_katsuya_01_tsujou.png\` のような短縮ローマ字）は **2026-09-13 に全廃**。どのコードも参照していません
 2. 台帳の \`placeholder\` を \`false\` に → シルエット補完（\`figureSVG\`）が消えて実画像になる
-3. \`sw.js\` の \`CACHE\` を上げる
+   （**1と2はセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れる）
+   ― まとめてやるなら \`node tools/sync_placeholder.mjs\`（実在ファイルを検出して自動で \`false\` にする）
+3. \`sw.js\` の \`CACHE\`（現在 \`${CACHE_NOW}\`）を上げる（\`--bump\` で自動）
 4. 白背景のまま置きたいときだけ CONFIG「画像合成」= multiply（ \`#stage[data-blend="multiply"] .chr img\` にだけ掛かる）
+5. \`node tools/sync_placeholder.mjs --check\` で寸法・透過・容量・台帳のズレを確認 → \`npm test\`
+
+### 入稿寸法（実測ベース ― 詳細は \`docs/ART_SPEC.md\`）
+
+| 項目 | 値 | 根拠 |
+|---|---|---|
+| 推奨 | **${RECOMMEND.chr}** | 表示枠 \`.chr{width:${GEOM.chrBox.w}u;height:${GEOM.chrBox.h}u}\`（\`css/vn.css:108\`）＝実寸 ${GEOM.chrBoxPx.w}×${GEOM.chrBoxPx.h}px |
+| 描画 | \`object-fit:contain\` ＋ \`object-position:bottom center\` | \`css/vn.css:114\`。比がズレると枠内に余白が出る |
+| **上が切れる** | 横画面（16:9）では枠の上 ${(GEOM.chrCrop * 100).toFixed(1)}% が画面外 | 舞台の高さ ${GEOM.stage.h}u ＜ 枠 ${GEOM.chrBox.h}u ＋ \`bottom:0\` ＋ \`#viewport{overflow:hidden}\` |
+| → 840×1280 の場合 | **上 155px は余白**にして頭頂を y≧163px に | 切れるのは ${(GEOM.chrCrop * 100).toFixed(1)}% ＝ 155px |
+| → 切りたくない場合 | **840×1120（3:4）** なら \`contain\` で 420×560u に収まり全身が見える | 切れない上限は 840×1125（w/h≒0.747） |
+| 確実に見える帯 | 840×1280 換算で **y=155〜885px** | 上端 ${(GEOM.chrCrop * 100).toFixed(1)}% は画面外、下端は下 ${GEOM.txtCoverU}u（${(GEOM.txtCover * 100).toFixed(0)}%）をテキスト窓が覆う（半透明＋blur なので完全には消えない） |
+| 横の余白 | 左右に **10〜15% の透明余白**を推奨 | 配置は 1人=50%／2人=33.3%・66.7%／3人=18%・50%・82%（\`js/visual.js:848-850\`）で枠は常に ${GEOM.chrBox.w}u 幅 → 3人時は左右 50u ずつ重なる |
+| 解像度の上限 | 1344×2048（Retina 等倍）まで意味がある | 実寸 ${GEOM.chrBoxPx.w}×${GEOM.chrBoxPx.h}px × DPR2。ただし ${list.length} 枚あるので容量と相談 → **透過WebP** 推奨（PNG の 1/4〜1/6） |
 
 ### 演出（JS/CSS 側で自動）
 
@@ -538,13 +596,56 @@ ${[...byChar.entries()].map(([slug, arr]) => {
   return md;
 }
 
+/* ---- docs/CHR_REPLACE_LIST.md ---- */
+function chrReplaceDoc() {
+  const list = ASSETS.filter(a => a.cat === 'chr');          // 台帳の並び順（＝スロット順）をそのまま使う
+  const slugOf = (a) => a.meta || path.basename(a.file).split('_')[1];
+  const exprOf = (a) => (path.basename(a.file).match(/_(\d\d)_/) || [])[1] || '01';
+  const real = list.filter(a => !a.placeholder).length;
+  let md = head('立ち絵 差し替え一覧',
+    [`**${list.length} 枚を「どのファイル名でどこに置くか」だけにした実務一覧**。正本は台帳 \`data/assets.json\`。`,
+     '置くファイル名は **台帳ID + 拡張子**（例 \`chr_katsuya_01_tsuujou.png\`）。台帳の \`id\` と \`file\` のファイル名部分は全行一致しています。',
+     '旧名（\`chr_katsuya_01_tsujou.png\` のような短縮ローマ字）は **2026-09-13 に全廃**。版A（\`assets/chr/\`）も版B（\`game/js/assets_manifest.js\` → \`game/assets/img/\`）も**同じ新名**で解決するので、旧名の一覧は不要になりました。'],
+    list.length);
+  md += `## 先にまとめ
+
+- 置く場所: **\`assets/chr/\`**（版A）／版B も動かすなら同じ名前を \`game/assets/img/\` にも
+- 実画像にする条件: 台帳の \`"placeholder": true\` → \`false\`（**ファイルとフラグは必ずセット**）
+  ― まとめてやるなら \`node tools/sync_placeholder.mjs\`（実在ファイルを検出して自動で倒す。寸法・透過・容量も見る）
+- そのあと \`sw.js\` の \`CACHE\`（現在 \`${CACHE_NOW}\`）を上げる（\`--bump\` で自動）
+- 現在の状態: 実画像 **${real} 枚**・未配置 **${list.length - real} 枚**
+- 寸法: **${RECOMMEND.chr}** ― 構図の注意（上が ${(GEOM.chrCrop * 100).toFixed(1)}% 切れる／下 ${(GEOM.txtCover * 100).toFixed(0)}% はテキスト窓）は \`docs/ART_SPEC.md\`
+
+## 一覧（台帳順＝スロット順）
+
+| No | 置くファイル名（\`assets/chr/\` ＝ 台帳ID + \`.png\`） | \`@chr\` の書き方 | 表情 | 本編の使用 | 初出 | 状態 |
+|---:|---|---|---|---:|---|---|
+${list.map((a, i) => {
+    const slug = slugOf(a), expr = exprOf(a);
+    const us = chrUsage.get(`${slug}|${expr}`) || [];
+    const sp = Object.values(meta.speakers || {}).find(v => v.sprite === slug);
+    return `| ${i + 1} | \`${path.basename(a.file)}\` | \`@chr ${slug}=${expr}\` | ` +
+      `${sp ? sp.name + ' ' : ''}${exprLabel(a.label)} | ${us.length} 回 | ` +
+      `${us.length ? whereStr(us[0]).replace(/^.*― /, '') : '―'} | ${a.placeholder ? '未配置' : '● 実画像'} |`;
+  }).join('\n')}
+
+## 読み方
+
+- **本編の使用** = 脚本（\`data/script/*.txt\`）の \`@chr slug=NN\` が出てくる行数。0 回の差分は「枠だけ確保」なので、出すには脚本に \`@chr\` を足す
+- **初出** = 最初に呼ばれる行。\`ファイル名:行番号\`
+- **状態** = 台帳の \`placeholder\`。\`未配置\` の間は \`js/visual.js\` の \`figureSVG()\` がシルエットを描きます
+- 表情の詳しい意図・キャラごとの差分構成は \`assets/chr/README.md\`
+`;
+  return md;
+}
+
 /* ---- assets/README.md ---- */
 function topDoc() {
   const chrCount = ASSETS.filter(a=>a.cat==='chr').length;
   const cats = [
-    ['bg', '背景', '1600×900／cover', '等高線SVG（`backdropSVG`）'],
-    ['cg', '名場面CG・ENDカード', '1600×900／cover', '―（白紙なら下地のみ）'],
-    ['chr', '立ち絵差分', '840×1280／透過PNG', 'シルエット（`figureSVG`）'],
+    ['bg', '背景', '1920×1080（16:9）／cover', '等高線SVG（`backdropSVG`）'],
+    ['cg', '名場面CG・ENDカード', '1920×1080（16:9）／cover・kb で最大1.11倍', '―（暗色ベタのみ）'],
+    ['chr', '立ち絵差分', '840×1280（21:32）／透過・下揃え', 'シルエット（`figureSVG`）'],
   ];
   let md = `# Assets — 画像素材总台帳
 
@@ -557,6 +658,8 @@ function topDoc() {
 - \`cg/README.md\` ― CG 32 枚（出番・Ken Burns・差し替え仕様）
 - \`chr/README.md\` ― 立ち絵 ${chrCount} 差分（キャラ別・表情別の本編出現回数）
 - \`../docs/CG_GUIDE.md\` ― **CG 32枚を物語順にまとめた1本**（これだけ読めばCGは足りる）
+- \`../docs/ART_SPEC.md\` ― **入稿仕様書**（推奨寸法・セーフエリア・形式・命名規則。絵を注文するときはこれ）
+- \`../docs/CHR_REPLACE_LIST.md\` ― 立ち絵 ${chrCount} 枚の差し替え一覧（**自動生成**：置くファイル名・\`@chr\`・表情・使用回数・状態）
 
 ## 内訳
 
@@ -570,11 +673,24 @@ ${cats.map(([d, n, rec, fb]) => {
 
 ## 差し替えの作法（4ステップ）
 
-1. **台帳の \`file\` 名で新規配置**（白紙の元ファイルは削除済み。フォルダと拡張子を変えるときは台帳の \`file\` も直す）
+1. **「台帳ID + 拡張子」のファイル名で新規配置**（例 \`chr_mie_04_kimazui_chinmoku.png\` → \`assets/chr/\`）
+   ― 台帳の \`id\` と \`file\` のファイル名部分は全行一致。白紙の元ファイルは削除済み
+   ― 拡張子を変える（WebP 化など）ときは台帳の \`file\` も直す（\`--adopt-ext\` で自動）
 2. \`data/assets.json\` の \`"placeholder": true\` → \`false\`
    ― これだけで補完SVGが消えて実画像に切り替わる（ \`#stage[data-art="real"]\` ）
-3. \`sw.js\` の \`CACHE\` を上げる ← **忘れると白紙が返る**
-4. \`node tools/vncheck.mjs\` と \`node tools/smoke.mjs\` で崩れを確認
+   ― **1と2は必ずセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れる
+   ― まとめてやるなら **\`node tools/sync_placeholder.mjs\`**（実在ファイルを検出して自動で \`false\` にする）
+3. \`sw.js\` の \`CACHE\`（現在 \`${CACHE_NOW}\`）を上げる ← **忘れると古いキャッシュを返す**（\`--bump\` で自動）
+4. \`node tools/sync_placeholder.mjs --check\` ＋ \`npm test\`（vncheck / smoke）で崩れを確認
+
+## 命名規則（2026-09-13 に統一済み）
+
+| | 版A（\`index.html\`／この台帳） | 版B（\`game/index.html\`） |
+|---|---|---|
+| 置き場 | \`assets/bg/\` \`assets/chr/\` \`assets/cg/\` | \`game/assets/img/\`（1フォルダ） |
+| ファイル名 | **台帳ID + 拡張子**（\`chr_katsuya_01_tsuujou.png\`） | **同じ**（\`game/js/assets_manifest.js\` も新名に更新済み） |
+| 実画像にする条件 | \`data/assets.json\` の \`placeholder: false\` | ファイルを置くだけ（フラグ機構なし） |
+| 旧名（\`chr_katsuya_01_tsujou.png\` 等） | **廃止** ― どのコードも参照していません | 同左 |
 
 ## 合成（blend）についての注意 ― 2026-09-11 に変更
 
@@ -583,7 +699,9 @@ ${cats.map(([d, n, rec, fb]) => {
 - いまは **既定 \`normal\`**。立ち絵だけ CONFIG「画像合成」= multiply で選べる
   （ \`#stage[data-blend="multiply"] .chr img\` ／背景は \`#fff\` 下地に切り替わる）。
 - 立ち絵は**透過PNGが正解**。multiply は白背景JPEGをそのまま置きたいときの逃げ道。
-- 実素材を大量に置くなら **WebP** を推奨（1600×900 PNG を素で置くと概算 165MB、WebPなら 30MB 前後）。
+- 実素材を大量に置くなら **WebP** を推奨（1600×900 PNG を素で置くと概算 165MB、WebPなら 30MB 前後。
+  実際に収録済みの背景24枚は PNG で計 53MB）。透過が要る立ち絵は **透過WebP**（\`lossless\` か \`quality 90\` 前後）。
+  拡張子を変えたときは台帳の \`file\` も直す ― \`node tools/sync_placeholder.mjs --adopt-ext\` で自動反映されます。
   起動プリロードは「読む5シーンぶんだけ」を先に待つ優先方式なので、枚数が増えても起動は一定。
 
 ## 重さの記録
@@ -602,6 +720,7 @@ const out = {
   'assets/cg/README.md': cgDoc(),
   'assets/chr/README.md': chrDoc(),
   'docs/CG_GUIDE.md': cgDoc({ byStory: true }),
+  'docs/CHR_REPLACE_LIST.md': chrReplaceDoc(),
 };
 for (const [p, txt] of Object.entries(out)) {
   fs.writeFileSync(path.join(ROOT, p), txt.replace(/\n{3,}/g, '\n\n'));

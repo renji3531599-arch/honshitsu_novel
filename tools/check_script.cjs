@@ -36,7 +36,13 @@ function warn(msg) { console.warn("  △ " + msg); warns++; }
 function hasBG(id) { return !!MAN.bg[id]; }
 function hasCG(id) { return !!(MAN.cg[id] || MAN.ed_cg[id]); }
 // UI画像は2026-09-12に撤去（CSS/SVG描画で代替）。frame参照の検証は不要になった。
-function chrExprCount(who) { return MAN.chr[who] ? MAN.chr[who].exprs.length : 0; }
+/* 表情番号は連番ではない（2026-09-13 に未使用27枚を削除して欠番ができた）。
+   配列の長さではなく、マニフェストに実在する `no` の集合で判定する。 */
+function chrExprNos(who) { return new Set((MAN.chr[who] ? MAN.chr[who].exprs : []).map(e => e.no)); }
+function exprErr(sid, idx, kind, cmd) {
+  const nos = [...chrExprNos(cmd[1])].sort((x, y) => x - y);
+  err(`${sid}[${idx}] ${kind}: '${cmd[1]}' 表情${cmd[2]} はマニフェストにありません（ある番号: ${nos.join(',')}）`);
+}
 
 /* --- 遷移グラフ構築 --- */
 const sceneIds = Object.keys(SCENES);
@@ -67,11 +73,11 @@ for (const [sid, scene] of Object.entries(SCENES)) {
     if (t === "cg" && !hasCG(cmd[1])) err(`${sid}[${idx}] cg: 不明 '${cmd[1]}'`);
     if (t === "chr") {
       if (!CHARS[cmd[1]]) err(`${sid}[${idx}] chr: 未定義キャラ '${cmd[1]}'`);
-      else if (cmd[2] < 1 || cmd[2] > chrExprCount(cmd[1])) err(`${sid}[${idx}] chr: '${cmd[1]}' 表情${cmd[2]} は範囲外 (1-${chrExprCount(cmd[1])})`);
+      else if (!chrExprNos(cmd[1]).has(cmd[2])) exprErr(sid, idx, "chr", cmd);
     }
     if (t === "ex") {
       if (!CHARS[cmd[1]]) err(`${sid}[${idx}] ex: 未定義キャラ '${cmd[1]}'`);
-      else if (cmd[2] < 1 || cmd[2] > chrExprCount(cmd[1])) err(`${sid}[${idx}] ex: '${cmd[1]}' 表情${cmd[2]} は範囲外`);
+      else if (!chrExprNos(cmd[1]).has(cmd[2])) exprErr(sid, idx, "ex", cmd);
     }
     if (t === "tips" && !TIPS[cmd[1]]) err(`${sid}[${idx}] tips: 未定義 '${cmd[1]}'`);
     if (t === "jump") {

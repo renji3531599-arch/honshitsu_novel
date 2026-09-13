@@ -49,7 +49,7 @@
 ### `BG01` ― 北棟三年B組教室・朝
 
 - **ファイル**: `assets/bg/bg_hokutou_kyoshitsu_asa.png`（現 1672×940・1832KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **時間帯トーン**: `kyoshitsu/asa` → 朝（明るい寒色・光差し ON）（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
@@ -59,7 +59,7 @@
 ### `BG02` ― 北棟三年B組教室・昼休み
 
 - **ファイル**: `assets/bg/bg_hokutou_kyoshitsu_hiru.png`（現 1672×940・1959KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **時間帯トーン**: `kyoshitsu/hiru` → 昼（ニュートラル・光 ON）（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
@@ -75,7 +75,7 @@
 ### `BG03` ― 北棟三年B組教室・夕方（茜色・逆光）
 
 - **ファイル**: `assets/bg/bg_hokutou_kyoshitsu_yuugata.png`（現 1672×940・1878KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **時間帯トーン**: `kyoshitsu/yuugata` → 夕方（オレンジ・光 WARM）（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
@@ -91,7 +91,7 @@
 ### `BG04` ― 北棟三年B組教室・夜（サプライズ準備）
 
 - **ファイル**: `assets/bg/bg_hokutou_kyoshitsu_yoru.png`（現 1672×940・1854KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **時間帯トーン**: `kyoshitsu/yoru` → 夜（青み・光 OFF・ヴェール半枚）（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
@@ -107,7 +107,7 @@
 ### `BG05` ― 北棟廊下
 
 - **ファイル**: `assets/bg/bg_rouka_hokutou.png`（現 1672×940・1951KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
@@ -116,7 +116,7 @@
 ### `BG06` ― 階段の踊り場（掲示物あり）
 
 - **ファイル**: `assets/bg/bg_kaidan_odoriba.png`（現 1672×940・1971KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -127,7 +127,7 @@
 ### `BG07` ― 職員室
 
 - **ファイル**: `assets/bg/bg_jimushitsu.png`（現 1672×941・1895KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -137,7 +137,7 @@
 ### `BG08` ― 地図保管庫
 
 - **ファイル**: `assets/bg/bg_chizu_hokanko.png`（現 1671×941・2102KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
@@ -147,7 +147,7 @@
 ### `BG09` ― 図書室
 
 - **ファイル**: `assets/bg/bg_toshoshitsu.png`（現 1672×940・2088KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -157,8 +157,8 @@
 
 ### `BG10` ― 図書室奥の書庫（埃っぽい）
 
-- **ファイル**: `assets/bg/bg_toshokan_shozoko.png`（現 1671×941・2083KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **ファイル**: `assets/bg/bg_toshoshitsu_oku_shoko.png`（現 1671×941・2083KB）
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -168,7 +168,7 @@
 ### `BG11` ― 翠湖のほとり
 
 - **ファイル**: `assets/bg/bg_suiko_hotori.png`（現 1672×941・2740KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -179,7 +179,7 @@
 ### `BG12` ― 文化祭/謝恩会準備中の校庭
 
 - **ファイル**: `assets/bg/bg_koutei_bunkasai_junbi.png`（現 1672×940・2336KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
@@ -188,7 +188,7 @@
 ### `BG13` ― 体育館（謝恩会当日）
 
 - **ファイル**: `assets/bg/bg_taiikukan.png`（現 1672×941・2134KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
@@ -197,7 +197,7 @@
 ### `BG14` ― 屋上
 
 - **ファイル**: `assets/bg/bg_okujou.png`（現 1672×941・2244KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
@@ -206,7 +206,7 @@
 ### `BG15` ― 通学電車の車窓（砂糖視点）
 
 - **ファイル**: `assets/bg/bg_tsuugaku_densha_mado.png`（現 1672×940・1746KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -216,7 +216,7 @@
 ### `BG16` ― 南棟と北棟を繋ぐ桜並木（蕾）
 
 - **ファイル**: `assets/bg/bg_sakura_namiki.png`（現 1672×941・3136KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 3 箇所
@@ -228,7 +228,7 @@
 ### `BG17` ― 卒業式会場
 
 - **ファイル**: `assets/bg/bg_sotsugyoushiki_kaijou.png`（現 1672×941・2139KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -240,7 +240,7 @@
 ### `BG18` ― 南棟三年教室
 
 - **ファイル**: `assets/bg/bg_minamitou_kyoshitsu.png`（現 1672×941・1961KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 3 箇所
@@ -252,7 +252,7 @@
 ### `BG19` ― 両馬の家・祖父の遺影がある部屋
 
 - **ファイル**: `assets/bg/bg_ryoma_ie_butsudan.png`（現 1672×941・2008KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
@@ -262,8 +262,8 @@
 
 ### `BG20` ― 回想・ハワイの溶岩台地
 
-- **ファイル**: `assets/bg/bg_hawaii_youganchi_kaisou.png`（現 1672×941・2653KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **ファイル**: `assets/bg/bg_hawaii_yougan_daichi_kaisou.png`（現 1672×941・2653KB）
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
@@ -271,8 +271,8 @@
 
 ### `BG21` ― 回想・稲葉と勝也がいた山（褪色調）
 
-- **ファイル**: `assets/bg/bg_yama_gensho_kaisou.png`（現 1672×941・2743KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **ファイル**: `assets/bg/bg_yama_kaisou.png`（現 1672×941・2743KB）
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
@@ -281,18 +281,18 @@
 
 ### `BG22` ― 回想・大学時代の野外調査ベースキャンプ
 
-- **ファイル**: `assets/bg/bg_daigaku_yakou_kaisou.png`（現 1672×941・2551KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **ファイル**: `assets/bg/bg_daigaku_camp_kaisou.png`（現 1672×941・2551KB）
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
   - 窓の外に、ずっといた人 / シーン `h4`「回想：最後の日」 ― `60_climax.txt:76`
-- **この背景まわりのCG**: `cg_wakaki_utsumuki` / `cg_kuhou_kageboushi`
+- **この背景まわりのCG**: `cg_wakaki_utsumuki` / `cg_fuhou_kageboushi`
 
 ### `BG23` ― エピローグ・卒業後の春、もぬけの殻の教室
 
 - **ファイル**: `assets/bg/bg_kyoshitsu_haru_sotsugyougo.png`（現 1672×941・2255KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **時間帯トーン**: `kyoshitsu/haru` → haru（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
@@ -304,7 +304,7 @@
 ### `BG24` ― TRUE END後日談・数年後の同じ教室
 
 - **ファイル**: `assets/bg/bg_kyoshitsu_suunengo.png`（現 1672×941・1987KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **時間帯トーン**: `kyoshitsu/suunengo` → suunengo（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
@@ -315,7 +315,7 @@
 ### `title_key` ― タイトルキービジュアル（夕方の教室・地図筒・古写真）
 
 - **ファイル**: `assets/bg/title_key.jpg`（現 1672×940・2237KB）
-- **差し替え推奨**: 1600×900（16:9）／JPEG か PNG／`object-fit: cover` で全画面
+- **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **出番**: 脚本から `@bg` 指定なし（タイトル背景など、エンジン側だけを使う）
@@ -323,10 +323,21 @@
 
 ## 差し替え手順（BG共通）
 
-1. `assets/bg/` に同名上書き（1600×900／16:9）
-2. 台帳の `placeholder` を `false` に → SVG補完が外れて実画像になる
-3. `sw.js` の `CACHE` を上げる
+1. **ファイル名は「台帳ID + 拡張子」**（例 `bg_okujou.png`）。それを `assets/bg/` に上書き／新規配置
+2. 台帳の `placeholder` を `false` に → SVG補完（`backdropSVG`）が外れて実画像になる
+   （背景25枚は**既に全て `placeholder: false`**＝上書きするだけで反映されます）
+3. `sw.js` の `CACHE`（現在 `honshitsu-v6`）を上げる
 4. 白背景素材のまま使いたいときだけ CONFIG「画像合成」= multiply（**既定は normal**。multiply は `#stage[data-blend="multiply"]` を付けたときだけ立ち絵に掛かる）
+5. `node tools/sync_placeholder.mjs --check` で寸法・容量・台帳のズレを確認
+
+### 入稿寸法（実測ベース ― 詳細は `docs/ART_SPEC.md`）
+
+| 項目 | 値 | 根拠 |
+|---|---|---|
+| 推奨 | **1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）** | 舞台は常に16:9（`#viewport{aspect-ratio:16/9}`） |
+| 収録済みの実測 | 1672×940〜941 PNG・1.7〜3.1MB/枚（24枚で約53MB） | `assets/bg/` を実測 |
+| 描画 | `object-fit: cover` 全画面＋ `bgSettle`（1.016→1.0） | `css/vn.css:74,89-92` → 1600×900 ちょうどでも僅かに拡大される |
+| 隠れる範囲 | 下 35% はテキスト窓、左右に立ち絵（枠幅 420u） | 主役の被写体は中央〜やや上に |
 
 ### `@bg` の書き方
 

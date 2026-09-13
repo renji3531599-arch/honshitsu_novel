@@ -15,3 +15,15 @@ jobs:
       - run: npm ci || npm i
       - run: node tools/vncheck.mjs
       - run: node tools/smoke.mjs
+      # 実素材と台帳（data/assets.json）のズレ検出: placeholder:false なのにファイルが無い＝404 で壊れる
+      - run: node tools/sync_placeholder.mjs --check
+      # 素材ドキュメントは全て台帳＋脚本から自動生成。手編集・生成忘れでズレていないかの確認
+      - name: 素材ドキュメントが最新か（ズレたら npm run docs）
+        run: |
+          node tools/gen_asset_md.mjs
+          if ! git diff --exit-code -- assets/README.md assets/bg/README.md assets/cg/README.md assets/chr/README.md docs/CG_GUIDE.md docs/CHR_REPLACE_LIST.md; then
+            echo "::error::素材ドキュメントが台帳とズレています。 npm run docs を実行してコミットしてください。"
+            exit 1
+          fi
+      # 版B（game/ 以下）の静的検証
+      - run: node tools/check_script.cjs

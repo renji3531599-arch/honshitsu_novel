@@ -41,7 +41,7 @@
 
 - **書き方**: `@chr futami=01`〜`@chr futami=05`（差分 4 枚・`@chr futami all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 二見玲子／色 `#b9a2cc`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
 
 - **① 通常** ― `@chr futami=01` ／ `chr_futami_01_tsuujou.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:88`（職員室前）
@@ -56,16 +56,16 @@
 
 - **書き方**: `@chr inaba=01`〜`@chr inaba=01`（差分 1 枚・`@chr inaba all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 稲葉悌二／色 `#c0a888`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 1 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 1 枚（白紙削除済み）
 
-- **① 古写真の中の柔らかい笑み** ― `@chr inaba=01` ／ `chr_inaba_01_shashin_no_waraui.png`
+- **① 古写真の中の柔らかい笑み** ― `@chr inaba=01` ／ `chr_inaba_01_furushashin_hohoemi.png`
   本編 **1 回**。初出 `60_climax:66`（回想：はじめての地形図）
 
 ### `izaki` ― 伊崎（いざき）
 
 - **書き方**: `@chr izaki=01`〜`@chr izaki=06`（差分 4 枚・`@chr izaki all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 伊崎／色 `#dcbd92`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
 
 - **① 通常** ― `@chr izaki=01` ／ `chr_izaki_01_tsuujou.png`
   本編 **1 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み）
@@ -73,14 +73,14 @@
   本編 **2 回**。初出 `00_prologue:94`（二月、北棟三年B組・昼休み） → ほか 1 回
 - **④ 真剣（仕切る顔）** ― `@chr izaki=04` ／ `chr_izaki_04_shikiri.png`
   本編 **3 回**。初出 `50_converge:19`（放課後、誰もいない北棟三年B組教室） → ほか 2 回
-- **⑥ しみじみとした微笑み** ― `@chr izaki=06` ／ `chr_izaki_06_shimiemi.png`
+- **⑥ しみじみとした微笑み** ― `@chr izaki=06` ／ `chr_izaki_06_shimijimi_hohoemi.png`
   本編 **1 回**。初出 `70_endings:179`（GOOD END 伊崎＋伊豆見「それぞれの歩幅」）
 
 ### `izumi` ― 伊豆見（いずみ）
 
 - **書き方**: `@chr izumi=01`〜`@chr izumi=06`（差分 4 枚・`@chr izumi all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 伊豆見／色 `#e0cba2`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
 
 - **② 笑顔** ― `@chr izumi=02` ／ `chr_izumi_02_egao.png`
   本編 **2 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み） → ほか 1 回
@@ -95,7 +95,7 @@
 
 - **書き方**: `@chr katsuya=01`〜`@chr katsuya=10`（差分 9 枚・`@chr katsuya all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 塀勝也／色 `#cbb27c`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 9 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 9 枚（白紙削除済み）
 
 - **① 通常（穏やか）** ― `@chr katsuya=01` ／ `chr_katsuya_01_tsuujou.png`
   本編 **2 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 1 回
@@ -105,39 +105,39 @@
   本編 **1 回**。初出 `00_prologue:54`（三年間ダイジェスト（共通・スキップ可））
 - **④ 驚き** ― `@chr katsuya=04` ／ `chr_katsuya_04_odoroki.png`
   本編 **3 回**。初出 `10_chapter1:30`（地図保管庫） → ほか 2 回
-- **⑥ 硬い無表情** ― `@chr katsuya=06` ／ `chr_katsuya_06_kataki_muten.png`
+- **⑥ 硬い無表情** ― `@chr katsuya=06` ／ `chr_katsuya_06_katai_muhyoujou.png`
   本編 **3 回**。初出 `10_chapter1:42`（地図保管庫） → ほか 2 回
-- **⑦ 回想・目を細める** ― `@chr katsuya=07` ／ `chr_katsuya_07_kaisou_me_soseru.png`
+- **⑦ 回想・目を細める** ― `@chr katsuya=07` ／ `chr_katsuya_07_kaisou_me_hosomeru.png`
   本編 **2 回**。初出 `60_climax:124`（気づき） → ほか 1 回
 - **⑧ 涙をこらえる** ― `@chr katsuya=08` ／ `chr_katsuya_08_namida_koraeru.png`
   本編 **3 回**。初出 `60_climax:96`（回想：最後の日） → ほか 2 回
 - **⑨ 泣く** ― `@chr katsuya=09` ／ `chr_katsuya_09_naku.png`
   本編 **1 回**。初出 `60_climax:92`（回想：最後の日）
-- **⑩ 晴れやかな笑み** ― `@chr katsuya=10` ／ `chr_katsuya_10_hareyaka_emmi.png`
+- **⑩ 晴れやかな笑み** ― `@chr katsuya=10` ／ `chr_katsuya_10_hareyaka_emi.png`
   本編 **2 回**。初出 `60_climax:176`（締めの言葉） → ほか 1 回
 
 ### `kuraishi` ― 倉石暁（くらいし・あきら）
 
 - **書き方**: `@chr kuraishi=01`〜`@chr kuraishi=06`（差分 5 枚・`@chr kuraishi all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 倉石暁／色 `#d6d46e`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
 
-- **① 通常（熱狂）** ― `@chr kuraishi=01` ／ `chr_kuraishi_01_kekkyou.png`
+- **① 通常（熱狂）** ― `@chr kuraishi=01` ／ `chr_kuraishi_01_nekkyou.png`
   本編 **4 回**。初出 `00_prologue:81`（二月、北棟三年B組・昼休み） → ほか 3 回
-- **② 感激** ― `@chr kuraishi=02` ／ `chr_kuraishi_02_kanshou.png`
+- **② 感激** ― `@chr kuraishi=02` ／ `chr_kuraishi_02_kangeki.png`
   本編 **1 回**。初出 `70_endings:163`（GOOD END 両馬「✝本質✝、その後」）
 - **③ 真剣（調査中）** ― `@chr kuraishi=03` ／ `chr_kuraishi_03_chousa_shinken.png`
   本編 **3 回**。初出 `40_route_minamitou_meshino:133`（図書室、書庫） → ほか 2 回
 - **⑤ 誇らしげ** ― `@chr kuraishi=05` ／ `chr_kuraishi_05_hokorashige.png`
   本編 **2 回**。初出 `50_converge:68`（「思い出の地形図」制作） → ほか 1 回
-- **⑥ 言葉を失う顔** ― `@chr kuraishi=06` ／ `chr_kuraishi_06_kotoba_usinau.png`
+- **⑥ 言葉を失う顔** ― `@chr kuraishi=06` ／ `chr_kuraishi_06_kotoba_ushinau.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:138`（図書室、書庫）
 
 ### `meshino` ― 召野カイト（めしの・かいと）
 
 - **書き方**: `@chr meshino=01`〜`@chr meshino=06`（差分 4 枚・`@chr meshino all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 召野カイト／色 `#e2a8bc`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
 
 - **① 通常** ― `@chr meshino=01` ／ `chr_meshino_01_tsuujou.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:113`（二見の後押し）
@@ -152,7 +152,7 @@
 
 - **書き方**: `@chr mie=01`〜`@chr mie=10`（差分 8 枚・`@chr mie all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 三重県臣／色 `#7fa9d8`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
 
 - **① 通常（冷笑・半目）** ― `@chr mie=01` ／ `chr_mie_01_reishou.png`
   本編 **19 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 18 回
@@ -160,9 +160,9 @@
   本編 **4 回**。初出 `00_prologue:74`（二月、北棟三年B組・昼休み） → ほか 3 回
 - **③ 動揺** ― `@chr mie=03` ／ `chr_mie_03_douyou.png`
   本編 **1 回**。初出 `20_route_satou_rei:169`（零の中の変化）
-- **④ 気まずい沈黙** ― `@chr mie=04` ／ `chr_mie_04_chimatsu.png`
+- **④ 気まずい沈黙** ― `@chr mie=04` ／ `chr_mie_04_kimazui_chinmoku.png`
   本編 **8 回**。初出 `10_chapter1:67`（放課後、屋上へ続く階段の踊り場） → ほか 7 回
-- **⑥ 苛立ち混じりの真剣** ― `@chr mie=06` ／ `chr_mie_06_iraduki_shinken.png`
+- **⑥ 苛立ち混じりの真剣** ― `@chr mie=06` ／ `chr_mie_06_iradachi_shinken.png`
   本編 **2 回**。初出 `10_chapter1:74`（放課後、屋上へ続く階段の踊り場） → ほか 1 回
 - **⑦ 本気の真剣** ― `@chr mie=07` ／ `chr_mie_07_honki_shinken.png`
   本編 **7 回**。初出 `10_chapter1:149`（HUB ― ルート選択） → ほか 6 回
@@ -175,7 +175,7 @@
 
 - **書き方**: `@chr mitsumine=01`〜`@chr mitsumine=06`（差分 4 枚・`@chr mitsumine all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 三峰瑠衣／色 `#e2b79e`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 4 枚（白紙削除済み）
 
 - **① 通常** ― `@chr mitsumine=01` ／ `chr_mitsumine_01_tsuujou.png`
   本編 **2 回**。初出 `40_route_minamitou_meshino:15`（桜並木、まだ蕾） → ほか 1 回
@@ -190,7 +190,7 @@
 
 - **書き方**: `@chr naitou=01`〜`@chr naitou=06`（差分 5 枚・`@chr naitou all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 内藤蘭／色 `#b6d8c6`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
 
 - **① 通常** ― `@chr naitou=01` ／ `chr_naitou_01_tsuujou.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
@@ -207,7 +207,7 @@
 
 - **書き方**: `@chr rei=01`〜`@chr rei=07`（差分 5 枚・`@chr rei all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 数理零／色 `#d3d9e8`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 5 枚（白紙削除済み）
 - **その人が主役のルート**: B「零編」 ― 面白いの向こう側（開始シーン `b1`）
 
 - **① 通常（涼しい顔）** ― `@chr rei=01` ／ `chr_rei_01_suzushii.png`
@@ -225,14 +225,14 @@
 
 - **書き方**: `@chr ryoma=01`〜`@chr ryoma=09`（差分 8 枚・`@chr ryoma all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 両馬二郎／色 `#e2853f`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
 - **その人が主役のルート**: D「両馬編」 ― 祖父と✝本質✝（開始シーン `d1`）
 
 - **① 通常** ― `@chr ryoma=01` ／ `chr_ryoma_01_tsuujou.png`
   本編 **4 回**。初出 `00_prologue:81`（二月、北棟三年B組・昼休み） → ほか 3 回
 - **② ニヤリ** ― `@chr ryoma=02` ／ `chr_ryoma_02_niyari.png`
   本編 **5 回**。初出 `00_prologue:74`（二月、北棟三年B組・昼休み） → ほか 4 回
-- **④ 急に真顔** ― `@chr ryoma=04` ／ `chr_ryoma_04_kinimo_majime.png`
+- **④ 急に真顔** ― `@chr ryoma=04` ／ `chr_ryoma_04_kyuu_magao.png`
   本編 **6 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 5 回
 - **⑤ しょんぼり** ― `@chr ryoma=05` ／ `chr_ryoma_05_shonbori.png`
   本編 **1 回**。初出 `10_chapter1:160`（まだ聞けていない話がある気がする）
@@ -249,7 +249,7 @@
 
 - **書き方**: `@chr sakura=01`〜`@chr sakura=06`（差分 3 枚・`@chr sakura all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 櫻優／色 `#a8c8e0`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 3 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 3 枚（白紙削除済み）
 
 - **② 真剣（研究者モード）** ― `@chr sakura=02` ／ `chr_sakura_02_kenkyuusha.png`
   本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
@@ -262,12 +262,12 @@
 
 - **書き方**: `@chr satou=01`〜`@chr satou=08`（差分 8 枚・`@chr satou all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 砂糖東洋／色 `#7fd0c8`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 8 枚（白紙削除済み）
 - **その人が主役のルート**: A「砂糖編」 ― 窓の外の続き（開始シーン `a1`）
 
-- **① 通常（ゲーム画面凝視）** ― `@chr satou=01` ／ `chr_satou_01_game_shuuchuu.png`
+- **① 通常（ゲーム画面凝視）** ― `@chr satou=01` ／ `chr_satou_01_game_gyoushi.png`
   本編 **3 回**。初出 `00_prologue:88`（二月、北棟三年B組・昼休み） → ほか 2 回
-- **② 無表情（素）** ― `@chr satou=02` ／ `chr_satou_02_muten.png`
+- **② 無表情（素）** ― `@chr satou=02` ／ `chr_satou_02_muhyoujou.png`
   本編 **3 回**。初出 `20_route_satou_rei:25`（放課後、教室に残る砂糖） → ほか 2 回
 - **③ 驚き（画面から顔を上げる）** ― `@chr satou=03` ／ `chr_satou_03_kao_ageta.png`
   本編 **1 回**。初出 `20_route_satou_rei:53`（正面から頼んだ方）
@@ -279,21 +279,21 @@
   本編 **2 回**。初出 `20_route_satou_rei:98`（砂糖のスマートフォン） → ほか 1 回
 - **⑦ 言葉に詰まる顔** ― `@chr satou=07` ／ `chr_satou_07_tsumaru.png`
   本編 **2 回**。初出 `20_route_satou_rei:88`（砂糖のスマートフォン） → ほか 1 回
-- **⑧ 目に光るものを堪える顔** ― `@chr satou=08` ／ `chr_satou_08_hikari_koraeru.png`
+- **⑧ 目に光るものを堪える顔** ― `@chr satou=08` ／ `chr_satou_08_me_hikari_koraeru.png`
   本編 **1 回**。初出 `60_climax:116`（窓の外の五秒）
 
 ### `terachi` ― 寺地星（てらち・せい）
 
 - **書き方**: `@chr terachi=01`〜`@chr terachi=08`（差分 6 枚・`@chr terachi all` は非対応、`@chr clear` で全員下げる）
 - **名前ボックス**: 寺地星／色 `#9ec98f`
-- **差し替え推奨（このキャラ共通）**: 840×1280 以上／透過PNG／下揃え（`object-position: bottom center`） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
+- **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 0 枚・未配置 6 枚（白紙削除済み）
 - **その人が主役のルート**: C「寺地編」 ― 最後の朗読、まだ早いけど（開始シーン `c1`）
 
 - **① 通常（眠そう・淡々）** ― `@chr terachi=01` ／ `chr_terachi_01_nemusou.png`
   本編 **2 回**。初出 `30_route_terachi_ryoma:12`（放課後、誰もいない教室） → ほか 1 回
-- **② 困惑して固まる** ― `@chr terachi=02` ／ `chr_terachi_02_komatte_kataaru.png`
+- **② 困惑して固まる** ― `@chr terachi=02` ／ `chr_terachi_02_konwaku_katamaru.png`
   本編 **1 回**。初出 `30_route_terachi_ryoma:32`（正面から頼んだ方）
-- **③ 真剣な配信者の顔** ― `@chr terachi=03` ／ `chr_terachi_03_hansya_shinken.png`
+- **③ 真剣な配信者の顔** ― `@chr terachi=03` ／ `chr_terachi_03_haishin_shinken.png`
   本編 **1 回**。初出 `30_route_terachi_ryoma:17`（放課後、誰もいない教室）
 - **④ 嬉しい** ― `@chr terachi=04` ／ `chr_terachi_04_ureshii.png`
   本編 **1 回**。初出 `70_endings:145`（GOOD END 寺地「配信は続く」）
@@ -304,10 +304,28 @@
 
 ## 差し替え手順（立ち絵共通）
 
-1. `assets/chr/` に**同名・透過PNG**で上書き（840×1280 推奨／下揃え）
+1. **ファイル名は「台帳ID + 拡張子」**（例 `chr_katsuya_01_tsuujou.png`）。それを `assets/chr/` に新規配置
+   ― 台帳の `id` と `file` のファイル名部分は 78 行すべて一致済み。一覧は `docs/CHR_REPLACE_LIST.md`
+   ― 旧名（`chr_katsuya_01_tsujou.png` のような短縮ローマ字）は **2026-09-13 に全廃**。どのコードも参照していません
 2. 台帳の `placeholder` を `false` に → シルエット補完（`figureSVG`）が消えて実画像になる
-3. `sw.js` の `CACHE` を上げる
+   （**1と2はセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れる）
+   ― まとめてやるなら `node tools/sync_placeholder.mjs`（実在ファイルを検出して自動で `false` にする）
+3. `sw.js` の `CACHE`（現在 `honshitsu-v6`）を上げる（`--bump` で自動）
 4. 白背景のまま置きたいときだけ CONFIG「画像合成」= multiply（ `#stage[data-blend="multiply"] .chr img` にだけ掛かる）
+5. `node tools/sync_placeholder.mjs --check` で寸法・透過・容量・台帳のズレを確認 → `npm test`
+
+### 入稿寸法（実測ベース ― 詳細は `docs/ART_SPEC.md`）
+
+| 項目 | 値 | 根拠 |
+|---|---|---|
+| 推奨 | **840×1280（21:32）・透過／全身を切りたくなければ 840×1120（3:4）。最低 672×1024** | 表示枠 `.chr{width:420u;height:640u}`（`css/vn.css:108`）＝実寸 672×1024px |
+| 描画 | `object-fit:contain` ＋ `object-position:bottom center` | `css/vn.css:114`。比がズレると枠内に余白が出る |
+| **上が切れる** | 横画面（16:9）では枠の上 12.1% が画面外 | 舞台の高さ 562.5u ＜ 枠 640u ＋ `bottom:0` ＋ `#viewport{overflow:hidden}` |
+| → 840×1280 の場合 | **上 155px は余白**にして頭頂を y≧163px に | 切れるのは 12.1% ＝ 155px |
+| → 切りたくない場合 | **840×1120（3:4）** なら `contain` で 420×560u に収まり全身が見える | 切れない上限は 840×1125（w/h≒0.747） |
+| 確実に見える帯 | 840×1280 換算で **y=155〜885px** | 上端 12.1% は画面外、下端は下 197u（35%）をテキスト窓が覆う（半透明＋blur なので完全には消えない） |
+| 横の余白 | 左右に **10〜15% の透明余白**を推奨 | 配置は 1人=50%／2人=33.3%・66.7%／3人=18%・50%・82%（`js/visual.js:848-850`）で枠は常に 420u 幅 → 3人時は左右 50u ずつ重なる |
+| 解像度の上限 | 1344×2048（Retina 等倍）まで意味がある | 実寸 672×1024px × DPR2。ただし 78 枚あるので容量と相談 → **透過WebP** 推奨（PNG の 1/4〜1/6） |
 
 ### 演出（JS/CSS 側で自動）
 
