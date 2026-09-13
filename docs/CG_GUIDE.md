@@ -4,7 +4,7 @@
 CGの実ファイルは未配置（台帳に名前だけ）。だからこそ**連絡表として使う**のが正しい読み方。
 構図・寸法・出番（行番号まで）がここにある。
 
-> 生成: `node tools/gen_asset_md.mjs`（2026-09-13）／総数 32 ファイル／正本は台帳 `data/assets.json`
+> 生成: `node tools/gen_asset_md.mjs`（生成日は入れない ― 出力をバイト単位で再現可能にして CI の差分検査を安定させる）／総数 32 ファイル／正本は台帳 `data/assets.json`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
 
 ## 先にまとめ
@@ -586,7 +586,7 @@ _地面は、忘れない。（`#chapter end`）― この章で 15 枚使用_
 2. `data/assets.json` のその行の `"placeholder": true` → `false`
    ― **1と2は必ずセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れます
    （まとめてやるなら `node tools/sync_placeholder.mjs` が実在ファイルを検出して自動で倒します）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v6`）を上げる ← **忘れると古いキャッシュを返し続ける**
+3. `sw.js` の `CACHE`（現在 `honshitsu-v7`）を上げる ← **忘れると古いキャッシュを返し続ける**
    （`node tools/sync_placeholder.mjs --bump` で自動）
 4. 差し替えた瞬間、エンジン側は `backdropSVG`／合成の重い方を自動で切る（`#stage[data-art="real"]`）
 5. `node tools/sync_placeholder.mjs --check` ＋ `npm test`（vncheck / smoke）で崩れを確認

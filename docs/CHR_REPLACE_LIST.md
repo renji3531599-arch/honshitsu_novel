@@ -4,7 +4,7 @@
 置くファイル名は **台帳ID + 拡張子**（例 `chr_katsuya_01_tsuujou.png`）。台帳の `id` と `file` のファイル名部分は全行一致しています。
 旧名（`chr_katsuya_01_tsujou.png` のような短縮ローマ字）は **2026-09-13 に全廃**。版A（`assets/chr/`）も版B（`game/js/assets_manifest.js` → `game/assets/img/`）も**同じ新名**で解決するので、旧名の一覧は不要になりました。
 
-> 生成: `node tools/gen_asset_md.mjs`（2026-09-13）／総数 78 ファイル／正本は台帳 `data/assets.json`
+> 生成: `node tools/gen_asset_md.mjs`（生成日は入れない ― 出力をバイト単位で再現可能にして CI の差分検査を安定させる）／総数 78 ファイル／正本は台帳 `data/assets.json`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
 
 ## 先にまとめ
@@ -12,7 +12,7 @@
 - 置く場所: **`assets/chr/`**（版A）／版B も動かすなら同じ名前を `game/assets/img/` にも
 - 実画像にする条件: 台帳の `"placeholder": true` → `false`（**ファイルとフラグは必ずセット**）
   ― まとめてやるなら `node tools/sync_placeholder.mjs`（実在ファイルを検出して自動で倒す。寸法・透過・容量も見る）
-- そのあと `sw.js` の `CACHE`（現在 `honshitsu-v6`）を上げる（`--bump` で自動）
+- そのあと `sw.js` の `CACHE`（現在 `honshitsu-v7`）を上げる（`--bump` で自動）
 - 現在の状態: 実画像 **0 枚**・未配置 **78 枚**
 - 寸法: **840×1280（21:32）・透過／全身を切りたくなければ 840×1120（3:4）。最低 672×1024** ― 構図の注意（上が 12.1% 切れる／下 35% はテキスト窓）は `docs/ART_SPEC.md`
 

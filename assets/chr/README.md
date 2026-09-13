@@ -3,7 +3,7 @@
 `assets/chr/` の立ち絵差分。キャラごとに**どの表情が本編で何回出るか**を1枚ずつ書く。
 実ファイルは未配置（白紙プレースホルダは2026-09-12に削除）。画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。
 
-> 生成: `node tools/gen_asset_md.mjs`（2026-09-13）／総数 78 ファイル／正本は台帳 `data/assets.json`
+> 生成: `node tools/gen_asset_md.mjs`（生成日は入れない ― 出力をバイト単位で再現可能にして CI の差分検査を安定させる）／総数 78 ファイル／正本は台帳 `data/assets.json`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
 
 ## 先にまとめ
@@ -310,7 +310,7 @@
 2. 台帳の `placeholder` を `false` に → シルエット補完（`figureSVG`）が消えて実画像になる
    （**1と2はセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れる）
    ― まとめてやるなら `node tools/sync_placeholder.mjs`（実在ファイルを検出して自動で `false` にする）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v6`）を上げる（`--bump` で自動）
+3. `sw.js` の `CACHE`（現在 `honshitsu-v7`）を上げる（`--bump` で自動）
 4. 白背景のまま置きたいときだけ CONFIG「画像合成」= multiply（ `#stage[data-blend="multiply"] .chr img` にだけ掛かる）
 5. `node tools/sync_placeholder.mjs --check` で寸法・透過・容量・台帳のズレを確認 → `npm test`
 

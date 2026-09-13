@@ -3,7 +3,7 @@
 `assets/bg/` の背景スロット。**1枚ずつ「どのシーンで何回」「どの時間帯トーンか」**まで書く。
 背景25枚は**実画像を収録済み**（2026-09-12時点）。実ファイルが無いスロットは `js/visual.js` の `backdropSVG()` が等高線下地で補完。
 
-> 生成: `node tools/gen_asset_md.mjs`（2026-09-13）／総数 25 ファイル／正本は台帳 `data/assets.json`
+> 生成: `node tools/gen_asset_md.mjs`（生成日は入れない ― 出力をバイト単位で再現可能にして CI の差分検査を安定させる）／総数 25 ファイル／正本は台帳 `data/assets.json`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
 
 ## 先にまとめ
@@ -326,7 +326,7 @@
 1. **ファイル名は「台帳ID + 拡張子」**（例 `bg_okujou.png`）。それを `assets/bg/` に上書き／新規配置
 2. 台帳の `placeholder` を `false` に → SVG補完（`backdropSVG`）が外れて実画像になる
    （背景25枚は**既に全て `placeholder: false`**＝上書きするだけで反映されます）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v6`）を上げる
+3. `sw.js` の `CACHE`（現在 `honshitsu-v7`）を上げる
 4. 白背景素材のまま使いたいときだけ CONFIG「画像合成」= multiply（**既定は normal**。multiply は `#stage[data-blend="multiply"]` を付けたときだけ立ち絵に掛かる）
 5. `node tools/sync_placeholder.mjs --check` で寸法・容量・台帳のズレを確認
 

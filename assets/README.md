@@ -29,7 +29,7 @@
    ― これだけで補完SVGが消えて実画像に切り替わる（ `#stage[data-art="real"]` ）
    ― **1と2は必ずセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れる
    ― まとめてやるなら **`node tools/sync_placeholder.mjs`**（実在ファイルを検出して自動で `false` にする）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v6`）を上げる ← **忘れると古いキャッシュを返す**（`--bump` で自動）
+3. `sw.js` の `CACHE`（現在 `honshitsu-v7`）を上げる ← **忘れると古いキャッシュを返す**（`--bump` で自動）
 4. `node tools/sync_placeholder.mjs --check` ＋ `npm test`（vncheck / smoke）で崩れを確認
 
 ## 命名規則（2026-09-13 に統一済み）

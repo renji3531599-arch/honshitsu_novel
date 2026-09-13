@@ -21,7 +21,6 @@ import { fileURLToPath } from 'url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const rd = (p) => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const exists = (p) => fs.existsSync(path.join(ROOT, p));
-const TODAY = new Date().toISOString().slice(0, 10);
 
 /* ----------------------------------------------------------- 台帳・メタ ---- */
 const ledger = JSON.parse(rd('data/assets.json'));
@@ -326,7 +325,7 @@ const head = (title, lead, total) => `# ${title}
 
 ${Array.isArray(lead) ? lead.join('\n') : lead}
 
-> 生成: \`node tools/gen_asset_md.mjs\`（${TODAY}）／総数 ${total} ファイル／正本は台帳 \`data/assets.json\`
+> 生成: \`node tools/gen_asset_md.mjs\`（生成日は入れない ― 出力をバイト単位で再現可能にして CI の差分検査を安定させる）／総数 ${total} ファイル／正本は台帳 \`data/assets.json\`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
 
 `;
