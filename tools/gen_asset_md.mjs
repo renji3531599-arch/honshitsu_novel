@@ -8,7 +8,7 @@
      assets/README.md          … 総合（早見・共通仕様・差し替え手順）
      assets/bg/README.md       … 背景 25
      assets/cg/README.md       … CG 32
-     assets/chr/README.md      … 立ち絵 105（キャラごとにまとめる）
+     assets/chr/README.md      … 立ち絵（キャラごとにまとめる）
      docs/CG_GUIDE.md          … CG 全32枚（名場面18＋ED14）を「物語順」にまとめたガイド
    手編集せず、台帳を直して `node tools/gen_asset_md.mjs` で再生成。
    ※ 2026-09-12(3): 本編CGの番号スロット（cg02等）は廃止。bgと同じ「ID＝ファイル名
@@ -474,7 +474,7 @@ function chrDoc() {
     byChar.get(slug).push(a);
   }
   const usedSlots = [...chrUsage.keys()];
-  let md = head('CHR — 立ち絵（105差分／16キャラ）',
+  let md = head(`CHR — 立ち絵（${list.length}差分／${byChar.size}キャラ）`,
     ['`assets/chr/` の立ち絵差分。キャラごとに**どの表情が本編で何回出るか**を1枚ずつ書く。',
      '実ファイルは未配置（白紙プレースホルダは2026-09-12に削除）。画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。'],
     list.length);
@@ -540,6 +540,7 @@ ${[...byChar.entries()].map(([slug, arr]) => {
 
 /* ---- assets/README.md ---- */
 function topDoc() {
+  const chrCount = ASSETS.filter(a=>a.cat==='chr').length;
   const cats = [
     ['bg', '背景', '1600×900／cover', '等高線SVG（`backdropSVG`）'],
     ['cg', '名場面CG・ENDカード', '1600×900／cover', '―（白紙なら下地のみ）'],
@@ -554,7 +555,7 @@ function topDoc() {
 
 - \`bg/README.md\` ― 背景 25 枚（出番・時間帯トーン・@bg の書き方）
 - \`cg/README.md\` ― CG 32 枚（出番・Ken Burns・差し替え仕様）
-- \`chr/README.md\` ― 立ち絵 105 差分（キャラ別・表情別の本編出現回数）
+- \`chr/README.md\` ― 立ち絵 ${chrCount} 差分（キャラ別・表情別の本編出現回数）
 - \`../docs/CG_GUIDE.md\` ― **CG 32枚を物語順にまとめた1本**（これだけ読めばCGは足りる）
 
 ## 内訳
