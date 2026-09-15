@@ -81,7 +81,6 @@
 #scene end_good_mie | GOOD END 三重「否定の向こう側」
 @bg bg_kyoshitsu_haru_sotsugyougo
 @bgm bgm19 fade=2.4
-@cg cg_end_mie kb
 ナ：三重県臣は、教育学部に進学した。
 ナ：「人に何かを伝える仕事」に興味を持ったのは、あの日、寺地が読み上げた言葉が、自分でも驚くほど胸に残ったからだった。
 @chr mie=09
@@ -93,7 +92,6 @@
 @jump end_good_mie_end
 
 #scene end_good_mie_2 | （おまけ）ハモり
-@cg off
 @chr mitsumine=06,mie=02
 三峰：あんた、先生になったんだっけ。
 三重：なってない。まだ。
@@ -107,16 +105,14 @@
 
 ; ───────────────────────────────────────── ③ GOOD END ― 砂糖 ──
 #scene end_good_satou | GOOD END 砂糖「見ている、それだけで」
-@bg bg_kyoshitsu_haru_sotsugyougo
+@bg bg_suiko_hotori
 @bgm bgm19 fade=2.4
-@cg cg_end_satou kb
 ナ：砂糖東洋は、地質・地理情報系の学科に進んだ。
 ナ：フィールド調査先で、堂々と空を見上げている。
 @chr satou=06
 砂糖：見てる。今度は、見てないふりしない。
 ナ：スマートフォンの充電は、今でもよく切れる。
 ナ：だが、切れても平気になった。
-@cg off
 ナ：代わりに、切れたら空を見るようになった。それだけの差が、三年分よりずっと大きかった。
 @fx fadeblack
 @end good_satou | GOOD END 砂糖「見ている、それだけで」
@@ -125,7 +121,6 @@
 #scene end_good_rei | GOOD END 零「面白いを仕事にする」
 @bg bg_toshoshitsu
 @bgm bgm19 fade=2.4
-@cg cg_end_rei kb
 ナ：数理零は、データサイエンス系の研究室に進んだ。
 ナ：「面白い」は今も彼の最高の褒め言葉だが、それとは別に、「大事」という言葉も、彼の語彙に加わった。
 @chr rei=02
@@ -139,7 +134,6 @@
 #scene end_good_terachi | GOOD END 寺地「配信は続く」
 @bg bg_hokutou_kyoshitsu_yoru
 @bgm bgm09 fade=2.4
-@cg cg_end_terachi kb
 ナ：本質配信は、今も細々と続いている。
 ナ：登録者数は増えたり減ったりしているが、寺地はもう気にしていない。
 @chr terachi=04
@@ -153,13 +147,11 @@
 #scene end_good_ryoma | GOOD END 両馬「✝本質✝、その後」
 @bg bg_ryoma_ie_butsudan
 @bgm bgm10 fade=2.4
-@cg cg_end_ryoma kb
 ナ：両馬二郎は、祖父の墓の前で、変わらず笑っていた。
 @chr ryoma=06
 両馬：爺ちゃん、聞こえてる?　俺、後輩に引き継いだよ。✝本質✝、まだ終わってない。
 ナ：倉石暁が、その隣で神妙な顔で手を合わせていた。
 ナ：墓前で笑って報告できる孫は、たぶん、そう多くない。
-@cg off
 @chr kuraishi=02,ryoma=06
 倉石：先輩。年鑑の第四章、系譜の項を書き換えました。
 両馬：ん?　何を。
@@ -173,7 +165,6 @@
 #scene end_good_izaki | GOOD END 伊崎＋伊豆見「それぞれの歩幅」
 @bg bg_sakura_namiki
 @bgm bgm19 fade=2.4
-@cg cg_end_izaki_izumi kb
 ナ：伊崎と伊豆見は、別々の大学に進んだ。
 ナ：それでも、月に一度は連絡を取り合っている。
 @chr izumi=06,izaki=06
@@ -181,7 +172,6 @@
 伊崎：だな。
 ナ：春休みに一度だけ、同じ駅で待ち合わせて、どちらからともなく同じ方角に歩き出した。
 ナ：距離は、たぶん、二人が勝手に決めていいものだった。
-@cg off
 @fx fadeblack
 @end good_izaki | GOOD END 伊崎＋伊豆見「隣にいた二人、それぞれの歩幅」
 
@@ -189,7 +179,6 @@
 #scene end_good_meshino | GOOD END 召野「言葉を届ける」
 @bg bg_minamitou_kyoshitsu
 @bgm bgm19 fade=2.4
-@cg cg_end_meshino kb
 ナ：召野カイトは、国際系の学部で英語教育を学び始めた。
 ナ：「伝えたいことを、ちゃんと言葉にする」というテーマを、二見先生への片思いから見つけた男だった。
 @chr meshino=06
@@ -203,7 +192,6 @@
 #scene end_good_kuraishi | GOOD END 倉石「年鑑、完結せず」
 @bg bg_kaidan_odoriba
 @bgm bgm19 fade=2.4
-@cg cg_end_kuraishi kb
 ナ：倉石暁は、✝本質✝年鑑を完結させなかった。
 ナ：完結させたら✝本質✝ではなくなる――それが、彼の三年間の結論だった。
 ナ：年鑑は、後輩に託された。
@@ -219,14 +207,12 @@
 #scene end_good_minamitou | GOOD END 南棟「境界のない春」
 @bg bg_sakura_namiki
 @bgm bgm19 fade=2.4
-@cg cg_end_minamitou kb
 ナ：櫻優と内藤蘭は、まだ理論通りには進んでいない。
 ナ：それでも、二人でいる時間は、確実に増えていた。
 @chr sakura=06,naitou=06
 櫻：恋愛発生の法則、また一つ、書き換えないといけないかもしれません。
 内藤：書き換えなくていいですよ、そんなの。
 ナ：三峰瑠衣は、今では理数科の教室に出入りする"公認"のような存在になっていた。
-@cg off
 @chr mitsumine=03
 三峰：あたしはもう、国境の向こうとか思ってないし。
 @fx fadeblack
@@ -236,7 +222,6 @@
 #scene end_normal | NORMAL END「見えないけど、ある」
 @bg bg_hokutou_kyoshitsu_yuugata
 @bgm bgm20 fade=2.6
-@cg cg_end_normal kb
 ナ：勝也は、あの日、全てを語ったわけではなかった。
 ナ：「ありがとう。……でも、この話は、また今度な」――そう言って、彼は静かに教室を出ていった。
 @chr katsuya=02
@@ -244,7 +229,6 @@
 ナ：それでも、十分だった。
 ナ：わからないことが全部わかる必要はない。見えないけど、ある。
 ナ：それだけで、この三年間は報われた。
-@cg off
 @fx fadeblack
 @end normal | NORMAL END「見えないけど、ある」
 
@@ -256,7 +240,6 @@
 ナ：準備は、間に合わなかった。
 ナ：地図は未完成のまま、慌ただしく丸められて勝也に渡された。
 ナ：段取りは崩れ、伝えたかった言葉の半分も、伝えられなかった。
-@cg cg_end_bittersweet
 @chr mie=04,ryoma=08
 三重：……ぐだぐだになったな。
 両馬：ぐだぐだでも、渡せただけマシだろ。
@@ -264,7 +247,6 @@
 @chr katsuya=02
 勝也：……十分だ。完璧な地図より、こぼれた地図の方が、らしくていい。
 ナ：うまくはいかなかった。それでも、小さな灯りは、確かに残った。
-@cg off
 @fx fadeblack
 @end bittersweet | BITTERSWEET END「こぼれた地図」
 
@@ -273,7 +255,6 @@
 @bg bg_hokutou_kyoshitsu_hiru
 @bgm bgm22 fade=1.6
 ナ：大真面目にふざけ続けた者には、たいてい、最後にふざけた結末が来る。
-@cg cg_end_comedy kb
 ナ：倉石の「グレートチェーン理論」が、なぜか完成してしまった。
 ナ：前-原✝本質✝、原✝本質✝、✝本質✝、亜✝本質✝、非✝本質✝――五段階モデルを、勝也まで巻き込んで検証する羽目になる。
 @tip greatchain
@@ -286,7 +267,6 @@
 @cnt ryoma_honshitsu
 @chat bbs_comedy
 ナ：この一件は、後年まで掲示板に記録として残り、誰も真に受けず、誰も忘れない。
-@cg off
 @fx flash
 @se se03
 @end comedy | COMEDY SECRET END「原✝本質✝、完全体」

@@ -1,7 +1,7 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。 2026-09-15: 残り27枚（rei5/izaki4/izumi4/meshino4/kuraishi5/futami4/inaba1）も台帳正名へ改名して配置し、78差分すべてを実画像化。版Bの game/assets/img/ にも78枚を同期。sw.js CACHE → v9。 2026-09-15(2): CGをさらに6枚降板・台帳から削除（cg_butsudan_seiza_sugata／cg_naitou_kao_age／cg_nagai_chinmoku／cg_mado_gawa_no_houkoku／cg_wakaki_utsumuki／cg_hitorizutsu_no_kotoba）。「1シーン1枚・類似構図の隣接禁止・手元アップと対話のみの場面は立ち絵」の基準（docs/CG_GUIDE.md 冒頭）による追加整理。CGは26枚（名場面12＋ED14）になり、クライマックスは9→5枚。経緯は docs/ASSET_MANIFEST.md「2026-09-15 CG追加降板」。sw.js CACHE → v10。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。 2026-09-15: 残り27枚（rei5/izaki4/izumi4/meshino4/kuraishi5/futami4/inaba1）も台帳正名へ改名して配置し、78差分すべてを実画像化。版Bの game/assets/img/ にも78枚を同期。sw.js CACHE → v9。 2026-09-15(2): CGをさらに6枚降板・台帳から削除（cg_butsudan_seiza_sugata／cg_naitou_kao_age／cg_nagai_chinmoku／cg_mado_gawa_no_houkoku／cg_wakaki_utsumuki／cg_hitorizutsu_no_kotoba）。「1シーン1枚・類似構図の隣接禁止・手元アップと対話のみの場面は立ち絵」の基準（docs/CG_GUIDE.md 冒頭）による追加整理。CGは26枚（名場面12＋ED14）になり、クライマックスは9→5枚。経緯は docs/ASSET_MANIFEST.md「2026-09-15 CG追加降板」。sw.js CACHE → v10。 2026-09-15(3): CG19枚を追加撤去し7枚（名場面5＋ED2）に限定。ルート・ENDごとの割当を廃止。docs/CG_PRUNING_2026-09-15.md 参照。CACHE v11。",
  "engine_limit": 300,
- "assigned": 129,
+ "assigned": 110,
  "buffer": 0,
  "assets": [
   {
@@ -1035,46 +1035,6 @@
    "placeholder": true
   },
   {
-   "id": "cg_mado_ushiro_miteteta",
-   "cat": "cg",
-   "file": "assets/cg/cg_mado_ushiro_miteteta.png",
-   "label": "砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。",
-   "desc": "砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。",
-   "meta": "scene",
-   "source": "image2/white_136.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_tsukue_kakomi_daiji",
-   "cat": "cg",
-   "file": "assets/cg/cg_tsukue_kakomi_daiji.png",
-   "label": "零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。",
-   "desc": "零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。",
-   "meta": "scene",
-   "source": "image1/white_138.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_butsudan_narabu_futari",
-   "cat": "cg",
-   "file": "assets/cg/cg_butsudan_narabu_futari.png",
-   "label": "両馬／三重／BG19。祖父の口癖を話す生活感のある並席。",
-   "desc": "両馬／三重／BG19。祖父の口癖を話す生活感のある並席。",
-   "meta": "scene",
-   "source": "image1/white_142.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_yoru_chizu_tsukuri",
-   "cat": "cg",
-   "file": "assets/cg/cg_yoru_chizu_tsukuri.png",
-   "label": "全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。",
-   "desc": "全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。",
-   "meta": "scene",
-   "source": "image1/white_149.png",
-   "placeholder": true
-  },
-  {
    "id": "cg_omoide_chikeizu_kansei",
    "cat": "cg",
    "file": "assets/cg/cg_omoide_chikeizu_kansei.png",
@@ -1085,16 +1045,6 @@
    "placeholder": true
   },
   {
-   "id": "cg_yuugata_madobe_katsuya",
-   "cat": "cg",
-   "file": "assets/cg/cg_yuugata_madobe_katsuya.png",
-   "label": "勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。",
-   "desc": "勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。",
-   "meta": "scene",
-   "source": "image2/white_152.png",
-   "placeholder": true
-  },
-  {
    "id": "cg_yama_ue_hajimete_chizu",
    "cat": "cg",
    "file": "assets/cg/cg_yama_ue_hajimete_chizu.png",
@@ -1102,26 +1052,6 @@
    "desc": "若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。",
    "meta": "scene",
    "source": "image2/white_156.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_fuhou_kageboushi",
-   "cat": "cg",
-   "file": "assets/cg/cg_fuhou_kageboushi.png",
-   "label": "勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。",
-   "desc": "勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。",
-   "meta": "scene",
-   "source": "image1/white_158.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_seito_wo_miwatasu",
-   "cat": "cg",
-   "file": "assets/cg/cg_seito_wo_miwatasu.png",
-   "label": "全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。",
-   "desc": "全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。",
-   "meta": "scene",
-   "source": "image2/white_160.png",
    "placeholder": true
   },
   {
@@ -1152,126 +1082,6 @@
    "desc": "TRUE END ―― 数年後の教室で地図を見せる勝也＋卒業アルバムのモンタージュ",
    "meta": "ending",
    "source": "image3/white_168.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_mie",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_mie.png",
-   "label": "GOOD END・三重 ―― 教壇に立つ練習",
-   "desc": "GOOD END・三重 ―― 教壇に立つ練習",
-   "meta": "ending",
-   "source": "image2/white_169.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_satou",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_satou.png",
-   "label": "GOOD END・砂糖 ―― フィールドで堂々と空を見上げる",
-   "desc": "GOOD END・砂糖 ―― フィールドで堂々と空を見上げる",
-   "meta": "ending",
-   "source": "image3/white_170.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_rei",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_rei.png",
-   "label": "GOOD END・零 ―― 研究室でPCに向かいながら微笑む",
-   "desc": "GOOD END・零 ―― 研究室でPCに向かいながら微笑む",
-   "meta": "ending",
-   "source": "image2/white_171.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_terachi",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_terachi.png",
-   "label": "GOOD END・寺地 ―― 紙束が増えた配信机",
-   "desc": "GOOD END・寺地 ―― 紙束が増えた配信机",
-   "meta": "ending",
-   "source": "image1/white_172.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_ryoma",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_ryoma.png",
-   "label": "GOOD END・両馬 ―― 祖父の墓前で笑って報告",
-   "desc": "GOOD END・両馬 ―― 祖父の墓前で笑って報告",
-   "meta": "ending",
-   "source": "image2/white_173.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_izaki_izumi",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_izaki_izumi.png",
-   "label": "GOOD END・伊崎＋伊豆見 ―― 別々の道で並んで笑う",
-   "desc": "GOOD END・伊崎＋伊豆見 ―― 別々の道で並んで笑う",
-   "meta": "ending",
-   "source": "image2/white_174.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_meshino",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_meshino.png",
-   "label": "GOOD END・召野 ―― 教壇／留学先を思わせる一枚",
-   "desc": "GOOD END・召野 ―― 教壇／留学先を思わせる一枚",
-   "meta": "ending",
-   "source": "image2/white_175.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_kuraishi",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_kuraishi.png",
-   "label": "GOOD END・倉石 ―― 後輩に年鑑を託す",
-   "desc": "GOOD END・倉石 ―― 後輩に年鑑を託す",
-   "meta": "ending",
-   "source": "image2/white_176.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_minamitou",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_minamitou.png",
-   "label": "GOOD END・南棟 ―― 櫻・内藤・三峰の穏やかな一枚",
-   "desc": "GOOD END・南棟 ―― 櫻・内藤・三峰の穏やかな一枚",
-   "meta": "ending",
-   "source": "image1/white_177.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_normal",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_normal.png",
-   "label": "NORMAL END ―― 桜の下、いつも通りの日常",
-   "desc": "NORMAL END ―― 桜の下、いつも通りの日常",
-   "meta": "ending",
-   "source": "image1/white_178.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_bittersweet",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_bittersweet.png",
-   "label": "BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う",
-   "desc": "BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う",
-   "meta": "ending",
-   "source": "image3/white_179.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_end_comedy",
-   "cat": "cg",
-   "file": "assets/cg/cg_end_comedy.png",
-   "label": "COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう",
-   "desc": "COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう",
-   "meta": "ending",
-   "source": "image2/white_180.png",
    "placeholder": true
   },
   {

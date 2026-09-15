@@ -7,9 +7,9 @@
    出力:
      assets/README.md          … 総合（早見・共通仕様・差し替え手順）
      assets/bg/README.md       … 背景 25
-     assets/cg/README.md       … CG 26（名場面12＋ED14）
+     assets/cg/README.md       … CG 7（名場面5＋ED2）
      assets/chr/README.md      … 立ち絵（キャラごとにまとめる）
-     docs/CG_GUIDE.md          … CG 全26枚（名場面12＋ED14）を「物語順」にまとめたガイド
+     docs/CG_GUIDE.md          … CG 全7枚（名場面5＋ED2）を「物語順」にまとめたガイド
    手編集せず、台帳を直して `node tools/gen_asset_md.mjs` で再生成。
    ※ 2026-09-12(3): 本編CGの番号スロット（cg02等）は廃止。bgと同じ「ID＝ファイル名
      （拡張子なし）」の実名に統一（例: cg_chizutsutsu_kobore_shashin）。
@@ -357,13 +357,13 @@ function cgDoc(opts = {}) {
   md += `## 先にまとめ
 
 - **本編で使っている枚数**: ${used.filter(a => (usage.cg.get(a.id) || []).length).length} 枚（ \`@cg\` 指定 ${[...usage.cg.values()].reduce((n, v) => n + v.length, 0)} 箇所 ）
-- **降板して削除した枚数**: 26 枚（非ピーク・重複構図。台帳・実ファイルとも削除済み。第1弾20枚＝\`docs/UI_CG_2026-09-12.md\`、第2弾6枚＝2026-09-15＝\`docs/ASSET_MANIFEST.md\`「2026-09-15 CG追加降板」）
+- **撤去した枚数**: 45 枚（今回19枚。選定理由は \`docs/CG_PRUNING_2026-09-15.md\`）
 - **実ファイルが乗っている枚数**: ${order.filter(a => !a.placeholder).length} 枚（0＝すべて未配置。台帳の名前で新規配置すれば差し替わる）
 - **回収表示の分母**: \`AssetDB.collectible('cg')\` = ${order.filter(a => !a.reserve).length} 枚 → タイトルと保存画面の \`x/N\` はここを見る
 
 ## CG を置く基準（2026-09-15 再改定）
 
-1. **印象的で感動的なシーンにだけ置く** ―― 引き金／各ルートの決定の瞬間／収束の夜／クライマックス／各END。
+1. **立ち絵では伝わらない情報・関係性にだけ置く**。各ルート・各ENDへの均等配分はしない。写真／完成地図／山の回想／最後の報告／卒業／TRUE／同窓会の7枚に限定。
 2. 呼び止め・手元アップ・並んで喋るだけ・状況説明の集合図は**立ち絵＋\`@bg\`＋\`@chr\`**（＋ \`@memo\` \`@caption\`）で足りる。置かない。
 3. 同じCGを10ライン以内に再掲しない（ dip の連発は「切れた」ことすら伝わらない）。
 4. ENDカード用 \`cg_end_*\` と同一構図の差し替えは作らない。1シーン1枚。
@@ -441,8 +441,8 @@ ${quickTable(order, (a) => {
 
 | 書き方 | 結果 |
 |---|---|
-| \`@cg cg_mado_ushiro_miteteta\` | 0.42秒で一度下げてから 0.75秒でフェードイン（\`.lay-cg.dip\`）。同一idの再指定は何もしない |
-| \`@cg cg_mado_ushiro_miteteta kb\` | 同上＋ Ken Burns 26秒（1.02→1.12） |
+| \`@cg cg_yama_ue_hajimete_chizu\` | 0.42秒で一度下げてから 0.75秒でフェードイン（\`.lay-cg.dip\`）。同一idの再指定は何もしない |
+| \`@cg cg_yama_ue_hajimete_chizu kb\` | 同上＋ Ken Burns 26秒（1.02→1.12） |
 | \`@cg off\` | 0.75秒で下げて立ち絵を返す（\`stage-mode=cg\` を外す） |
 | 背景切り替え | \`@bg\` は 2枚スラブのクロスディゾルブ（既定1.15秒・CONFIGで変更可） |
 `;
@@ -667,7 +667,7 @@ function topDoc() {
 - \`bg/README.md\` ― 背景 ${bgCount} 枚（出番・時間帯トーン・@bg の書き方）
 - \`cg/README.md\` ― CG ${cgCount} 枚（出番・Ken Burns・差し替え仕様）
 - \`chr/README.md\` ― 立ち絵 ${chrCount} 差分（キャラ別・表情別の本編出現回数）
-- \`../docs/CG_GUIDE.md\` ― **CG 32枚を物語順にまとめた1本**（これだけ読めばCGは足りる）
+- \`../docs/CG_GUIDE.md\` ― **CG 7枚を物語順にまとめた1本**（これだけ読めばCGは足りる）
 - \`../docs/ART_SPEC.md\` ― **入稿仕様書**（推奨寸法・セーフエリア・形式・命名規則。絵を注文するときはこれ）
 - \`../docs/CHR_REPLACE_LIST.md\` ― 立ち絵 ${chrCount} 枚の差し替え一覧（**自動生成**：置くファイル名・\`@chr\`・表情・使用回数・状態）
 
