@@ -5,7 +5,7 @@
 正式なスロット名へリネーム・配置した対応表です。
 
 > **2026-09-15 現在の実ファイル**: 背景25枚（`assets/bg/`）と立ち絵78枚（`assets/chr/`）が実画像として存在します。
-> CGは名場面12+ED14の**26枚**（2026-09-15(2) に6枚を追加降板・台帳削除）。UI20は撤去。立ち絵は台帳の `placeholder: false` まで反映済みです。
+> CGは名場面5+ED2の**7枚**（2026-09-15(3) に19枚を追加撤去）。UI20は撤去。立ち絵は台帳の `placeholder: false` まで反映済みです。
 > CGの実素材は、下表の「差し替え先」の名前で新規配置すれば
 > `data/assets.json` の該当行 `placeholder` を `false` にした瞬間から本編に乗ります。
 > 生成プロンプト（添付する背景・立ち絵の指定つき）は `docs/CG_PROMPTS.md`。
@@ -21,8 +21,8 @@
 |---|---|---|
 | 背景(BG) | 24 | 24 |
 | 立ち絵差分 | 113 | 78（未使用27削除後） |
-| 名場面CG | 38 | 12（降板20＋2026-09-15追加降板6を削除） |
-| ED専用CG | 14 | 14 |
+| 名場面CG | 38 | 5（累計33枚撤去） |
+| ED専用CG | 14 | 2（12枚撤去） |
 | UI／アイテム | 20 | 0（2026-09-12 撤去） |
 | 立ち絵差分（実ファイル） | 78 | 78（2026-09-15収録済み） |
 | 削除済み未使用立ち絵 | - | 27（2026-09-13削除） |
@@ -134,36 +134,36 @@
 | 125 | `image?/white_125.png` | `assets/chr/chr_naitou_06_sukoshi_warau.png` | 立ち絵差分 内藤蘭／少し笑う |
 | 126 | `image?/white_126.png` | `assets/chr/chr_inaba_01_furushashin_hohoemi.png` | 立ち絵差分 稲葉悌二（回想専用）／古写真の中の柔らかい笑み |
 | 131 | `image?/white_131.png` | `assets/cg/cg_chizutsutsu_kobore_shashin.png` | 三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。 |
-| 136 | `image?/white_136.png` | `assets/cg/cg_mado_ushiro_miteteta.png` | 砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。 |
-| 138 | `image?/white_138.png` | `assets/cg/cg_tsukue_kakomi_daiji.png` | 零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。 |
+| 136 | `image?/white_136.png` | `assets/cg/cg_mado_ushiro_miteteta.png` | 砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。 **2026-09-15(3) 撤去・生成不要** |
+| 138 | `image?/white_138.png` | `assets/cg/cg_tsukue_kakomi_daiji.png` | 零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。 **2026-09-15(3) 撤去・生成不要** |
 | 141 | `image?/white_141.png` | ~~`assets/cg/cg_butsudan_seiza_sugata.png`~~ **2026-09-15 降板・削除** | 両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。 |
-| 142 | `image?/white_142.png` | `assets/cg/cg_butsudan_narabu_futari.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 |
+| 142 | `image?/white_142.png` | `assets/cg/cg_butsudan_narabu_futari.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 **2026-09-15(3) 撤去・生成不要** |
 | 148 | `image?/white_148.png` | ~~`assets/cg/cg_naitou_kao_age.png`~~ **2026-09-15 降板・削除** | 内藤（単独）／BG18。伏し目から顔を上げる一瞬。 |
-| 149 | `image?/white_149.png` | `assets/cg/cg_yoru_chizu_tsukuri.png` | 全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。 |
+| 149 | `image?/white_149.png` | `assets/cg/cg_yoru_chizu_tsukuri.png` | 全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。 **2026-09-15(3) 撤去・生成不要** |
 | 151 | `image?/white_151.png` | `assets/cg/cg_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図。画面いっぱいの作品アート。 |
-| 152 | `image?/white_152.png` | `assets/cg/cg_yuugata_madobe_katsuya.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 |
+| 152 | `image?/white_152.png` | `assets/cg/cg_yuugata_madobe_katsuya.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 **2026-09-15(3) 撤去・生成不要** |
 | 155 | `image?/white_155.png` | ~~`assets/cg/cg_nagai_chinmoku.png`~~ **2026-09-15 降板・削除** | 勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。 |
 | 156 | `image?/white_156.png` | `assets/cg/cg_yama_ue_hajimete_chizu.png` | 若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。 |
 | 157 | `image?/white_157.png` | ~~`assets/cg/cg_wakaki_utsumuki.png`~~ **2026-09-15 降板・削除** | 若き勝也（回想・単独）／BG22。生意気を言った日、俯く。 |
-| 158 | `image?/white_158.png` | `assets/cg/cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 |
+| 158 | `image?/white_158.png` | `assets/cg/cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 **2026-09-15(3) 撤去・生成不要** |
 | 159 | `image?/white_159.png` | ~~`assets/cg/cg_mado_gawa_no_houkoku.png`~~ **2026-09-15 降板・削除** | 勝也（単独）／BG13。「窓の外を見るたび、報告していた」。 |
-| 160 | `image?/white_160.png` | `assets/cg/cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG13。生徒たちを見渡す広い構図。 |
+| 160 | `image?/white_160.png` | `assets/cg/cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG13。生徒たちを見渡す広い構図。 **2026-09-15(3) 撤去・生成不要** |
 | 162 | `image?/white_162.png` | ~~`assets/cg/cg_hitorizutsu_no_kotoba.png`~~ **2026-09-15 降板・削除** | 全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。 |
 | 163 | `image?/white_163.png` | `assets/cg/cg_hareyaka_na_emi.png` | 勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。 |
 | 164 | `image?/white_164.png` | `assets/cg/cg_sotsugyou_sakurafubuki.png` | 全員集合／BG17。卒業式、桜吹雪。 |
 | 168 | `image?/white_168.png` | `assets/cg/cg_end_true.png` | TRUE END ―― 数年後の教室で地図を見せる勝也＋卒業アルバムのモンタージュ |
-| 169 | `image?/white_169.png` | `assets/cg/cg_end_mie.png` | GOOD END・三重 ―― 教壇に立つ練習 |
-| 170 | `image?/white_170.png` | `assets/cg/cg_end_satou.png` | GOOD END・砂糖 ―― フィールドで堂々と空を見上げる |
-| 171 | `image?/white_171.png` | `assets/cg/cg_end_rei.png` | GOOD END・零 ―― 研究室でPCに向かいながら微笑む |
-| 172 | `image?/white_172.png` | `assets/cg/cg_end_terachi.png` | GOOD END・寺地 ―― 紙束が増えた配信机 |
-| 173 | `image?/white_173.png` | `assets/cg/cg_end_ryoma.png` | GOOD END・両馬 ―― 祖父の墓前で笑って報告 |
-| 174 | `image?/white_174.png` | `assets/cg/cg_end_izaki_izumi.png` | GOOD END・伊崎＋伊豆見 ―― 別々の道で並んで笑う |
-| 175 | `image?/white_175.png` | `assets/cg/cg_end_meshino.png` | GOOD END・召野 ―― 教壇／留学先を思わせる一枚 |
-| 176 | `image?/white_176.png` | `assets/cg/cg_end_kuraishi.png` | GOOD END・倉石 ―― 後輩に年鑑を託す |
-| 177 | `image?/white_177.png` | `assets/cg/cg_end_minamitou.png` | GOOD END・南棟 ―― 櫻・内藤・三峰の穏やかな一枚 |
-| 178 | `image?/white_178.png` | `assets/cg/cg_end_normal.png` | NORMAL END ―― 桜の下、いつも通りの日常 |
-| 179 | `image?/white_179.png` | `assets/cg/cg_end_bittersweet.png` | BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う |
-| 180 | `image?/white_180.png` | `assets/cg/cg_end_comedy.png` | COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう |
+| 169 | `image?/white_169.png` | `assets/cg/cg_end_mie.png` | GOOD END・三重 ―― 教壇に立つ練習 **2026-09-15(3) 撤去・生成不要** |
+| 170 | `image?/white_170.png` | `assets/cg/cg_end_satou.png` | GOOD END・砂糖 ―― フィールドで堂々と空を見上げる **2026-09-15(3) 撤去・生成不要** |
+| 171 | `image?/white_171.png` | `assets/cg/cg_end_rei.png` | GOOD END・零 ―― 研究室でPCに向かいながら微笑む **2026-09-15(3) 撤去・生成不要** |
+| 172 | `image?/white_172.png` | `assets/cg/cg_end_terachi.png` | GOOD END・寺地 ―― 紙束が増えた配信机 **2026-09-15(3) 撤去・生成不要** |
+| 173 | `image?/white_173.png` | `assets/cg/cg_end_ryoma.png` | GOOD END・両馬 ―― 祖父の墓前で笑って報告 **2026-09-15(3) 撤去・生成不要** |
+| 174 | `image?/white_174.png` | `assets/cg/cg_end_izaki_izumi.png` | GOOD END・伊崎＋伊豆見 ―― 別々の道で並んで笑う **2026-09-15(3) 撤去・生成不要** |
+| 175 | `image?/white_175.png` | `assets/cg/cg_end_meshino.png` | GOOD END・召野 ―― 教壇／留学先を思わせる一枚 **2026-09-15(3) 撤去・生成不要** |
+| 176 | `image?/white_176.png` | `assets/cg/cg_end_kuraishi.png` | GOOD END・倉石 ―― 後輩に年鑑を託す **2026-09-15(3) 撤去・生成不要** |
+| 177 | `image?/white_177.png` | `assets/cg/cg_end_minamitou.png` | GOOD END・南棟 ―― 櫻・内藤・三峰の穏やかな一枚 **2026-09-15(3) 撤去・生成不要** |
+| 178 | `image?/white_178.png` | `assets/cg/cg_end_normal.png` | NORMAL END ―― 桜の下、いつも通りの日常 **2026-09-15(3) 撤去・生成不要** |
+| 179 | `image?/white_179.png` | `assets/cg/cg_end_bittersweet.png` | BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う **2026-09-15(3) 撤去・生成不要** |
+| 180 | `image?/white_180.png` | `assets/cg/cg_end_comedy.png` | COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう **2026-09-15(3) 撤去・生成不要** |
 | 181 | `image?/white_181.png` | `assets/cg/cg_end_bonus.png` | BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット |
 
 ### 2026-09-13 削除済み未使用立ち絵27枚
@@ -223,7 +223,7 @@
 | `bg_hawaii_youganchi_kaisou` | **`bg_hawaii_yougan_daichi_kaisou`** | 回想・ハワイの溶岩台地 | 溶岩=yougan／台地=daichi（youganchi は混成） |
 | `bg_yama_gensho_kaisou` | **`bg_yama_kaisou`** | 回想・稲葉と勝也がいた山（褪色調） | gensho が日本語として特定できない（褪色=taishoku／幻想=gensou のタイポか）。場所＝山＋回想で足りる |
 | `bg_daigaku_yakou_kaisou` | **`bg_daigaku_camp_kaisou`** | 回想・大学時代の野外調査ベースキャンプ | 野外=yagai（yakou は「夜行」で別語）。ベースキャンプ=camp／台帳 meta も `yakou`→`camp` |
-| `cg_kuhou_kageboushi` | **`cg_fuhou_kageboushi`** | 勝也 訃報を知った瞬間、シルエットのみ | 訃報=fuhou（kuhou は誤り） |
+| `cg_kuhou_kageboushi` | **`cg_fuhou_kageboushi`** | 勝也 訃報を知った瞬間、シルエットのみ | 訃報=fuhou（kuhou は誤り） **2026-09-15(3) 撤去・生成不要** |
 
 追従した箇所（すべて機械置換＋実ファイルの `git mv`）:
 
@@ -285,12 +285,12 @@
 
 | 降板したCG | 出ていた場所 | 降板理由（＝立ち絵で代替する根拠） |
 |---|---|---|
-| `cg_butsudan_seiza_sugata` | 両馬編 d1（正座して線香を上げる） | 直後の d2 `cg_butsudan_narabu_futari` と同じ部屋で2連発になる準備絵。基準3・7（密度）。仏壇の背景＋立ち絵（`ryoma=08/06`）で成立 |
+| `cg_butsudan_seiza_sugata` | 両馬編 d1（正座して線香を上げる） | 直後の d2 `cg_butsudan_narabu_futari` と同じ部屋で2連発になる準備絵。基準3・7（密度）。仏壇の背景＋立ち絵（`ryoma=08/06`）で成立 **2026-09-15(3) 撤去・生成不要** |
 | `cg_naitou_kao_age` | 南棟編 e3（内藤が顔を上げる一瞬） | 「一瞬の表情アップ」は基準2で明記した立ち絵の仕事。脚本も直後に `naitou=05`（優しい目）を立てており重複 |
 | `cg_nagai_chinmoku` | クライマックス h2（五秒を超える沈黙） | 対話中の沈黙ビート。クライマックス9枚の密度を5枚へ整理（基準3・7）。`katsuya=03`（遠い目）で受ける |
-| `cg_mado_gawa_no_houkoku` | クライマックス h5（窓への報告を語る） | h1 `cg_yuugata_madobe_katsuya` と構図がほぼ同一（BG03・勝也ひとり・窓際）。基準7。語るだけなので立ち絵で受ける |
+| `cg_mado_gawa_no_houkoku` | クライマックス h5（窓への報告を語る） | h1 `cg_yuugata_madobe_katsuya` と構図がほぼ同一（BG03・勝也ひとり・窓際）。基準7。語るだけなので立ち絵で受ける **2026-09-15(3) 撤去・生成不要** |
 | `cg_wakaki_utsumuki` | クライマックス h4（生意気を言った日、俯く） | h3→h4 で回想絵が3連発（yama_ue→wakaki→fuhou）。1シーン1枚（基準4）に絞り、回想は「山」と「シルエット」の2枚構成へ。間の芝居は `bg_daigaku_camp_kaisou`（褪色）で受ける |
-| `cg_hitorizutsu_no_kotoba` | クライマックス h7（一人ずつの一言） | 隣接シーン h6 `cg_seito_wo_miwatasu` と同系統の集合構図（BG03・全員）。基準7。朗読は寺地の立ち絵（`terachi=06/08`）で受ける |
+| `cg_hitorizutsu_no_kotoba` | クライマックス h7（一人ずつの一言） | 隣接シーン h6 `cg_seito_wo_miwatasu` と同系統の集合構図（BG03・全員）。基準7。朗読は寺地の立ち絵（`terachi=06/08`）で受ける **2026-09-15(3) 撤去・生成不要** |
 
 追従した箇所:
 
@@ -303,3 +303,8 @@
 
 **セーブ互換**: 削除した6枚の回収記録が旧セーブに残っていても、`cgSeen()`／ギャラリーは
 現行台帳に存在するidだけを数えるため未回収ズレは起きません（版A `js/store.js`・版B `game/js/engine.js`）。
+
+## 2026-09-15(3) CG大幅整理
+
+現行CGは **7枚（名場面5＋ED2）**。19枚を脚本・台帳・制作対象から撤去。
+全14ENDと台詞・分岐は維持。選定理由は `CG_PRUNING_2026-09-15.md`。

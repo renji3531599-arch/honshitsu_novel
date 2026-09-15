@@ -26,7 +26,7 @@
 | `BG08` | 地図保管庫 | 1箇所 | — |
 | `BG09` | 図書室 | 2箇所 | — |
 | `BG10` | 図書室奥の書庫（埃っぽい） | 2箇所 | — |
-| `BG11` | 翠湖のほとり | 2箇所 | — |
+| `BG11` | 翠湖のほとり | 3箇所 | — |
 | `BG12` | 文化祭/謝恩会準備中の校庭 | 1箇所 | — |
 | `BG13` | 体育館（謝恩会当日） | 1箇所 | — |
 | `BG14` | 屋上 | 1箇所 | — |
@@ -38,7 +38,7 @@
 | `BG20` | 回想・ハワイの溶岩台地 | 1箇所 | — |
 | `BG21` | 回想・稲葉と勝也がいた山（褪色調） | 1箇所 | — |
 | `BG22` | 回想・大学時代の野外調査ベースキャンプ | 1箇所 | — |
-| `BG23` | エピローグ・卒業後の春、もぬけの殻の教室 | 2箇所 | haru |
+| `BG23` | エピローグ・卒業後の春、もぬけの殻の教室 | 1箇所 | haru |
 | `BG24` | TRUE END後日談・数年後の同じ教室 | 1箇所 | suunengo |
 | `title_key` | タイトルキービジュアル（夕方の教室・地図筒・古写真） | — | — |
 
@@ -67,10 +67,9 @@
   - 三度目の春、まだ来ない / シーン `prologue_002`「三年間ダイジェスト（共通・スキップ可）」 ― `00_prologue.txt:42`
   - 三度目の春、まだ来ない / シーン `prologue_003`「二月、北棟三年B組・昼休み」 ― `00_prologue.txt:69`
   - 三度目の春、まだ来ない / シーン `prologue_004`「二月、北棟三年B組・昼休み（続き）」 ― `00_prologue.txt:100`
-  - 零編 ― 面白いの向こう側 / シーン `b1`「放課後、黒板の前」 ― `20_route_satou_rei.txt:115`
-  - 零編 ― 面白いの向こう側 / シーン `b1_hiku`「引き下がった方」 ― `20_route_satou_rei.txt:136`
+  - 零編 ― 面白いの向こう側 / シーン `b1`「放課後、黒板の前」 ― `20_route_satou_rei.txt:113`
+  - 零編 ― 面白いの向こう側 / シーン `b1_hiku`「引き下がった方」 ― `20_route_satou_rei.txt:134`
   - …ほか 3 箇所
-- **この背景まわりのCG**: `cg_end_comedy`
 
 ### `BG03` ― 北棟三年B組教室・夕方（茜色・逆光）
 
@@ -86,7 +85,7 @@
   - 砂糖編 ― 窓の外の続き / シーン `a1`「放課後、教室に残る砂糖」 ― `20_route_satou_rei.txt:10`
   - 砂糖編 ― 窓の外の続き / シーン `a1_hara`「気を遣った方」 ― `20_route_satou_rei.txt:39`
   - …ほか 11 箇所
-- **この背景まわりのCG**: `cg_mado_ushiro_miteteta` / `cg_yuugata_madobe_katsuya` / `cg_seito_wo_miwatasu` / `cg_hareyaka_na_emi` / `cg_end_normal` / `cg_end_bittersweet`
+- **この背景まわりのCG**: `cg_hareyaka_na_emi`
 
 ### `BG04` ― 北棟三年B組教室・夜（サプライズ準備）
 
@@ -97,12 +96,12 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 8 箇所
   - 地図を作る夜 / シーン `g1`「放課後、誰もいない北棟三年B組教室」 ― `50_converge.txt:10`
-  - 地図を作る夜 / シーン `g1_zenbu`「一ページ目から最終ページまで」 ― `50_converge.txt:39`
-  - 地図を作る夜 / シーン `g2`「「思い出の地形図」制作」 ― `50_converge.txt:48`
-  - 地図を作る夜 / シーン `g2_suu`「三日の重み」 ― `50_converge.txt:74`
-  - 地図を作る夜 / シーン `g2_eb`「当日の設計」 ― `50_converge.txt:88`
+  - 地図を作る夜 / シーン `g1_zenbu`「一ページ目から最終ページまで」 ― `50_converge.txt:37`
+  - 地図を作る夜 / シーン `g2`「「思い出の地形図」制作」 ― `50_converge.txt:46`
+  - 地図を作る夜 / シーン `g2_suu`「三日の重み」 ― `50_converge.txt:72`
+  - 地図を作る夜 / シーン `g2_eb`「当日の設計」 ― `50_converge.txt:86`
   - …ほか 3 箇所
-- **この背景まわりのCG**: `cg_yoru_chizu_tsukuri` / `cg_omoide_chikeizu_kansei` / `cg_end_terachi`
+- **この背景まわりのCG**: `cg_omoide_chikeizu_kansei`
 
 ### `BG05` ― 北棟廊下
 
@@ -121,8 +120,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
   - 差出人不明の写真 / シーン `c005_kaidan`「放課後、屋上へ続く階段の踊り場」 ― `10_chapter1.txt:65`
-  - 地面は、忘れない。 / シーン `end_good_kuraishi`「GOOD END 倉石「年鑑、完結せず」」 ― `70_endings.txt:204`
-- **この背景まわりのCG**: `cg_end_kuraishi`
+  - 地面は、忘れない。 / シーン `end_good_kuraishi`「GOOD END 倉石「年鑑、完結せず」」 ― `70_endings.txt:193`
 
 ### `BG07` ― 職員室
 
@@ -151,9 +149,8 @@
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
-  - 零編 ― 面白いの向こう側 / シーン `b2`「零の中の変化」 ― `20_route_satou_rei.txt:158`
-  - 地面は、忘れない。 / シーン `end_good_rei`「GOOD END 零「面白いを仕事にする」」 ― `70_endings.txt:126`
-- **この背景まわりのCG**: `cg_tsukue_kakomi_daiji` / `cg_end_rei`
+  - 零編 ― 面白いの向こう側 / シーン `b2`「零の中の変化」 ― `20_route_satou_rei.txt:156`
+  - 地面は、忘れない。 / シーン `end_good_rei`「GOOD END 零「面白いを仕事にする」」 ― `70_endings.txt:122`
 
 ### `BG10` ― 図書室奥の書庫（埃っぽい）
 
@@ -171,9 +168,10 @@
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／`object-fit: cover` で全画面（最低 1600×900・既存実測 1672×941）
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
-- **使用回数**: 本編 2 箇所
+- **使用回数**: 本編 3 箇所
   - 三度目の春、まだ来ない / シーン `prologue_002`「三年間ダイジェスト（共通・スキップ可）」 ― `00_prologue.txt:33`
-  - 地面は、忘れない。 / シーン `end_bonus`「BONUS EXTRA「また、この教室で」」 ― `70_endings.txt:296`
+  - 地面は、忘れない。 / シーン `end_good_satou`「GOOD END 砂糖「見ている、それだけで」」 ― `70_endings.txt:108`
+  - 地面は、忘れない。 / シーン `end_bonus`「BONUS EXTRA「また、この教室で」」 ― `70_endings.txt:276`
 - **この背景まわりのCG**: `cg_end_bonus`
 
 ### `BG12` ― 文化祭/謝恩会準備中の校庭
@@ -221,9 +219,8 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 3 箇所
   - 南棟編 ― 境界線の向こう側 / シーン `e1`「桜並木、まだ蕾」 ― `40_route_minamitou_meshino.txt:10`
-  - 地面は、忘れない。 / シーン `end_good_izaki`「GOOD END 伊崎＋伊豆見「それぞれの歩幅」」 ― `70_endings.txt:174`
-  - 地面は、忘れない。 / シーン `end_good_minamitou`「GOOD END 南棟「境界のない春」」 ― `70_endings.txt:220`
-- **この背景まわりのCG**: `cg_end_izaki_izumi` / `cg_end_minamitou`
+  - 地面は、忘れない。 / シーン `end_good_izaki`「GOOD END 伊崎＋伊豆見「それぞれの歩幅」」 ― `70_endings.txt:166`
+  - 地面は、忘れない。 / シーン `end_good_minamitou`「GOOD END 南棟「境界のない春」」 ― `70_endings.txt:208`
 
 ### `BG17` ― 卒業式会場
 
@@ -246,8 +243,7 @@
 - **使用回数**: 本編 3 箇所
   - 南棟編 ― 境界線の向こう側 / シーン `e2`「南棟三年教室」 ― `40_route_minamitou_meshino.txt:28`
   - 南棟編 ― 境界線の向こう側 / シーン `e2_jikashi`「茶化した場合」 ― `40_route_minamitou_meshino.txt:44`
-  - 地面は、忘れない。 / シーン `end_good_meshino`「GOOD END 召野「言葉を届ける」」 ― `70_endings.txt:190`
-- **この背景まわりのCG**: `cg_end_meshino`
+  - 地面は、忘れない。 / シーン `end_good_meshino`「GOOD END 召野「言葉を届ける」」 ― `70_endings.txt:180`
 
 ### `BG19` ― 両馬の家・祖父の遺影がある部屋
 
@@ -257,8 +253,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
   - 両馬編 ― 祖父と✝本質✝ / シーン `d1`「両馬の家、夕方」 ― `30_route_terachi_ryoma.txt:82`
-  - 地面は、忘れない。 / シーン `end_good_ryoma`「GOOD END 両馬「✝本質✝、その後」」 ― `70_endings.txt:154`
-- **この背景まわりのCG**: `cg_butsudan_narabu_futari` / `cg_end_ryoma`
+  - 地面は、忘れない。 / シーン `end_good_ryoma`「GOOD END 両馬「✝本質✝、その後」」 ― `70_endings.txt:148`
 
 ### `BG20` ― 回想・ハワイの溶岩台地
 
@@ -276,7 +271,7 @@
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
-  - 窓の外に、ずっといた人 / シーン `h3`「回想：はじめての地形図」 ― `60_climax.txt:62`
+  - 窓の外に、ずっといた人 / シーン `h3`「回想：はじめての地形図」 ― `60_climax.txt:60`
 - **この背景まわりのCG**: `cg_yama_ue_hajimete_chizu`
 
 ### `BG22` ― 回想・大学時代の野外調査ベースキャンプ
@@ -286,8 +281,7 @@
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
-  - 窓の外に、ずっといた人 / シーン `h4`「回想：最後の日」 ― `60_climax.txt:78`
-- **この背景まわりのCG**: `cg_fuhou_kageboushi`
+  - 窓の外に、ずっといた人 / シーン `h4`「回想：最後の日」 ― `60_climax.txt:76`
 
 ### `BG23` ― エピローグ・卒業後の春、もぬけの殻の教室
 
@@ -296,10 +290,8 @@
 - **状態**: ● 実画像が乗っている
 - **時間帯トーン**: `kyoshitsu/haru` → haru（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
-- **使用回数**: 本編 2 箇所
+- **使用回数**: 本編 1 箇所
   - 地面は、忘れない。 / シーン `end_good_mie`「GOOD END 三重「否定の向こう側」」 ― `70_endings.txt:82`
-  - 地面は、忘れない。 / シーン `end_good_satou`「GOOD END 砂糖「見ている、それだけで」」 ― `70_endings.txt:110`
-- **この背景まわりのCG**: `cg_end_mie` / `cg_end_satou`
 
 ### `BG24` ― TRUE END後日談・数年後の同じ教室
 
@@ -326,7 +318,7 @@
 1. **ファイル名は「台帳ID + 拡張子」**（例 `bg_okujou.png`）。それを `assets/bg/` に上書き／新規配置
 2. 台帳の `placeholder` を `false` に → SVG補完（`backdropSVG`）が外れて実画像になる
    （背景25枚は**既に全て `placeholder: false`**＝上書きするだけで反映されます）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v10`）を上げる
+3. `sw.js` の `CACHE`（現在 `honshitsu-v11`）を上げる
 4. 白背景素材のまま使いたいときだけ CONFIG「画像合成」= multiply（**既定は normal**。multiply は `#stage[data-blend="multiply"]` を付けたときだけ立ち絵に掛かる）
 5. `node tools/sync_placeholder.mjs --check` で寸法・容量・台帳のズレを確認
 

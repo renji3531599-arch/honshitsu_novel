@@ -7,7 +7,8 @@
       honshitsu-v8: 2026-09-13 実素材の同期（tools/sync_placeholder.mjs --bump）。
       honshitsu-v9: 2026-09-15 実素材の同期（tools/sync_placeholder.mjs --bump）。
       honshitsu-v10: 2026-09-15(2) CG6枚の追加降板（台帳・脚本・版Bマニフェストの更新）に伴う払い落とし。 */
-const CACHE = 'honshitsu-v10';
+// v11: CG19枚撤去・両版の脚本と台帳更新。
+const CACHE = 'honshitsu-v11';
 const CORE = [
   './',
   './index.html',

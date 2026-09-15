@@ -160,15 +160,15 @@
 | スロット | 元ファイル | 新ファイル名 | 内容 |
 |---|---|---|---|
 |  | white_131.png | `cg_chizutsutsu_kobore_shashin.png` | 三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。 |
-|  | white_136.png | `cg_mado_ushiro_miteteta.png` | 砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。 |
-|  | white_138.png | `cg_tsukue_kakomi_daiji.png` | 零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。 |
-|  | white_142.png | `cg_butsudan_narabu_futari.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 |
-|  | white_149.png | `cg_yoru_chizu_tsukuri.png` | 全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。 |
+|  | white_136.png | `cg_mado_ushiro_miteteta.png` | 砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。 **2026-09-15(3) 撤去・生成不要** |
+|  | white_138.png | `cg_tsukue_kakomi_daiji.png` | 零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。 **2026-09-15(3) 撤去・生成不要** |
+|  | white_142.png | `cg_butsudan_narabu_futari.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 **2026-09-15(3) 撤去・生成不要** |
+|  | white_149.png | `cg_yoru_chizu_tsukuri.png` | 全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。 **2026-09-15(3) 撤去・生成不要** |
 |  | white_151.png | `cg_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図。画面いっぱいの作品アート。 |
-|  | white_152.png | `cg_yuugata_madobe_katsuya.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 |
+|  | white_152.png | `cg_yuugata_madobe_katsuya.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 **2026-09-15(3) 撤去・生成不要** |
 |  | white_156.png | `cg_yama_ue_hajimete_chizu.png` | 若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。 |
-|  | white_158.png | `cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 |
-|  | white_160.png | `cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。 |
+|  | white_158.png | `cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 **2026-09-15(3) 撤去・生成不要** |
+|  | white_160.png | `cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。 **2026-09-15(3) 撤去・生成不要** |
 |  | white_163.png | `cg_hareyaka_na_emi.png` | 勝也（単独）／BG03（夕方の教室）。締めの台詞、晴れやかな笑み（表情⑩）。 |
 |  | white_164.png | `cg_sotsugyou_sakurafubuki.png` | 全員集合／BG17。卒業式、桜吹雪。 |
 | cg01 | white_130.png | ―（降板・削除済み） |  |
@@ -203,18 +203,18 @@
 | スロット | 元ファイル | 新ファイル名 | 内容 |
 |---|---|---|---|
 | cg_end_true | white_168.png | `cg_end_true.png` | TRUE END ―― 数年後の教室で地図を見せる勝也＋卒業アルバムのモンタージュ |
-| cg_end_mie | white_169.png | `cg_end_mie.png` | GOOD END・三重 ―― 教壇に立つ練習 |
-| cg_end_satou | white_170.png | `cg_end_satou.png` | GOOD END・砂糖 ―― フィールドで堂々と空を見上げる |
-| cg_end_rei | white_171.png | `cg_end_rei.png` | GOOD END・零 ―― 研究室でPCに向かいながら微笑む |
-| cg_end_terachi | white_172.png | `cg_end_terachi.png` | GOOD END・寺地 ―― 紙束が増えた配信机 |
-| cg_end_ryoma | white_173.png | `cg_end_ryoma.png` | GOOD END・両馬 ―― 祖父の墓前で笑って報告 |
-| cg_end_izaki_izumi | white_174.png | `cg_end_izaki_izumi.png` | GOOD END・伊崎＋伊豆見 ―― 別々の道で並んで笑う |
-| cg_end_meshino | white_175.png | `cg_end_meshino.png` | GOOD END・召野 ―― 教壇／留学先を思わせる一枚 |
-| cg_end_kuraishi | white_176.png | `cg_end_kuraishi.png` | GOOD END・倉石 ―― 後輩に年鑑を託す |
-| cg_end_minamitou | white_177.png | `cg_end_minamitou.png` | GOOD END・南棟 ―― 櫻・内藤・三峰の穏やかな一枚 |
-| cg_end_normal | white_178.png | `cg_end_normal.png` | NORMAL END ―― 桜の下、いつも通りの日常 |
-| cg_end_bittersweet | white_179.png | `cg_end_bittersweet.png` | BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う |
-| cg_end_comedy | white_180.png | `cg_end_comedy.png` | COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう |
+| cg_end_mie | white_169.png | `cg_end_mie.png` | GOOD END・三重 ―― 教壇に立つ練習 **2026-09-15(3) 撤去・生成不要** |
+| cg_end_satou | white_170.png | `cg_end_satou.png` | GOOD END・砂糖 ―― フィールドで堂々と空を見上げる **2026-09-15(3) 撤去・生成不要** |
+| cg_end_rei | white_171.png | `cg_end_rei.png` | GOOD END・零 ―― 研究室でPCに向かいながら微笑む **2026-09-15(3) 撤去・生成不要** |
+| cg_end_terachi | white_172.png | `cg_end_terachi.png` | GOOD END・寺地 ―― 紙束が増えた配信机 **2026-09-15(3) 撤去・生成不要** |
+| cg_end_ryoma | white_173.png | `cg_end_ryoma.png` | GOOD END・両馬 ―― 祖父の墓前で笑って報告 **2026-09-15(3) 撤去・生成不要** |
+| cg_end_izaki_izumi | white_174.png | `cg_end_izaki_izumi.png` | GOOD END・伊崎＋伊豆見 ―― 別々の道で並んで笑う **2026-09-15(3) 撤去・生成不要** |
+| cg_end_meshino | white_175.png | `cg_end_meshino.png` | GOOD END・召野 ―― 教壇／留学先を思わせる一枚 **2026-09-15(3) 撤去・生成不要** |
+| cg_end_kuraishi | white_176.png | `cg_end_kuraishi.png` | GOOD END・倉石 ―― 後輩に年鑑を託す **2026-09-15(3) 撤去・生成不要** |
+| cg_end_minamitou | white_177.png | `cg_end_minamitou.png` | GOOD END・南棟 ―― 櫻・内藤・三峰の穏やかな一枚 **2026-09-15(3) 撤去・生成不要** |
+| cg_end_normal | white_178.png | `cg_end_normal.png` | NORMAL END ―― 桜の下、いつも通りの日常 **2026-09-15(3) 撤去・生成不要** |
+| cg_end_bittersweet | white_179.png | `cg_end_bittersweet.png` | BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う **2026-09-15(3) 撤去・生成不要** |
+| cg_end_comedy | white_180.png | `cg_end_comedy.png` | COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう **2026-09-15(3) 撤去・生成不要** |
 | cg_end_bonus | white_181.png | `cg_end_bonus.png` | BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット |
 
 ## UI／アイテム（2026-09-12 撤去）
@@ -227,5 +227,9 @@ UI画像20枚はエンジンのCSS/SVG描画で全代替のため、実ファイ
 
 ---
 
-- 合計: 129スロット (背景24＝実画像 / 立ち絵78＝実画像 / 名場面CG 12＝現行・台帳のみ / ED用CG 14＝台帳のみ / UI 20＝撤去 / 未使用削除27 / 2026-09-15 追加降板CG 6)
+- 現行: 109スロット（背景24＋立ち絵78＋名場面CG5＋ED用CG2）。CG実素材は未配置。
 - 2026-09-13: 未使用立ち絵27枚を完全削除。旧名→新名統一（例: `chr_katsuya_02_bishou.png` → `chr_katsuya_02_hohoemi.png`）。台帳は `data/assets.json` が正本。
+## 2026-09-15(3) CG大幅整理
+
+現行CGは **7枚（名場面5＋ED2）**。19枚を脚本・台帳・制作対象から撤去。
+全14ENDと台詞・分岐は維持。選定理由は `docs/CG_PRUNING_2026-09-15.md`。

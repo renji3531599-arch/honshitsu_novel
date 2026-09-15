@@ -1,6 +1,5 @@
-// 自動生成: tools/map_assets.py によるアセットマニフェスト（※2026-09-15(2): CG6枚降板を手動反映。map_assets.py は凍結のため再実行しない）
-// 実画像は game/assets/img/（背景24枚＋立ち絵78枚を収録。CGは台帳のみで実ファイル未配置）。
-// 詳細対応表は ASSET_MAP.md を参照。
+// 現行台帳: data/assets.json と同期。2026-09-15(3): CG7枚（名場面5＋ED2）。
+// tools/map_assets.py は旧スロット履歴のため凍結。再実行しない。
 window.ASSET_MANIFEST = {
   "bg": {
     "BG01": {
@@ -675,50 +674,15 @@ window.ASSET_MANIFEST = {
       "desc": "三重／勝也　地図筒から古写真がこぼれ落ちる瞬間",
       "slot": 131
     },
-    "cg_mado_ushiro_miteteta": {
-      "file": "cg_mado_ushiro_miteteta.png",
-      "desc": "砂糖／三重　窓を背にした二人の構図",
-      "slot": 136
-    },
-    "cg_tsukue_kakomi_daiji": {
-      "file": "cg_tsukue_kakomi_daiji.png",
-      "desc": "零／両馬／三重　机を囲み「大事だと思うから」と零が",
-      "slot": 138
-    },
-    "cg_butsudan_narabu_futari": {
-      "file": "cg_butsudan_narabu_futari.png",
-      "desc": "両馬／三重　仏壇の前で並んで座る",
-      "slot": 142
-    },
-    "cg_yoru_chizu_tsukuri": {
-      "file": "cg_yoru_chizu_tsukuri.png",
-      "desc": "全員集合　机を寄せ合い地図を作る俯瞰構図",
-      "slot": 149
-    },
     "cg_omoide_chikeizu_kansei": {
       "file": "cg_omoide_chikeizu_kansei.png",
       "desc": "「思い出の地形図」完成図　画面いっぱいの作品アートワーク",
       "slot": 151
     },
-    "cg_yuugata_madobe_katsuya": {
-      "file": "cg_yuugata_madobe_katsuya.png",
-      "desc": "勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る",
-      "slot": 152
-    },
     "cg_yama_ue_hajimete_chizu": {
       "file": "cg_yama_ue_hajimete_chizu.png",
       "desc": "若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調)",
       "slot": 156
-    },
-    "cg_fuhou_kageboushi": {
-      "file": "cg_fuhou_kageboushi.png",
-      "desc": "勝也(単独)　訃報を知った瞬間(シルエットのみ)",
-      "slot": 158
-    },
-    "cg_seito_wo_miwatasu": {
-      "file": "cg_seito_wo_miwatasu.png",
-      "desc": "全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図",
-      "slot": 160
     },
     "cg_hareyaka_na_emi": {
       "file": "cg_hareyaka_na_emi.png",
@@ -736,66 +700,6 @@ window.ASSET_MANIFEST = {
       "file": "cg_end_true.png",
       "desc": "TRUE END「地面は、忘れない。」数年後の教室とアルバムのモンタージュ",
       "slot": 168
-    },
-    "cg_end_mie": {
-      "file": "cg_end_mie.png",
-      "desc": "GOOD END・三重編　教壇に立つ練習をする三重",
-      "slot": 169
-    },
-    "cg_end_satou": {
-      "file": "cg_end_satou.png",
-      "desc": "GOOD END・砂糖編　フィールドで堂々と空を見上げる砂糖",
-      "slot": 170
-    },
-    "cg_end_rei": {
-      "file": "cg_end_rei.png",
-      "desc": "GOOD END・零編　研究室で微笑む零",
-      "slot": 171
-    },
-    "cg_end_terachi": {
-      "file": "cg_end_terachi.png",
-      "desc": "GOOD END・寺地編　紙束が増えた机で配信を続ける寺地",
-      "slot": 172
-    },
-    "cg_end_ryoma": {
-      "file": "cg_end_ryoma.png",
-      "desc": "GOOD END・両馬編　祖父の墓前で笑って報告する両馬",
-      "slot": 173
-    },
-    "cg_end_izaki_izumi": {
-      "file": "cg_end_izaki_izumi.png",
-      "desc": "GOOD END・伊崎＋伊豆見編　別々の道を並んで歩く二人",
-      "slot": 174
-    },
-    "cg_end_meshino": {
-      "file": "cg_end_meshino.png",
-      "desc": "GOOD END・召野編　教壇/留学を思わせる一枚",
-      "slot": 175
-    },
-    "cg_end_kuraishi": {
-      "file": "cg_end_kuraishi.png",
-      "desc": "GOOD END・倉石編　後輩に「年鑑」を託す倉石",
-      "slot": 176
-    },
-    "cg_end_minamitou": {
-      "file": "cg_end_minamitou.png",
-      "desc": "GOOD END・南棟編　櫻と内藤、三峰を交えた穏やかな一枚",
-      "slot": 177
-    },
-    "cg_end_normal": {
-      "file": "cg_end_normal.png",
-      "desc": "NORMAL END　桜の下、いつも通りの日常が続く",
-      "slot": 178
-    },
-    "cg_end_bittersweet": {
-      "file": "cg_end_bittersweet.png",
-      "desc": "BITTERSWEET END　小さくまとまったサプライズ、それでも笑い合う",
-      "slot": 179
-    },
-    "cg_end_comedy": {
-      "file": "cg_end_comedy.png",
-      "desc": "COMEDY SECRET END　勝也が「……本質かもな」",
-      "slot": 180
     },
     "cg_end_bonus": {
       "file": "cg_end_bonus.png",
