@@ -153,7 +153,8 @@ export function parseScript(text, file, ctx = {}) {
         }
         case 'chr': {
           if (!arg || arg === 'clear') push({ t: 'chr', clear: true }, lineNo);
-          else if (arg[0] === '-') push({ t: 'chr', del: arg.slice(1).split(',').map(x => x.trim()) }, lineNo);
+          // 例: @chr -mie / @chr -izaki,-ryoma（各項目の先頭 '-' は個別に落とす）
+          else if (arg[0] === '-') push({ t: 'chr', del: arg.split(',').map(x => x.trim().replace(/^-/, '')).filter(Boolean) }, lineNo);
           else {
             const set = {};
             arg.split(',').forEach(p => {
