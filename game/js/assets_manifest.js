@@ -1,5 +1,5 @@
 // 自動生成: tools/map_assets.py によるアセットマニフェスト
-// 実画像は game/assets/img/（2026-09-12時点で背景24枚のみ。他は台帳のみで実ファイル未配置）。
+// 実画像は game/assets/img/（背景24枚＋立ち絵78枚を収録。CGは台帳のみで実ファイル未配置）。
 // 詳細対応表は ASSET_MAP.md を参照。
 window.ASSET_MANIFEST = {
   "bg": {

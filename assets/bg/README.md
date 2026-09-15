@@ -326,7 +326,7 @@
 1. **ファイル名は「台帳ID + 拡張子」**（例 `bg_okujou.png`）。それを `assets/bg/` に上書き／新規配置
 2. 台帳の `placeholder` を `false` に → SVG補完（`backdropSVG`）が外れて実画像になる
    （背景25枚は**既に全て `placeholder: false`**＝上書きするだけで反映されます）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v8`）を上げる
+3. `sw.js` の `CACHE`（現在 `honshitsu-v9`）を上げる
 4. 白背景素材のまま使いたいときだけ CONFIG「画像合成」= multiply（**既定は normal**。multiply は `#stage[data-blend="multiply"]` を付けたときだけ立ち絵に掛かる）
 5. `node tools/sync_placeholder.mjs --check` で寸法・容量・台帳のズレを確認
 

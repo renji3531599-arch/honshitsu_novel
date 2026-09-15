@@ -15,14 +15,14 @@
 | 検証ツール | `tools/vncheck.mjs` ＋ `tools/smoke.mjs` | `tools/check_script.cjs` ＋ `tools/playthrough_test.cjs` ＋ `tools/save_test.cjs` |
 | 固有ドキュメント | `docs/SCRIPT_SPEC.md` ／ `docs/ART_SPEC.md` ／ `docs/ASSET_MANIFEST.md` | `ASSET_MAP.md` |
 
-**共通事項**: **背景は両版とも実画像を収録済み**（版A 25枚／版B 24枚）。
+**共通事項**: **背景と立ち絵は両版とも実画像を収録済み**（版A 背景25枚＋立ち絵78枚／版B 背景24枚＋立ち絵78枚）。
 立ち絵・CGの白紙プレースホルダ（`white_XXX.png` 改め計512枚）は **2026-09-12 に全削除**しました ――
 名前とスロットは台帳（版A `data/assets.json`／版B `ASSET_MAP.md`・`game/js/assets_manifest.js`）に
-残してあるので、**実素材は「台帳ID + 拡張子」のファイル名で新規配置し、版A では台帳の `placeholder` を
-`false` にすると差し替わります**（版B はファイルを置くだけ）。
+残してあり、**立ち絵78枚は実素材を適用済み**です。今後の素材は「台帳ID + 拡張子」のファイル名で配置し、
+版A では台帳の `placeholder` を `false` にすると差し替わります（版B はファイルを置くだけ）。
 寸法・セーフエリア・形式は **`docs/ART_SPEC.md`**、立ち絵78枚のファイル名一覧は **`docs/CHR_REPLACE_LIST.md`**。
 まとめてやるなら `node tools/sync_placeholder.mjs --bump`（台帳反映＋`sw.js` の CACHE 上げ）。
-未配置のあいだは両版とも等高線背景・シルエット立ち絵等の手続き生成で舞台として成立します。
+未配置のCGが残るあいだも、両版とも暗色ベタやシルエット等のフォールバックで舞台として成立します。
 同じ日に **UI画像20枚（ui01〜ui20）も両版とも撤去**しました（画面UIは全てCSS/SVG描画のため）。
 経緯は `docs/UI_CG_2026-09-12.md`。
 
@@ -72,8 +72,8 @@ python3 -m http.server 8000        # 任意の静的サーバーで可（file://
 
 ## 3. 画像について（重要）
 
-`assets/` には**背景25枚の実画像**だけが入っている。立ち絵105・CG32は**名前だけ台帳に登録**してあり、
-実ファイルは未配置（白紙プレースホルダ256枚は2026-09-12に削除。未配置でも支障なく動く）。
+`assets/` には**背景25枚と立ち絵78枚の実画像**が入っている。CG32枚は**名前だけ台帳に登録**してあり、
+実ファイルは未配置（白紙プレースホルダ256枚は2026-09-12に削除）。
 エンジン側の作法：
 
 * 白紙プレースホルダのあいだは `js/visual.js` がその場手続き生成したSVG（等高線背景／シルエット立ち絵）を
@@ -218,13 +218,13 @@ game/
 │   ├── characters.js     キャラ定義＋✝本質✝辞典データ
 │   ├── assets_manifest.js 自動生成（tools/map_assets.py。※現在は data/assets.json と同じ新名に手動同期済み）
 │   └── script_0*_*.js    本編スクリプト（企画書§10〜§11を全台詞実装）
-└── assets/img/           背景の実画像24枚のみ（白紙プレースホルダ256枚は2026-09-12削除。他は台帳のみ）
+└── assets/img/           背景24枚＋立ち絵78枚の実画像（白紙プレースホルダ256枚は2026-09-12削除。CGは台帳のみ）
 tools/
 ├── map_assets.py         仮画像→アセット名リネーム（**2026-09-13 凍結・--force 必須**。実行すると整理前に戻る）
 ├── check_script.cjs      整合性チェック（参照・遷移・Flagの静的検証）
 ├── playthrough_test.cjs  jsdomで実プレイ（TRUE/BITTERSWEET/COMEDY SECRET到達を自動検証）
 └── save_test.cjs         セーブ/ロード復元・オートセーブ・BONUS解放の自動検証
-ASSET_MAP.md              アセット名・スロットの対応表（版B。実ファイルは背景24枚のみ、白紙/UI/予備は削除済みと表示）
+ASSET_MAP.md              アセット名・スロットの対応表（版B。背景24枚＋立ち絵78枚を収録、CGは台帳のみ）
 ```
 
 ## 検証（版B）

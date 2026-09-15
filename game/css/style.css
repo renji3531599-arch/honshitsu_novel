@@ -76,7 +76,9 @@ body { font-family: var(--font-goth); color: var(--ink); }
 .sprite.speaking { filter: brightness(1.02) saturate(1); transform: translateY(-4px); }
 .sprite .ph {
   position: absolute; inset: 0; border-radius: 150px 150px 12px 12px / 220px 220px 10px 10px;
-  background-size: cover; background-position: center; background-blend-mode: multiply;
+  /* 背景画像は立ち絵の縦全体を見せる。横長キャンバスは従来どおり左右をトリミングし、
+     透過背景を切り抜いた新規素材は縦 fit で頭や足が欠けないようにする。 */
+  background-size: auto 100%; background-position: center bottom; background-repeat: no-repeat; background-blend-mode: multiply;
   box-shadow: 0 14px 34px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.14);
 }
 .sprite .ph::after {

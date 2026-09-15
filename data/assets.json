@@ -1,5 +1,5 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。残り27差分はシルエット補完のまま。sw.js CACHE → v8。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。 2026-09-15: 残り27枚（rei5/izaki4/izumi4/meshino4/kuraishi5/futami4/inaba1）も台帳正名へ改名して配置し、78差分すべてを実画像化。版Bの game/assets/img/ にも78枚を同期。sw.js CACHE → v9。",
  "engine_limit": 300,
  "assigned": 135,
  "buffer": 0,
@@ -642,7 +642,7 @@
    "desc": "立ち絵差分 数理零／通常（涼しい顔）",
    "meta": "rei",
    "source": "image3/white_070.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_rei_02_hohoemi",
@@ -652,7 +652,7 @@
    "desc": "立ち絵差分 数理零／微笑",
    "meta": "rei",
    "source": "image3/white_071.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_rei_04_odoroki",
@@ -662,7 +662,7 @@
    "desc": "立ち絵差分 数理零／驚き",
    "meta": "rei",
    "source": "image1/white_073.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_rei_05_data_shinken",
@@ -672,7 +672,7 @@
    "desc": "立ち絵差分 数理零／真剣（データと向き合う）",
    "meta": "rei",
    "source": "image3/white_074.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_rei_07_kotoba_erabu",
@@ -682,7 +682,7 @@
    "desc": "立ち絵差分 数理零／言葉を選ぶ顔",
    "meta": "rei",
    "source": "image1/white_076.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izaki_01_tsuujou",
@@ -692,7 +692,7 @@
    "desc": "立ち絵差分 伊崎／通常",
    "meta": "izaki",
    "source": "image3/white_078.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izaki_02_egao",
@@ -702,7 +702,7 @@
    "desc": "立ち絵差分 伊崎／笑顔",
    "meta": "izaki",
    "source": "image2/white_079.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izaki_04_shikiri",
@@ -712,7 +712,7 @@
    "desc": "立ち絵差分 伊崎／真剣（仕切る顔）",
    "meta": "izaki",
    "source": "image1/white_081.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izaki_06_shimijimi_hohoemi",
@@ -722,7 +722,7 @@
    "desc": "立ち絵差分 伊崎／しみじみとした微笑み",
    "meta": "izaki",
    "source": "image1/white_083.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izumi_02_egao",
@@ -732,7 +732,7 @@
    "desc": "立ち絵差分 伊豆見／笑顔",
    "meta": "izumi",
    "source": "image2/white_085.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izumi_03_kinchou",
@@ -742,7 +742,7 @@
    "desc": "立ち絵差分 伊豆見／緊張",
    "meta": "izumi",
    "source": "image2/white_086.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izumi_04_ketsui",
@@ -752,7 +752,7 @@
    "desc": "立ち絵差分 伊豆見／決意",
    "meta": "izumi",
    "source": "image1/white_087.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_izumi_06_hokorashige",
@@ -762,7 +762,7 @@
    "desc": "立ち絵差分 伊豆見／誇らしげ",
    "meta": "izumi",
    "source": "image3/white_089.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_meshino_01_tsuujou",
@@ -772,7 +772,7 @@
    "desc": "立ち絵差分 召野カイト／通常",
    "meta": "meshino",
    "source": "image3/white_090.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_meshino_04_shinken",
@@ -782,7 +782,7 @@
    "desc": "立ち絵差分 召野カイト／真剣",
    "meta": "meshino",
    "source": "image1/white_093.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_meshino_05_eigo_doya",
@@ -792,7 +792,7 @@
    "desc": "立ち絵差分 召野カイト／英語ドヤ顔",
    "meta": "meshino",
    "source": "image3/white_094.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_meshino_06_shinmiri",
@@ -802,7 +802,7 @@
    "desc": "立ち絵差分 召野カイト／しんみり",
    "meta": "meshino",
    "source": "image3/white_095.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_kuraishi_01_nekkyou",
@@ -812,7 +812,7 @@
    "desc": "立ち絵差分 倉石暁／通常（熱狂）",
    "meta": "kuraishi",
    "source": "image2/white_096.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_kuraishi_02_kangeki",
@@ -822,7 +822,7 @@
    "desc": "立ち絵差分 倉石暁／感激",
    "meta": "kuraishi",
    "source": "image3/white_097.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_kuraishi_03_chousa_shinken",
@@ -832,7 +832,7 @@
    "desc": "立ち絵差分 倉石暁／真剣（調査中）",
    "meta": "kuraishi",
    "source": "image2/white_098.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_kuraishi_05_hokorashige",
@@ -842,7 +842,7 @@
    "desc": "立ち絵差分 倉石暁／誇らしげ",
    "meta": "kuraishi",
    "source": "image1/white_100.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_kuraishi_06_kotoba_ushinau",
@@ -852,7 +852,7 @@
    "desc": "立ち絵差分 倉石暁／言葉を失う顔",
    "meta": "kuraishi",
    "source": "image3/white_101.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_futami_01_tsuujou",
@@ -862,7 +862,7 @@
    "desc": "立ち絵差分 二見玲子／通常",
    "meta": "futami",
    "source": "image1/white_103.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_futami_03_shinpai",
@@ -872,7 +872,7 @@
    "desc": "立ち絵差分 二見玲子／心配顔",
    "meta": "futami",
    "source": "image1/white_105.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_futami_04_itazura",
@@ -882,7 +882,7 @@
    "desc": "立ち絵差分 二見玲子／いたずらっぽい笑み",
    "meta": "futami",
    "source": "image1/white_106.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_futami_05_yokogao",
@@ -892,7 +892,7 @@
    "desc": "立ち絵差分 二見玲子／しんみりした横顔",
    "meta": "futami",
    "source": "image3/white_107.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "chr_sakura_02_kenkyuusha",
@@ -1022,7 +1022,7 @@
    "desc": "立ち絵差分 稲葉悌二（回想専用）／古写真の中の柔らかい笑み",
    "meta": "inaba",
    "source": "image1/white_126.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "cg_chizutsutsu_kobore_shashin",

@@ -67,7 +67,7 @@ function loadImage(src, timeout = 20000) {
     im.decoding = "async";
     const to = setTimeout(() => resolve(false), timeout);
     im.onload = () => { clearTimeout(to); im.decode ? im.decode().then(() => resolve(true), () => resolve(true)) : resolve(true); };
-    // 2026-09-12: 白紙プレースホルダ削除後、cg/chr は実ファイルが無い（台帳に名前だけ）。
+    // 未配置のCGなどの読み込み失敗は想定内（立ち絵78枚は収録済み）。
     // 失敗は想定内なので静かにスキップ（まとめ報告は preloadAll で1行だけ出す）。
     im.onerror = () => { clearTimeout(to); resolve(false); };
     im.src = src;
@@ -91,9 +91,8 @@ async function preloadAll() {
     }
   };
   await Promise.all(Array.from({ length: Math.min(6, total || 1) }, worker));
-  // 2026-09-12: cg/chr は台帳に名前だけ登録し実ファイルを削除してあるので、
-  // 読込失敗は想定内（背景24枚だけが実画像）。1行にまとめて報告する。
-  if (failed && txt) txt.textContent = `準備完了（背景 ${total - failed}/${total} を先読み。CG・立ち絵は未配置）`;
+  // 未配置のCGは読み込み失敗が想定内。1行にまとめて報告する。
+  if (failed && txt) txt.textContent = `準備完了（画像 ${total - failed}/${total} を先読み。一部のCGは未配置）`;
   else if (txt) txt.textContent = "準備完了";
 }
 
