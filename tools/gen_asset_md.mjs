@@ -513,9 +513,13 @@ function chrDoc() {
     byChar.get(slug).push(a);
   }
   const usedSlots = [...chrUsage.keys()];
+  const realCount = list.filter(a => !a.placeholder).length;
+  const chrStatus = realCount === list.length
+    ? `実ファイル${realCount}枚を収録済み。`
+    : `実ファイル${realCount}枚・未配置${list.length - realCount}枚。`;
   let md = head(`CHR — 立ち絵（${list.length}差分／${byChar.size}キャラ）`,
     ['`assets/chr/` の立ち絵差分。キャラごとに**どの表情が本編で何回出るか**を1枚ずつ書く。',
-     '実ファイルは未配置（白紙プレースホルダは2026-09-12に削除）。画面に出ているのは `js/visual.js` の `figureSVG()` シルエット補完。'],
+     `${chrStatus} 未配置のスロットは \`js/visual.js\` の \`figureSVG()\` シルエットで補完する。`],
     list.length);
   md += `## 先にまとめ
 
@@ -641,6 +645,7 @@ ${list.map((a, i) => {
 /* ---- assets/README.md ---- */
 function topDoc() {
   const chrCount = ASSETS.filter(a=>a.cat==='chr').length;
+  const chrReal = ASSETS.filter(a=>a.cat==='chr' && !a.placeholder).length;
   const cats = [
     ['bg', '背景', '1920×1080（16:9）／cover', '等高線SVG（`backdropSVG`）'],
     ['cg', '名場面CG・ENDカード', '1920×1080（16:9）／cover・kb で最大1.11倍', '―（暗色ベタのみ）'],
@@ -648,8 +653,8 @@ function topDoc() {
   ];
   let md = `# Assets — 画像素材总台帳
 
-**背景（\`assets/bg/\` 25枚）だけが実画像**。CG・立ち絵は**台帳にスロット名だけ**登録してあり、
-実ファイルは未配置（2026-09-12 に白紙プレースホルダ256枚を削除） ―― 画面に実際に描いているのは \`js/visual.js\` の手続き生成SVGです。
+**背景（\`assets/bg/\` 25枚）と立ち絵（${chrReal}/${chrCount}枚）が実画像**。CGは**台帳にスロット名だけ**登録してあり、
+未配置のCGは暗色ベタ、未配置スロットの立ち絵は \`js/visual.js\` の手続き生成SVGで補完します。
 **「何を・どこに・どう置けば効くか」を1素材ずつ書いたREADMEが、下の3枚**。
 （UI画像は2026-09-12に撤去 ―― ロゴ・枠・アイコンまで含め、UIは全てエンジンのCSS/SVG描画で代替済み。）
 

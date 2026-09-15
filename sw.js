@@ -4,8 +4,9 @@
       honshitsu-v6: 2026-09-12(3) 本編CGの番号スロット廃止（実名化）に伴う台帳・脚本の更新。
       honshitsu-v7: 2026-09-13 素材の命名監査21件（BG4枚はファイル名変更）＋版Bの表情参照修復。
                     旧名のキャッシュを払い落とすため。
-      honshitsu-v8: 2026-09-13 実素材の同期（tools/sync_placeholder.mjs --bump）。 */
-const CACHE = 'honshitsu-v8';
+      honshitsu-v8: 2026-09-13 実素材の同期（tools/sync_placeholder.mjs --bump）。
+      honshitsu-v9: 2026-09-15 実素材の同期（tools/sync_placeholder.mjs --bump）。 */
+const CACHE = 'honshitsu-v9';
 const CORE = [
   './',
   './index.html',

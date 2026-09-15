@@ -550,7 +550,7 @@
 2. `data/assets.json` のその行の `"placeholder": true` → `false`
    ― **1と2は必ずセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れます
    （まとめてやるなら `node tools/sync_placeholder.mjs` が実在ファイルを検出して自動で倒します）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v8`）を上げる ← **忘れると古いキャッシュを返し続ける**
+3. `sw.js` の `CACHE`（現在 `honshitsu-v9`）を上げる ← **忘れると古いキャッシュを返し続ける**
    （`node tools/sync_placeholder.mjs --bump` で自動）
 4. 差し替えた瞬間、エンジン側は `backdropSVG`／合成の重い方を自動で切る（`#stage[data-art="real"]`）
 5. `node tools/sync_placeholder.mjs --check` ＋ `npm test`（vncheck / smoke）で崩れを確認
