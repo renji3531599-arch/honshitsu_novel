@@ -6,6 +6,7 @@
 2026-09-13: 未使用立ち絵27枚を完全削除。残り78差分に整理。旧名→新名を統一（`data/assets.json`基準）。
 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語）。旧名→新名は `docs/ASSET_MANIFEST.md`「命名修正」。
 実素材は対応表のファイル名で `game/assets/img/` に新規配置すればゲームに反映される（版A `assets/` も**同じ名前**）。2026-09-15現在、立ち絵78枚を両版に収録済み。
+2026-09-15(2): 効果が薄く重複するCG 6枚を降板・台帳削除（名場面CGは18→12枚、ギャラリーは26枚）。理由は `docs/ASSET_MANIFEST.md`「2026-09-15 CG追加降板」。
 
 > ※ 本ファイルの生成スクリプト `tools/map_assets.py` は 2026-09-13 に凍結（`--force` 必須）。
 > 正本は台帳 `data/assets.json`、版A 側ドキュメントは `node tools/gen_asset_md.mjs` で生成すること。
@@ -161,20 +162,14 @@
 |  | white_131.png | `cg_chizutsutsu_kobore_shashin.png` | 三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。 |
 |  | white_136.png | `cg_mado_ushiro_miteteta.png` | 砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。 |
 |  | white_138.png | `cg_tsukue_kakomi_daiji.png` | 零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。 |
-|  | white_141.png | `cg_butsudan_seiza_sugata.png` | 両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。 |
 |  | white_142.png | `cg_butsudan_narabu_futari.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 |
-|  | white_148.png | `cg_naitou_kao_age.png` | 内藤（単独）／BG18。伏し目から顔を上げる一瞬。 |
 |  | white_149.png | `cg_yoru_chizu_tsukuri.png` | 全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。 |
 |  | white_151.png | `cg_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図。画面いっぱいの作品アート。 |
 |  | white_152.png | `cg_yuugata_madobe_katsuya.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 |
-|  | white_155.png | `cg_nagai_chinmoku.png` | 勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。 |
 |  | white_156.png | `cg_yama_ue_hajimete_chizu.png` | 若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。 |
-|  | white_157.png | `cg_wakaki_utsumuki.png` | 若き勝也（回想・単独）／BG22。生意気を言った日、俯く。 |
 |  | white_158.png | `cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 |
-|  | white_159.png | `cg_mado_gawa_no_houkoku.png` | 勝也（単独）／BG13。「窓の外を見るたび、報告していた」。 |
-|  | white_160.png | `cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG13。生徒たちを見渡す広い構図。 |
-|  | white_162.png | `cg_hitorizutsu_no_kotoba.png` | 全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。 |
-|  | white_163.png | `cg_hareyaka_na_emi.png` | 勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。 |
+|  | white_160.png | `cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。 |
+|  | white_163.png | `cg_hareyaka_na_emi.png` | 勝也（単独）／BG03（夕方の教室）。締めの台詞、晴れやかな笑み（表情⑩）。 |
 |  | white_164.png | `cg_sotsugyou_sakurafubuki.png` | 全員集合／BG17。卒業式、桜吹雪。 |
 | cg01 | white_130.png | ―（降板・削除済み） |  |
 | cg03 | white_132.png | ―（降板・削除済み） |  |
@@ -196,6 +191,12 @@
 | cg36 | white_165.png | ―（降板・削除済み） |  |
 | cg37 | white_166.png | ―（降板・削除済み） |  |
 | cg38 | white_167.png | ―（降板・削除済み） |  |
+| ―（旧`cg_butsudan_seiza_sugata`） | white_141.png | ―（2026-09-15 降板・削除） | 直後の `cg_butsudan_narabu_futari` と2連発になる準備絵 |
+| ―（旧`cg_naitou_kao_age`） | white_148.png | ―（2026-09-15 降板・削除） | 一瞬の表情アップは立ち絵（`naitou=05`）で受ける |
+| ―（旧`cg_nagai_chinmoku`） | white_155.png | ―（2026-09-15 降板・削除） | 対話中の沈黙は立ち絵で。クライマックス9→5枚 |
+| ―（旧`cg_wakaki_utsumuki`） | white_157.png | ―（2026-09-15 降板・削除） | 回想は「山」と「シルエット」の2枚に |
+| ―（旧`cg_mado_gawa_no_houkoku`） | white_159.png | ―（2026-09-15 降板・削除） | `cg_yuugata_madobe_katsuya` と構図がほぼ同一 |
+| ―（旧`cg_hitorizutsu_no_kotoba`） | white_162.png | ―（2026-09-15 降板・削除） | 隣接シーンの `cg_seito_wo_miwatasu` と同系統の集合構図 |
 
 ## エンディング専用CG
 
@@ -226,5 +227,5 @@ UI画像20枚はエンジンのCSS/SVG描画で全代替のため、実ファイ
 
 ---
 
-- 合計: 135スロット (背景24＝実画像 / 立ち絵78＝台帳のみ / 名場面CG 18＝現行 / ED用CG 14＝台帳のみ / UI 20＝撤去 / 未使用削除27)
+- 合計: 129スロット (背景24＝実画像 / 立ち絵78＝実画像 / 名場面CG 12＝現行・台帳のみ / ED用CG 14＝台帳のみ / UI 20＝撤去 / 未使用削除27 / 2026-09-15 追加降板CG 6)
 - 2026-09-13: 未使用立ち絵27枚を完全削除。旧名→新名統一（例: `chr_katsuya_02_bishou.png` → `chr_katsuya_02_hohoemi.png`）。台帳は `data/assets.json` が正本。

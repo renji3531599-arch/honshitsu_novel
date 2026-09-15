@@ -5,8 +5,9 @@
       honshitsu-v7: 2026-09-13 素材の命名監査21件（BG4枚はファイル名変更）＋版Bの表情参照修復。
                     旧名のキャッシュを払い落とすため。
       honshitsu-v8: 2026-09-13 実素材の同期（tools/sync_placeholder.mjs --bump）。
-      honshitsu-v9: 2026-09-15 実素材の同期（tools/sync_placeholder.mjs --bump）。 */
-const CACHE = 'honshitsu-v9';
+      honshitsu-v9: 2026-09-15 実素材の同期（tools/sync_placeholder.mjs --bump）。
+      honshitsu-v10: 2026-09-15(2) CG6枚の追加降板（台帳・脚本・版Bマニフェストの更新）に伴う払い落とし。 */
+const CACHE = 'honshitsu-v10';
 const CORE = [
   './',
   './index.html',

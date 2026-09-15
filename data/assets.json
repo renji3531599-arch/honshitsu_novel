@@ -1,7 +1,7 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。 2026-09-15: 残り27枚（rei5/izaki4/izumi4/meshino4/kuraishi5/futami4/inaba1）も台帳正名へ改名して配置し、78差分すべてを実画像化。版Bの game/assets/img/ にも78枚を同期。sw.js CACHE → v9。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。 2026-09-15: 残り27枚（rei5/izaki4/izumi4/meshino4/kuraishi5/futami4/inaba1）も台帳正名へ改名して配置し、78差分すべてを実画像化。版Bの game/assets/img/ にも78枚を同期。sw.js CACHE → v9。 2026-09-15(2): CGをさらに6枚降板・台帳から削除（cg_butsudan_seiza_sugata／cg_naitou_kao_age／cg_nagai_chinmoku／cg_mado_gawa_no_houkoku／cg_wakaki_utsumuki／cg_hitorizutsu_no_kotoba）。「1シーン1枚・類似構図の隣接禁止・手元アップと対話のみの場面は立ち絵」の基準（docs/CG_GUIDE.md 冒頭）による追加整理。CGは26枚（名場面12＋ED14）になり、クライマックスは9→5枚。経緯は docs/ASSET_MANIFEST.md「2026-09-15 CG追加降板」。sw.js CACHE → v10。",
  "engine_limit": 300,
- "assigned": 135,
+ "assigned": 129,
  "buffer": 0,
  "assets": [
   {
@@ -1055,16 +1055,6 @@
    "placeholder": true
   },
   {
-   "id": "cg_butsudan_seiza_sugata",
-   "cat": "cg",
-   "file": "assets/cg/cg_butsudan_seiza_sugata.png",
-   "label": "両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。",
-   "desc": "両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。",
-   "meta": "scene",
-   "source": "image1/white_141.png",
-   "placeholder": true
-  },
-  {
    "id": "cg_butsudan_narabu_futari",
    "cat": "cg",
    "file": "assets/cg/cg_butsudan_narabu_futari.png",
@@ -1072,16 +1062,6 @@
    "desc": "両馬／三重／BG19。祖父の口癖を話す生活感のある並席。",
    "meta": "scene",
    "source": "image1/white_142.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_naitou_kao_age",
-   "cat": "cg",
-   "file": "assets/cg/cg_naitou_kao_age.png",
-   "label": "内藤（単独）／BG18。伏し目から顔を上げる一瞬。",
-   "desc": "内藤（単独）／BG18。伏し目から顔を上げる一瞬。",
-   "meta": "scene",
-   "source": "image1/white_148.png",
    "placeholder": true
   },
   {
@@ -1115,16 +1095,6 @@
    "placeholder": true
   },
   {
-   "id": "cg_nagai_chinmoku",
-   "cat": "cg",
-   "file": "assets/cg/cg_nagai_chinmoku.png",
-   "label": "勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。",
-   "desc": "勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。",
-   "meta": "scene",
-   "source": "image2/white_155.png",
-   "placeholder": true
-  },
-  {
    "id": "cg_yama_ue_hajimete_chizu",
    "cat": "cg",
    "file": "assets/cg/cg_yama_ue_hajimete_chizu.png",
@@ -1132,16 +1102,6 @@
    "desc": "若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。",
    "meta": "scene",
    "source": "image2/white_156.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_wakaki_utsumuki",
-   "cat": "cg",
-   "file": "assets/cg/cg_wakaki_utsumuki.png",
-   "label": "若き勝也（回想・単独）／BG22。生意気を言った日、俯く。",
-   "desc": "若き勝也（回想・単独）／BG22。生意気を言った日、俯く。",
-   "meta": "scene",
-   "source": "image1/white_157.png",
    "placeholder": true
   },
   {
@@ -1155,41 +1115,21 @@
    "placeholder": true
   },
   {
-   "id": "cg_mado_gawa_no_houkoku",
-   "cat": "cg",
-   "file": "assets/cg/cg_mado_gawa_no_houkoku.png",
-   "label": "勝也（単独）／BG13。「窓の外を見るたび、報告していた」。",
-   "desc": "勝也（単独）／BG13。「窓の外を見るたび、報告していた」。",
-   "meta": "scene",
-   "source": "image2/white_159.png",
-   "placeholder": true
-  },
-  {
    "id": "cg_seito_wo_miwatasu",
    "cat": "cg",
    "file": "assets/cg/cg_seito_wo_miwatasu.png",
-   "label": "全員集合／勝也／BG13。生徒たちを見渡す広い構図。",
-   "desc": "全員集合／勝也／BG13。生徒たちを見渡す広い構図。",
+   "label": "全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。",
+   "desc": "全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。",
    "meta": "scene",
    "source": "image2/white_160.png",
-   "placeholder": true
-  },
-  {
-   "id": "cg_hitorizutsu_no_kotoba",
-   "cat": "cg",
-   "file": "assets/cg/cg_hitorizutsu_no_kotoba.png",
-   "label": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
-   "desc": "全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。",
-   "meta": "scene",
-   "source": "image3/white_162.png",
    "placeholder": true
   },
   {
    "id": "cg_hareyaka_na_emi",
    "cat": "cg",
    "file": "assets/cg/cg_hareyaka_na_emi.png",
-   "label": "勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。",
-   "desc": "勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。",
+   "label": "勝也（単独）／BG03（夕方の教室）。締めの台詞、晴れやかな笑み（表情⑩）。",
+   "desc": "勝也（単独）／BG03（夕方の教室）。締めの台詞、晴れやかな笑み（表情⑩）。",
    "meta": "scene",
    "source": "image2/white_163.png",
    "placeholder": true

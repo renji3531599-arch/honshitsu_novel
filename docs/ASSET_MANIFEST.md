@@ -5,9 +5,10 @@
 正式なスロット名へリネーム・配置した対応表です。
 
 > **2026-09-15 現在の実ファイル**: 背景25枚（`assets/bg/`）と立ち絵78枚（`assets/chr/`）が実画像として存在します。
-> CGは名場面18+ED14。UI20は撤去。立ち絵は台帳の `placeholder: false` まで反映済みです。
+> CGは名場面12+ED14の**26枚**（2026-09-15(2) に6枚を追加降板・台帳削除）。UI20は撤去。立ち絵は台帳の `placeholder: false` まで反映済みです。
 > CGの実素材は、下表の「差し替え先」の名前で新規配置すれば
 > `data/assets.json` の該当行 `placeholder` を `false` にした瞬間から本編に乗ります。
+> 生成プロンプト（添付する背景・立ち絵の指定つき）は `docs/CG_PROMPTS.md`。
 
 - 白紙実ファイルは2026-09-12に全削除しました。CGは**台帳に名前だけ**の状態で、
   立ち絵78枚は2026-09-15に実素材を収録済みです。
@@ -20,7 +21,7 @@
 |---|---|---|
 | 背景(BG) | 24 | 24 |
 | 立ち絵差分 | 113 | 78（未使用27削除後） |
-| 名場面CG | 38 | 18（降板20削除） |
+| 名場面CG | 38 | 12（降板20＋2026-09-15追加降板6を削除） |
 | ED専用CG | 14 | 14 |
 | UI／アイテム | 20 | 0（2026-09-12 撤去） |
 | 立ち絵差分（実ファイル） | 78 | 78（2026-09-15収録済み） |
@@ -135,19 +136,19 @@
 | 131 | `image?/white_131.png` | `assets/cg/cg_chizutsutsu_kobore_shashin.png` | 三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。 |
 | 136 | `image?/white_136.png` | `assets/cg/cg_mado_ushiro_miteteta.png` | 砂糖／三重／BG01・放課後。「見てた」と認める瞬間、窓を背に。 |
 | 138 | `image?/white_138.png` | `assets/cg/cg_tsukue_kakomi_daiji.png` | 零／両馬／三重／BG01。「面白いからじゃなくて、大事だと思うから」。 |
-| 141 | `image?/white_141.png` | `assets/cg/cg_butsudan_seiza_sugata.png` | 両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。 |
+| 141 | `image?/white_141.png` | ~~`assets/cg/cg_butsudan_seiza_sugata.png`~~ **2026-09-15 降板・削除** | 両馬（単独）／BG19。仏壇の前に正座する後ろ姿、線香の煙。 |
 | 142 | `image?/white_142.png` | `assets/cg/cg_butsudan_narabu_futari.png` | 両馬／三重／BG19。祖父の口癖を話す生活感のある並席。 |
-| 148 | `image?/white_148.png` | `assets/cg/cg_naitou_kao_age.png` | 内藤（単独）／BG18。伏し目から顔を上げる一瞬。 |
+| 148 | `image?/white_148.png` | ~~`assets/cg/cg_naitou_kao_age.png`~~ **2026-09-15 降板・削除** | 内藤（単独）／BG18。伏し目から顔を上げる一瞬。 |
 | 149 | `image?/white_149.png` | `assets/cg/cg_yoru_chizu_tsukuri.png` | 全員集合／BG04・夜。机を寄せ合い地図を作る俯瞰構図。 |
 | 151 | `image?/white_151.png` | `assets/cg/cg_omoide_chikeizu_kansei.png` | 「思い出の地形図」完成図。画面いっぱいの作品アート。 |
 | 152 | `image?/white_152.png` | `assets/cg/cg_yuugata_madobe_katsuya.png` | 勝也（単独・後ろ姿）／BG03。誰もいない教室の窓際。 |
-| 155 | `image?/white_155.png` | `assets/cg/cg_nagai_chinmoku.png` | 勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。 |
+| 155 | `image?/white_155.png` | ~~`assets/cg/cg_nagai_chinmoku.png`~~ **2026-09-15 降板・削除** | 勝也（単独）。いつもの五秒より長い沈黙、表情が見える角度。 |
 | 156 | `image?/white_156.png` | `assets/cg/cg_yama_ue_hajimete_chizu.png` | 若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。 |
-| 157 | `image?/white_157.png` | `assets/cg/cg_wakaki_utsumuki.png` | 若き勝也（回想・単独）／BG22。生意気を言った日、俯く。 |
+| 157 | `image?/white_157.png` | ~~`assets/cg/cg_wakaki_utsumuki.png`~~ **2026-09-15 降板・削除** | 若き勝也（回想・単独）／BG22。生意気を言った日、俯く。 |
 | 158 | `image?/white_158.png` | `assets/cg/cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 |
-| 159 | `image?/white_159.png` | `assets/cg/cg_mado_gawa_no_houkoku.png` | 勝也（単独）／BG13。「窓の外を見るたび、報告していた」。 |
+| 159 | `image?/white_159.png` | ~~`assets/cg/cg_mado_gawa_no_houkoku.png`~~ **2026-09-15 降板・削除** | 勝也（単独）／BG13。「窓の外を見るたび、報告していた」。 |
 | 160 | `image?/white_160.png` | `assets/cg/cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG13。生徒たちを見渡す広い構図。 |
-| 162 | `image?/white_162.png` | `assets/cg/cg_hitorizutsu_no_kotoba.png` | 全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。 |
+| 162 | `image?/white_162.png` | ~~`assets/cg/cg_hitorizutsu_no_kotoba.png`~~ **2026-09-15 降板・削除** | 全員集合／勝也／BG13。一人ずつの一言、涙をこらえる。 |
 | 163 | `image?/white_163.png` | `assets/cg/cg_hareyaka_na_emi.png` | 勝也（単独）／BG13。締めの台詞、晴れやかな笑み（表情⑩）。 |
 | 164 | `image?/white_164.png` | `assets/cg/cg_sotsugyou_sakurafubuki.png` | 全員集合／BG17。卒業式、桜吹雪。 |
 | 168 | `image?/white_168.png` | `assets/cg/cg_end_true.png` | TRUE END ―― 数年後の教室で地図を見せる勝也＋卒業アルバムのモンタージュ |
@@ -275,3 +276,30 @@
 - `tools/check_script.cjs` の範囲検査が**配列の長さ**基準（`1..length`）で、欠番を「範囲外」と誤検出していた（42件中27件がこれ）→ マニフェストに実在する `no` の集合で判定するように修正
 
 版A（`data/script/*.txt`）は `@chr slug=NN` が全て現存差分を指しており、変更不要（`node tools/vncheck.mjs` で確認済み）。
+
+### 2026-09-15 CG追加降板（6枚）― 「効かない場所のCG」を削除し 32→26枚へ
+
+`docs/CG_GUIDE.md` 冒頭の「CG を置く基準」をもう一段厳しく適用し、
+**明らかに効果的でない場所に出ている6枚**を脚本・台帳・版Bマニフェストから削除しました。
+実ファイルは元々未配置（台帳スロットのみ）だったので、消えたのはスロットと `@cg` 行だけです。
+
+| 降板したCG | 出ていた場所 | 降板理由（＝立ち絵で代替する根拠） |
+|---|---|---|
+| `cg_butsudan_seiza_sugata` | 両馬編 d1（正座して線香を上げる） | 直後の d2 `cg_butsudan_narabu_futari` と同じ部屋で2連発になる準備絵。基準3・7（密度）。仏壇の背景＋立ち絵（`ryoma=08/06`）で成立 |
+| `cg_naitou_kao_age` | 南棟編 e3（内藤が顔を上げる一瞬） | 「一瞬の表情アップ」は基準2で明記した立ち絵の仕事。脚本も直後に `naitou=05`（優しい目）を立てており重複 |
+| `cg_nagai_chinmoku` | クライマックス h2（五秒を超える沈黙） | 対話中の沈黙ビート。クライマックス9枚の密度を5枚へ整理（基準3・7）。`katsuya=03`（遠い目）で受ける |
+| `cg_mado_gawa_no_houkoku` | クライマックス h5（窓への報告を語る） | h1 `cg_yuugata_madobe_katsuya` と構図がほぼ同一（BG03・勝也ひとり・窓際）。基準7。語るだけなので立ち絵で受ける |
+| `cg_wakaki_utsumuki` | クライマックス h4（生意気を言った日、俯く） | h3→h4 で回想絵が3連発（yama_ue→wakaki→fuhou）。1シーン1枚（基準4）に絞り、回想は「山」と「シルエット」の2枚構成へ。間の芝居は `bg_daigaku_camp_kaisou`（褪色）で受ける |
+| `cg_hitorizutsu_no_kotoba` | クライマックス h7（一人ずつの一言） | 隣接シーン h6 `cg_seito_wo_miwatasu` と同系統の集合構図（BG03・全員）。基準7。朗読は寺地の立ち絵（`terachi=06/08`）で受ける |
+
+追従した箇所:
+
+- 脚本 `data/script/30_route_terachi_ryoma.txt`・`40_route_minamitou_meshino.txt`・`60_climax.txt`（`@cg`／`@cg off` 削除。h1 の `@cg off` 追加・h2 に `@chr katsuya=03` 追加）
+- 台帳 `data/assets.json`（6行削除・`assigned` 135→129・note 追記）
+- 版B `game/js/script_01_routes_abc.js`・`script_02_routes_cef.js`・`script_03_climax.js`（該当 `cg`／`cgoff` 削除。h4 に `cgoff`＋`BG22 flashback`、h5 に `BG03 evening`、h4 分岐前に `cgoff` を補い、回想→教室の戻りを明示）
+- 版B `game/js/assets_manifest.js`（6件削除）／`ASSET_MAP.md`（行削除・合計更新）
+- ギャラリーは台帳／マニフェスト駆動なので両版とも自動で26枚に縮小（回収分母も `collectible('cg')` = 26）
+- `sw.js` CACHE v9 → v10／自動生成ドキュメント一式を `node tools/gen_asset_md.mjs` で再生成／`docs/CG_PROMPTS.md` を26枚構成＋添付ファイル指定つきに改稿
+
+**セーブ互換**: 削除した6枚の回収記録が旧セーブに残っていても、`cgSeen()`／ギャラリーは
+現行台帳に存在するidだけを数えるため未回収ズレは起きません（版A `js/store.js`・版B `game/js/engine.js`）。

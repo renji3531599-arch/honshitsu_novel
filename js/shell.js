@@ -232,7 +232,7 @@ export class Shell {
     const ep = this.dom.titleProgress;
     ep.innerHTML = Object.entries(this.def.endings).map(([id, e]) =>
       `<i class="${m.endings[id] ? 'on' : ''}" title="${esc(e.tier)}">${esc(id === 'bonus' ? 'BONUS' : e.tier.split(' ')[0].replace('END', ''))}</i>`).join('')
-      + `<i title="回収CG">${this.cgSeen(m)}/${this.data.assets ? this.data.assets.collectible('cg').length : 32}</i>`
+      + `<i title="回収CG">${this.cgSeen(m)}/${this.data.assets ? this.data.assets.collectible('cg').length : 26}</i>`
       + `<i title="周回">RUN ${m.runs || 0}</i>`;
   }
   async titlePick(id) {
@@ -937,7 +937,7 @@ ${ends}
         <span>今回の心Point <b>${j.heart}</b></span>
         <span>主要Flag <b>${j.flagcount}</b> / ${j.maj}</span>
         <span>周回 <b>${m.runs || 1}</b></span>
-        <span>CG <b>${this.cgSeen(m)}</b> / ${this.data.assets ? this.data.assets.collectible('cg').length : 32}</span>
+        <span>CG <b>${this.cgSeen(m)}</b> / ${this.data.assets ? this.data.assets.collectible('cg').length : 26}</span>
       </div>
       <p class="hint">条件を満たすと、収束章のあと自動で振り分けられます。到達済みは金色、未到達は半透明。クリックでCGプレビュー（到達済みのみ）。</p>`;
     wrap.appendChild(head);

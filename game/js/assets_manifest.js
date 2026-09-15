@@ -1,4 +1,4 @@
-// 自動生成: tools/map_assets.py によるアセットマニフェスト
+// 自動生成: tools/map_assets.py によるアセットマニフェスト（※2026-09-15(2): CG6枚降板を手動反映。map_assets.py は凍結のため再実行しない）
 // 実画像は game/assets/img/（背景24枚＋立ち絵78枚を収録。CGは台帳のみで実ファイル未配置）。
 // 詳細対応表は ASSET_MAP.md を参照。
 window.ASSET_MANIFEST = {
@@ -667,7 +667,7 @@ window.ASSET_MANIFEST = {
           "slot": 61
         }
       ]
-    },
+    }
   },
   "cg": {
     "cg_chizutsutsu_kobore_shashin": {
@@ -685,20 +685,10 @@ window.ASSET_MANIFEST = {
       "desc": "零／両馬／三重　机を囲み「大事だと思うから」と零が",
       "slot": 138
     },
-    "cg_butsudan_seiza_sugata": {
-      "file": "cg_butsudan_seiza_sugata.png",
-      "desc": "両馬(単独)　祖父の遺影の前で正座する後ろ姿",
-      "slot": 141
-    },
     "cg_butsudan_narabu_futari": {
       "file": "cg_butsudan_narabu_futari.png",
       "desc": "両馬／三重　仏壇の前で並んで座る",
       "slot": 142
-    },
-    "cg_naitou_kao_age": {
-      "file": "cg_naitou_kao_age.png",
-      "desc": "内藤(単独)　「本質配信、ずっと見てます」と顔を上げる",
-      "slot": 148
     },
     "cg_yoru_chizu_tsukuri": {
       "file": "cg_yoru_chizu_tsukuri.png",
@@ -715,40 +705,20 @@ window.ASSET_MANIFEST = {
       "desc": "勝也(後ろ姿)　誰もいない夕方の教室で窓の外を見る",
       "slot": 152
     },
-    "cg_nagai_chinmoku": {
-      "file": "cg_nagai_chinmoku.png",
-      "desc": "勝也(単独)　いつもの5秒より長い沈黙",
-      "slot": 155
-    },
     "cg_yama_ue_hajimete_chizu": {
       "file": "cg_yama_ue_hajimete_chizu.png",
       "desc": "若き勝也／稲葉(回想)　山の上、初めての地形図(褪色調)",
       "slot": 156
-    },
-    "cg_wakaki_utsumuki": {
-      "file": "cg_wakaki_utsumuki.png",
-      "desc": "若き勝也(回想・単独)　生意気な口を利いた日、俯く",
-      "slot": 157
     },
     "cg_fuhou_kageboushi": {
       "file": "cg_fuhou_kageboushi.png",
       "desc": "勝也(単独)　訃報を知った瞬間(シルエットのみ)",
       "slot": 158
     },
-    "cg_mado_gawa_no_houkoku": {
-      "file": "cg_mado_gawa_no_houkoku.png",
-      "desc": "勝也(単独)　「窓の外を見るたび、報告していた」と語る",
-      "slot": 159
-    },
     "cg_seito_wo_miwatasu": {
       "file": "cg_seito_wo_miwatasu.png",
       "desc": "全員／勝也　✝本質✝と稲葉の教えが重なる瞬間、広い構図",
       "slot": 160
-    },
-    "cg_hitorizutsu_no_kotoba": {
-      "file": "cg_hitorizutsu_no_kotoba.png",
-      "desc": "全員／勝也　一人ずつの一言、勝也が涙をこらえる",
-      "slot": 162
     },
     "cg_hareyaka_na_emi": {
       "file": "cg_hareyaka_na_emi.png",

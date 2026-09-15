@@ -86,7 +86,7 @@
   - 砂糖編 ― 窓の外の続き / シーン `a1`「放課後、教室に残る砂糖」 ― `20_route_satou_rei.txt:10`
   - 砂糖編 ― 窓の外の続き / シーン `a1_hara`「気を遣った方」 ― `20_route_satou_rei.txt:39`
   - …ほか 11 箇所
-- **この背景まわりのCG**: `cg_mado_ushiro_miteteta` / `cg_yuugata_madobe_katsuya` / `cg_nagai_chinmoku` / `cg_mado_gawa_no_houkoku` / `cg_seito_wo_miwatasu` / `cg_hitorizutsu_no_kotoba` / `cg_hareyaka_na_emi` / `cg_end_normal` / `cg_end_bittersweet`
+- **この背景まわりのCG**: `cg_mado_ushiro_miteteta` / `cg_yuugata_madobe_katsuya` / `cg_seito_wo_miwatasu` / `cg_hareyaka_na_emi` / `cg_end_normal` / `cg_end_bittersweet`
 
 ### `BG04` ― 北棟三年B組教室・夜（サプライズ準備）
 
@@ -131,8 +131,8 @@
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
-  - 召野＋倉石編 ― 調査と応援 / シーン `f1`「職員室前」 ― `40_route_minamitou_meshino.txt:84`
-  - 召野＋倉石編 ― 調査と応援 / シーン `f1_ossan`「食い下がった方」 ― `40_route_minamitou_meshino.txt:102`
+  - 召野＋倉石編 ― 調査と応援 / シーン `f1`「職員室前」 ― `40_route_minamitou_meshino.txt:85`
+  - 召野＋倉石編 ― 調査と応援 / シーン `f1_ossan`「食い下がった方」 ― `40_route_minamitou_meshino.txt:103`
 
 ### `BG08` ― 地図保管庫
 
@@ -163,7 +163,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
   - 差出人不明の写真 / シーン `c005b_sotto`「一人で抱える」 ― `10_chapter1.txt:85`
-  - 召野＋倉石編 ― 調査と応援 / シーン `f3`「図書室、書庫」 ― `40_route_minamitou_meshino.txt:128`
+  - 召野＋倉石編 ― 調査と応援 / シーン `f3`「図書室、書庫」 ― `40_route_minamitou_meshino.txt:129`
 
 ### `BG11` ― 翠湖のほとり
 
@@ -247,7 +247,7 @@
   - 南棟編 ― 境界線の向こう側 / シーン `e2`「南棟三年教室」 ― `40_route_minamitou_meshino.txt:28`
   - 南棟編 ― 境界線の向こう側 / シーン `e2_jikashi`「茶化した場合」 ― `40_route_minamitou_meshino.txt:44`
   - 地面は、忘れない。 / シーン `end_good_meshino`「GOOD END 召野「言葉を届ける」」 ― `70_endings.txt:190`
-- **この背景まわりのCG**: `cg_naitou_kao_age` / `cg_end_meshino`
+- **この背景まわりのCG**: `cg_end_meshino`
 
 ### `BG19` ― 両馬の家・祖父の遺影がある部屋
 
@@ -258,7 +258,7 @@
 - **使用回数**: 本編 2 箇所
   - 両馬編 ― 祖父と✝本質✝ / シーン `d1`「両馬の家、夕方」 ― `30_route_terachi_ryoma.txt:82`
   - 地面は、忘れない。 / シーン `end_good_ryoma`「GOOD END 両馬「✝本質✝、その後」」 ― `70_endings.txt:154`
-- **この背景まわりのCG**: `cg_butsudan_seiza_sugata` / `cg_butsudan_narabu_futari` / `cg_end_ryoma`
+- **この背景まわりのCG**: `cg_butsudan_narabu_futari` / `cg_end_ryoma`
 
 ### `BG20` ― 回想・ハワイの溶岩台地
 
@@ -276,7 +276,7 @@
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
-  - 窓の外に、ずっといた人 / シーン `h3`「回想：はじめての地形図」 ― `60_climax.txt:60`
+  - 窓の外に、ずっといた人 / シーン `h3`「回想：はじめての地形図」 ― `60_climax.txt:62`
 - **この背景まわりのCG**: `cg_yama_ue_hajimete_chizu`
 
 ### `BG22` ― 回想・大学時代の野外調査ベースキャンプ
@@ -286,8 +286,8 @@
 - **状態**: ● 実画像が乗っている
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
-  - 窓の外に、ずっといた人 / シーン `h4`「回想：最後の日」 ― `60_climax.txt:76`
-- **この背景まわりのCG**: `cg_wakaki_utsumuki` / `cg_fuhou_kageboushi`
+  - 窓の外に、ずっといた人 / シーン `h4`「回想：最後の日」 ― `60_climax.txt:78`
+- **この背景まわりのCG**: `cg_fuhou_kageboushi`
 
 ### `BG23` ― エピローグ・卒業後の春、もぬけの殻の教室
 
@@ -326,7 +326,7 @@
 1. **ファイル名は「台帳ID + 拡張子」**（例 `bg_okujou.png`）。それを `assets/bg/` に上書き／新規配置
 2. 台帳の `placeholder` を `false` に → SVG補完（`backdropSVG`）が外れて実画像になる
    （背景25枚は**既に全て `placeholder: false`**＝上書きするだけで反映されます）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v9`）を上げる
+3. `sw.js` の `CACHE`（現在 `honshitsu-v10`）を上げる
 4. 白背景素材のまま使いたいときだけ CONFIG「画像合成」= multiply（**既定は normal**。multiply は `#stage[data-blend="multiply"]` を付けたときだけ立ち絵に掛かる）
 5. `node tools/sync_placeholder.mjs --check` で寸法・容量・台帳のズレを確認
 
