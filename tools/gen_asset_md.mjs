@@ -7,9 +7,9 @@
    出力:
      assets/README.md          … 総合（早見・共通仕様・差し替え手順）
      assets/bg/README.md       … 背景 25
-     assets/cg/README.md       … CG 32
+     assets/cg/README.md       … CG 26（名場面12＋ED14）
      assets/chr/README.md      … 立ち絵（キャラごとにまとめる）
-     docs/CG_GUIDE.md          … CG 全32枚（名場面18＋ED14）を「物語順」にまとめたガイド
+     docs/CG_GUIDE.md          … CG 全26枚（名場面12＋ED14）を「物語順」にまとめたガイド
    手編集せず、台帳を直して `node tools/gen_asset_md.mjs` で再生成。
    ※ 2026-09-12(3): 本編CGの番号スロット（cg02等）は廃止。bgと同じ「ID＝ファイル名
      （拡張子なし）」の実名に統一（例: cg_chizutsutsu_kobore_shashin）。
@@ -346,20 +346,22 @@ function cgDoc(opts = {}) {
       })
     : ASSETS.filter(a => a.cat === 'cg').sort((a, b) => a.id.localeCompare(b.id, 'en'));
   const used = order.filter(a => !a.reserve), spare = order.filter(a => a.reserve);
+  const nScene = order.filter(a => a.meta !== 'ending').length;
+  const nEnd = order.length - nScene;
   const leadCg = opts.byStory
-    ? ['本編で**今どこに使っていて**、どの順で差し替えを進めればいいのか ―― 32枚を**物語の順**に並べた1本。',
+    ? [`本編で**今どこに使っていて**、どの順で差し替えを進めればいいのか ―― ${order.length}枚を**物語の順**に並べた1本。`,
        'CGの実ファイルは未配置（台帳に名前だけ）。だからこそ**連絡表として使う**のが正しい読み方。',
        '構図・寸法・出番（行番号まで）がここにある。']
-    : ['`assets/cg/` の差し込みCG 18スロット＋ENDカード 14スロット。**実ファイルは未配置**（台帳に名前だけ）。出番・演出・差し替え仕様を1枚ずつ。'];
+    : [`\`assets/cg/\` の差し込みCG ${nScene}スロット＋ENDカード ${nEnd}スロット。**実ファイルは未配置**（台帳に名前だけ）。出番・演出・差し替え仕様を1枚ずつ。`];
   let md = head(opts.byStory ? `CG 総まくりガイド ― 今ある${order.length}枚を1枚ずつ` : `CG — 名場面CG・ENDカード（${order.length}枚）`, leadCg, order.length);
   md += `## 先にまとめ
 
 - **本編で使っている枚数**: ${used.filter(a => (usage.cg.get(a.id) || []).length).length} 枚（ \`@cg\` 指定 ${[...usage.cg.values()].reduce((n, v) => n + v.length, 0)} 箇所 ）
-- **降板して削除した枚数**: 20 枚（非ピーク。台帳・実ファイルとも削除済み。理由は \`docs/UI_CG_2026-09-12.md\`、命名の記録は \`docs/ASSET_MANIFEST.md\`）
+- **降板して削除した枚数**: 26 枚（非ピーク・重複構図。台帳・実ファイルとも削除済み。第1弾20枚＝\`docs/UI_CG_2026-09-12.md\`、第2弾6枚＝2026-09-15＝\`docs/ASSET_MANIFEST.md\`「2026-09-15 CG追加降板」）
 - **実ファイルが乗っている枚数**: ${order.filter(a => !a.placeholder).length} 枚（0＝すべて未配置。台帳の名前で新規配置すれば差し替わる）
 - **回収表示の分母**: \`AssetDB.collectible('cg')\` = ${order.filter(a => !a.reserve).length} 枚 → タイトルと保存画面の \`x/N\` はここを見る
 
-## CG を置く基準（2026-09-12 改定）
+## CG を置く基準（2026-09-15 再改定）
 
 1. **印象的で感動的なシーンにだけ置く** ―― 引き金／各ルートの決定の瞬間／収束の夜／クライマックス／各END。
 2. 呼び止め・手元アップ・並んで喋るだけ・状況説明の集合図は**立ち絵＋\`@bg\`＋\`@chr\`**（＋ \`@memo\` \`@caption\`）で足りる。置かない。
@@ -367,8 +369,10 @@ function cgDoc(opts = {}) {
 4. ENDカード用 \`cg_end_*\` と同一構図の差し替えは作らない。1シーン1枚。
 5. 喜劇のツッコミ（「は？」）にはCGを立てない。立つと笑いが半減する。
 6. 外した素材は**台帳から外して実ファイルも削除**する（未回収で埋まらないように。命名の記録は \`docs/ASSET_MANIFEST.md\`）。
+7. **隣り合うシーンへ同系統の構図を連投しない**（全員集合・単身窓際など）。次のシーンの立ち回りが
+   「語るだけ」「一瞬の表情アップ」なら、それは立ち絵の役目（2026-09-15 の追加降板6枚はこの基準で選定）。
 
-経緯: \`docs/PERF_2026-09-11.md\`（第1弾・11枚降板）→ \`docs/UI_CG_2026-09-12.md\`（第2弾・9枚降板＋白紙ファイル全削除）。
+経緯: \`docs/PERF_2026-09-11.md\`（第1弾・11枚降板）→ \`docs/UI_CG_2026-09-12.md\`（第2弾・9枚降板＋白紙ファイル全削除）→ 2026-09-15（第3弾・6枚降板。\`docs/ASSET_MANIFEST.md\`「2026-09-15 CG追加降板」）。
 
 ## 早見表（${opts.byStory ? '物語順' : 'ID順'}）
 
@@ -646,6 +650,8 @@ ${list.map((a, i) => {
 function topDoc() {
   const chrCount = ASSETS.filter(a=>a.cat==='chr').length;
   const chrReal = ASSETS.filter(a=>a.cat==='chr' && !a.placeholder).length;
+  const cgCount = ASSETS.filter(a=>a.cat==='cg').length;
+  const bgCount = ASSETS.filter(a=>a.cat==='bg').length;
   const cats = [
     ['bg', '背景', '1920×1080（16:9）／cover', '等高線SVG（`backdropSVG`）'],
     ['cg', '名場面CG・ENDカード', '1920×1080（16:9）／cover・kb で最大1.11倍', '―（暗色ベタのみ）'],
@@ -658,8 +664,8 @@ function topDoc() {
 **「何を・どこに・どう置けば効くか」を1素材ずつ書いたREADMEが、下の3枚**。
 （UI画像は2026-09-12に撤去 ―― ロゴ・枠・アイコンまで含め、UIは全てエンジンのCSS/SVG描画で代替済み。）
 
-- \`bg/README.md\` ― 背景 25 枚（出番・時間帯トーン・@bg の書き方）
-- \`cg/README.md\` ― CG 32 枚（出番・Ken Burns・差し替え仕様）
+- \`bg/README.md\` ― 背景 ${bgCount} 枚（出番・時間帯トーン・@bg の書き方）
+- \`cg/README.md\` ― CG ${cgCount} 枚（出番・Ken Burns・差し替え仕様）
 - \`chr/README.md\` ― 立ち絵 ${chrCount} 差分（キャラ別・表情別の本編出現回数）
 - \`../docs/CG_GUIDE.md\` ― **CG 32枚を物語順にまとめた1本**（これだけ読めばCGは足りる）
 - \`../docs/ART_SPEC.md\` ― **入稿仕様書**（推奨寸法・セーフエリア・形式・命名規則。絵を注文するときはこれ）

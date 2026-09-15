@@ -184,7 +184,7 @@ h2: {
     ["hide", "katsuya"],
     ["nar", "教室の空気が張り詰める。誰も茶化さない。両馬でさえ、黙っている。"],
     ["bgm", "bgm14"],
-    ["cg", "cg_nagai_chinmoku", { tint: "evening", caption: "いつもの5秒より、長い沈黙" }],
+    // 2026-09-15: cg_nagai_chinmoku 降板 ―― 対話中の沈黙は立ち絵で受ける（クライマックス密度9→5）。
     ["win", 15],
     ["ex", "katsuya", 3, "C"],
     ["say", "katsuya", "……お前ら、良い質問をするようになったな"],
@@ -218,7 +218,10 @@ h4: {
   data: [
     ["chapter", "回想", "最後の日"],
     ["bgmstop", 2000],
-    ["cg", "cg_wakaki_utsumuki", { tint: "flashback", caption: "生意気な口を利いた日、俯く若き勝也" }],
+    // 2026-09-15: cg_wakaki_utsumuki 降板 ―― 回想絵は yama_ue と fuhou の2枚に絞る。
+    // 直前まで表示中の yama_ue を下ろし、芝居は褪色のキャンプ場背景で受ける。
+    ["cgoff"],
+    ["bg", "BG22", { tint: "flashback" }],
     ["voice", "katsuya", "……俺は、大学に進んで、教職を取ろうとしてた。だが最後に会った日、少し生意気な口を利いた"],
     ["nar", "記憶の中の声が、少しだけ震える。"],
     ["voice", "wakaki", "先生の生き方、正直、俺にはちょっと向いてないと思います。ずっと山ばっかり見てて、それで食っていけるんですか"],
@@ -230,6 +233,7 @@ h4: {
     ["wait", 1600],
     ["voice", "katsuya", "次は、来なかった。梅雨の沢で、増水に巻き込まれたと聞いた。……最後に会った日、俺は先生に、ありがとうの一言も言ってない"],
     ["wait", 700],
+    ["cgoff"],
     ["branch", { cond: "heart>=24",
       then: [
         ["ex", "katsuya", 8, "C"],
@@ -250,7 +254,9 @@ h5: {
   title: "クライマックス　窓の外の五秒",
   data: [
     ["chapter", "クライマックス", "窓の外の五秒"],
-    ["cg", "cg_mado_gawa_no_houkoku", { tint: "evening", caption: "「窓の外を見るたび、報告していた」" }],
+    // 2026-09-15: cg_mado_gawa_no_houkoku 降板 ―― h1 の yuugata_madobe と構図がほぼ同一。
+    // 回想背景から教室へ戻す。
+    ["bg", "BG03", { tint: "evening" }],
     ["bgm", "bgm15"],
     ["ex", "katsuya", 8, "C"],
     ["say", "katsuya", "それから、癖になった。授業の合間、山が見える方角の窓を見ると――心の中で、先生に報告するようになった。『今日はこんな生徒がいました』ってな"],
@@ -318,10 +324,10 @@ h7: {
     ["say", "terachi", "――そして、寺地星より"],
     ["hide", "terachi"],
     ["nar", "寺地がそこで、一度言葉を止めた。"],
-    ["cg", "cg_hitorizutsu_no_kotoba", { tint: "evening", caption: "一人ずつの言葉に、勝也が涙をこらえる" }],
+    // 2026-09-15: cg_hitorizutsu_no_kotoba 降板 ―― 隣接シーン h6 の seito_wo_miwatasu と
+    // 同系統の集合構図。朗読は寺地の立ち絵で受ける。
     ["chr", "terachi", 8, "C"],
     ["say", "terachi", "意味がわからないものを、意味がわからないまま届け続けていいんだと、初めて思わせてくれたのが、先生の授業でした。ありがとうございました"],
-    ["cgoff"],
     ["hideall"],
     ["jump", "h8"],
   ],

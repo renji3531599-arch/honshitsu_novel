@@ -21,7 +21,7 @@
 | `inaba` | 稲葉悌二（いなば・ていじ／回想の声） | 1 | 1 | `#c0a888` |
 | `izaki` | 伊崎（いざき） | 4 | 7 | `#dcbd92` |
 | `izumi` | 伊豆見（いずみ） | 4 | 5 | `#e0cba2` |
-| `katsuya` | 塀勝也（へい・かつや／通称ヘイカツ） | 9 | 23 | `#cbb27c` |
+| `katsuya` | 塀勝也（へい・かつや／通称ヘイカツ） | 9 | 24 | `#cbb27c` |
 | `kuraishi` | 倉石暁（くらいし・あきら） | 5 | 11 | `#d6d46e` |
 | `meshino` | 召野カイト（めしの・かいと） | 4 | 5 | `#e2a8bc` |
 | `mie` | 三重県臣（みえ・けんしん） | 8 | 47 | `#7fa9d8` |
@@ -44,13 +44,13 @@
 - **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 4 枚・未配置 0 枚（白紙削除済み）（各 現 332×1494・639KB）
 
 - **① 通常** ― `@chr futami=01` ／ `chr_futami_01_tsuujou.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:88`（職員室前）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:89`（職員室前）
 - **③ 心配顔** ― `@chr futami=03` ／ `chr_futami_03_shinpai.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:104`（食い下がった方）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:105`（食い下がった方）
 - **④ いたずらっぽい笑み** ― `@chr futami=04` ／ `chr_futami_04_itazura.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:113`（二見の後押し）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:114`（二見の後押し）
 - **⑤ しんみりした横顔** ― `@chr futami=05` ／ `chr_futami_05_yokogao.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:93`（職員室前）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:94`（職員室前）
 
 ### `inaba` ― 稲葉悌二（いなば・ていじ／回想の声）
 
@@ -59,7 +59,7 @@
 - **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 1 枚・未配置 0 枚（白紙削除済み）（各 現 463×1496・793KB）
 
 - **① 古写真の中の柔らかい笑み** ― `@chr inaba=01` ／ `chr_inaba_01_furushashin_hohoemi.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `60_climax:66`（回想：はじめての地形図）
+  本編 **1 回**。初出 `60_climax:68`（回想：はじめての地形図）
 
 ### `izaki` ― 伊崎（いざき）
 
@@ -100,21 +100,21 @@
 - **① 通常（穏やか）** ― `@chr katsuya=01` ／ `chr_katsuya_01_tsuujou.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `00_prologue:106`（二月、北棟三年B組・昼休み（続き）） → ほか 1 回
 - **② 微笑** ― `@chr katsuya=02` ／ `chr_katsuya_02_hohoemi.png`　※ ● 実画像が乗っている
-  本編 **6 回**。初出 `60_climax:36`（卒業式前日、放課後の教室） → ほか 5 回
+  本編 **6 回**。初出 `60_climax:37`（卒業式前日、放課後の教室） → ほか 5 回
 - **③ 遠い目** ― `@chr katsuya=03` ／ `chr_katsuya_03_tooi_me.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `00_prologue:54`（三年間ダイジェスト（共通・スキップ可））
+  本編 **2 回**。初出 `00_prologue:54`（三年間ダイジェスト（共通・スキップ可）） → ほか 1 回
 - **④ 驚き** ― `@chr katsuya=04` ／ `chr_katsuya_04_odoroki.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `10_chapter1:30`（地図保管庫） → ほか 2 回
 - **⑥ 硬い無表情** ― `@chr katsuya=06` ／ `chr_katsuya_06_katai_muhyoujou.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `10_chapter1:42`（地図保管庫） → ほか 2 回
 - **⑦ 回想・目を細める** ― `@chr katsuya=07` ／ `chr_katsuya_07_kaisou_me_hosomeru.png`　※ ● 実画像が乗っている
-  本編 **2 回**。初出 `60_climax:124`（気づき） → ほか 1 回
+  本編 **2 回**。初出 `60_climax:126`（気づき） → ほか 1 回
 - **⑧ 涙をこらえる** ― `@chr katsuya=08` ／ `chr_katsuya_08_namida_koraeru.png`　※ ● 実画像が乗っている
-  本編 **3 回**。初出 `60_climax:96`（回想：最後の日） → ほか 2 回
+  本編 **3 回**。初出 `60_climax:98`（回想：最後の日） → ほか 2 回
 - **⑨ 泣く** ― `@chr katsuya=09` ／ `chr_katsuya_09_naku.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `60_climax:92`（回想：最後の日）
+  本編 **1 回**。初出 `60_climax:94`（回想：最後の日）
 - **⑩ 晴れやかな笑み** ― `@chr katsuya=10` ／ `chr_katsuya_10_hareyaka_emi.png`　※ ● 実画像が乗っている
-  本編 **2 回**。初出 `60_climax:176`（締めの言葉） → ほか 1 回
+  本編 **2 回**。初出 `60_climax:178`（締めの言葉） → ほか 1 回
 
 ### `kuraishi` ― 倉石暁（くらいし・あきら）
 
@@ -127,11 +127,11 @@
 - **② 感激** ― `@chr kuraishi=02` ／ `chr_kuraishi_02_kangeki.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:163`（GOOD END 両馬「✝本質✝、その後」）
 - **③ 真剣（調査中）** ― `@chr kuraishi=03` ／ `chr_kuraishi_03_chousa_shinken.png`　※ ● 実画像が乗っている
-  本編 **3 回**。初出 `40_route_minamitou_meshino:133`（図書室、書庫） → ほか 2 回
+  本編 **3 回**。初出 `40_route_minamitou_meshino:134`（図書室、書庫） → ほか 2 回
 - **⑤ 誇らしげ** ― `@chr kuraishi=05` ／ `chr_kuraishi_05_hokorashige.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `50_converge:68`（「思い出の地形図」制作） → ほか 1 回
 - **⑥ 言葉を失う顔** ― `@chr kuraishi=06` ／ `chr_kuraishi_06_kotoba_ushinau.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:138`（図書室、書庫）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:139`（図書室、書庫）
 
 ### `meshino` ― 召野カイト（めしの・かいと）
 
@@ -140,9 +140,9 @@
 - **差し替え推奨（このキャラ共通）**: 840×1280（21:32）透過・下揃え／全身を見せたいなら 840×1120（3:4） ／ 現在 実画像 4 枚・未配置 0 枚（白紙削除済み）（各 現 376×1445・636KB）
 
 - **① 通常** ― `@chr meshino=01` ／ `chr_meshino_01_tsuujou.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:113`（二見の後押し）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:114`（二見の後押し）
 - **④ 真剣** ― `@chr meshino=04` ／ `chr_meshino_04_shinken.png`　※ ● 実画像が乗っている
-  本編 **2 回**。初出 `40_route_minamitou_meshino:88`（職員室前） → ほか 1 回
+  本編 **2 回**。初出 `40_route_minamitou_meshino:89`（職員室前） → ほか 1 回
 - **⑤ 英語ドヤ顔** ― `@chr meshino=05` ／ `chr_meshino_05_eigo_doya.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `50_converge:63`（「思い出の地形図」制作）
 - **⑥ しんみり** ― `@chr meshino=06` ／ `chr_meshino_06_shinmiri.png`　※ ● 実画像が乗っている
@@ -169,7 +169,7 @@
 - **⑨ 初めての素直な微笑み** ― `@chr mie=09` ／ `chr_mie_09_sunao_hohoemi.png`　※ ● 実画像が乗っている
   本編 **5 回**。初出 `10_chapter1:137`（選択後共通 ―― 夕方の廊下） → ほか 4 回
 - **⑩ 泣き顔** ― `@chr mie=10` ／ `chr_mie_10_nakigao.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `60_climax:131`（気づき）
+  本編 **1 回**。初出 `60_climax:133`（気づき）
 
 ### `mitsumine` ― 三峰瑠衣（みつみね・るい）
 
@@ -182,7 +182,7 @@
 - **② ツッコミ顔** ― `@chr mitsumine=02` ／ `chr_mitsumine_02_tsukkomi.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:19`（桜並木、まだ蕾）
 - **③ 笑顔** ― `@chr mitsumine=03` ／ `chr_mitsumine_03_egao.png`　※ ● 実画像が乗っている
-  本編 **2 回**。初出 `40_route_minamitou_meshino:63`（決意） → ほか 1 回
+  本編 **2 回**。初出 `40_route_minamitou_meshino:64`（決意） → ほか 1 回
 - **⑥ 「は？」（ハモリ専用）** ― `@chr mitsumine=06` ／ `chr_mitsumine_06_ha.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:97`（（おまけ）ハモり）
 
@@ -199,7 +199,7 @@
 - **④ 驚き** ― `@chr naitou=04` ／ `chr_naitou_04_odoroki.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:46`（茶化した場合）
 - **⑤ 優しい目** ― `@chr naitou=05` ／ `chr_naitou_05_yasashii_me.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:59`（決意）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:60`（決意）
 - **⑥ 少し笑う** ― `@chr naitou=06` ／ `chr_naitou_06_sukoshi_warau.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
 
@@ -237,13 +237,13 @@
 - **⑤ しょんぼり** ― `@chr ryoma=05` ／ `chr_ryoma_05_shonbori.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `10_chapter1:160`（まだ聞けていない話がある気がする）
 - **⑥ 泣き笑い** ― `@chr ryoma=06` ／ `chr_ryoma_06_nakiwarai.png`　※ ● 実画像が乗っている
-  本編 **4 回**。初出 `30_route_terachi_ryoma:97`（両馬の家、夕方） → ほか 3 回
+  本編 **4 回**。初出 `30_route_terachi_ryoma:98`（両馬の家、夕方） → ほか 3 回
 - **⑦ 真剣な決意顔** ― `@chr ryoma=07` ／ `chr_ryoma_07_shinken_ketsui.png`　※ ● 実画像が乗っている
   本編 **4 回**。初出 `10_chapter1:149`（HUB ― ルート選択） → ほか 3 回
 - **⑧ 照れ隠しで頭をかく** ― `@chr ryoma=08` ／ `chr_ryoma_08_terekakushi.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `30_route_terachi_ryoma:88`（両馬の家、夕方） → ほか 1 回
 - **⑨ 号泣** ― `@chr ryoma=09` ／ `chr_ryoma_09_goukyuu.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `30_route_terachi_ryoma:120`（祖父の口癖）
+  本編 **1 回**。初出 `30_route_terachi_ryoma:121`（祖父の口癖）
 
 ### `sakura` ― 櫻優（さくら・ゆう）
 
@@ -254,7 +254,7 @@
 - **② 真剣（研究者モード）** ― `@chr sakura=02` ／ `chr_sakura_02_kenkyuusha.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:32`（南棟三年教室）
 - **⑤ 笑顔** ― `@chr sakura=05` ／ `chr_sakura_05_egao.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `40_route_minamitou_meshino:65`（決意）
+  本編 **1 回**。初出 `40_route_minamitou_meshino:66`（決意）
 - **⑥ 柔らかい表情** ― `@chr sakura=06` ／ `chr_sakura_06_yawarakai.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `70_endings:225`（GOOD END 南棟「境界のない春」）
 
@@ -280,7 +280,7 @@
 - **⑦ 言葉に詰まる顔** ― `@chr satou=07` ／ `chr_satou_07_tsumaru.png`　※ ● 実画像が乗っている
   本編 **2 回**。初出 `20_route_satou_rei:88`（砂糖のスマートフォン） → ほか 1 回
 - **⑧ 目に光るものを堪える顔** ― `@chr satou=08` ／ `chr_satou_08_me_hikari_koraeru.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `60_climax:116`（窓の外の五秒）
+  本編 **1 回**。初出 `60_climax:118`（窓の外の五秒）
 
 ### `terachi` ― 寺地星（てらち・せい）
 
@@ -300,7 +300,7 @@
 - **⑥ マイク前の決意顔** ― `@chr terachi=06` ／ `chr_terachi_06_maiku_no_ketsui.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `30_route_terachi_ryoma:57`（三年分の紙） → ほか 2 回
 - **⑧ 涙** ― `@chr terachi=08` ／ `chr_terachi_08_namida.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `60_climax:168`（最後の朗読）
+  本編 **1 回**。初出 `60_climax:171`（最後の朗読）
 
 ## 差し替え手順（立ち絵共通）
 
@@ -310,7 +310,7 @@
 2. 台帳の `placeholder` を `false` に → シルエット補完（`figureSVG`）が消えて実画像になる
    （**1と2はセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れる）
    ― まとめてやるなら `node tools/sync_placeholder.mjs`（実在ファイルを検出して自動で `false` にする）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v9`）を上げる（`--bump` で自動）
+3. `sw.js` の `CACHE`（現在 `honshitsu-v10`）を上げる（`--bump` で自動）
 4. 白背景のまま置きたいときだけ CONFIG「画像合成」= multiply（ `#stage[data-blend="multiply"] .chr img` にだけ掛かる）
 5. `node tools/sync_placeholder.mjs --check` で寸法・透過・容量・台帳のズレを確認 → `npm test`
 
