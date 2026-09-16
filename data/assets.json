@@ -1088,8 +1088,8 @@
    "id": "cg_end_bonus",
    "cat": "cg",
    "file": "assets/cg/cg_end_bonus.png",
-   "label": "BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット",
-   "desc": "BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット",
+   "label": "勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。",
+   "desc": "勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。",
    "meta": "ending",
    "source": "image1/white_181.png",
    "placeholder": true

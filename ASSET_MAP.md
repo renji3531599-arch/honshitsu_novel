@@ -215,7 +215,7 @@
 | cg_end_normal | white_178.png | `cg_end_normal.png` | NORMAL END ―― 桜の下、いつも通りの日常 **2026-09-15(3) 撤去・生成不要** |
 | cg_end_bittersweet | white_179.png | `cg_end_bittersweet.png` | BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う **2026-09-15(3) 撤去・生成不要** |
 | cg_end_comedy | white_180.png | `cg_end_comedy.png` | COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう **2026-09-15(3) 撤去・生成不要** |
-| cg_end_bonus | white_181.png | `cg_end_bonus.png` | BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット |
+| cg_end_bonus | white_181.png | `cg_end_bonus.png` | 勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。 |
 
 ## UI／アイテム（2026-09-12 撤去）
 
