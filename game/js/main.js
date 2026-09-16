@@ -67,8 +67,8 @@ function loadImage(src, timeout = 20000) {
     im.decoding = "async";
     const to = setTimeout(() => resolve(false), timeout);
     im.onload = () => { clearTimeout(to); im.decode ? im.decode().then(() => resolve(true), () => resolve(true)) : resolve(true); };
-    // 未配置のCGなどの読み込み失敗は想定内（立ち絵78枚は収録済み）。
-    // 失敗は想定内なので静かにスキップ（まとめ報告は preloadAll で1行だけ出す）。
+    // 読み込み失敗は静かにスキップ（まとめ報告は preloadAll で1行だけ出す）。
+    // 2026-09-16時点で背景・CG・立ち絵の全109枚を収録済みのため、失敗は想定外だが落とさない。
     im.onerror = () => { clearTimeout(to); resolve(false); };
     im.src = src;
   });
@@ -91,8 +91,8 @@ async function preloadAll() {
     }
   };
   await Promise.all(Array.from({ length: Math.min(6, total || 1) }, worker));
-  // 未配置のCGは読み込み失敗が想定内。1行にまとめて報告する。
-  if (failed && txt) txt.textContent = `準備完了（画像 ${total - failed}/${total} を先読み。一部のCGは未配置）`;
+  // 失敗があれば1行にまとめて報告する（全画像収録済みのため通常は failed=0）。
+  if (failed && txt) txt.textContent = `準備完了（画像 ${total - failed}/${total} を先読み。一部を読み飛ばし）`;
   else if (txt) txt.textContent = "準備完了";
 }
 

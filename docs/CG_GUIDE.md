@@ -1,8 +1,7 @@
 # CG 総まくりガイド ― 今ある7枚を1枚ずつ
 
 本編で**今どこに使っていて**、どの順で差し替えを進めればいいのか ―― 7枚を**物語の順**に並べた1本。
-CGの実ファイルは未配置（台帳に名前だけ）。だからこそ**連絡表として使う**のが正しい読み方。
-構図・寸法・出番（行番号まで）がここにある。
+CGは**7枚すべて実画像を収録済み**（2026-09-16適用）。構図・寸法・出番（行番号まで）がここにある。
 
 > 生成: `node tools/gen_asset_md.mjs`（生成日は入れない ― 出力をバイト単位で再現可能にして CI の差分検査を安定させる）／総数 7 ファイル／正本は台帳 `data/assets.json`
 > ここに並ぶ説明は台帳と本編DSLから機械的に拾っている。直すべきは台帳と脚本のほう。
@@ -11,7 +10,7 @@ CGの実ファイルは未配置（台帳に名前だけ）。だからこそ**�
 
 - **本編で使っている枚数**: 7 枚（ `@cg` 指定 7 箇所 ）
 - **撤去した枚数**: 45 枚（今回19枚。選定理由は `docs/CG_PRUNING_2026-09-15.md`）
-- **実ファイルが乗っている枚数**: 0 枚（0＝すべて未配置。台帳の名前で新規配置すれば差し替わる）
+- **実ファイルが乗っている枚数**: 7 枚（すべて実画像）
 - **回収表示の分母**: `AssetDB.collectible('cg')` = 7 枚 → タイトルと保存画面の `x/N` はここを見る
 
 ## CG を置く基準（2026-09-15 再改定）
@@ -51,9 +50,9 @@ _差出人不明の写真（`#chapter ch1`）― この章で 1 枚使用_
 
 #### `cg_chizutsutsu_kobore_shashin` ― 三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。
 
-- **ファイル**: `assets/cg/cg_chizutsutsu_kobore_shashin.png`（現 —（未配置）・—）
+- **ファイル**: `assets/cg/cg_chizutsutsu_kobore_shashin.png`（現 1672×940・2277KB）
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける
-- **状態**: スロット登録のみ（実ファイルは未配置）― CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）
+- **状態**: ● 実画像が乗っている
 - **出番**: 差出人不明の写真 / シーン `c004_hokanko`「地図保管庫」 ― `10_chapter1.txt:25`
   - 指定: `@cg cg_chizutsutsu_kobore_shashin kb` ／ 25→46行（約21ライン表示） ／ Ken Burns ON（26秒で 1.02→1.12）
   - そのときの背景: `BG08` 地図保管庫
@@ -69,9 +68,9 @@ _地図を作る夜（`#chapter converge`）― この章で 1 枚使用_
 
 #### `cg_omoide_chikeizu_kansei` ― 「思い出の地形図」完成図。画面いっぱいの作品アート。
 
-- **ファイル**: `assets/cg/cg_omoide_chikeizu_kansei.png`（現 —（未配置）・—）
+- **ファイル**: `assets/cg/cg_omoide_chikeizu_kansei.png`（現 1672×941・2829KB）
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける
-- **状態**: スロット登録のみ（実ファイルは未配置）― CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）
+- **状態**: ● 実画像が乗っている
 - **出番**: 地図を作る夜 / シーン `g3`「完成、そして両馬の手」 ― `50_converge.txt:98`
   - 指定: `@cg cg_omoide_chikeizu_kansei kb` ／ 98→115行（約17ライン表示） ／ Ken Burns ON（26秒で 1.02→1.12）
   - そのときの背景: `BG04` 北棟三年B組教室・夜（サプライズ準備）
@@ -87,9 +86,9 @@ _窓の外に、ずっといた人（`#chapter climax`）― この章で 2 枚�
 
 #### `cg_yama_ue_hajimete_chizu` ― 若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。
 
-- **ファイル**: `assets/cg/cg_yama_ue_hajimete_chizu.png`（現 —（未配置）・—）
+- **ファイル**: `assets/cg/cg_yama_ue_hajimete_chizu.png`（現 1672×940・2421KB）
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける
-- **状態**: スロット登録のみ（実ファイルは未配置）― CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）
+- **状態**: ● 実画像が乗っている
 - **出番**: 窓の外に、ずっといた人 / シーン `h3`「回想：はじめての地形図」 ― `60_climax.txt:61`
   - 指定: `@cg cg_yama_ue_hajimete_chizu kb` ／ 61→72行（約11ライン表示） ／ Ken Burns ON（26秒で 1.02→1.12）
   - そのときの背景: `BG21` 回想・稲葉と勝也がいた山（褪色調）
@@ -98,9 +97,9 @@ _窓の外に、ずっといた人（`#chapter climax`）― この章で 2 枚�
 
 #### `cg_hareyaka_na_emi` ― 勝也（単独）／BG03（夕方の教室）。締めの台詞、晴れやかな笑み（表情⑩）。
 
-- **ファイル**: `assets/cg/cg_hareyaka_na_emi.png`（現 —（未配置）・—）
+- **ファイル**: `assets/cg/cg_hareyaka_na_emi.png`（現 1672×941・1949KB）
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける
-- **状態**: スロット登録のみ（実ファイルは未配置）― CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）
+- **状態**: ● 実画像が乗っている
 - **出番**: 窓の外に、ずっといた人 / シーン `h8`「締めの言葉」 ― `60_climax.txt:175`
   - 指定: `@cg cg_hareyaka_na_emi kb` ／ 175→183行（約8ライン表示） ／ Ken Burns ON（26秒で 1.02→1.12）
   - そのときの背景: `BG03` 北棟三年B組教室・夕方（茜色・逆光）
@@ -114,9 +113,9 @@ _地面は、忘れない。（`#chapter end`）― この章で 3 枚使用_
 
 #### `cg_sotsugyou_sakurafubuki` ― 両馬／三重／三峰／BG17。卒業式、桜吹雪。三峰が少し照れる、背景は無名のクラスメイト。
 
-- **ファイル**: `assets/cg/cg_sotsugyou_sakurafubuki.png`（現 —（未配置）・—）
+- **ファイル**: `assets/cg/cg_sotsugyou_sakurafubuki.png`（現 1672×941・1999KB）
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける
-- **状態**: スロット登録のみ（実ファイルは未配置）― CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）
+- **状態**: ● 実画像が乗っている
 - **出番**: 地面は、忘れない。 / シーン `end0`「卒業式（共通）」 ― `70_endings.txt:17`
   - 指定: `@cg cg_sotsugyou_sakurafubuki kb` ／ 17→27行（約10ライン表示） ／ Ken Burns ON（26秒で 1.02→1.12）
   - そのときの背景: `BG17` 卒業式会場
@@ -127,9 +126,9 @@ _地面は、忘れない。（`#chapter end`）― この章で 3 枚使用_
 
 #### `cg_end_true` ― TRUE END ―― 数年後の教室で地図を見せる勝也＋卒業アルバムのモンタージュ
 
-- **ファイル**: `assets/cg/cg_end_true.png`（現 —（未配置）・—）
+- **ファイル**: `assets/cg/cg_end_true.png`（現 1672×941・2086KB）
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける
-- **状態**: スロット登録のみ（実ファイルは未配置）― CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）
+- **状態**: ● 実画像が乗っている
 - **出番**: 地面は、忘れない。 / シーン `end_true`「TRUE END「地面は、忘れない。」」 ― `70_endings.txt:58`
   - 指定: `@cg cg_end_true kb` ／ 58→67行（約9ライン表示） ／ Ken Burns ON（26秒で 1.02→1.12）
   - そのときの背景: `BG24` TRUE END後日談・数年後の同じ教室
@@ -142,9 +141,9 @@ _地面は、忘れない。（`#chapter end`）― この章で 3 枚使用_
 
 #### `cg_end_bonus` ― 勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。
 
-- **ファイル**: `assets/cg/cg_end_bonus.png`（現 —（未配置）・—）
+- **ファイル**: `assets/cg/cg_end_bonus.png`（現 1672×940・2566KB）
 - **差し替え推奨**: 1920×1080（16:9）／WebP か JPEG／全面描き（透過しない）。Ken Burns で最大 1.11 倍になるので 1600×900 ちょうどは避ける
-- **状態**: スロット登録のみ（実ファイルは未配置）― CG面は暗色ベタのまま（差し替えまで1枚絵は出ない）
+- **状態**: ● 実画像が乗っている
 - **出番**: 地面は、忘れない。 / シーン `end_bonus`「BONUS EXTRA「また、この教室で」」 ― `70_endings.txt:282`
   - 指定: `@cg cg_end_bonus kb` ／ 282→297行（約15ライン表示） ／ Ken Burns ON（26秒で 1.02→1.12）
   - そのときの背景: `BG11` 翠湖のほとり
@@ -172,13 +171,13 @@ _地面は、忘れない。（`#chapter end`）― この章で 3 枚使用_
 
 | ID | ファイル | 寸法（現） | 状態 |
 |---|---|---|---|
-| `cg_chizutsutsu_kobore_shashin` | `assets/cg/cg_chizutsutsu_kobore_shashin.png` | —（未配置） | 本編 1箇所・未配置 |
-| `cg_omoide_chikeizu_kansei` | `assets/cg/cg_omoide_chikeizu_kansei.png` | —（未配置） | 本編 1箇所・未配置 |
-| `cg_yama_ue_hajimete_chizu` | `assets/cg/cg_yama_ue_hajimete_chizu.png` | —（未配置） | 本編 1箇所・未配置 |
-| `cg_hareyaka_na_emi` | `assets/cg/cg_hareyaka_na_emi.png` | —（未配置） | 本編 1箇所・未配置 |
-| `cg_sotsugyou_sakurafubuki` | `assets/cg/cg_sotsugyou_sakurafubuki.png` | —（未配置） | 本編 1箇所・未配置 |
-| `cg_end_true` | `assets/cg/cg_end_true.png` | —（未配置） | 本編 1箇所・未配置 |
-| `cg_end_bonus` | `assets/cg/cg_end_bonus.png` | —（未配置） | 本編 1箇所・未配置 |
+| `cg_chizutsutsu_kobore_shashin` | `assets/cg/cg_chizutsutsu_kobore_shashin.png` | 1672×940 | 本編 1箇所・実画像 |
+| `cg_omoide_chikeizu_kansei` | `assets/cg/cg_omoide_chikeizu_kansei.png` | 1672×941 | 本編 1箇所・実画像 |
+| `cg_yama_ue_hajimete_chizu` | `assets/cg/cg_yama_ue_hajimete_chizu.png` | 1672×940 | 本編 1箇所・実画像 |
+| `cg_hareyaka_na_emi` | `assets/cg/cg_hareyaka_na_emi.png` | 1672×941 | 本編 1箇所・実画像 |
+| `cg_sotsugyou_sakurafubuki` | `assets/cg/cg_sotsugyou_sakurafubuki.png` | 1672×941 | 本編 1箇所・実画像 |
+| `cg_end_true` | `assets/cg/cg_end_true.png` | 1672×941 | 本編 1箇所・実画像 |
+| `cg_end_bonus` | `assets/cg/cg_end_bonus.png` | 1672×940 | 本編 1箇所・実画像 |
 
 ## 差し替え手順（CG共通）
 
@@ -187,7 +186,7 @@ _地面は、忘れない。（`#chapter end`）― この章で 3 枚使用_
 2. `data/assets.json` のその行の `"placeholder": true` → `false`
    ― **1と2は必ずセット**。ファイルだけ置くと補完のまま、フラグだけ倒すと 404 で壊れます
    （まとめてやるなら `node tools/sync_placeholder.mjs` が実在ファイルを検出して自動で倒します）
-3. `sw.js` の `CACHE`（現在 `honshitsu-v11`）を上げる ← **忘れると古いキャッシュを返し続ける**
+3. `sw.js` の `CACHE`（現在 `honshitsu-v12`）を上げる ← **忘れると古いキャッシュを返し続ける**
    （`node tools/sync_placeholder.mjs --bump` で自動）
 4. 差し替えた瞬間、エンジン側は `backdropSVG`／合成の重い方を自動で切る（`#stage[data-art="real"]`）
 5. `node tools/sync_placeholder.mjs --check` ＋ `npm test`（vncheck / smoke）で崩れを確認
