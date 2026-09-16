@@ -1,6 +1,6 @@
 # 全CG生成プロンプト集（7枚）
 
-『まだ地図の途中で ―― ✝本質✝特別編』の**現行本編CG 7枚（名場面5枚＋エンディング2枚）**を生成するためのプロンプト集。
+『まだ地図の途中で ―― ✝本質特別編』の**現行本編CG 7枚（名場面5枚＋エンディング2枚）**を生成するためのプロンプト集。
 
 - 正本: `data/assets.json`
 - 構図・出番: `docs/CG_GUIDE.md`
@@ -8,7 +8,8 @@
 - 生成後の配置先: `assets/cg/`（版B も動かすなら同名で `game/assets/img/` にもコピー）
 - 仕様: **1920×1080（最低 1600×900）/ 16:9 / WebP・JPEG・PNG / 全面不透明**
 - 2026-09-12(3): 番号スロット（`cg02` 等）廃止。「ID＝ファイル名」の実名に統一済み。
-- **2026-09-15(3): 26→7枚に整理。** 掲載した7枚だけ生成する。撤去理由・一覧は `CG_PRUNING_2026-09-15.md`。
+- 2026-09-15(3): 26→7枚に整理。掲載した7枚だけ生成する。撤去理由・一覧は `CG_PRUNING_2026-09-15.md`。
+- **2026-09-16: プロンプトの固有名詞を全削除し「身体的特徴の指差し」に置換（画像モデルは名前を認識しないため）。5枚目（卒業式）は全員集合から「3人＋無名群衆」構成へ縮小（AIは識別可能な顔が10人前後で追従不能になるため）。特徴の基準は `assets/chr/` 実画像の実写転写。**
 
 ---
 
@@ -18,9 +19,11 @@
    - 背景 = 本編でそのCGの裏に出ている `assets/bg/` の実画像。光・色・空間の一致はここから取る。
    - 立ち絵 = そのCGに描くキャラクターの `assets/chr/` の実画像。顔・髪・制服・ネクタイ色をここから固定する。
    - 背景も立ち絵も**すべて実画像が揃っている**ので、「何となく近い絵」ではなく実物を添付できる。添付なしで始めると全7枚の統一が壊れる。
-2. 「共通ベースプロンプト」を先頭に付け、各CGの個別プロンプトを続ける。
-3. 「共通ネガティブプロンプト」をネガティブ欄に入れる。
+2. 「共通ベースプロンプト」を先頭に付け、各CGの個別プロンプトを続ける（この文書の各ブロックは両方合成済み）。
+3. 「共通ネガティブプロンプト」をネガティブ欄に入れる（チャット系で欄がなければプロンプト内の否定指示で足りる）。
 4. 生成後、正確な日本語の文字・年号・キャプションは必要に応じて後処理で入れる。画像生成モデルに文字を任せない。
+5. **識別可能な顔は3人まで**にする（10人前後で追従不能）。そのクラスを表現したい場合は「anonymous, softly blurred crowd（無名・ぼけの群衆）」で表す ― 崩れた顔の発生抑制にもなる。
+6. 複数添付するCGは、添付順序を「前景の主要キャラ → 他の識別可能キャラ → 背景」にすると、モデルの顔↔シート対応が安定する。
 
 ### 共通ベースプロンプト（英語）
 
@@ -40,12 +43,35 @@ A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustratio
 - **寺地星**: 北棟・理数科の高校生。本質配信者。紙、マジック、配信機材を使う。普段は眠そうだが、朗読時は強い集中を見せる。参照: `chr_terachi_*`。
 - **伊崎・伊豆見**: 北棟側の高校生。準備と進行を担う組み合わせ。二人の距離感は親しいが、依存的にはしない。参照: `chr_izaki_*`・`chr_izumi_*`。
 - **召野カイト**: 北棟側の高校生。言葉を届けることに目覚めた人物。エンディングでは国際・英語教育系の進路を感じさせる。参照: `chr_meshino_*`。
-- **倉石暁**: 年下の北棟・理数科生。✝本質✝年鑑を編纂する記録係。熱狂と真剣さを両立させる。参照: `chr_kuraishi_*`。
+- **倉石暁**: 年下の北棟・理数科生。✝本質年鑑を編纂する記録係。熱狂と真剣さを両立させる。参照: `chr_kuraishi_*`。
 - **櫻優**: 南棟・中高一貫側の高校生。紺色のネクタイ。恋愛学を研究する理論派。参照: `chr_sakura_*`。
 - **内藤蘭**: 南棟・中高一貫側の高校生。紺色のネクタイ。静かで、本を読むことが多い。小さな微笑みが重要。参照: `chr_naitou_*`。
 - **三峰瑠衣**: 南棟・中高一貫側の女子高校生。紺色のネクタイ。常識人で、二人を支える連絡係。参照: `chr_mitsumine_*`。
 - **稲葉悌二**: 回想にだけ登場する、勝也のかつての指導者。山と地図を知る成人男性。説明的な英雄にはせず、記憶の中の存在として描く。参照は古写真の `chr_inaba_01_furushashin_hohoemi.png` 1枚のみ（顔の基準にする）。
 - **若き日の勝也**: 回想専用。現在の勝也（`chr_katsuya_*`）と同じ人物だとわかる面影を残すが、未熟さのある若者として描く。
+
+### 身体的特徴早見（プロンプトの指差しまだ）
+
+プロンプトで人物を指差すときの英文。`assets/chr/` 実画像を実写転写したもの（2026-09-16）。**立ち絵を差し替えた場合はここから再転写する。**
+
+| キャラ | プロンプト用の指差し |
+|---|---|
+| 塀勝也（教師） | an adult man with messy dark brown hair, thin rectangular glasses, a long calm face, brown blazer over a dark waistcoat |
+| 三重県臣 | a boy with short black hair, straight bangs, thin rectangular glasses, a faint cold smirk |
+| 両馬二郎 | a tall boy with spiky auburn (red-brown) hair, thin black-framed glasses, a confident smirk |
+| 砂糖東洋 | a pale boy with shaggy black hair, long messy bangs partly covering his eyes, a tired flat expression, earphones around his neck |
+| 数理零 | a boy with neat short dark brown hair and a calm, cool, expressionless face |
+| 寺地星 | a boy with warm brown tousled hair and sleepy half-lidded eyes |
+| 伊崎 | a boy with messy black hair and black over-ear headphones around his neck |
+| 伊豆見 | a boy with spiky tousled black hair and a bright open smile |
+| 召野カイト | a boy with short black hair, a small ahoge, grey-blue eyes and flushed cheeks |
+| 倉石暁 | a boy with short black hair, a straight side-swept fringe and thin rectangular glasses |
+| 櫻優（南棟） | a boy with warm brown tousled hair, round glasses and soft blue-grey eyes, navy tie |
+| 内藤蘭（南棟） | a girl with very long straight black hair and soft grey-blue eyes, navy ribbon and plaid skirt |
+| 三峰瑠衣（南棟） | a girl with a brown chin-length bob and large warm brown eyes, navy ribbon and plaid skirt |
+| 稲葉悌二（回想） | an older man with wavy grey-brown hair and light stubble, a warm smile |
+
+> 眼鏡が「三重／倉石／勝也」で被るので、年齢（成人）と前髪（真直ぐ／横流し）で区別している。
 
 ### 共通ネガティブプロンプト（英語）
 
@@ -61,13 +87,13 @@ photorealistic, 3D render, chibi, super-deformed, childish proportions, manga pa
 
 | # | ID | 場面 | 添付する背景 | 添付する立ち絵 | KB |
 |---:|---|---|---|---|---|
-| 1 | `cg_chizutsutsu_kobore_shashin` | 地図筒から古写真がこぼれる | `assets/bg/bg_chizu_hokanko.png` | `chr_mie_03_douyou.png`・`chr_katsuya_06_katai_muhyoujou.png` | あり |
-| 2 | `cg_omoide_chikeizu_kansei` | 「思い出の地形図」完成図 | （作品アート。背景添付不要） | `chr_mie_07_honki_shinken.png`・`chr_ryoma_01_tsuujou.png`（直後の芝居の基準） | あり |
-| 3 | `cg_yama_ue_hajimete_chizu` | 若き勝也と稲葉、初めての地形図 | `assets/bg/bg_yama_kaisou.png` | `chr_inaba_01_furushashin_hohoemi.png`・`chr_katsuya_01_tsuujou.png`（若き日の顔基準） | あり |
-| 4 | `cg_hareyaka_na_emi` | 勝也、晴れやかな笑み | `assets/bg/bg_hokutou_kyoshitsu_yuugata.png` | `chr_katsuya_10_hareyaka_emi.png` | あり |
-| 5 | `cg_sotsugyou_sakurafubuki` | 卒業式と桜吹雪 | `assets/bg/bg_sotsugyoushiki_kaijou.png` | `chr_ryoma_02_niyari.png`・`chr_mie_09_sunao_hohoemi.png` | あり |
-| 6 | `cg_end_true` | TRUE END・数年後の教室 | `assets/bg/bg_kyoshitsu_suunengo.png` | `chr_katsuya_02_hohoemi.png` | あり |
-| 7 | `cg_end_bonus` | BONUS EXTRA・数年後の同窓会 | `assets/bg/bg_suiko_hotori.png` | `chr_katsuya_10_hareyaka_emi.png`・`chr_ryoma_02_niyari.png`・`chr_mie_09_sunao_hohoemi.png` | あり |
+| 1 | `cg_chizutsutsu_kobore_shashin` | 地図筒から古写真がこぼれる | `assets/bg/bg_chizu_hokanko.png` | `chr_mie_03_douyou`・`chr_katsuya_06_katai_muhyoujou`・`chr_katsuya_04_odoroki`・`chr_inaba_01_furushashin_hohoemi`（写真内の稲葉）・`chr_katsuya_01_tsuujou`（写真内の若き勝也の面影） | あり |
+| 2 | `cg_omoide_chikeizu_kansei` | 「思い出の地形図」完成図 | （作品アート。背景添付不要） | 貼付写真の顔として全13キャラ（`chr_katsuya_01`・`chr_mie_07`・`chr_ryoma_01`・`chr_satou_02`・`chr_rei_01`・`chr_terachi_01`・`chr_izaki_01`・`chr_izumi_02`・`chr_meshino_01`・`chr_kuraishi_01`・`chr_sakura_05`・`chr_naitou_01`・`chr_mitsumine_01`） | あり |
+| 3 | `cg_yama_ue_hajimete_chizu` | 若き勝也と稲葉、初めての地形図 | `assets/bg/bg_yama_kaisou.png` | `chr_inaba_01_furushashin_hohoemi`（稲葉の唯一の基準＝古写真）・`chr_katsuya_01_tsuujou`（若き勝也の顔基準） | あり |
+| 4 | `cg_hareyaka_na_emi` | 勝也、晴れやかな笑み | `assets/bg/bg_hokutou_kyoshitsu_yuugata.png` | `chr_katsuya_10_hareyaka_emi`（**表情⑩＝このCGと同じ笑み**。顔をこの立ち絵に一致させる） | あり |
+| 5 | `cg_sotsugyou_sakurafubuki` | 卒業式、桜吹雪（3人＋無名群衆） | `assets/bg/bg_sotsugyoushiki_kaijou.png` | `chr_ryoma_02_niyari`・`chr_mie_09_sunao_hohoemi`・`chr_mitsumine_03_egao`（照れ） | あり |
+| 6 | `cg_end_true` | TRUE END・数年後の教室 | `assets/bg/bg_kyoshitsu_suunengo.png` | `chr_katsuya_02_hohoemi` | あり |
+| 7 | `cg_end_bonus` | BONUS EXTRA・数年後の同窓会 | `assets/bg/bg_suiko_hotori.png` | `chr_katsuya_10_hareyaka_emi`・`chr_ryoma_02_niyari`・`chr_mie_09_sunao_hohoemi` ＋ 残り10キャラ（`chr_satou_02`・`chr_rei_01`・`chr_terachi_01`・`chr_izaki_01`・`chr_izumi_02`・`chr_meshino_01`・`chr_kuraishi_01`・`chr_sakura_05`・`chr_naitou_01`・`chr_mitsumine_01`）※ 追従が難しければ3〜6人に縮小 | あり |
 
 > 「添付する立ち絵」は `assets/chr/` の実画像。**CGの表示中、本編の立ち絵は強制非表示になる**ため、
 > キャラクターはCGの中に描き込む ―― そのための顔・制服の基準として添付する。
@@ -84,11 +110,11 @@ photorealistic, 3D render, chibi, super-deformed, childish proportions, manga pa
 - **ファイル**: `assets/cg/cg_chizutsutsu_kobore_shashin.png`
 - **シーン**: `c004_hokanko` / 第一章（`10_chapter1.txt`）
 - **添付する背景**: `assets/bg/bg_chizu_hokanko.png`（本編でCGの裏に出ている地図保管庫）
-- **添付する立ち絵**: `chr_mie_03_douyou.png`（驚く三重）・`chr_katsuya_06_katai_muhyoujou.png`（硬くなる勝也）
+- **添付する立ち絵**: `chr_mie_03_douyou`（驚く三重）・`chr_katsuya_06_katai_muhyoujou`（硬くなる勝也）・`chr_katsuya_04_odoroki`（一瞬の強張り）・`chr_inaba_01_furushashin_hohoemi`（写真内の稲葉）・`chr_katsuya_01_tsuujou`（写真内の若き勝也の面影）
 - **Prompt**:
 
 ```text
-Inside a narrow map archive at a Japanese high school, shelves packed with dusty cylindrical map cases and old paper. Mie and adult geography teacher Katsuya are handling one weathered map tube together; its lid has just popped loose and an old map, loose papers and one sepia photograph are suspended in mid-air. Mie twists toward the falling photograph in startled surprise, while Katsuya stands one step behind him, suddenly rigid and guarded. The photograph visibly shows two smiling young men on a mountain with a topographic map, but contains no readable writing. Focus on the airborne photograph, hands and the instant of suspended time, warm dusty ceiling light, tiny dust motes, quiet dramatic tension, medium-wide cinematic composition.
+A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustration, mature light-novel key-visual quality, clean expressive line art, restrained cel shading, painterly atmospheric background, realistic teenage and adult proportions, carefully staged eye-lines and hands, emotionally subtle acting, natural perspective, soft filmic color grading, detailed but uncluttered composition, leave safe margins for a visual-novel text box, no UI and no decorative frame. Use the approved character reference sheets for every face, hairstyle, body proportion, age, uniform and color; keep the cast visually consistent across all images. Students from the North science building wear the established burgundy-red school tie, students from the South integrated building wear the established navy tie. Do not add any text, speech bubbles, captions, logos or watermark inside the image. Inside a narrow map archive at a Japanese high school, shelves packed with dusty cylindrical map cases and old paper. The boy with short black hair, straight bangs and thin rectangular glasses, in a navy uniform with a burgundy tie, and the adult teacher with messy dark brown hair, rectangular glasses, a brown blazer and a dark waistcoat, are handling one weathered map tube together; its lid has just popped loose and an old map, loose papers and one sepia photograph are suspended in mid-air. The boy twists toward the falling photograph in startled surprise, while the teacher stands one step behind him, suddenly rigid and guarded. The photograph visibly shows two smiling young men on a mountain with a topographic map, one of them clearly the same man as the teacher but younger, but contains no readable writing. Focus on the airborne photograph, hands and the instant of suspended time, warm dusty ceiling light, tiny dust motes, quiet dramatic tension, medium-wide cinematic composition.
 ```
 
 - **演出メモ**: 写真が画面の視線誘導の中心。勝也の驚きは大きくしすぎず、「知っているものを見られた」硬さで表現する。
@@ -100,11 +126,11 @@ Inside a narrow map archive at a Japanese high school, shelves packed with dusty
 - **ファイル**: `assets/cg/cg_omoide_chikeizu_kansei.png`
 - **シーン**: `g3` / 収束章（`50_converge.txt`）
 - **添付する背景**: なし（画面全体が作品アート。直前の背景は `assets/bg/bg_hokutou_kyoshitsu_yoru.png`）
-- **添付する立ち絵**: 絵自体には人物を描かない。直後に続く芝居の基準として `chr_mie_07_honki_shinken.png`・`chr_ryoma_01_tsuujou.png`（任意）
+- **添付する立ち絵**: 絵自体には人物を描かない。貼付写真の顔と直後の芝居の基準として全13キャラ（一覧表参照）
 - **Prompt**:
 
 ```text
-A full-frame top-down artwork of a handmade memory topographic map spread across a large sheet of paper, designed as the emotional centerpiece of a Japanese visual novel. Organic contour lines connect symbolic landmarks from three years of school life: the shore of Suiko Lake with tiny footprints, the black lava plateau of Hawaii, a North-building corn-soup vending machine and its long absence, the Itoigawa–Shizuoka tectonic line running through the center, regional miso and mochi markers on both sides, a sports-court diagram with a two-point difference, small printed photographs, colored tape, handwritten-style empty caption areas and layered paper textures. At one inconspicuous corner, leave a small intentional blank space where Ryoma has added a private note. Rich tactile paper, colored pencil, marker and collage details, carefully balanced graphic design, warm midnight classroom light, beautiful and legible visual hierarchy, no UI. Any exact Japanese labels will be typeset in post-production; do not generate garbled text.
+A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustration, mature light-novel key-visual quality, clean expressive line art, restrained cel shading, painterly atmospheric background, realistic teenage and adult proportions, carefully staged eye-lines and hands, emotionally subtle acting, natural perspective, soft filmic color grading, detailed but uncluttered composition, leave safe margins for a visual-novel text box, no UI and no decorative frame. Use the approved character reference sheets for every face, hairstyle, body proportion, age, uniform and color; keep the cast visually consistent across all images. Students from the North science building wear the established burgundy-red school tie, students from the South integrated building wear the established navy tie. Do not add any text, speech bubbles, captions, logos or watermark inside the image. A full-frame top-down artwork of a handmade memory topographic map spread across a large sheet of paper, designed as the emotional centerpiece of a Japanese visual novel. Organic contour lines connect symbolic landmarks from three years of school life: the shore of Suiko Lake with tiny footprints, the black lava plateau of Hawaii, a corn-soup vending machine and its long absence, a tectonic fault line running through the center, regional miso and mochi markers on both sides, a sports-court diagram with a two-point difference, small printed photographs of the established cast (every face in them exactly matching the attached reference sheets), colored tape, handwritten-style empty caption areas and layered paper textures. At one inconspicuous corner, leave a small intentional blank space for a private handwritten note. Rich tactile paper, colored pencil, marker and collage details, carefully balanced graphic design, warm midnight classroom light, beautiful and legible visual hierarchy, no UI. Any exact Japanese labels will be typeset in post-production; do not generate garbled text.
 ```
 
 - **演出メモ**: 地図の主役は「出来事の一覧」ではなく、三年間が等高線として一枚に繋がった作品アート。正確な日本語は後処理する。
@@ -116,11 +142,11 @@ A full-frame top-down artwork of a handmade memory topographic map spread across
 - **ファイル**: `assets/cg/cg_yama_ue_hajimete_chizu.png`
 - **シーン**: `h3` / クライマックス回想（`60_climax.txt`）
 - **添付する背景**: `assets/bg/bg_yama_kaisou.png`（回想の山・褪色調）
-- **添付する立ち絵**: `chr_inaba_01_furushashin_hohoemi.png`（稲葉の唯一の基準＝古写真）・`chr_katsuya_01_tsuujou.png`（若き勝也の顔の面影の基準）
+- **添付する立ち絵**: `chr_inaba_01_furushashin_hohoemi`（稲葉の唯一の基準＝古写真）・`chr_katsuya_01_tsuujou`（若き勝也の顔の面影の基準）
 - **Prompt**:
 
 ```text
-A faded, sun-washed flashback on a mountain ridge, rendered with restrained sepia and washed-out film colors. Young Katsuya, still a student in practical outdoor clothes, kneels beside an older geography mentor Inaba Teiji. Between them lies an open topographic map; Inaba points toward a tightly packed set of contour lines while young Katsuya studies the map with earnest uncertainty. The mountain landscape and the two figures are framed by warm backlight, edges slightly softened like a treasured memory. Show guidance rather than heroism, a quiet beginning of a lifelong way of seeing the ground, wide cinematic composition, no readable writing.
+A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustration, mature light-novel key-visual quality, clean expressive line art, restrained cel shading, painterly atmospheric background, realistic teenage and adult proportions, carefully staged eye-lines and hands, emotionally subtle acting, natural perspective, soft filmic color grading, detailed but uncluttered composition, leave safe margins for a visual-novel text box, no UI and no decorative frame. Use the approved character reference sheets for every face, hairstyle, body proportion, age, uniform and color; keep the cast visually consistent across all images. Students from the North science building wear the established burgundy-red school tie, students from the South integrated building wear the established navy tie. Do not add any text, speech bubbles, captions, logos or watermark inside the image. A faded, sun-washed flashback on a mountain ridge, rendered with restrained sepia and washed-out film colors. A young man with messy dark brown hair, still a student in practical outdoor clothes, kneels beside an older man with wavy grey-brown hair and light stubble, his geography mentor. Between them lies an open topographic map; the older man points toward a tightly packed set of contour lines while the young man studies the map with earnest uncertainty. The young man's face keeps the same facial structure as the adult teacher in the attached reference, only younger and less set. The mountain landscape and the two figures are framed by warm backlight, edges slightly softened like a treasured memory. Show guidance rather than heroism, a quiet beginning of a lifelong way of seeing the ground, wide cinematic composition, no readable writing.
 ```
 
 - **演出メモ**: 稲葉を「偉人」の肖像にしない。若い勝也が教わる側だったこと、二人の間に地図があることを優先する。
@@ -130,34 +156,34 @@ A faded, sun-washed flashback on a mountain ridge, rendered with restrained sepi
 - **ファイル**: `assets/cg/cg_hareyaka_na_emi.png`
 - **シーン**: `h8` / クライマックス（`60_climax.txt`）
 - **添付する背景**: `assets/bg/bg_hokutou_kyoshitsu_yuugata.png`（茜色の教室）
-- **添付する立ち絵**: `chr_katsuya_10_hareyaka_emi.png`（**表情⑩＝このCGと同じ笑み**。顔をこの立ち絵に一致させる）
+- **添付する立ち絵**: `chr_katsuya_10_hareyaka_emi`（**表情⑩＝このCGと同じ笑み**。顔をこの立ち絵に一致させる）
 - **Prompt**:
 
 ```text
-Adult geography teacher Katsuya in the late-afternoon classroom, a wide three-quarter composition at the emotional release of the story. Show the open window, the distant mountain ridge to which he addresses his absent mentor, and the handmade memory map behind him in the same frame. He looks toward the mountains and wears a rare, completely open, radiant smile—the first truly carefree smile he has shown in three years—with a trace of moisture still in his eyes. The familiar handmade map and warm sunset remain softly behind him, while golden light outlines his face and shoulders. His expression must feel earned, gentle and relieved, never like a commercial grin. Cinematic visual novel key art, subtle light flare only, uncluttered composition with safe lower space for dialogue.
+A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustration, mature light-novel key-visual quality, clean expressive line art, restrained cel shading, painterly atmospheric background, realistic teenage and adult proportions, carefully staged eye-lines and hands, emotionally subtle acting, natural perspective, soft filmic color grading, detailed but uncluttered composition, leave safe margins for a visual-novel text box, no UI and no decorative frame. Use the approved character reference sheets for every face, hairstyle, body proportion, age, uniform and color; keep the cast visually consistent across all images. Students from the North science building wear the established burgundy-red school tie, students from the South integrated building wear the established navy tie. Do not add any text, speech bubbles, captions, logos or watermark inside the image. The adult geography teacher, a man with messy dark brown hair, thin rectangular glasses and a long calm face, wearing a brown blazer over a dark waistcoat, stands in the late-afternoon classroom, a wide three-quarter composition at the emotional release of the story. Show the open window, the distant mountain ridge to which he addresses his absent mentor, and the handmade memory map behind him in the same frame. He looks toward the mountains and wears a rare, completely open, radiant smile, the first truly carefree smile he has shown in three years, with a trace of moisture still in his eyes, matching the smile in his attached reference exactly. The familiar handmade map and warm sunset remain softly behind him, while golden light outlines his face and shoulders. His expression must feel earned, gentle and relieved, never like a commercial grin. Cinematic visual novel key art, subtle light flare only, uncluttered composition with safe lower space for dialogue.
 ```
 
 - **演出メモ**: 顔アップの立ち絵拡大にはしない。窓の向こうの山・勝也の視線・背後の地図を同じ画面に置き、「稲葉への報告」を空間で描く。笑顔を若返らせたり、過剰な涙や光で誤魔化したりしない。
 
-## 4. 卒業式
+## 4. 卒業式（3人＋無名群衆）
 
-### `cg_sotsugyou_sakurafubuki` — 全員集合、卒業式と桜吹雪
+### `cg_sotsugyou_sakurafubuki` — 両馬／三重／三峰、卒業式と桜吹雪
 
 - **ファイル**: `assets/cg/cg_sotsugyou_sakurafubuki.png`
 - **シーン**: `end0` / 共通エピローグ（`70_endings.txt`）
 - **添付する背景**: `assets/bg/bg_sotsugyoushiki_kaijou.png`（卒業式会場）
-- **添付する立ち絵**: `chr_ryoma_02_niyari.png`・`chr_mie_09_sunao_hohoemi.png`（前景の二人。他キャストも同じ顔基準で揃える）
+- **添付する立ち絵**: `chr_ryoma_02_niyari`・`chr_mie_09_sunao_hohoemi`（前景の二人）・`chr_mitsumine_03_egao`（三峰。照れはプロンプトで表現）
 - **Prompt**:
 
 ```text
-A warm spring graduation ceremony for a Japanese high school, a large representative group from the North science building and South integrated building gathered together beneath drifting cherry blossom petals. Show the established students in their school uniforms, clearly preserving the contrast between burgundy-red North ties and navy South ties. Ryoma and Mie can anchor the foreground with their familiar contrasting expressions—Ryoma sincerely grateful and Mie trying to keep a straight face—while the rest of the class forms a joyful but natural crowd behind them. Include the graduation venue, soft afternoon light, petals crossing the frame, restrained celebration after three years together, cinematic 16:9 ensemble composition, no banner text or logos.
+A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustration, mature light-novel key-visual quality, clean expressive line art, restrained cel shading, painterly atmospheric background, realistic teenage and adult proportions, carefully staged eye-lines and hands, emotionally subtle acting, natural perspective, soft filmic color grading, detailed but uncluttered composition, leave safe margins for a visual-novel text box, no UI and no decorative frame. Use the approved character reference sheets for every face, hairstyle, body proportion, age, uniform and color; keep the cast visually consistent across all images. Students from the North science building wear the established burgundy-red school tie, students from the South integrated building wear the established navy tie. Do not add any text, speech bubbles, captions, logos or watermark inside the image. A warm spring graduation ceremony for a Japanese high school, a focused three-person composition beneath drifting cherry blossom petals, with a softly blurred crowd of anonymous classmates filling the background in school uniforms, a mix of burgundy-red ties and navy ties and ribbons. In the foreground, two boys exactly as in their attached reference sheets: the tall boy with spiky auburn hair, thin black-framed glasses and a burgundy tie, speaking to the assembly with quiet sincerity; a half-step to his side, the boy with short black hair, straight bangs, rectangular glasses and a burgundy tie, trying to keep a straight face with a faint smirk. Behind and slightly between them stands the girl with a brown chin-length bob, large warm brown eyes, a navy ribbon and a plaid skirt, exactly as in her attached reference sheet, watching the spiky auburn-haired boy with a soft slightly bashful smile, the tips of her ears faintly flushed. The background crowd stays softly out of focus with faces indistinct, giving a natural class-photo depth. Include the graduation venue, soft afternoon light, petals crossing the frame, restrained celebration after three years together, cinematic 16:9 composition, no banner text or logos.
 ```
 
-- **演出メモ**: 喜劇の余韻を残した卒業カット。泣き崩れる集合写真ではなく、「まだこの関係が続く」明るさにする。
+- **演出メモ**: 2026-09-16 改訂。全員集合（12人）はAIが追従不能のため、**識別可能な顔は両馬・三重・三峰の3人**に縮小。背景のクラスメイトはぼけ・無名（顔の崩れ防止にも）。三峰の照れは「両馬を見て、ほんの少し、照れたように笑っていた。」（`70_endings.txt` に追加したナレーション）のリンガーショット。
 
 ---
 
-# エンディングCG（14枚）
+# エンディングCG
 
 > 各エンドカードは「そのENDに到達した瞬間だけ出る1枚」。背景・立ち絵の添付は、
 > 脚本で `@cg` が灯るときの `@bg`・`@chr` と一致させてある（＝本編の続きに見える）。
@@ -169,14 +195,14 @@ A warm spring graduation ceremony for a Japanese high school, a large representa
 - **ファイル**: `assets/cg/cg_end_true.png`
 - **シーン**: `end_true`（`70_endings.txt`）
 - **添付する背景**: `assets/bg/bg_kyoshitsu_suunengo.png`（数年後の教室）
-- **添付する立ち絵**: `chr_katsuya_02_hohoemi.png`
+- **添付する立ち絵**: `chr_katsuya_02_hohoemi`
 - **Prompt**:
 
 ```text
-Several years later in the same North science classroom, now occupied by a new generation. Adult geography teacher Katsuya stands at the front and unfolds the same familiar topographic map for a small group of new students. His expression is calm and gently smiling, carrying the memory of the former class without becoming nostalgic spectacle. In one corner, a former student now serving as a new teacher or trainee watches with a quiet smile; on a desk, an open graduation album creates a subtle visual montage of the old class without readable photographs or text. Repeat the classroom geometry from the main story but make the light softer and more hopeful, warm spring daylight, circular sense of time, cinematic wide composition, map as the visual center.
+A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustration, mature light-novel key-visual quality, clean expressive line art, restrained cel shading, painterly atmospheric background, realistic teenage and adult proportions, carefully staged eye-lines and hands, emotionally subtle acting, natural perspective, soft filmic color grading, detailed but uncluttered composition, leave safe margins for a visual-novel text box, no UI and no decorative frame. Use the approved character reference sheets for every face, hairstyle, body proportion, age, uniform and color; keep the cast visually consistent across all images. Students from the North science building wear the established burgundy-red school tie, students from the South integrated building wear the established navy tie. Do not add any text, speech bubbles, captions, logos or watermark inside the image. Several years later in the same science classroom, now occupied by a new generation. The adult geography teacher with messy dark brown hair, rectangular glasses and a brown blazer stands at the front and unfolds the same familiar topographic map for a small group of new students. His expression is calm and gently smiling, carrying the memory of the former class without becoming nostalgic spectacle. In one corner, one of his former students, now a young teacher in plain office clothes, watches with a quiet smile; on a desk, an open graduation album creates a subtle visual montage of the old class without readable photographs or text. Repeat the classroom geometry from the main story but make the light softer and more hopeful, warm spring daylight, circular sense of time, cinematic wide composition, map as the visual center.
 ```
 
-- **演出メモ**: 過去クラスの同窓会写真を画面いっぱいに貼るのではなく、同じ地図が次の誰かへ渡る循環を中心にする。
+- **演出メモ**: 過去クラスの同窓会写真を画面いっぱいに貼るのではなく、同じ地図が次の誰かへ渡る循環を中心にする。隅の元教え子は脚本上の「誰か」のまま不特定に（添付・特定なし）。
 
 ## 6. BONUS EXTRA
 
@@ -185,14 +211,15 @@ Several years later in the same North science classroom, now occupied by a new g
 - **ファイル**: `assets/cg/cg_end_bonus.png`
 - **シーン**: `end_bonus`（`70_endings.txt`）
 - **添付する背景**: `assets/bg/bg_suiko_hotori.png`（翠湖のほとり）
-- **添付する立ち絵**: `chr_katsuya_10_hareyaka_emi.png`・`chr_ryoma_02_niyari.png`・`chr_mie_09_sunao_hohoemi.png`（前景の三人。残りのキャストも既存立ち絵に顔を揃える）
+- **添付する立ち絵**: `chr_katsuya_10_hareyaka_emi`・`chr_ryoma_02_niyari`・`chr_mie_09_sunao_hohoemi`（前景の三人）＋残り10キャラ（一覧表参照）
 - **Prompt**:
 
 ```text
-A wide summer reunion at the shore of Suiko Lake several years after graduation. The former North science class and the South-building friends have gathered together with adult teacher Katsuya, a large but readable ensemble of familiar faces around a picnic cloth, old photographs and a folded memory map. Katsuya has a relaxed smile; Ryoma is animated and delighted, Mie looks exasperated but unmistakably happy, and Sakura, Naitou, Mitsumine, Satou, Rei, Terachi, Izaki, Izumi, Meshino and Kuraishi all feel like the same established people now older by several years. Lush lakeside greenery, summer sky, warm clear light, small overlapping conversations, a sense that the class has not ended even though everyone took different paths. Keep the ensemble natural and not overcrowded, cinematic wide group composition, no readable text or logos.
+A full-bleed 16:9 Japanese visual novel event CG, cinematic 2D anime illustration, mature light-novel key-visual quality, clean expressive line art, restrained cel shading, painterly atmospheric background, realistic teenage and adult proportions, carefully staged eye-lines and hands, emotionally subtle acting, natural perspective, soft filmic color grading, detailed but uncluttered composition, leave safe margins for a visual-novel text box, no UI and no decorative frame. Use the approved character reference sheets for every face, hairstyle, body proportion, age, uniform and color; keep the cast visually consistent across all images. Students from the North science building wear the established burgundy-red school tie, students from the South integrated building wear the established navy tie. Do not add any text, speech bubbles, captions, logos or watermark inside the image. A wide summer reunion at the shore of Suiko Lake several years after graduation. The former class and their friends have gathered with the adult teacher, a large but readable ensemble of familiar faces around a picnic cloth, old photographs and a folded memory map. The teacher with messy dark brown hair and rectangular glasses has a relaxed smile; the tall boy with spiky auburn hair and thin glasses is animated and delighted; the boy with short black hair, straight bangs and rectangular glasses looks exasperated but unmistakably happy. The rest of the group are the same established people, now older by several years, each still recognizable exactly as in the attached reference sheets: the pale boy with shaggy black hair and earphones; the boy with neat dark brown hair and a cool face; the boy with warm brown tousled hair and sleepy eyes; the boy with messy black hair and over-ear headphones; the boy with spiky tousled black hair and a bright smile; the boy with short black hair, an ahoge, grey-blue eyes and flushed cheeks; the boy with short black hair and thin rectangular glasses; the boy with warm brown tousled hair and round glasses; the girl with very long straight black hair; the girl with a brown bob and large warm eyes. Lush lakeside greenery, summer sky, warm clear light, small overlapping conversations, a sense that the class has not ended even though everyone took different paths. Keep the ensemble natural and not overcrowded, cinematic wide group composition, no readable text or logos.
 ```
 
 - **演出メモ**: 全員集合の最終カット。変わらない掛け合いと、それぞれが別の時間を歩いてきた事実を同時に入れる。湖・地図・人の輪を三角形に配置するとまとまりやすい。
+- **⚠ 人数リスク**: 識別可能な顔が13人になるため、卒業式と同じ縮小（3〜6人＋無名群衆）を検討すること。縮小するなら前景＝勝也・両馬・三重、中景＝櫻・内藤・三峰（脚本の直前ナレーションが3人を指名）が候補。
 
 ---
 

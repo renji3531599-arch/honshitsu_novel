@@ -25,7 +25,7 @@
 | `kuraishi` | 倉石暁（くらいし・あきら） | 5 | 11 | `#d6d46e` |
 | `meshino` | 召野カイト（めしの・かいと） | 4 | 5 | `#e2a8bc` |
 | `mie` | 三重県臣（みえ・けんしん） | 8 | 47 | `#7fa9d8` |
-| `mitsumine` | 三峰瑠衣（みつみね・るい） | 4 | 6 | `#e2b79e` |
+| `mitsumine` | 三峰瑠衣（みつみね・るい） | 4 | 7 | `#e2b79e` |
 | `naitou` | 内藤蘭（ないとう・らん） | 5 | 5 | `#b6d8c6` |
 | `rei` | 数理零（すうり・れい） | 5 | 10 | `#d3d9e8` |
 | `ryoma` | 両馬二郎（りょうま・じろう） | 8 | 27 | `#e2853f` |
@@ -74,7 +74,7 @@
 - **④ 真剣（仕切る顔）** ― `@chr izaki=04` ／ `chr_izaki_04_shikiri.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `50_converge:18`（放課後、誰もいない北棟三年B組教室） → ほか 2 回
 - **⑥ しみじみとした微笑み** ― `@chr izaki=06` ／ `chr_izaki_06_shimijimi_hohoemi.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:170`（GOOD END 伊崎＋伊豆見「それぞれの歩幅」）
+  本編 **1 回**。初出 `70_endings:171`（GOOD END 伊崎＋伊豆見「それぞれの歩幅」）
 
 ### `izumi` ― 伊豆見（いずみ）
 
@@ -89,7 +89,7 @@
 - **④ 決意** ― `@chr izumi=04` ／ `chr_izumi_04_ketsui.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `50_converge:57`（「思い出の地形図」制作）
 - **⑥ 誇らしげ** ― `@chr izumi=06` ／ `chr_izumi_06_hokorashige.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:170`（GOOD END 伊崎＋伊豆見「それぞれの歩幅」）
+  本編 **1 回**。初出 `70_endings:171`（GOOD END 伊崎＋伊豆見「それぞれの歩幅」）
 
 ### `katsuya` ― 塀勝也（へい・かつや／通称ヘイカツ）
 
@@ -125,7 +125,7 @@
 - **① 通常（熱狂）** ― `@chr kuraishi=01` ／ `chr_kuraishi_01_nekkyou.png`　※ ● 実画像が乗っている
   本編 **4 回**。初出 `00_prologue:81`（二月、北棟三年B組・昼休み） → ほか 3 回
 - **② 感激** ― `@chr kuraishi=02` ／ `chr_kuraishi_02_kangeki.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:155`（GOOD END 両馬「✝本質✝、その後」）
+  本編 **1 回**。初出 `70_endings:156`（GOOD END 両馬「✝本質✝、その後」）
 - **③ 真剣（調査中）** ― `@chr kuraishi=03` ／ `chr_kuraishi_03_chousa_shinken.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `40_route_minamitou_meshino:134`（図書室、書庫） → ほか 2 回
 - **⑤ 誇らしげ** ― `@chr kuraishi=05` ／ `chr_kuraishi_05_hokorashige.png`　※ ● 実画像が乗っている
@@ -146,7 +146,7 @@
 - **⑤ 英語ドヤ顔** ― `@chr meshino=05` ／ `chr_meshino_05_eigo_doya.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `50_converge:61`（「思い出の地形図」制作）
 - **⑥ しんみり** ― `@chr meshino=06` ／ `chr_meshino_06_shinmiri.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:184`（GOOD END 召野「言葉を届ける」）
+  本編 **1 回**。初出 `70_endings:185`（GOOD END 召野「言葉を届ける」）
 
 ### `mie` ― 三重県臣（みえ・けんしん）
 
@@ -182,9 +182,9 @@
 - **② ツッコミ顔** ― `@chr mitsumine=02` ／ `chr_mitsumine_02_tsukkomi.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:19`（桜並木、まだ蕾）
 - **③ 笑顔** ― `@chr mitsumine=03` ／ `chr_mitsumine_03_egao.png`　※ ● 実画像が乗っている
-  本編 **2 回**。初出 `40_route_minamitou_meshino:64`（決意） → ほか 1 回
+  本編 **3 回**。初出 `40_route_minamitou_meshino:64`（決意） → ほか 2 回
 - **⑥ 「は？」（ハモリ専用）** ― `@chr mitsumine=06` ／ `chr_mitsumine_06_ha.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:95`（（おまけ）ハモり）
+  本編 **1 回**。初出 `70_endings:96`（（おまけ）ハモり）
 
 ### `naitou` ― 内藤蘭（ないとう・らん）
 
@@ -201,7 +201,7 @@
 - **⑤ 優しい目** ― `@chr naitou=05` ／ `chr_naitou_05_yasashii_me.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:60`（決意）
 - **⑥ 少し笑う** ― `@chr naitou=06` ／ `chr_naitou_06_sukoshi_warau.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:212`（GOOD END 南棟「境界のない春」）
+  本編 **1 回**。初出 `70_endings:213`（GOOD END 南棟「境界のない春」）
 
 ### `rei` ― 数理零（すうり・れい）
 
@@ -256,7 +256,7 @@
 - **⑤ 笑顔** ― `@chr sakura=05` ／ `chr_sakura_05_egao.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `40_route_minamitou_meshino:66`（決意）
 - **⑥ 柔らかい表情** ― `@chr sakura=06` ／ `chr_sakura_06_yawarakai.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:212`（GOOD END 南棟「境界のない春」）
+  本編 **1 回**。初出 `70_endings:213`（GOOD END 南棟「境界のない春」）
 
 ### `satou` ― 砂糖東洋（さとう・とうよう）
 
@@ -296,7 +296,7 @@
 - **③ 真剣な配信者の顔** ― `@chr terachi=03` ／ `chr_terachi_03_haishin_shinken.png`　※ ● 実画像が乗っている
   本編 **1 回**。初出 `30_route_terachi_ryoma:17`（放課後、誰もいない教室）
 - **④ 嬉しい** ― `@chr terachi=04` ／ `chr_terachi_04_ureshii.png`　※ ● 実画像が乗っている
-  本編 **1 回**。初出 `70_endings:139`（GOOD END 寺地「配信は続く」）
+  本編 **1 回**。初出 `70_endings:140`（GOOD END 寺地「配信は続く」）
 - **⑥ マイク前の決意顔** ― `@chr terachi=06` ／ `chr_terachi_06_maiku_no_ketsui.png`　※ ● 実画像が乗っている
   本編 **3 回**。初出 `30_route_terachi_ryoma:57`（三年分の紙） → ほか 2 回
 - **⑧ 涙** ― `@chr terachi=08` ／ `chr_terachi_08_namida.png`　※ ● 実画像が乗っている

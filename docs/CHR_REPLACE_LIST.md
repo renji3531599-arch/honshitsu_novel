@@ -48,7 +48,7 @@
 | 26 | `chr_terachi_01_nemusou.png` | `@chr terachi=01` | 寺地星 通常（眠そう・淡々） | 2 回 | `30_route_terachi_ryoma.txt:12` | ● 実画像 |
 | 27 | `chr_terachi_02_konwaku_katamaru.png` | `@chr terachi=02` | 寺地星 困惑して固まる | 1 回 | `30_route_terachi_ryoma.txt:32` | ● 実画像 |
 | 28 | `chr_terachi_03_haishin_shinken.png` | `@chr terachi=03` | 寺地星 真剣な配信者の顔 | 1 回 | `30_route_terachi_ryoma.txt:17` | ● 実画像 |
-| 29 | `chr_terachi_04_ureshii.png` | `@chr terachi=04` | 寺地星 嬉しい | 1 回 | `70_endings.txt:139` | ● 実画像 |
+| 29 | `chr_terachi_04_ureshii.png` | `@chr terachi=04` | 寺地星 嬉しい | 1 回 | `70_endings.txt:140` | ● 実画像 |
 | 30 | `chr_terachi_06_maiku_no_ketsui.png` | `@chr terachi=06` | 寺地星 マイク前の決意顔 | 3 回 | `30_route_terachi_ryoma.txt:57` | ● 実画像 |
 | 31 | `chr_terachi_08_namida.png` | `@chr terachi=08` | 寺地星 涙 | 1 回 | `60_climax.txt:165` | ● 実画像 |
 | 32 | `chr_satou_01_game_gyoushi.png` | `@chr satou=01` | 砂糖東洋 通常（ゲーム画面凝視） | 3 回 | `00_prologue.txt:88` | ● 実画像 |
@@ -67,17 +67,17 @@
 | 45 | `chr_izaki_01_tsuujou.png` | `@chr izaki=01` | 伊崎 通常 | 1 回 | `00_prologue.txt:88` | ● 実画像 |
 | 46 | `chr_izaki_02_egao.png` | `@chr izaki=02` | 伊崎 笑顔 | 2 回 | `00_prologue.txt:94` | ● 実画像 |
 | 47 | `chr_izaki_04_shikiri.png` | `@chr izaki=04` | 伊崎 真剣（仕切る顔） | 3 回 | `50_converge.txt:18` | ● 実画像 |
-| 48 | `chr_izaki_06_shimijimi_hohoemi.png` | `@chr izaki=06` | 伊崎 しみじみとした微笑み | 1 回 | `70_endings.txt:170` | ● 実画像 |
+| 48 | `chr_izaki_06_shimijimi_hohoemi.png` | `@chr izaki=06` | 伊崎 しみじみとした微笑み | 1 回 | `70_endings.txt:171` | ● 実画像 |
 | 49 | `chr_izumi_02_egao.png` | `@chr izumi=02` | 伊豆見 笑顔 | 2 回 | `00_prologue.txt:88` | ● 実画像 |
 | 50 | `chr_izumi_03_kinchou.png` | `@chr izumi=03` | 伊豆見 緊張 | 1 回 | `50_converge.txt:88` | ● 実画像 |
 | 51 | `chr_izumi_04_ketsui.png` | `@chr izumi=04` | 伊豆見 決意 | 1 回 | `50_converge.txt:57` | ● 実画像 |
-| 52 | `chr_izumi_06_hokorashige.png` | `@chr izumi=06` | 伊豆見 誇らしげ | 1 回 | `70_endings.txt:170` | ● 実画像 |
+| 52 | `chr_izumi_06_hokorashige.png` | `@chr izumi=06` | 伊豆見 誇らしげ | 1 回 | `70_endings.txt:171` | ● 実画像 |
 | 53 | `chr_meshino_01_tsuujou.png` | `@chr meshino=01` | 召野カイト 通常 | 1 回 | `40_route_minamitou_meshino.txt:114` | ● 実画像 |
 | 54 | `chr_meshino_04_shinken.png` | `@chr meshino=04` | 召野カイト 真剣 | 2 回 | `40_route_minamitou_meshino.txt:89` | ● 実画像 |
 | 55 | `chr_meshino_05_eigo_doya.png` | `@chr meshino=05` | 召野カイト 英語ドヤ顔 | 1 回 | `50_converge.txt:61` | ● 実画像 |
-| 56 | `chr_meshino_06_shinmiri.png` | `@chr meshino=06` | 召野カイト しんみり | 1 回 | `70_endings.txt:184` | ● 実画像 |
+| 56 | `chr_meshino_06_shinmiri.png` | `@chr meshino=06` | 召野カイト しんみり | 1 回 | `70_endings.txt:185` | ● 実画像 |
 | 57 | `chr_kuraishi_01_nekkyou.png` | `@chr kuraishi=01` | 倉石暁 通常（熱狂） | 4 回 | `00_prologue.txt:81` | ● 実画像 |
-| 58 | `chr_kuraishi_02_kangeki.png` | `@chr kuraishi=02` | 倉石暁 感激 | 1 回 | `70_endings.txt:155` | ● 実画像 |
+| 58 | `chr_kuraishi_02_kangeki.png` | `@chr kuraishi=02` | 倉石暁 感激 | 1 回 | `70_endings.txt:156` | ● 実画像 |
 | 59 | `chr_kuraishi_03_chousa_shinken.png` | `@chr kuraishi=03` | 倉石暁 真剣（調査中） | 3 回 | `40_route_minamitou_meshino.txt:134` | ● 実画像 |
 | 60 | `chr_kuraishi_05_hokorashige.png` | `@chr kuraishi=05` | 倉石暁 誇らしげ | 2 回 | `50_converge.txt:66` | ● 実画像 |
 | 61 | `chr_kuraishi_06_kotoba_ushinau.png` | `@chr kuraishi=06` | 倉石暁 言葉を失う顔 | 1 回 | `40_route_minamitou_meshino.txt:139` | ● 実画像 |
@@ -87,16 +87,16 @@
 | 65 | `chr_futami_05_yokogao.png` | `@chr futami=05` | 二見玲子 しんみりした横顔 | 1 回 | `40_route_minamitou_meshino.txt:94` | ● 実画像 |
 | 66 | `chr_sakura_02_kenkyuusha.png` | `@chr sakura=02` | 櫻優 真剣（研究者モード） | 1 回 | `40_route_minamitou_meshino.txt:32` | ● 実画像 |
 | 67 | `chr_sakura_05_egao.png` | `@chr sakura=05` | 櫻優 笑顔 | 1 回 | `40_route_minamitou_meshino.txt:66` | ● 実画像 |
-| 68 | `chr_sakura_06_yawarakai.png` | `@chr sakura=06` | 櫻優 柔らかい表情 | 1 回 | `70_endings.txt:212` | ● 実画像 |
+| 68 | `chr_sakura_06_yawarakai.png` | `@chr sakura=06` | 櫻優 柔らかい表情 | 1 回 | `70_endings.txt:213` | ● 実画像 |
 | 69 | `chr_mitsumine_01_tsuujou.png` | `@chr mitsumine=01` | 三峰瑠衣 通常 | 2 回 | `40_route_minamitou_meshino.txt:15` | ● 実画像 |
 | 70 | `chr_mitsumine_02_tsukkomi.png` | `@chr mitsumine=02` | 三峰瑠衣 ツッコミ顔 | 1 回 | `40_route_minamitou_meshino.txt:19` | ● 実画像 |
-| 71 | `chr_mitsumine_03_egao.png` | `@chr mitsumine=03` | 三峰瑠衣 笑顔 | 2 回 | `40_route_minamitou_meshino.txt:64` | ● 実画像 |
-| 72 | `chr_mitsumine_06_ha.png` | `@chr mitsumine=06` | 三峰瑠衣 「は？」（ハモリ専用） | 1 回 | `70_endings.txt:95` | ● 実画像 |
+| 71 | `chr_mitsumine_03_egao.png` | `@chr mitsumine=03` | 三峰瑠衣 笑顔 | 3 回 | `40_route_minamitou_meshino.txt:64` | ● 実画像 |
+| 72 | `chr_mitsumine_06_ha.png` | `@chr mitsumine=06` | 三峰瑠衣 「は？」（ハモリ専用） | 1 回 | `70_endings.txt:96` | ● 実画像 |
 | 73 | `chr_naitou_01_tsuujou.png` | `@chr naitou=01` | 内藤蘭 通常 | 1 回 | `40_route_minamitou_meshino.txt:32` | ● 実画像 |
 | 74 | `chr_naitou_02_hohoemi.png` | `@chr naitou=02` | 内藤蘭 微笑 | 1 回 | `40_route_minamitou_meshino.txt:36` | ● 実画像 |
 | 75 | `chr_naitou_04_odoroki.png` | `@chr naitou=04` | 内藤蘭 驚き | 1 回 | `40_route_minamitou_meshino.txt:46` | ● 実画像 |
 | 76 | `chr_naitou_05_yasashii_me.png` | `@chr naitou=05` | 内藤蘭 優しい目 | 1 回 | `40_route_minamitou_meshino.txt:60` | ● 実画像 |
-| 77 | `chr_naitou_06_sukoshi_warau.png` | `@chr naitou=06` | 内藤蘭 少し笑う | 1 回 | `70_endings.txt:212` | ● 実画像 |
+| 77 | `chr_naitou_06_sukoshi_warau.png` | `@chr naitou=06` | 内藤蘭 少し笑う | 1 回 | `70_endings.txt:213` | ● 実画像 |
 | 78 | `chr_inaba_01_furushashin_hohoemi.png` | `@chr inaba=01` | 稲葉悌二 古写真の中の柔らかい笑み | 1 回 | `60_climax.txt:66` | ● 実画像 |
 
 ## 読み方
