@@ -348,17 +348,29 @@ function cgDoc(opts = {}) {
   const used = order.filter(a => !a.reserve), spare = order.filter(a => a.reserve);
   const nScene = order.filter(a => a.meta !== 'ending').length;
   const nEnd = order.length - nScene;
+  const cgReal = order.filter(a => !a.placeholder).length;
+  const cgStateLead = cgReal === order.length
+    ? `**${cgReal}枚すべて実画像を収録済み**`
+    : cgReal === 0
+      ? '**実ファイルは未配置**（台帳に名前だけ）'
+      : `実画像 ${cgReal}枚・未配置 ${order.length - cgReal}枚`;
+  const cgCountNote = cgReal === order.length
+    ? 'すべて実画像'
+    : cgReal === 0
+      ? '0＝すべて未配置。台帳の名前で新規配置すれば差し替わる'
+      : `残り${order.length - cgReal}枚は台帳の名前で新規配置すれば差し替わる`;
   const leadCg = opts.byStory
     ? [`本編で**今どこに使っていて**、どの順で差し替えを進めればいいのか ―― ${order.length}枚を**物語の順**に並べた1本。`,
-       'CGの実ファイルは未配置（台帳に名前だけ）。だからこそ**連絡表として使う**のが正しい読み方。',
-       '構図・寸法・出番（行番号まで）がここにある。']
-    : [`\`assets/cg/\` の差し込みCG ${nScene}スロット＋ENDカード ${nEnd}スロット。**実ファイルは未配置**（台帳に名前だけ）。出番・演出・差し替え仕様を1枚ずつ。`];
+       cgReal === order.length
+         ? `CGは${cgStateLead}（2026-09-16適用）。構図・寸法・出番（行番号まで）がここにある。`
+         : 'CGの実ファイルは未配置（台帳に名前だけ）。だからこそ**連絡表として使う**のが正しい読み方。構図・寸法・出番（行番号まで）がここにある。']
+    : [`\`assets/cg/\` の差し込みCG ${nScene}スロット＋ENDカード ${nEnd}スロット。${cgStateLead}。出番・演出・差し替え仕様を1枚ずつ。`];
   let md = head(opts.byStory ? `CG 総まくりガイド ― 今ある${order.length}枚を1枚ずつ` : `CG — 名場面CG・ENDカード（${order.length}枚）`, leadCg, order.length);
   md += `## 先にまとめ
 
 - **本編で使っている枚数**: ${used.filter(a => (usage.cg.get(a.id) || []).length).length} 枚（ \`@cg\` 指定 ${[...usage.cg.values()].reduce((n, v) => n + v.length, 0)} 箇所 ）
 - **撤去した枚数**: 45 枚（今回19枚。選定理由は \`docs/CG_PRUNING_2026-09-15.md\`）
-- **実ファイルが乗っている枚数**: ${order.filter(a => !a.placeholder).length} 枚（0＝すべて未配置。台帳の名前で新規配置すれば差し替わる）
+- **実ファイルが乗っている枚数**: ${cgReal} 枚（${cgCountNote}）
 - **回収表示の分母**: \`AssetDB.collectible('cg')\` = ${order.filter(a => !a.reserve).length} 枚 → タイトルと保存画面の \`x/N\` はここを見る
 
 ## CG を置く基準（2026-09-15 再改定）
@@ -651,7 +663,16 @@ function topDoc() {
   const chrCount = ASSETS.filter(a=>a.cat==='chr').length;
   const chrReal = ASSETS.filter(a=>a.cat==='chr' && !a.placeholder).length;
   const cgCount = ASSETS.filter(a=>a.cat==='cg').length;
+  const cgReal = ASSETS.filter(a=>a.cat==='cg' && !a.placeholder).length;
   const bgCount = ASSETS.filter(a=>a.cat==='bg').length;
+  const bgReal = ASSETS.filter(a=>a.cat==='bg' && !a.placeholder).length;
+  const allReal = bgReal === bgCount && cgReal === cgCount && chrReal === chrCount;
+  const topLead = allReal
+    ? `**背景（\`assets/bg/\` ${bgCount}枚）・CG（${cgCount}枚）・立ち絵（${chrCount}枚）の全${bgCount + cgCount + chrCount}スロットが実画像**。`
+    : `**背景（\`assets/bg/\` 25枚）と立ち絵（${chrReal}/${chrCount}枚）が実画像**。CGは**台帳にスロット名だけ**登録してあり、`;
+  const topFb = allReal
+    ? '補完SVG（等高線背景／シルエット立ち絵／暗色ベタ）は出ない。'
+    : '未配置のCGは暗色ベタ、未配置スロットの立ち絵は `js/visual.js` の手続き生成SVGで補完します。';
   const cats = [
     ['bg', '背景', '1920×1080（16:9）／cover', '等高線SVG（`backdropSVG`）'],
     ['cg', '名場面CG・ENDカード', '1920×1080（16:9）／cover・kb で最大1.11倍', '―（暗色ベタのみ）'],
@@ -659,8 +680,8 @@ function topDoc() {
   ];
   let md = `# Assets — 画像素材总台帳
 
-**背景（\`assets/bg/\` 25枚）と立ち絵（${chrReal}/${chrCount}枚）が実画像**。CGは**台帳にスロット名だけ**登録してあり、
-未配置のCGは暗色ベタ、未配置スロットの立ち絵は \`js/visual.js\` の手続き生成SVGで補完します。
+${topLead}
+${topFb}
 **「何を・どこに・どう置けば効くか」を1素材ずつ書いたREADMEが、下の3枚**。
 （UI画像は2026-09-12に撤去 ―― ロゴ・枠・アイコンまで含め、UIは全てエンジンのCSS/SVG描画で代替済み。）
 

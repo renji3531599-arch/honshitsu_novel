@@ -1,5 +1,5 @@
 {
- "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。 2026-09-15: 残り27枚（rei5/izaki4/izumi4/meshino4/kuraishi5/futami4/inaba1）も台帳正名へ改名して配置し、78差分すべてを実画像化。版Bの game/assets/img/ にも78枚を同期。sw.js CACHE → v9。 2026-09-15(2): CGをさらに6枚降板・台帳から削除（cg_butsudan_seiza_sugata／cg_naitou_kao_age／cg_nagai_chinmoku／cg_mado_gawa_no_houkoku／cg_wakaki_utsumuki／cg_hitorizutsu_no_kotoba）。「1シーン1枚・類似構図の隣接禁止・手元アップと対話のみの場面は立ち絵」の基準（docs/CG_GUIDE.md 冒頭）による追加整理。CGは26枚（名場面12＋ED14）になり、クライマックスは9→5枚。経緯は docs/ASSET_MANIFEST.md「2026-09-15 CG追加降板」。sw.js CACHE → v10。 2026-09-15(3): CG19枚を追加撤去し7枚（名場面5＋ED2）に限定。ルート・ENDごとの割当を廃止。docs/CG_PRUNING_2026-09-15.md 参照。CACHE v11。",
+ "note": "本棚（アセット台帳）。実素材に差し替えた行は placeholder を false にすると、エンジン側の演出用フォールバック（プロシージャル背景／立ち絵シルエット）が自動的に消える。2026-09-12: UI画像20枚を撤去、非ピークCG 20枚を降板のうえ削除（本編CGは名場面18＋ED14）。さらに白紙プレースホルダ実ファイル（cg/chr/_buffer 計256枚）を全削除 ―― 背景25枚は実画像のため、白紙は誰も読んでいなかった。cg/chr は「スロット名だけ」この台帳に登録してあり、同名の実素材を置いて placeholder を false にすればそのまま差し替わる。 2026-09-13: 未使用立ち絵27枚を完全削除。残り 78 差分。旧名→新名統一。 2026-09-13(2): 命名監査でローマ字21件を修正（読み誤り・混成語。旧名→新名は docs/ASSET_MANIFEST.md「命名修正」）。 2026-09-13(3): 立ち絵51枚を配置（katsuya9/ryoma8/mie8/satou8/terachi6/mitsumine4/naitou5/sakura3、実ファイルは _no_bg 綴りから台帳正名へ改名）。該当51行は placeholder false。 2026-09-15: 残り27枚（rei5/izaki4/izumi4/meshino4/kuraishi5/futami4/inaba1）も台帳正名へ改名して配置し、78差分すべてを実画像化。版Bの game/assets/img/ にも78枚を同期。sw.js CACHE → v9。 2026-09-15(2): CGをさらに6枚降板・台帳から削除（cg_butsudan_seiza_sugata／cg_naitou_kao_age／cg_nagai_chinmoku／cg_mado_gawa_no_houkoku／cg_wakaki_utsumuki／cg_hitorizutsu_no_kotoba）。「1シーン1枚・類似構図の隣接禁止・手元アップと対話のみの場面は立ち絵」の基準（docs/CG_GUIDE.md 冒頭）による追加整理。CGは26枚（名場面12＋ED14）になり、クライマックスは9→5枚。経緯は docs/ASSET_MANIFEST.md「2026-09-15 CG追加降板」。sw.js CACHE → v10。 2026-09-15(3): CG19枚を追加撤去し7枚（名場面5＋ED2）に限定。ルート・ENDごとの割当を廃止。docs/CG_PRUNING_2026-09-15.md 参照。CACHE v11。 2026-09-16: CG7枚（名場面5＋ED2）を実画像化。assets/cg/ に1672×940前後のPNGを配置し placeholder を false。版B game/assets/img/ にも同期。sw.js CACHE → v12。",
  "engine_limit": 300,
  "assigned": 110,
  "buffer": 0,
@@ -1032,7 +1032,7 @@
    "desc": "三重／勝也／BG08。地図筒の蓋が外れ古写真がこぼれ落ちる瞬間（スロー）。",
    "meta": "scene",
    "source": "image1/white_131.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "cg_omoide_chikeizu_kansei",
@@ -1042,7 +1042,7 @@
    "desc": "「思い出の地形図」完成図。画面いっぱいの作品アート。",
    "meta": "scene",
    "source": "image1/white_151.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "cg_yama_ue_hajimete_chizu",
@@ -1052,7 +1052,7 @@
    "desc": "若き勝也／稲葉／BG21。初めて地形図を渡される山の上（褪色）。",
    "meta": "scene",
    "source": "image2/white_156.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "cg_hareyaka_na_emi",
@@ -1062,7 +1062,7 @@
    "desc": "勝也（単独）／BG03（夕方の教室）。締めの台詞、晴れやかな笑み（表情⑩）。",
    "meta": "scene",
    "source": "image2/white_163.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "cg_sotsugyou_sakurafubuki",
@@ -1072,7 +1072,7 @@
    "desc": "両馬／三重／三峰／BG17。卒業式、桜吹雪。三峰が少し照れる、背景は無名のクラスメイト。",
    "meta": "scene",
    "source": "image2/white_164.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "cg_end_true",
@@ -1082,7 +1082,7 @@
    "desc": "TRUE END ―― 数年後の教室で地図を見せる勝也＋卒業アルバムのモンタージュ",
    "meta": "ending",
    "source": "image3/white_168.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "cg_end_bonus",
@@ -1092,7 +1092,7 @@
    "desc": "勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。",
    "meta": "ending",
    "source": "image1/white_181.png",
-   "placeholder": true
+   "placeholder": false
   },
   {
    "id": "title_key",

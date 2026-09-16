@@ -1,4 +1,5 @@
 // 現行台帳: data/assets.json と同期。2026-09-15(3): CG7枚（名場面5＋ED2）。
+// 2026-09-16: CG7枚の実画像を game/assets/img/ に収録（ファイル名変更なし）。
 // tools/map_assets.py は旧スロット履歴のため凍結。再実行しない。
 window.ASSET_MANIFEST = {
   "bg": {
