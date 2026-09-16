@@ -1068,8 +1068,8 @@
    "id": "cg_sotsugyou_sakurafubuki",
    "cat": "cg",
    "file": "assets/cg/cg_sotsugyou_sakurafubuki.png",
-   "label": "全員集合／BG17。卒業式、桜吹雪。",
-   "desc": "全員集合／BG17。卒業式、桜吹雪。",
+   "label": "両馬／三重／三峰／BG17。卒業式、桜吹雪。三峰が少し照れる、背景は無名のクラスメイト。",
+   "desc": "両馬／三重／三峰／BG17。卒業式、桜吹雪。三峰が少し照れる、背景は無名のクラスメイト。",
    "meta": "scene",
    "source": "image2/white_164.png",
    "placeholder": true
@@ -1088,8 +1088,8 @@
    "id": "cg_end_bonus",
    "cat": "cg",
    "file": "assets/cg/cg_end_bonus.png",
-   "label": "BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット",
-   "desc": "BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット",
+   "label": "勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。",
+   "desc": "勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。",
    "meta": "ending",
    "source": "image1/white_181.png",
    "placeholder": true

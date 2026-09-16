@@ -120,7 +120,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
   - 差出人不明の写真 / シーン `c005_kaidan`「放課後、屋上へ続く階段の踊り場」 ― `10_chapter1.txt:65`
-  - 地面は、忘れない。 / シーン `end_good_kuraishi`「GOOD END 倉石「年鑑、完結せず」」 ― `70_endings.txt:193`
+  - 地面は、忘れない。 / シーン `end_good_kuraishi`「GOOD END 倉石「年鑑、完結せず」」 ― `70_endings.txt:194`
 
 ### `BG07` ― 職員室
 
@@ -150,7 +150,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
   - 零編 ― 面白いの向こう側 / シーン `b2`「零の中の変化」 ― `20_route_satou_rei.txt:156`
-  - 地面は、忘れない。 / シーン `end_good_rei`「GOOD END 零「面白いを仕事にする」」 ― `70_endings.txt:122`
+  - 地面は、忘れない。 / シーン `end_good_rei`「GOOD END 零「面白いを仕事にする」」 ― `70_endings.txt:123`
 
 ### `BG10` ― 図書室奥の書庫（埃っぽい）
 
@@ -170,8 +170,8 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 3 箇所
   - 三度目の春、まだ来ない / シーン `prologue_002`「三年間ダイジェスト（共通・スキップ可）」 ― `00_prologue.txt:33`
-  - 地面は、忘れない。 / シーン `end_good_satou`「GOOD END 砂糖「見ている、それだけで」」 ― `70_endings.txt:108`
-  - 地面は、忘れない。 / シーン `end_bonus`「BONUS EXTRA「また、この教室で」」 ― `70_endings.txt:276`
+  - 地面は、忘れない。 / シーン `end_good_satou`「GOOD END 砂糖「見ている、それだけで」」 ― `70_endings.txt:109`
+  - 地面は、忘れない。 / シーン `end_bonus`「BONUS EXTRA「また、この教室で」」 ― `70_endings.txt:277`
 - **この背景まわりのCG**: `cg_end_bonus`
 
 ### `BG12` ― 文化祭/謝恩会準備中の校庭
@@ -219,8 +219,8 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 3 箇所
   - 南棟編 ― 境界線の向こう側 / シーン `e1`「桜並木、まだ蕾」 ― `40_route_minamitou_meshino.txt:10`
-  - 地面は、忘れない。 / シーン `end_good_izaki`「GOOD END 伊崎＋伊豆見「それぞれの歩幅」」 ― `70_endings.txt:166`
-  - 地面は、忘れない。 / シーン `end_good_minamitou`「GOOD END 南棟「境界のない春」」 ― `70_endings.txt:208`
+  - 地面は、忘れない。 / シーン `end_good_izaki`「GOOD END 伊崎＋伊豆見「それぞれの歩幅」」 ― `70_endings.txt:167`
+  - 地面は、忘れない。 / シーン `end_good_minamitou`「GOOD END 南棟「境界のない春」」 ― `70_endings.txt:209`
 
 ### `BG17` ― 卒業式会場
 
@@ -243,7 +243,7 @@
 - **使用回数**: 本編 3 箇所
   - 南棟編 ― 境界線の向こう側 / シーン `e2`「南棟三年教室」 ― `40_route_minamitou_meshino.txt:28`
   - 南棟編 ― 境界線の向こう側 / シーン `e2_jikashi`「茶化した場合」 ― `40_route_minamitou_meshino.txt:44`
-  - 地面は、忘れない。 / シーン `end_good_meshino`「GOOD END 召野「言葉を届ける」」 ― `70_endings.txt:180`
+  - 地面は、忘れない。 / シーン `end_good_meshino`「GOOD END 召野「言葉を届ける」」 ― `70_endings.txt:181`
 
 ### `BG19` ― 両馬の家・祖父の遺影がある部屋
 
@@ -253,7 +253,7 @@
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 2 箇所
   - 両馬編 ― 祖父と✝本質✝ / シーン `d1`「両馬の家、夕方」 ― `30_route_terachi_ryoma.txt:82`
-  - 地面は、忘れない。 / シーン `end_good_ryoma`「GOOD END 両馬「✝本質✝、その後」」 ― `70_endings.txt:148`
+  - 地面は、忘れない。 / シーン `end_good_ryoma`「GOOD END 両馬「✝本質✝、その後」」 ― `70_endings.txt:149`
 
 ### `BG20` ― 回想・ハワイの溶岩台地
 
@@ -291,7 +291,7 @@
 - **時間帯トーン**: `kyoshitsu/haru` → haru（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
-  - 地面は、忘れない。 / シーン `end_good_mie`「GOOD END 三重「否定の向こう側」」 ― `70_endings.txt:82`
+  - 地面は、忘れない。 / シーン `end_good_mie`「GOOD END 三重「否定の向こう側」」 ― `70_endings.txt:83`
 
 ### `BG24` ― TRUE END後日談・数年後の同じ教室
 
@@ -301,7 +301,7 @@
 - **時間帯トーン**: `kyoshitsu/suunengo` → suunengo（`js/visual.js MOODS`）、`@bg` 指定で自動追従
 - **補完SVG**: 出ない（実画像が乗っているので `#stage[data-art="real"]` になり、SVG側は空になる）
 - **使用回数**: 本編 1 箇所
-  - 地面は、忘れない。 / シーン `end_true`「TRUE END「地面は、忘れない。」」 ― `70_endings.txt:55`
+  - 地面は、忘れない。 / シーン `end_true`「TRUE END「地面は、忘れない。」」 ― `70_endings.txt:56`
 - **この背景まわりのCG**: `cg_end_true`
 
 ### `title_key` ― タイトルキービジュアル（夕方の教室・地図筒・古写真）

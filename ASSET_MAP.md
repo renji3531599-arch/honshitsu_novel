@@ -170,7 +170,7 @@
 |  | white_158.png | `cg_fuhou_kageboushi.png` | 勝也（回想の切れ目）／BG21。訃報を知った瞬間、シルエットのみ。 **2026-09-15(3) 撤去・生成不要** |
 |  | white_160.png | `cg_seito_wo_miwatasu.png` | 全員集合／勝也／BG03（夕方の教室）。生徒たちを見渡す広い構図。 **2026-09-15(3) 撤去・生成不要** |
 |  | white_163.png | `cg_hareyaka_na_emi.png` | 勝也（単独）／BG03（夕方の教室）。締めの台詞、晴れやかな笑み（表情⑩）。 |
-|  | white_164.png | `cg_sotsugyou_sakurafubuki.png` | 全員集合／BG17。卒業式、桜吹雪。 |
+|  | white_164.png | `cg_sotsugyou_sakurafubuki.png` | 両馬／三重／三峰／BG17。卒業式、桜吹雪。三峰が少し照れる、背景は無名のクラスメイト。 |
 | cg01 | white_130.png | ―（降板・削除済み） |  |
 | cg03 | white_132.png | ―（降板・削除済み） |  |
 | cg04 | white_133.png | ―（降板・削除済み） |  |
@@ -215,7 +215,7 @@
 | cg_end_normal | white_178.png | `cg_end_normal.png` | NORMAL END ―― 桜の下、いつも通りの日常 **2026-09-15(3) 撤去・生成不要** |
 | cg_end_bittersweet | white_179.png | `cg_end_bittersweet.png` | BITTERSWEET END ―― 小さくまとまったサプライズ、それでも笑い合う **2026-09-15(3) 撤去・生成不要** |
 | cg_end_comedy | white_180.png | `cg_end_comedy.png` | COMEDY SECRET END ―― 勝也が「……本質かもな」と言ってしまう **2026-09-15(3) 撤去・生成不要** |
-| cg_end_bonus | white_181.png | `cg_end_bonus.png` | BONUS EXTRA ―― 数年後の翠湖のほとり、同窓会集合カット |
+| cg_end_bonus | white_181.png | `cg_end_bonus.png` | 勝也／両馬／三重＋南棟三人／BG11。数年後の翠湖のほとり同窓会、6人＋無名のクラスメイト。 |
 
 ## UI／アイテム（2026-09-12 撤去）
 

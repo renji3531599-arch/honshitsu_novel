@@ -16,12 +16,13 @@
 ナ：理数科三年B組の四十人が、最後にもう一度、あの教室に集まった。
 @cg cg_sotsugyou_sakurafubuki kb
 @part sakura
-@chr ryoma=02,mie=09
+@chr ryoma=02,mie=09,mitsumine=03
 両馬：三年間、ありがとうございました。
 三重：お前が言うと締まらねえんだよ。
 両馬：締まらなくていい。それも✝本質✝だ。
 三重：……まあ。
 ナ：「まあ」がまだ死なないでいることに、誰もが少しだけ安心した。
+ナ：三峰は両馬を見て、ほんの少し、照れたように笑っていた。
 @item sotsugyou
 @cg off
 @chr clear
